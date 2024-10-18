@@ -1,0 +1,21 @@
+:root {
+  --color-yellow: #fcd118;
+  --color-red: #ff3636;
+  --color-yellow-light: #fef3c1;
+  --color-green: #93fd98;
+  --color-green-light: #d8ffda;
+  --color-purple: #9747ff;
+  --color-purple-light: #f0e5ff;
+  --color-gray-dark: #3f3f46;
+  --color-gray-light: #c1c1c1;
+  --color-white: #ffffff;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #f6f6f6;
+}
