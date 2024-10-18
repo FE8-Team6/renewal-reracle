@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --color-yellow: #fcd118;
   --color-red: #ff3636;
@@ -11,11 +15,7 @@
   --color-white: #ffffff;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 body {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   background-color: #f6f6f6;
 }
