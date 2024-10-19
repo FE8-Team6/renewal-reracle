@@ -39,7 +39,7 @@ const CategoryDetailItems = () => {
         alt={itemsDetails?.name}
         className="w-[10rem] h-[10rem]"
       />
-      <p>{itemsDetails?.disposalMethod}</p>
+      <p>{itemsDetails?.description}</p>
     </div>
   );
 };
