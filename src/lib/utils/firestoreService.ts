@@ -56,7 +56,7 @@ const wasteCategories = [
 
 export const saveWasteCategories = async () => {
   for (const category of wasteCategories) {
-    const categoryRef = doc(db, "WasteCategories", category.id); // 문서 ID로 id 사용
+    const categoryRef = doc(db, "WasteCategories", category.id);
 
     await setDoc(categoryRef, {
       name: category.name,

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { db } from "@/firebase";
 import { doc, getDoc } from "firebase/firestore";
-import { Layout } from "./layout/Layout";
 
 type CategoryItem = {
   id: string;
@@ -37,20 +36,20 @@ const CategoryItems = () => {
   }, [categoryId]);
 
   return (
-    <Layout>
-      <div>
-        {categoryItems.map((item) => (
-          <div key={item.id}>
+    <div>
+      {categoryItems.map((item) => (
+        <div key={item.id}>
+          <NavLink to={`/category/${categoryId}/item/${item.id}`}>
             <h2>{item.name}</h2>
             <img
               src={item.imageURL}
               alt={item.name}
               className="w-[3rem] h-[3rem]"
             />
-          </div>
-        ))}
-      </div>
-    </Layout>
+          </NavLink>
+        </div>
+      ))}
+    </div>
   );
 };
 

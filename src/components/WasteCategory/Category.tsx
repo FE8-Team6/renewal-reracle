@@ -29,10 +29,10 @@ const Category = () => {
   }, []);
 
   return (
-    <div>
+    <section>
       {categories.map((category) => (
         <div key={category.id}>
-          <NavLink to={`/${category.id}`}>
+          <NavLink to={`/category/${category.id}`}>
             <h2>{category.name}</h2>
             <p>{category.id}</p>
             <img
@@ -43,7 +43,7 @@ const Category = () => {
           </NavLink>
         </div>
       ))}
-    </div>
+    </section>
   );
 };
 
