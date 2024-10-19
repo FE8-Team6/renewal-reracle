@@ -55,7 +55,6 @@ const wasteCategories = [
 ];
 
 export const saveWasteCategories = async () => {
-  // WasteCategories 컬렉션에 각각의 카테고리 문서를 추가
   for (const category of wasteCategories) {
     const categoryRef = doc(db, "WasteCategories", category.id); // 문서 ID로 id 사용
 
@@ -67,5 +66,3 @@ export const saveWasteCategories = async () => {
   }
   console.log("Categories saved successfully!");
 };
-
-// saveWasteCategories();

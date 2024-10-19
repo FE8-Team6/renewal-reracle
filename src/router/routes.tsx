@@ -1,6 +1,7 @@
+import CategoryItems from "@/components/CategoryItems";
 import DetailItems from "@/components/DetailItems";
 import MyPage from "@/components/MyPage/MyPage";
-import WasteCategoryItems from "@/components/WasteCategoryItems";
+// import WasteCategoryItems from "@/components/WasteCategoryItems";
 import {
   Answer,
   Home,
@@ -36,7 +37,7 @@ export const routes = [
   },
   {
     path: "/:categoryId",
-    element: <WasteCategoryItems />,
+    element: <CategoryItems />,
   },
   {
     path: "/:categoryId/:itemId",
