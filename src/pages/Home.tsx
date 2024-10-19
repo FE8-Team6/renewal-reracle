@@ -1,8 +1,10 @@
-import { Layout } from '@/components/layout/Layout';
-import WasteCategory from '@/components/WasteCategory';
+import Category from "@/components/Category";
+import { Layout } from "@/components/layout/Layout";
+import WasteCategory from "@/components/WasteCategory";
 
 export const Home = () => (
   <Layout>
-    <WasteCategory />
+    {/* <WasteCategory /> */}
+    <Category />
   </Layout>
 );

@@ -4,7 +4,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "@shoelace-style/shoelace/dist/themes/light.css";
 import Loading from "./pages/Loading";
 import { routes } from "./router/routes";
-
+import { saveWasteCategories } from "./lib/utils/firestoreService";
 setBasePath(
   "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/"
 );
@@ -18,6 +18,13 @@ const App = () => {
     setTimeout(() => {
       setIsLoading(false);
     }, 3000);
+  }, []);
+
+  /**
+   * @description Firestore에 재활용 카테고리 데이터 저장하는 함수
+   */
+  useEffect(() => {
+    saveWasteCategories();
   }, []);
 
   return (
