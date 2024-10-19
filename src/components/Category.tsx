@@ -3,44 +3,46 @@ import { db } from "@/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { NavLink } from "react-router-dom";
 
+type Category = {
+  id: string;
+  name: string;
+  imageURL: string;
+}[];
+
 const Category = () => {
-  const [categoriesArray, setCategoriesArray] = useState([]);
+  const [categories, setCategories] = useState<Category>([]);
+
+  const fetchData = async () => {
+    const categoriesCollectionRef = collection(db, "WasteCategories");
+    const categoriesSnap = await getDocs(categoriesCollectionRef);
+
+    const categoriesData = categoriesSnap.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    setCategories(categoriesData);
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const categoriesCollectionRef = collection(db, "WasteCategories");
-      const categoriesSnap = await getDocs(categoriesCollectionRef);
-
-      const categoriesData = categoriesSnap.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-
-      setCategoriesArray(categoriesData);
-    };
-
     fetchData();
   }, []);
 
   return (
     <div>
-      <h1>Categories</h1>
-      <div>
-        {categoriesArray.map((category) => (
-          <div key={category.id}>
-            <NavLink to={`/${category.id}`}>
-              <h2>{category.name}</h2>
-              <p>{category.id}</p>
-              <p>{category.disposalMethod}</p>
-              <img
-                src={category.imageURL}
-                alt={category.name}
-                className="w-[4rem]"
-              />
-            </NavLink>
-          </div>
-        ))}
-      </div>
+      {categories.map((category) => (
+        <div key={category.id}>
+          <NavLink to={`/${category.id}`}>
+            <h2>{category.name}</h2>
+            <p>{category.id}</p>
+            <img
+              src={category.imageURL}
+              alt={category.name}
+              className="w-[3rem] h-[3rem]"
+            />
+          </NavLink>
+        </div>
+      ))}
     </div>
   );
 };

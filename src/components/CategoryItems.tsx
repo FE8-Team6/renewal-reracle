@@ -4,9 +4,15 @@ import { db } from "@/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { Layout } from "./layout/Layout";
 
+type CategoryItem = {
+  id: string;
+  name: string;
+  imageURL: string;
+}[];
+
 const CategoryItems = () => {
   const { categoryId } = useParams();
-  const [categoryItems, setCategoryItems] = useState([]);
+  const [categoryItems, setCategoryItems] = useState<CategoryItem>([]);
 
   const getCategoryItems = async () => {
     try {
@@ -32,12 +38,15 @@ const CategoryItems = () => {
 
   return (
     <Layout>
-      <h1>Category Items</h1>
       <div>
         {categoryItems.map((item) => (
           <div key={item.id}>
             <h2>{item.name}</h2>
-            <img src={item.imageURL} alt={item.name} className="w-[4rem]" />
+            <img
+              src={item.imageURL}
+              alt={item.name}
+              className="w-[3rem] h-[3rem]"
+            />
           </div>
         ))}
       </div>
