@@ -371,7 +371,5 @@ export const saveWasteCategories = async () => {
       items: category.items,
     });
   }
-  console.log("Categories saved successfully!");
+  console.log("Categories 저장 완료 되었습니다.");
 };
-
-saveWasteCategories();
