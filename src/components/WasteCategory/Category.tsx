@@ -18,15 +18,19 @@ const Category = () => {
   const [categories, setCategories] = useState<Category[]>([]);
 
   const getCategories = async () => {
-    const categoriesCollectionRef = collection(db, "WasteCategories");
-    const categoriesSnap = await getDocs(categoriesCollectionRef);
+    try {
+      const categoriesCollectionRef = collection(db, "WasteCategories");
+      const categoriesSnap = await getDocs(categoriesCollectionRef);
 
-    const categoriesData = categoriesSnap.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    })) as Category[];
+      const categoriesData = categoriesSnap.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as Category[];
 
-    setCategories(categoriesData);
+      setCategories(categoriesData);
+    } catch (error) {
+      console.error("카테고리가 존재하지 않습니다.", error);
+    }
   };
 
   useEffect(() => {
@@ -47,22 +51,23 @@ const Category = () => {
           <SlCarouselItem key={index}>
             <div className="grid grid-cols-3 gap-y-2 w-[23rem]">
               {chunk.map((category) => (
-                <NavLink
-                  key={category.id}
-                  to={`/category/${category.id}`}
-                  className="text-gray-800 no-underline"
-                >
-                  <div className="bg-yellowLight w-3/4 h-[6rem] flex justify-center items-center rounded-lg mx-auto hover:bg-yellow cursor-pointer">
-                    <img
-                      src={category.imageURL}
-                      alt={category.name}
-                      className="w-[2.5rem] h-[2.5rem]"
-                    />
-                  </div>
-                  <p className="text-sm font-semibold text-center ">
-                    {category.name}
-                  </p>
-                </NavLink>
+                <div key={category.id}>
+                  <NavLink
+                    to={`/category/${category.id}`}
+                    className="text-gray-800 no-underline"
+                  >
+                    <div className="bg-yellowLight w-3/4 h-[6rem] flex justify-center items-center rounded-lg mx-auto hover:bg-yellow cursor-pointer">
+                      <img
+                        src={category.imageURL}
+                        alt={category.name}
+                        className="w-[2.5rem] h-[2.5rem]"
+                      />
+                    </div>
+                    <p className="text-sm font-semibold text-center ">
+                      {category.name}
+                    </p>
+                  </NavLink>
+                </div>
               ))}
             </div>
           </SlCarouselItem>
