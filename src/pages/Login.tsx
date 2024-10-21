@@ -12,7 +12,6 @@ import {
 import LoginToSignUpTitle from "@/components/LoginToSignUpTitle";
 import { Button } from "@/components/ui/button";
 import GoogleButton from "@/components/GoogleButton";
-import Nav from "@/components/Nav/Nav";
 import { Input } from "@/components/ui/input";
 
 export const Login = () => {
@@ -107,7 +106,6 @@ export const Login = () => {
           <span>회원가입</span>
         </Button>
       </section>
-      <Nav />
     </>
   );
 };

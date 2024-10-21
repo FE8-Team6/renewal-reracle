@@ -1,6 +1,7 @@
 import DetailItems from "@/components/DetailItems";
 import { Layout } from "@/components/layout/Layout";
 import MyPage from "@/components/MyPage/MyPage";
+import Nav from "@/components/Nav/Nav";
 import CategoryDetailItems from "@/components/WasteCategory/CategoryDetailItems";
 import CategoryItems from "@/components/WasteCategory/CategoryItems";
 // import WasteCategoryItems from "@/components/WasteCategoryItems";
@@ -27,7 +28,12 @@ export const routes = [
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <>
+        <Login />,
+        <Nav />
+      </>
+    ),
   },
   {
     path: "/pwreset",
@@ -35,7 +41,12 @@ export const routes = [
   },
   {
     path: "/signup",
-    element: <SignUp />,
+    element: (
+      <>
+        <SignUp />,
+        <Nav />
+      </>
+    ),
   },
   {
     path: "*",

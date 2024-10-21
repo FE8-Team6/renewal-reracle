@@ -3,7 +3,6 @@ import { doc, setDoc, getDoc } from "firebase/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { useNavigate } from "react-router-dom";
-import { Layout } from "@/components/layout/Layout";
 import LoginToSignUpTitle from "@/components/LoginToSignUpTitle";
 import { PurpleButton, WhiteButton } from "@/components/Buttons";
 import {
@@ -90,7 +89,7 @@ export const SignUp = () => {
   };
 
   return (
-    <Layout>
+    <>
       <LoginToSignUpTitle title="회원가입" />
       <section className="w-[56.3vh] h-[79.7vh] bg-white relative flex flex-col justify-center items-center gap-[2vh] overflow-hidden">
         <form
@@ -149,6 +148,6 @@ export const SignUp = () => {
         </form>
         <WhiteButton onClick={() => navigate("/login")}>취소</WhiteButton>
       </section>
-    </Layout>
+    </>
   );
 };
