@@ -48,7 +48,6 @@ export const Login = () => {
         setError("사용자 데이터를 찾을 수 없습니다.");
       }
     } catch (error) {
-      setError("이메일 또는 비밀번호가 잘못되었습니다.");
       console.error("이메일 로그인 실패:", error);
     }
   };
@@ -70,7 +69,7 @@ export const Login = () => {
           onSubmit={handleLogin}
           className="relative flex flex-col items-center justify-center "
         >
-          <div className="relative flex mb-2">
+          <div className="relative flex flex-col mb-2">
             <MdAlternateEmail className="absolute text-xl left-3 top-4 text-purple" />
             <Input
               type="text"
@@ -79,8 +78,7 @@ export const Login = () => {
               onChange={(event) => setEmail(event.target.value)}
             />
           </div>
-          {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
-          <div className="relative flex mb-2">
+          <div className="relative flex flex-col mb-2">
             <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
             <Input
               placeholder="Password"
@@ -96,7 +94,7 @@ export const Login = () => {
               {isShowPassword ? <MdVisibilityOff /> : <MdVisibility />}
             </button>
           </div>
-          {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
+          {error && <p className="mt-1 text-sm text-red">{error}</p>}
           <Button variant="default" type="submit" size="default">
             로그인
           </Button>

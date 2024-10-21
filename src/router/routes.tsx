@@ -1,4 +1,3 @@
-import DetailItems from "@/components/DetailItems";
 import { Layout } from "@/components/layout/Layout";
 import MyPage from "@/components/MyPage/MyPage";
 import Nav from "@/components/Nav/Nav";
@@ -30,7 +29,7 @@ export const routes = [
     path: "/login",
     element: (
       <>
-        <Login />,
+        <Login />
         <Nav />
       </>
     ),
@@ -43,7 +42,7 @@ export const routes = [
     path: "/signup",
     element: (
       <>
-        <SignUp />,
+        <SignUp />
         <Nav />
       </>
     ),
@@ -56,7 +55,7 @@ export const routes = [
     path: "category/:categoryId",
     element: (
       <Layout>
-        <CategoryItems />,
+        <CategoryItems />
       </Layout>
     ),
   },
