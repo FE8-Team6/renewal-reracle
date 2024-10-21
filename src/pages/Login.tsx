@@ -3,16 +3,23 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { useNavigate } from "react-router-dom";
-import { MdAlternateEmail, MdOutlinePassword } from "react-icons/md";
+import {
+  MdAlternateEmail,
+  MdOutlinePassword,
+  MdVisibility,
+  MdVisibilityOff,
+} from "react-icons/md";
 import LoginToSignUpTitle from "@/components/LoginToSignUpTitle";
 import { Button } from "@/components/ui/button";
 import GoogleButton from "@/components/GoogleButton";
 import Nav from "@/components/Nav/Nav";
+import { Input } from "@/components/ui/input";
 
 export const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleLogin = async (event: React.FormEvent) => {
@@ -26,9 +33,7 @@ export const Login = () => {
         password
       );
       const user = userCredential.user;
-
       const userDoc = await getDoc(doc(db, "users", user.uid));
-
       if (userDoc.exists()) {
         const userData = userDoc.data();
         localStorage.setItem(
@@ -44,8 +49,13 @@ export const Login = () => {
         setError("사용자 데이터를 찾을 수 없습니다.");
       }
     } catch (error) {
+      setError("이메일 또는 비밀번호가 잘못되었습니다.");
       console.error("이메일 로그인 실패:", error);
     }
+  };
+
+  const togglePasswordVisibility = () => {
+    setIsShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
   return (
@@ -61,31 +71,33 @@ export const Login = () => {
           onSubmit={handleLogin}
           className="relative flex flex-col items-center justify-center "
         >
-          <div className="relative flex">
-            <input
+          <div className="relative flex mb-2">
+            <MdAlternateEmail className="absolute text-xl left-3 top-4 text-purple" />
+            <Input
               type="text"
               placeholder="email@example.com"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              className=" w-[23rem] h-[6vh] border border-purple rounded-2xl mb-[1vh] pl-[5vh] box-border text-[2vh]"
             />
-            <MdAlternateEmail className="absolute left-[1.5vh] top-[1.8vh] text-[2.5vh] text-purple" />
           </div>
-          <div className="relative flex">
-            <input
-              type="password"
+          {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
+          <div className="relative flex mb-2">
+            <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
+            <Input
               placeholder="Password"
+              type={isShowPassword ? "text" : "password"}
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-              className="w-[23rem] h-[6vh] border border-purple rounded-2xl mb-[1vh] pl-[5vh] box-border text-[2vh]"
             />
-            <MdOutlinePassword className="absolute left-[1.5vh] top-[1.8vh] text-[2.5vh] text-purple" />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="absolute text-xl right-3 top-4 text-purple"
+            >
+              {isShowPassword ? <MdVisibilityOff /> : <MdVisibility />}
+            </button>
           </div>
-          {/* {error && (
-            <p className="absolute bottom-[7.5vh] animate-vibration text-gray-dark">
-            {error}
-            </p>
-            )} */}
+          {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
           <Button variant="default" type="submit" size="default">
             로그인
           </Button>

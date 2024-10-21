@@ -12,10 +12,12 @@ export default {
         greenLight: "var(--color-green-light)",
         purple: "var(--color-purple)",
         purpleLight: "var(--color-purple-light)",
+        purpleDark: "var(--color-purple-dark)",
         grayDark: "var(--color-gray-dark)",
         grayLight: "var(--color-gray-light)",
         white: "var(--color-white)",
         pink: "var(--color-pink)",
+        pinkLight: "var(--color-pink-light)",
       },
       fontSize: {
         "display-lg": "66px",
