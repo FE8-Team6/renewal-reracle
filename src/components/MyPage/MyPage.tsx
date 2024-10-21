@@ -1,37 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { PurpleButton, WhiteButton } from "../Buttons";
 import UserInfo from "./UserInfo";
-// import { userData } from './UserData';
 import { Layout } from "@/components/layout/Layout";
 import { useSearchStore } from "@/lib/store/useSearchStore";
 import LoginToSignUpTitle from "../LoginToSignUpTitle";
-// import { SearchState } from '@/lib/types/searchState';
-// import { useLocalStorage } from './useLocalStorage';
 
 const getUserData = () => {
   const data = localStorage.getItem("userData");
-  console.log(data);
   return data ? JSON.parse(data) : null;
 };
 
 const MyPage = () => {
   const [user, setUser] = useState({
-    nickname: "",
+    displayName: "",
     email: "",
-    password: "",
   });
 
+  console.log(user);
+
+  useEffect(() => {
+    const storedUser = getUserData();
+    if (storedUser) {
+      setUser(storedUser);
+    }
+  }, []);
+
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUser((u) => ({ ...u, nickname: event.target!.value }));
+    setUser((u) => ({ ...u, displayName: event.target!.value }));
   };
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUser((u) => ({ ...u, email: event.target!.value }));
-  };
-
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUser((u) => ({ ...u, password: event.target!.value }));
   };
 
   const handleClick = (
@@ -39,7 +39,6 @@ const MyPage = () => {
   ) => {
     event.preventDefault();
     localStorage.setItem("userData", JSON.stringify(user));
-    console.log(user);
     alert("회원정보가 수정되었습니다");
   };
 
@@ -56,13 +55,13 @@ const MyPage = () => {
 
   return (
     <Layout>
-      <section className="w-full h- bg-white relative flex flex-col items-center gap-[2vh] overflow-y-auto">
+      <section className="w-full h-auto bg-white relative flex flex-col items-center gap-[2vh] overflow-y-auto">
         <LoginToSignUpTitle title="프로필" />
         <div className="mt-4">
           <UserInfo
             label="아이디"
             type="text"
-            value={user.nickname}
+            value={user.displayName}
             onChange={handleNameChange}
           >
             아이디
@@ -74,14 +73,6 @@ const MyPage = () => {
             onChange={handleEmailChange}
           >
             이메일
-          </UserInfo>
-          <UserInfo
-            label="비밀번호"
-            type="password"
-            value={user.password}
-            onChange={handlePasswordChange}
-          >
-            비밀번호
           </UserInfo>
         </div>
         <PurpleButton onClick={handleClick}>회원정보 수정</PurpleButton>
