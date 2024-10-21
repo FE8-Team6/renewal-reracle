@@ -1,20 +1,18 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { useNavigate } from "react-router-dom";
-import { Layout } from "@/components/layout/Layout";
-import { PurpleButton, WhiteButton } from "@/components/Buttons";
-import loginPageImg from "../assets/images/loginPageImg.png";
 import { MdAlternateEmail, MdOutlinePassword } from "react-icons/md";
 import LoginToSignUpTitle from "@/components/LoginToSignUpTitle";
 import { Button } from "@/components/ui/button";
 import GoogleButton from "@/components/GoogleButton";
+import Nav from "@/components/Nav/Nav";
 
 export const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
   const navigate = useNavigate();
 
   const handleLogin = async (event: React.FormEvent) => {
@@ -45,16 +43,20 @@ export const Login = () => {
       } else {
         setError("사용자 데이터를 찾을 수 없습니다.");
       }
-    } catch (error: any) {
-      setError("로그인에 실패했습니다. 이메일과 비밀번호를 확인하세요.");
+    } catch (error) {
+      console.error("이메일 로그인 실패:", error);
     }
   };
 
   return (
-    <Layout>
+    <>
       <LoginToSignUpTitle title="로그인" />
-      <section className="w-full h-[79vh] bg-white relative flex flex-col justify-center items-center gap-[2vh] overflow-hidden">
-        <img src={loginPageImg} alt="" className="w-[14rem]" />
+      <section className="w-full h-[79vh] bg-white relative flex flex-col justify-center items-center gap-3 overflow-hidden">
+        <img
+          src="/images/loginPageImg.png"
+          alt="로그인 페이지 이미지"
+          className="w-[14rem] h-[14rem] mb-4"
+        />
         <form
           onSubmit={handleLogin}
           className="relative flex flex-col items-center justify-center "
@@ -81,15 +83,19 @@ export const Login = () => {
           </div>
           {/* {error && (
             <p className="absolute bottom-[7.5vh] animate-vibration text-gray-dark">
-              {error}
+            {error}
             </p>
-          )} */}
+            )} */}
           <Button variant="default" type="submit" size="default">
             로그인
           </Button>
         </form>
         <GoogleButton />
+        <Button variant="link" size="sm" onClick={() => navigate("/signup")}>
+          <span>회원가입</span>
+        </Button>
       </section>
-    </Layout>
+      <Nav />
+    </>
   );
 };

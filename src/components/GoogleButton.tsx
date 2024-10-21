@@ -2,6 +2,7 @@ import { useState } from "react";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { Button } from "@/components/ui/button";
 import { auth } from "@/firebase";
+import { useNavigate } from "react-router-dom";
 
 type userDate = {
   uid: string;
@@ -15,6 +16,7 @@ const GoogleButton = () => {
     email: "",
     displayName: "",
   });
+  const navigate = useNavigate();
 
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
@@ -34,6 +36,7 @@ const GoogleButton = () => {
           displayName: data.user.displayName,
         })
       );
+      navigate("/");
     } catch (error) {
       console.error("구글 로그인 실패:", error);
     }
@@ -41,7 +44,11 @@ const GoogleButton = () => {
 
   return (
     <Button variant="secondary" size="default" onClick={handleGoogleLogin}>
-      <img src="/icon/google.svg" alt="Google Icon" className="mr-2" />
+      <img
+        src="/icon/google.svg"
+        alt="Google Icon"
+        className="mr-2 w-[1.2rem] h-[1.2rem]"
+      />
       구글 계정으로 로그인
     </Button>
   );
