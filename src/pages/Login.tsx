@@ -87,11 +87,14 @@ export const Login = () => {
             로그인
           </Button>
         </form>
-        <div className="w-[46vh] flex justify-between items-center">
-          <WhiteButton onClick={() => navigate("/signup")}>
-            회원가입
-          </WhiteButton>
-        </div>
+        <Button
+          variant="secondary"
+          size="default"
+          onClick={() => navigate("/signup")}
+        >
+          <img src="/icon/google.svg" alt="Google Icon" className="mr-2" />
+          구글 계정으로 로그인
+        </Button>
       </section>
     </Layout>
   );
