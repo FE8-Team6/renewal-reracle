@@ -9,6 +9,7 @@ import loginPageImg from "../assets/images/loginPageImg.png";
 import { MdAlternateEmail, MdOutlinePassword } from "react-icons/md";
 import LoginToSignUpTitle from "@/components/LoginToSignUpTitle";
 import { Button } from "@/components/ui/button";
+import GoogleButton from "@/components/GoogleButton";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -87,14 +88,7 @@ export const Login = () => {
             로그인
           </Button>
         </form>
-        <Button
-          variant="secondary"
-          size="default"
-          onClick={() => navigate("/signup")}
-        >
-          <img src="/icon/google.svg" alt="Google Icon" className="mr-2" />
-          구글 계정으로 로그인
-        </Button>
+        <GoogleButton />
       </section>
     </Layout>
   );
