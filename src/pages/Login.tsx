@@ -8,6 +8,7 @@ import { PurpleButton, WhiteButton } from "@/components/Buttons";
 import loginPageImg from "../assets/images/loginPageImg.png";
 import { MdAlternateEmail, MdOutlinePassword } from "react-icons/md";
 import LoginToSignUpTitle from "@/components/LoginToSignUpTitle";
+import { Button } from "@/components/ui/button";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -63,7 +64,7 @@ export const Login = () => {
               placeholder="email@example.com"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              className=" w-[23rem] h-[6vh] border border-purple rounded-xl mb-[1vh] pl-[5vh] box-border text-[2vh]"
+              className=" w-[23rem] h-[6vh] border border-purple rounded-2xl mb-[1vh] pl-[5vh] box-border text-[2vh]"
             />
             <MdAlternateEmail className="absolute left-[1.5vh] top-[1.8vh] text-[2.5vh] text-purple" />
           </div>
@@ -73,21 +74,20 @@ export const Login = () => {
               placeholder="Password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-              className="w-[23rem] h-[6vh] border border-purple rounded-xl mb-[1vh] pl-[5vh] box-border text-[2vh]"
+              className="w-[23rem] h-[6vh] border border-purple rounded-2xl mb-[1vh] pl-[5vh] box-border text-[2vh]"
             />
             <MdOutlinePassword className="absolute left-[1.5vh] top-[1.8vh] text-[2.5vh] text-purple" />
           </div>
-          {error && (
+          {/* {error && (
             <p className="absolute bottom-[7.5vh] animate-vibration text-gray-dark">
               {error}
             </p>
-          )}
-          <PurpleButton type="submit">로그인</PurpleButton>
+          )} */}
+          <Button variant="default" type="submit" size="default">
+            로그인
+          </Button>
         </form>
         <div className="w-[46vh] flex justify-between items-center">
-          <WhiteButton onClick={() => navigate("/pwreset")} className="mr-1">
-            비밀번호 재설정
-          </WhiteButton>
           <WhiteButton onClick={() => navigate("/signup")}>
             회원가입
           </WhiteButton>
