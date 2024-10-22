@@ -1,85 +1,98 @@
-import React, { useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
-import { auth, db } from '../firebase';
-import { useNavigate } from 'react-router-dom';
-import { Layout } from '@/components/layout/Layout';
-import { PurpleButton, WhiteButton } from '@/components/Buttons';
-import loginPageImg from '../assets/images/loginPageImg.png';
-import { MdAlternateEmail, MdOutlinePassword } from 'react-icons/md';
-import LoginToSignUpTitle from '@/components/LoginToSignUpTitle';
+import { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import {
+  MdAlternateEmail,
+  MdOutlinePassword,
+  MdVisibility,
+  MdVisibilityOff,
+} from "react-icons/md";
+import LoginToSignUpTitle from "@/components/LoginToSignUpTitle";
+import { Button } from "@/components/ui/button";
+import GoogleButton from "@/components/GoogleButton";
+import { Input } from "@/components/ui/input";
+import { getUserProfile } from "@/api/userApi/user";
+import { auth } from "@/firebase";
 
 export const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
+  const handleLogin = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setError("");
 
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       const user = userCredential.user;
+      const userData = await getUserProfile(user.uid);
+      localStorage.setItem("userData", JSON.stringify(userData));
 
-      const userDoc = await getDoc(doc(db, 'users', user.uid));
-
-      if (userDoc.exists()) {
-        const userData = userDoc.data();
-        localStorage.setItem(
-          'userData',
-          JSON.stringify({
-            uid: user.uid,
-            email: userData.email,
-            nickname: userData.nickname,
-          }),
-        );
-        navigate('/');
-      } else {
-        setError('사용자 데이터를 찾을 수 없습니다.');
-      }
-    } catch (error: any) {
-      setError('로그인에 실패했습니다. 이메일과 비밀번호를 확인하세요.');
+      navigate("/");
+    } catch (error) {
+      console.error("이메일 로그인 실패:", error);
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setIsShowPassword((prevShowPassword) => !prevShowPassword);
+  };
+
   return (
-    <Layout>
+    <>
       <LoginToSignUpTitle title="로그인" />
-      <section className="w-[56.3vh] h-[79.7vh] bg-white relative flex flex-col justify-center items-center gap-[2vh] overflow-hidden">
-        <img src={loginPageImg} alt="" className="w-[20vh] p-[5vh]" />
-        <form onSubmit={handleLogin} className="w-[46vh] flex flex-col justify-center items-center relative">
-          <div className="relative flex">
-            <input
+      <section className="w-full h-[79vh] bg-white relative flex flex-col justify-center items-center gap-3 overflow-hidden">
+        <img
+          src="/images/loginPageImg.png"
+          alt="로그인 페이지 이미지"
+          className="w-[14rem] h-[14rem] mb-4"
+        />
+        <form
+          onSubmit={handleLogin}
+          className="relative flex flex-col items-center justify-center "
+        >
+          <div className="relative flex flex-col mb-2">
+            <MdAlternateEmail className="absolute text-xl left-3 top-4 text-purple" />
+            <Input
               type="text"
               placeholder="email@example.com"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-[46vh] h-[6vh] border border-purple rounded-[1vh] mb-[1vh] pl-[5vh] box-border text-[2vh]"
+              onChange={(event) => setEmail(event.target.value)}
             />
-            <MdAlternateEmail className="absolute left-[1.5vh] top-[1.8vh] text-[2.5vh] text-purple" />
           </div>
-          <div className="relative flex">
-            <input
-              type="password"
+          <div className="relative flex flex-col mb-2">
+            <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
+            <Input
               placeholder="Password"
+              type={isShowPassword ? "text" : "password"}
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-[46vh] h-[6vh] border border-purple rounded-[1vh] mb-[1vh] pl-[5vh] box-border text-[2vh]"
+              onChange={(event) => setPassword(event.target.value)}
             />
-            <MdOutlinePassword className="absolute left-[1.5vh] top-[1.8vh] text-[2.5vh] text-purple" />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="absolute text-xl right-3 top-4 text-purple"
+            >
+              {isShowPassword ? <MdVisibilityOff /> : <MdVisibility />}
+            </button>
           </div>
-          {error && <p className="absolute bottom-[7.5vh] animate-vibration text-gray-dark">{error}</p>}
-          <PurpleButton type="submit">로그인</PurpleButton>
+          {error && <p className="mt-1 text-sm text-red">{error}</p>}
+          <Button variant="default" type="submit" size="default">
+            로그인
+          </Button>
         </form>
-        <div className="w-[46vh] flex justify-between items-center">
-          <WhiteButton onClick={() => navigate('/pwreset')} className="mr-[1vh]">
-            비밀번호 재설정
-          </WhiteButton>
-          <WhiteButton onClick={() => navigate('/signup')}>회원가입</WhiteButton>
-        </div>
+        <GoogleButton />
+        <Button variant="link" size="sm" onClick={() => navigate("/signup")}>
+          <span>회원가입</span>
+        </Button>
       </section>
-    </Layout>
+    </>
   );
 };

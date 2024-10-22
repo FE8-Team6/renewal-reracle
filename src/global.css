@@ -10,12 +10,21 @@
   --color-green-light: #d8ffda;
   --color-purple: #9747ff;
   --color-purple-light: #f0e5ff;
+  --color-purple-dark: #7b32a0;
   --color-gray-dark: #3f3f46;
   --color-gray-light: #c1c1c1;
   --color-white: #ffffff;
+  --color-pink: #ede0ff;
+  --color-pink-light: #f9f4ff;
 }
 
 body {
   font-family: "Noto Sans KR", sans-serif;
   background-color: #f6f6f6;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
 }

@@ -1,8 +1,7 @@
-import { Layout } from '@/components/layout/Layout';
-import WasteCategory from '@/components/WasteCategory';
+import Category from "@/components/WasteCategory/Category";
 
-export const Home = () => (
-  <Layout>
-    <WasteCategory />
-  </Layout>
-);
+const Home = () => {
+  return <Category />;
+};
+
+export default Home;

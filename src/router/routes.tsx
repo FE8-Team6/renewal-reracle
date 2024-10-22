@@ -1,9 +1,11 @@
-import DetailItems from "@/components/DetailItems";
+import { Layout } from "@/components/layout/Layout";
 import MyPage from "@/components/MyPage/MyPage";
-import WasteCategoryItems from "@/components/WasteCategoryItems";
+import Nav from "@/components/Nav/Nav";
+import CategoryDetailItems from "@/components/WasteCategory/CategoryDetailItems";
+import CategoryItems from "@/components/WasteCategory/CategoryItems";
+// import WasteCategoryItems from "@/components/WasteCategoryItems";
 import {
   Answer,
-  Home,
   Login,
   MyQuestion,
   NotFound,
@@ -12,15 +14,25 @@ import {
   SignUp,
   Topic,
 } from "@/pages";
+import Home from "@/pages/Home";
 
 export const routes = [
   {
     path: "/",
-    element: <Home />,
+    element: (
+      <Layout>
+        <Home />
+      </Layout>
+    ),
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <>
+        <Login />
+        <Nav />
+      </>
+    ),
   },
   {
     path: "/pwreset",
@@ -28,19 +40,32 @@ export const routes = [
   },
   {
     path: "/signup",
-    element: <SignUp />,
+    element: (
+      <>
+        <SignUp />
+        <Nav />
+      </>
+    ),
   },
   {
     path: "*",
     element: <NotFound />,
   },
   {
-    path: "/:categoryId",
-    element: <WasteCategoryItems />,
+    path: "category/:categoryId",
+    element: (
+      <Layout>
+        <CategoryItems />
+      </Layout>
+    ),
   },
   {
-    path: "/:categoryId/:itemId",
-    element: <DetailItems />,
+    path: "category/:categoryId/item/:itemId",
+    element: (
+      <Layout>
+        <CategoryDetailItems />
+      </Layout>
+    ),
   },
   {
     path: "qna",
