@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
-import { auth, db } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import {
   MdAlternateEmail,
@@ -13,6 +11,8 @@ import LoginToSignUpTitle from "@/components/LoginToSignUpTitle";
 import { Button } from "@/components/ui/button";
 import GoogleButton from "@/components/GoogleButton";
 import { Input } from "@/components/ui/input";
+import { getUserProfile } from "@/api/userApi/user";
+import { auth } from "@/firebase";
 
 export const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -32,21 +32,10 @@ export const Login = () => {
         password
       );
       const user = userCredential.user;
-      const userDoc = await getDoc(doc(db, "users", user.uid));
-      if (userDoc.exists()) {
-        const userData = userDoc.data();
-        localStorage.setItem(
-          "userData",
-          JSON.stringify({
-            uid: user.uid,
-            email: userData.email,
-            nickname: userData.nickname,
-          })
-        );
-        navigate("/");
-      } else {
-        setError("사용자 데이터를 찾을 수 없습니다.");
-      }
+      const userData = await getUserProfile(user.uid);
+      localStorage.setItem("userData", JSON.stringify(userData));
+
+      navigate("/");
     } catch (error) {
       console.error("이메일 로그인 실패:", error);
     }

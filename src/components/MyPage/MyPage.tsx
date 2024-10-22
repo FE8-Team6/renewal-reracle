@@ -13,11 +13,9 @@ const getUserData = () => {
 
 const MyPage = () => {
   const [user, setUser] = useState({
-    displayName: "",
+    nickname: "",
     email: "",
   });
-
-  console.log(user);
 
   useEffect(() => {
     const storedUser = getUserData();
@@ -27,7 +25,7 @@ const MyPage = () => {
   }, []);
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUser((u) => ({ ...u, displayName: event.target!.value }));
+    setUser((u) => ({ ...u, nickname: event.target!.value }));
   };
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,9 +57,9 @@ const MyPage = () => {
         <LoginToSignUpTitle title="프로필" />
         <div className="mt-4">
           <UserInfo
-            label="아이디"
+            label="닉네임"
             type="text"
-            value={user.displayName}
+            value={user.nickname}
             onChange={handleNameChange}
           >
             아이디

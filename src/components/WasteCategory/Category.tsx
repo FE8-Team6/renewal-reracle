@@ -45,16 +45,16 @@ const Category = () => {
       <SlCarousel
         pagination
         mouse-dragging
-        className="w-[100%] h-[28rem] mx-auto"
+        className="w-full h-[28rem] mx-auto"
       >
         {chunkedCategories.map((chunk, index) => (
           <SlCarouselItem key={index}>
-            <div className="grid grid-cols-3 gap-y-2 w-[23rem]">
+            <div className="grid grid-cols-3 gap-y-2 w-[25rem]">
               {chunk.map((category) => (
                 <div key={category.id}>
                   <NavLink
                     to={`/category/${category.id}`}
-                    className="text-gray-800 no-underline"
+                    className="no-underline"
                   >
                     <div className="bg-yellowLight w-3/4 h-[6rem] flex justify-center items-center rounded-lg mx-auto hover:bg-yellow cursor-pointer">
                       <img
