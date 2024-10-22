@@ -11,8 +11,8 @@ import {
 } from "react-icons/md";
 
 const MyPage = () => {
-  const [user, setUser] = useState<{ nickname: string; email: string }>({
-    nickname: "",
+  const [user, setUser] = useState<{ displayName: string; email: string }>({
+    displayName: "",
     email: "",
   });
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const MyPage = () => {
   }, []);
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUser((user) => ({ ...user, nickname: event.target!.value }));
+    setUser((user) => ({ ...user, displayName: event.target!.value }));
   };
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +57,7 @@ const MyPage = () => {
             <MdOutlineDriveFileRenameOutline className="absolute text-xl left-3 top-10 text-purple" />
             <Input
               type="text"
-              value={user.nickname}
+              value={user.displayName}
               onChange={handleNameChange}
               placeholder="닉네임을 입력해주세요"
               className="w-full h-[2.5rem] text-xl bg-transparent focus:outline-none focus:shadow-none pl-10"
@@ -82,6 +82,16 @@ const MyPage = () => {
           onClick={handleClick}
         >
           회원정보 수정
+        </Button>
+        <Button
+          variant="secondary"
+          size="default"
+          onClick={() => {
+            localStorage.removeItem("userData");
+            navigate("/login");
+          }}
+        >
+          로그아웃
         </Button>
         <Button
           variant="link"

@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 export const SignUp = () => {
-  const [nickname, setNickname] = useState<string>("");
+  const [displayName, setDisplayName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -24,12 +24,12 @@ export const SignUp = () => {
   const saveUserInfoToFirestore = async (
     userId: string,
     email: string,
-    nickname: string
+    displayName: string
   ) => {
     try {
       await setDoc(doc(db, "users", userId), {
         email: email,
-        nickname: nickname,
+        displayName: displayName,
         uid: userId,
       });
       console.log("사용자 정보가 성공적으로 Firestore에 저장되었습니다.");
@@ -42,7 +42,7 @@ export const SignUp = () => {
     event.preventDefault();
     setError("");
 
-    if (nickname.length < 2) {
+    if (displayName.length < 2) {
       setError("닉네임은 2자 이상이어야 합니다.");
       setErrorKey((prev) => prev + 1);
       return;
@@ -70,7 +70,11 @@ export const SignUp = () => {
         email,
         password
       );
-      await saveUserInfoToFirestore(userCredential.user.uid, email, nickname);
+      await saveUserInfoToFirestore(
+        userCredential.user.uid,
+        email,
+        displayName
+      );
       const userInfoDoc = await getDoc(
         doc(db, "users", userCredential.user.uid)
       );
@@ -100,8 +104,8 @@ export const SignUp = () => {
             <Input
               type="text"
               placeholder="닉네임"
-              value={nickname}
-              onChange={(event) => setNickname(event.target.value)}
+              value={displayName}
+              onChange={(event) => setDisplayName(event.target.value)}
             />
             <MdOutlineTagFaces className="absolute text-xl left-3 top-4 text-purple" />
           </div>
