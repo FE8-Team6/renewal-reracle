@@ -1,102 +1,15 @@
-import { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { collection, addDoc, getDocs, deleteDoc } from 'firebase/firestore';
-import { Link } from 'react-router-dom';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { db } from '../firebase';
-import { Layout } from '@/components/layout/Layout';
-
-const HeaderQna = styled.div`
-  width: 56.3vh;
-  height: 3.75vh;
-  background: #9747ff;
-  text-align: center;
-  align-content: center;
-  color: white;
-  font-size: 2vh;
-`;
-
-const Question = styled.button`
-  display: block;
-  margin: 1vh auto;
-  border: none;
-  background: #93fd98;
-  color: white;
-  font-size: 2vh;
-`;
-
-const QnaArea = styled.div`
-  text-align: center;
-`;
-
-const QuestionListContainer = styled.div`
-  max-height: 60vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  margin: 1.5vh auto;
-  width: 52vh;
-  position: relative;
-`;
-
-const QuestionContainer = styled.div`
-  background: #93fd98;
-  width: 50vh;
-  margin: 1.5vh auto;
-  height: 3.75vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1vh;
-  border-radius: 10px;
-  color: white;
-  font-size: 2vh;
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: white;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  display: inline-block;
-  width: 35vh;
-`;
-
-const QuestionInput = styled.input`
-  background: #ffffff;
-  border: none;
-  border-radius: 5px;
-  height: 2.5vh;
-  width: 35vh;
-  padding: 0.5vh;
-  font-size: 1.5vh;
-`;
-
-const AddButton = styled.button`
-  background: #9747ff;
-  border: none;
-  border-radius: 5px;
-  height: 2.5vh;
-  color: white;
-  cursor: pointer;
-  padding: 0 1vh;
-  font-size: 1.5vh;
-`;
-
-const DeleteButton = styled.button`
-  background: #ff4747;
-  border: none;
-  border-radius: 5px;
-  height: 2.5vh;
-  color: white;
-  cursor: pointer;
-  padding: 0 1vh;
-  font-size: 1.5vh;
-`;
+import { useState, useEffect } from "react";
+import { collection, addDoc, getDocs, deleteDoc } from "firebase/firestore";
+import { Link } from "react-router-dom";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { db } from "../firebase";
+import { Layout } from "@/components/layout/Layout";
 
 export const Qna = () => {
-  const [questions, setQuestions] = useState<{ question: string; author: string; authorUid: string }[]>([]);
-  const [currentQuestion, setCurrentQuestion] = useState<string>('');
+  const [questions, setQuestions] = useState<
+    { question: string; author: string; authorUid: string }[]
+  >([]);
+  const [currentQuestion, setCurrentQuestion] = useState<string>("");
   const [currentUser, setCurrentUser] = useState<any>(null);
 
   useEffect(() => {
@@ -108,8 +21,12 @@ export const Qna = () => {
 
   useEffect(() => {
     const fetchQuestions = async () => {
-      const querySnapshot = await getDocs(collection(db, 'questions'));
-      const questionList: { question: string; author: string; authorUid: string }[] = [];
+      const querySnapshot = await getDocs(collection(db, "questions"));
+      const questionList: {
+        question: string;
+        author: string;
+        authorUid: string;
+      }[] = [];
       querySnapshot.forEach((doc) => {
         const questionData = doc.data();
         questionList.push({
@@ -125,35 +42,39 @@ export const Qna = () => {
 
   const handleAddQuestion = async () => {
     if (!currentUser) {
-      alert('질문을 추가하려면 로그인해야 합니다.');
+      alert("질문을 추가하려면 로그인해야 합니다.");
       return;
     }
-    if (currentQuestion.trim() === '') return;
+    if (currentQuestion.trim() === "") return;
 
     try {
-      const docRef = await addDoc(collection(db, 'questions'), {
+      const docRef = await addDoc(collection(db, "questions"), {
         question: currentQuestion,
-        author: currentUser.displayName, // 현재 사용자의 이름 저장
-        authorUid: currentUser.uid, // 현재 사용자의 UID 저장
+        author: currentUser.displayName,
+        authorUid: currentUser.uid,
       });
-      console.log('Document written with ID: ', docRef.id);
+      console.log("Document written with ID: ", docRef.id);
 
       setQuestions([
         ...questions,
-        { question: currentQuestion, author: currentUser.displayName, authorUid: currentUser.uid },
+        {
+          question: currentQuestion,
+          author: currentUser.displayName,
+          authorUid: currentUser.uid,
+        },
       ]);
-      setCurrentQuestion('');
+      setCurrentQuestion("");
     } catch (e) {
-      console.error('Error adding document: ', e);
+      console.error("Error adding document: ", e);
     }
   };
 
   const handleDeleteQuestion = async (index: number) => {
     if (!currentUser) {
-      alert('질문을 삭제하려면 로그인해야 합니다.');
+      alert("질문을 삭제하려면 로그인해야 합니다.");
       return;
     }
-    if (window.confirm('정말로 삭제하시겠습니까?')) {
+    if (window.confirm("정말로 삭제하시겠습니까?")) {
       try {
         const deletedQuestion = questions[index];
         if (deletedQuestion.authorUid === currentUser.uid) {
@@ -161,7 +82,7 @@ export const Qna = () => {
           updatedQuestions.splice(index, 1);
           setQuestions(updatedQuestions);
 
-          const querySnapshot = await getDocs(collection(db, 'questions'));
+          const querySnapshot = await getDocs(collection(db, "questions"));
           querySnapshot.forEach((doc) => {
             if (
               doc.data().question === deletedQuestion.question &&
@@ -171,42 +92,64 @@ export const Qna = () => {
             }
           });
         } else {
-          alert('자신의 질문만 삭제할 수 있습니다.');
+          alert("자신의 질문만 삭제할 수 있습니다.");
         }
       } catch (error) {
-        console.error('Error deleting document: ', error);
+        console.error("Error deleting document: ", error);
       }
     }
   };
 
   return (
     <Layout>
-      <HeaderQna>R 지식in</HeaderQna>
-      <Question>질문하기</Question>
-      <QnaArea>
-        <QuestionInput
+      <div className="w-[56.3vh] h-[3.75vh] bg-purple text-center flex items-center justify-center text-white text-[2vh]">
+        R 지식in
+      </div>
+      <button className="block mx-auto my-[1vh] border-none bg-greenLight text-white text-[2vh]">
+        질문하기
+      </button>
+      <div className="text-center">
+        <input
           type="text"
           value={currentQuestion}
           onChange={(e) => setCurrentQuestion(e.target.value)}
           placeholder="질문을 입력하세요"
+          className="bg-white border-none rounded-[5px] h-[2.5vh] w-[35vh] p-[0.5vh] text-[1.5vh]"
         />
-        <AddButton onClick={handleAddQuestion}>추가</AddButton>
-      </QnaArea>
+        <button
+          onClick={handleAddQuestion}
+          className="bg-purple border-none rounded-[5px] h-[2.5vh] text-white cursor-pointer px-[1vh] text-[1.5vh]"
+        >
+          추가
+        </button>
+      </div>
 
-      <QuestionListContainer>
+      <div className="max-h-[60vh] overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] w-[52vh] relative">
         {questions.map((questionData, index) => (
-          <QuestionContainer key={index}>
-            <StyledLink
+          <div
+            key={index}
+            className="bg-greenLight w-[50vh] mx-auto my-[1.5vh] h-[3.75vh] flex items-center justify-between px-[1vh] rounded-[10px] text-white text-[2vh]"
+          >
+            <Link
               to={`/answer/${encodeURIComponent(questionData.question)}`}
-              state={{ question: questionData.question }}>
+              state={{ question: questionData.question }}
+              className="text-white overflow-hidden whitespace-nowrap text-ellipsis inline-block w-[35vh]"
+            >
               {questionData.question}
-            </StyledLink>
+            </Link>
             {currentUser && questionData.authorUid === currentUser.uid && (
-              <DeleteButton onClick={() => handleDeleteQuestion(index)}>삭제</DeleteButton>
+              <button
+                onClick={() => handleDeleteQuestion(index)}
+                className="bg-red border-none rounded-[5px] h-[2.5vh] text-white cursor-pointer px-[1vh] text-[1.5vh]"
+              >
+                삭제
+              </button>
             )}
-          </QuestionContainer>
+          </div>
         ))}
-      </QuestionListContainer>
+      </div>
     </Layout>
   );
 };
+
+export default Qna;
