@@ -5,15 +5,24 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { db } from "../firebase";
 import { Layout } from "@/components/layout/Layout";
 
+type Question = { question: string; author: string; authorUid: string }[];
+type QuestionList = {
+  question: string;
+  author: string;
+  authorUid: string;
+}[];
+
 export const Qna = () => {
-  const [questions, setQuestions] = useState<
-    { question: string; author: string; authorUid: string }[]
-  >([]);
+  const [questions, setQuestions] = useState<Question>([]);
   const [currentQuestion, setCurrentQuestion] = useState<string>("");
-  const [currentUser, setCurrentUser] = useState<any>(null);
+  const [currentUser, setCurrentUser] = useState({
+    displayName: "",
+    uid: "",
+  });
 
   useEffect(() => {
     const auth = getAuth();
+    console.log(auth);
     onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
     });
@@ -22,11 +31,7 @@ export const Qna = () => {
   useEffect(() => {
     const fetchQuestions = async () => {
       const querySnapshot = await getDocs(collection(db, "questions"));
-      const questionList: {
-        question: string;
-        author: string;
-        authorUid: string;
-      }[] = [];
+      const questionList: QuestionList = [];
       querySnapshot.forEach((doc) => {
         const questionData = doc.data();
         questionList.push({
@@ -41,7 +46,8 @@ export const Qna = () => {
   }, []);
 
   const handleAddQuestion = async () => {
-    if (!currentUser) {
+    const userData = localStorage.getItem("userData");
+    if (!userData) {
       alert("질문을 추가하려면 로그인해야 합니다.");
       return;
     }
@@ -64,8 +70,8 @@ export const Qna = () => {
         },
       ]);
       setCurrentQuestion("");
-    } catch (e) {
-      console.error("Error adding document: ", e);
+    } catch (error) {
+      console.error("Error adding document: ", error);
     }
   };
 
@@ -102,9 +108,10 @@ export const Qna = () => {
 
   return (
     <Layout>
-      <div className="w-[56.3vh] h-[3.75vh] bg-purple text-center flex items-center justify-center text-white text-[2vh]">
+      <div className="w-full h-[2rem] bg-purple text-center flex items-center justify-center text-white text-[2vh]">
         R 지식in
       </div>
+
       <button className="block mx-auto my-[1vh] border-none bg-greenLight text-white text-[2vh]">
         질문하기
       </button>
@@ -112,13 +119,13 @@ export const Qna = () => {
         <input
           type="text"
           value={currentQuestion}
-          onChange={(e) => setCurrentQuestion(e.target.value)}
+          onChange={(event) => setCurrentQuestion(event.target.value)}
           placeholder="질문을 입력하세요"
-          className="bg-white border-none rounded-[5px] h-[2.5vh] w-[35vh] p-[0.5vh] text-[1.5vh]"
+          className="bg-white border-none rounded-4 h-[2.5vh] w-[35vh] p-[0.5vh] text-[1.5vh]"
         />
         <button
           onClick={handleAddQuestion}
-          className="bg-purple border-none rounded-[5px] h-[2.5vh] text-white cursor-pointer px-[1vh] text-[1.5vh]"
+          className="bg-purple border-none rounded-4 h-[2.5vh] text-white cursor-pointer px-[1vh] text-[1.5vh]"
         >
           추가
         </button>
@@ -128,7 +135,7 @@ export const Qna = () => {
         {questions.map((questionData, index) => (
           <div
             key={index}
-            className="bg-greenLight w-[50vh] mx-auto my-[1.5vh] h-[3.75vh] flex items-center justify-between px-[1vh] rounded-[10px] text-white text-[2vh]"
+            className="bg-greenLight w-[50vh] mx-auto my-[1.5vh] h-[3.75vh] flex items-center justify-between px-[1vh] rounded-4 text-white text-[2vh]"
           >
             <Link
               to={`/answer/${encodeURIComponent(questionData.question)}`}
@@ -140,7 +147,7 @@ export const Qna = () => {
             {currentUser && questionData.authorUid === currentUser.uid && (
               <button
                 onClick={() => handleDeleteQuestion(index)}
-                className="bg-red border-none rounded-[5px] h-[2.5vh] text-white cursor-pointer px-[1vh] text-[1.5vh]"
+                className="bg-red border-none rounded-4 h-[2.5vh] text-white cursor-pointer px-[1vh] text-[1.5vh]"
               >
                 삭제
               </button>
