@@ -1,31 +1,107 @@
 import { useState, useEffect } from "react";
-import { collection, addDoc, getDocs, deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import { Link } from "react-router-dom";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { db } from "../firebase";
 import { Layout } from "@/components/layout/Layout";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-type Question = { question: string; author: string; authorUid: string }[];
+type Question = {
+  id: string;
+  question: string;
+  author: string;
+  authorUid: string;
+}[];
 type QuestionList = {
+  id: string;
   question: string;
   author: string;
   authorUid: string;
 }[];
 
+const QuestionModal = ({
+  isOpen,
+  onClose,
+  onSubmit,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmit: (title: string, content: string) => void;
+}) => {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
+  if (!isOpen) return null;
+
+  const handleSubmit = () => {
+    onSubmit(title, content);
+    setTitle("");
+    setContent("");
+  };
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 ">
+      <div className="p-4 bg-white rounded ">
+        <h2 className="mb-4 text-xl">질문 추가</h2>
+        <input
+          type="text"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+          placeholder="제목"
+          className="w-full p-2 mb-2 border"
+        />
+        <textarea
+          value={content}
+          onChange={(event) => setContent(event.target.value)}
+          placeholder="내용"
+          className="w-full p-2 mb-2 border"
+        />
+        <button
+          onClick={handleSubmit}
+          className="p-2 mr-2 text-white bg-blue-500 rounded"
+        >
+          추가
+        </button>
+        <button
+          onClick={onClose}
+          className="p-2 text-white bg-gray-500 rounded"
+        >
+          닫기
+        </button>
+      </div>
+    </div>
+  );
+};
+
 export const Qna = () => {
   const [questions, setQuestions] = useState<Question>([]);
-  const [currentQuestion, setCurrentQuestion] = useState<string>("");
   const [currentUser, setCurrentUser] = useState({
     displayName: "",
     uid: "",
   });
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const auth = getAuth();
-    console.log(auth);
-    onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setCurrentUser({
+          displayName: user.displayName,
+          uid: user.uid,
+        });
+      } else {
+        setCurrentUser({
+          displayName: "",
+          uid: "",
+        });
+      }
     });
+    return () => unsubscribe();
   }, []);
 
   useEffect(() => {
@@ -35,6 +111,7 @@ export const Qna = () => {
       querySnapshot.forEach((doc) => {
         const questionData = doc.data();
         questionList.push({
+          id: doc.id,
           question: questionData.question,
           author: questionData.author,
           authorUid: questionData.authorUid,
@@ -45,17 +122,18 @@ export const Qna = () => {
     fetchQuestions();
   }, []);
 
-  const handleAddQuestion = async () => {
-    const userData = localStorage.getItem("userData");
-    if (!userData) {
-      alert("질문을 추가하려면 로그인해야 합니다.");
-      return;
-    }
-    if (currentQuestion.trim() === "") return;
-
+  const handleAddQuestion = async (title: string, content: string) => {
     try {
+      const userData = localStorage.getItem("userData");
+      if (!userData) {
+        alert("질문을 추가하려면 로그인해야 합니다.");
+        return;
+      }
+      if (title.trim() === "" || content.trim() === "") return;
+
       const docRef = await addDoc(collection(db, "questions"), {
-        question: currentQuestion,
+        question: title,
+        content: content,
         author: currentUser.displayName,
         authorUid: currentUser.uid,
       });
@@ -64,44 +142,33 @@ export const Qna = () => {
       setQuestions([
         ...questions,
         {
-          question: currentQuestion,
+          id: docRef.id,
+          question: title,
+          content: content,
           author: currentUser.displayName,
           authorUid: currentUser.uid,
         },
       ]);
-      setCurrentQuestion("");
+      setIsModalOpen(false);
     } catch (error) {
       console.error("Error adding document: ", error);
     }
   };
 
-  const handleDeleteQuestion = async (index: number) => {
+  const handleDeleteQuestion = async (id: string) => {
     if (!currentUser) {
       alert("질문을 삭제하려면 로그인해야 합니다.");
       return;
     }
     if (window.confirm("정말로 삭제하시겠습니까?")) {
-      try {
-        const deletedQuestion = questions[index];
-        if (deletedQuestion.authorUid === currentUser.uid) {
-          const updatedQuestions = [...questions];
-          updatedQuestions.splice(index, 1);
-          setQuestions(updatedQuestions);
+      const deletedQuestion = questions.find((question) => question.id === id);
+      if (deletedQuestion && deletedQuestion.authorUid === currentUser.uid) {
+        const updatedQuestions = questions.filter(
+          (question) => question.id !== id
+        );
+        setQuestions(updatedQuestions);
 
-          const querySnapshot = await getDocs(collection(db, "questions"));
-          querySnapshot.forEach((doc) => {
-            if (
-              doc.data().question === deletedQuestion.question &&
-              doc.data().author === deletedQuestion.author
-            ) {
-              deleteDoc(doc.ref);
-            }
-          });
-        } else {
-          alert("자신의 질문만 삭제할 수 있습니다.");
-        }
-      } catch (error) {
-        console.error("Error deleting document: ", error);
+        await deleteDoc(doc(db, "questions", id));
       }
     }
   };
@@ -109,44 +176,29 @@ export const Qna = () => {
   return (
     <Layout>
       <div className="w-full h-[2rem] bg-purple text-center flex items-center justify-center text-white text-[2vh]">
-        R 지식in
+        R지식in
       </div>
-
-      <button className="block mx-auto my-[1vh] border-none bg-greenLight text-white text-[2vh]">
-        질문하기
+      <button
+        className="block p-1 mx-auto text-black border"
+        onClick={() => setIsModalOpen(true)}
+      >
+        질문
       </button>
-      <div className="text-center">
-        <input
-          type="text"
-          value={currentQuestion}
-          onChange={(event) => setCurrentQuestion(event.target.value)}
-          placeholder="질문을 입력하세요"
-          className="bg-white border-none rounded-4 h-[2.5vh] w-[35vh] p-[0.5vh] text-[1.5vh]"
-        />
-        <button
-          onClick={handleAddQuestion}
-          className="bg-purple border-none rounded-4 h-[2.5vh] text-white cursor-pointer px-[1vh] text-[1.5vh]"
-        >
-          추가
-        </button>
-      </div>
-
-      <div className="max-h-[60vh] overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] w-[52vh] relative">
-        {questions.map((questionData, index) => (
+      <div className="w-[23rem] h-full relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] ">
+        {questions.map((question) => (
           <div
-            key={index}
-            className="bg-greenLight w-[50vh] mx-auto my-[1.5vh] h-[3.75vh] flex items-center justify-between px-[1vh] rounded-4 text-white text-[2vh]"
+            key={question.id}
+            className="bg-greenLight w-full h-[5rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black "
           >
             <Link
-              to={`/answer/${encodeURIComponent(questionData.question)}`}
-              state={{ question: questionData.question }}
-              className="text-white overflow-hidden whitespace-nowrap text-ellipsis inline-block w-[35vh]"
+              to={`/answer/${question.id}`}
+              state={{ question: question.question }}
             >
-              {questionData.question}
+              {question.question}
             </Link>
-            {currentUser && questionData.authorUid === currentUser.uid && (
+            {currentUser && question.authorUid === currentUser.uid && (
               <button
-                onClick={() => handleDeleteQuestion(index)}
+                onClick={() => handleDeleteQuestion(question.id)}
                 className="bg-red border-none rounded-4 h-[2.5vh] text-white cursor-pointer px-[1vh] text-[1.5vh]"
               >
                 삭제
@@ -155,6 +207,11 @@ export const Qna = () => {
           </div>
         ))}
       </div>
+      <QuestionModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleAddQuestion}
+      />
     </Layout>
   );
 };
