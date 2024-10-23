@@ -3,7 +3,6 @@ import MyPage from "@/components/MyPage/MyPage";
 import Nav from "@/components/Nav/Nav";
 import CategoryDetailItems from "@/components/WasteCategory/CategoryDetailItems";
 import CategoryItems from "@/components/WasteCategory/CategoryItems";
-// import WasteCategoryItems from "@/components/WasteCategoryItems";
 import {
   Answer,
   Login,
@@ -76,7 +75,7 @@ export const routes = [
     element: <Topic />,
   },
   {
-    path: "answer/:questionIndex",
+    path: "answer/:questionId",
     element: <Answer />,
   },
   {

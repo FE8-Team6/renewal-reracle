@@ -1,11 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  deleteDoc,
-  doc,
-} from "firebase/firestore";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { db } from "../firebase";
 import { Layout } from "@/components/layout/Layout";
@@ -80,11 +74,14 @@ const QuestionModal = ({
 
 export const Qna = () => {
   const [questions, setQuestions] = useState<Question>([]);
-  const [currentUser, setCurrentUser] = useState({
+  const [currentUser, setCurrentUser] = useState<{
+    displayName: string;
+    uid: string;
+  }>({
     displayName: "",
     uid: "",
   });
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const auth = getAuth();
@@ -123,53 +120,34 @@ export const Qna = () => {
   }, []);
 
   const handleAddQuestion = async (title: string, content: string) => {
+    const userData = localStorage.getItem("userData");
+    if (!userData) {
+      alert("질문을 추가하려면 로그인해야 합니다.");
+      return;
+    }
+    if (title.trim() === "" || content.trim() === "") return;
     try {
-      const userData = localStorage.getItem("userData");
-      if (!userData) {
-        alert("질문을 추가하려면 로그인해야 합니다.");
-        return;
-      }
-      if (title.trim() === "" || content.trim() === "") return;
-
-      const docRef = await addDoc(collection(db, "questions"), {
+      await addDoc(collection(db, "questions"), {
         question: title,
-        content: content,
         author: currentUser.displayName,
         authorUid: currentUser.uid,
       });
-      console.log("Document written with ID: ", docRef.id);
 
-      setQuestions([
-        ...questions,
-        {
-          id: docRef.id,
-          question: title,
-          content: content,
-          author: currentUser.displayName,
-          authorUid: currentUser.uid,
-        },
-      ]);
+      const updatedQuestions = await getDocs(collection(db, "questions"));
+      const questionList: Question = [];
+      updatedQuestions.forEach((doc) => {
+        const questionData = doc.data();
+        questionList.push({
+          id: doc.id,
+          question: questionData.question,
+          author: questionData.author,
+          authorUid: questionData.authorUid,
+        });
+      });
+      setQuestions(questionList);
       setIsModalOpen(false);
     } catch (error) {
-      console.error("Error adding document: ", error);
-    }
-  };
-
-  const handleDeleteQuestion = async (id: string) => {
-    if (!currentUser) {
-      alert("질문을 삭제하려면 로그인해야 합니다.");
-      return;
-    }
-    if (window.confirm("정말로 삭제하시겠습니까?")) {
-      const deletedQuestion = questions.find((question) => question.id === id);
-      if (deletedQuestion && deletedQuestion.authorUid === currentUser.uid) {
-        const updatedQuestions = questions.filter(
-          (question) => question.id !== id
-        );
-        setQuestions(updatedQuestions);
-
-        await deleteDoc(doc(db, "questions", id));
-      }
+      console.error("질문 추가 실패:", error);
     }
   };
 
@@ -179,7 +157,7 @@ export const Qna = () => {
         R지식in
       </div>
       <button
-        className="block p-1 mx-auto text-black border"
+        className=" p-1 mx-auto text-black border"
         onClick={() => setIsModalOpen(true)}
       >
         질문
@@ -196,14 +174,6 @@ export const Qna = () => {
             >
               {question.question}
             </Link>
-            {currentUser && question.authorUid === currentUser.uid && (
-              <button
-                onClick={() => handleDeleteQuestion(question.id)}
-                className="bg-red border-none rounded-4 h-[2.5vh] text-white cursor-pointer px-[1vh] text-[1.5vh]"
-              >
-                삭제
-              </button>
-            )}
           </div>
         ))}
       </div>
