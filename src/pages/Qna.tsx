@@ -120,11 +120,6 @@ export const Qna = () => {
   }, []);
 
   const handleAddQuestion = async (title: string, content: string) => {
-    const userData = localStorage.getItem("userData");
-    if (!userData) {
-      alert("질문을 추가하려면 로그인해야 합니다.");
-      return;
-    }
     if (title.trim() === "" || content.trim() === "") return;
     try {
       await addDoc(collection(db, "questions"), {
@@ -151,6 +146,15 @@ export const Qna = () => {
     }
   };
 
+  const handleOpenModal = () => {
+    const userData = localStorage.getItem("userData");
+    if (!userData) {
+      alert("로그인이 필요합니다.");
+      return;
+    }
+    setIsModalOpen(true);
+  };
+
   return (
     <Layout>
       <div className="w-full h-[2rem] bg-purple text-center flex items-center justify-center text-white text-[2vh]">
@@ -158,7 +162,7 @@ export const Qna = () => {
       </div>
       <button
         className=" p-1 mx-auto text-black border"
-        onClick={() => setIsModalOpen(true)}
+        onClick={handleOpenModal}
       >
         질문
       </button>
