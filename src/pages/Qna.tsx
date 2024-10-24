@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc, getDocs, Timestamp } from "firebase/firestore";
 import { NavLink } from "react-router-dom";
 import { db } from "../firebase";
 import { Layout } from "@/components/layout/Layout";
 import QuestionModal from "@/components/modal/QuestionModal";
+import { serverTimestamp } from "firebase/firestore";
 
 type Question = {
   id: string;
@@ -11,6 +12,7 @@ type Question = {
   author: string;
   authorUid: string;
   content: string;
+  createdAt: Timestamp | null;
 }[];
 
 export const Qna = () => {
@@ -47,6 +49,7 @@ export const Qna = () => {
           author: questionData.author,
           authorUid: questionData.authorUid,
           content: questionData.content,
+          createdAt: questionData.createdAt || null,
         });
       });
       setQuestions(questionList);
@@ -65,6 +68,7 @@ export const Qna = () => {
         content,
         author: currentUser.displayName,
         authorUid: currentUser.uid,
+        createdAt: serverTimestamp(),
       });
 
       const updatedQuestions = await getDocs(collection(db, "questions"));
@@ -77,6 +81,7 @@ export const Qna = () => {
           content: questionData.content,
           author: questionData.author,
           authorUid: questionData.authorUid,
+          createdAt: questionData.createdAt || null,
         });
       });
       setQuestions(questionList);
@@ -110,7 +115,7 @@ export const Qna = () => {
         {questions.map((question) => (
           <div
             key={question.id}
-            className="bg-greenLight w-full h-[5rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black "
+            className=" bg-greenLight w-full h-[5rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black "
           >
             <NavLink
               to={`/answer/${question.id}`}
@@ -119,9 +124,20 @@ export const Qna = () => {
                 question: question.question,
                 content: question.content,
                 author: question.author,
+                createdAt: question.createdAt,
               }}
             >
-              {question.question} - {question.author} 님
+              <span>{question.question}</span>
+              <span>{question.author} 님</span>
+              {question.createdAt && (
+                <p>
+                  {question.createdAt.toDate().toLocaleString("ko-KR", {
+                    timeZone: "Asia/Seoul",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </p>
+              )}
             </NavLink>
           </div>
         ))}

@@ -18,6 +18,7 @@ export const Answer = () => {
   const question = location.state?.question || "";
   const content = location.state?.content || "";
   const author = location.state?.author || "";
+  const createdAt = location.state?.createdAt || "";
 
   const [submittedAnswers, setSubmittedAnswers] = useState<SubmittedAnswer>(
     location.state?.submittedAnswers || []
@@ -46,11 +47,25 @@ export const Answer = () => {
     fetchAnswers();
   }, [questionId]);
 
+  const formatDateToKoreanTime = (timestamp) => {
+    return timestamp.toDate().toLocaleString("ko-KR", {
+      timeZone: "Asia/Seoul",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
   return (
     <Layout>
       <div className="p-4">
         <p className="text-xl text-center">{question}</p>
         <p className="font-bold text-center">{author}</p>
+        {createdAt && (
+          <p className="text-center">{formatDateToKoreanTime(createdAt)}</p>
+        )}
         <p className="mt-4 text-center">{content}</p>
         <p>댓글 {submittedAnswers.length}</p>
       </div>
