@@ -1,8 +1,24 @@
-import { Button } from "@/components/ui/button";
-import { db } from "@/firebase";
-import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import {
+  collection,
+  addDoc,
+  deleteDoc,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
+import { db } from "../firebase";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+  DialogClose,
+} from "@/components/ui/dialog";
 
 const Comments = () => {
   const location = useLocation();
@@ -20,6 +36,8 @@ const Comments = () => {
     displayName: "",
   });
   const [answer, setAnswer] = useState<string>("");
+  const [editingAnswer, setEditingAnswer] = useState<string | null>(null);
+  const [editedContent, setEditedContent] = useState<string>("");
 
   useEffect(() => {
     const userData = localStorage.getItem("userData");
@@ -67,10 +85,30 @@ const Comments = () => {
     try {
       await deleteDoc(doc(db, "answers", id));
       setSubmittedAnswers(
-        submittedAnswers.filter((answer) => answer.id !== id)
+        submittedAnswers.filter((answer: { id: string }) => answer.id !== id)
       );
     } catch (error) {
       console.error("DELETE 에러 발생: ", error);
+    }
+  };
+
+  const handleEditAnswer = async () => {
+    if (!editingAnswer) return;
+
+    try {
+      const answerDoc = doc(db, "answers", editingAnswer);
+      await updateDoc(answerDoc, { content: editedContent });
+      setSubmittedAnswers(
+        submittedAnswers.map((answer: { id: string }) =>
+          answer.id === editingAnswer
+            ? { ...answer, content: editedContent }
+            : answer
+        )
+      );
+      setEditingAnswer(null);
+      setEditedContent("");
+    } catch (error) {
+      console.error("UPDATE 에러 발생: ", error);
     }
   };
 
@@ -99,14 +137,55 @@ const Comments = () => {
                 {answer.content}
               </p>
               {currentUser && currentUser.uid === answer.authorUid && (
-                <Button
-                  variant="default"
-                  size="default"
-                  className="w-[4rem] h-[1rem] px-4 mt-2 text-sm"
-                  onClick={() => handleDeleteAnswer(answer.id)}
-                >
-                  삭제
-                </Button>
+                <div>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button
+                        variant="default"
+                        size="default"
+                        className="w-[4rem] h-[1rem] px-4 mt-2 text-sm"
+                        onClick={() => {
+                          setEditingAnswer(answer.id);
+                          setEditedContent(answer.content);
+                        }}
+                      >
+                        수정
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>댓글 수정</DialogTitle>
+                        <DialogDescription>
+                          댓글 내용을 수정하세요.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <textarea
+                        value={editedContent}
+                        onChange={(e) => setEditedContent(e.target.value)}
+                        className="w-full h-28 border border-gray-300 rounded-4"
+                      />
+                      <DialogFooter>
+                        <DialogClose asChild>
+                          <Button
+                            variant="default"
+                            size="default"
+                            onClick={handleEditAnswer}
+                          >
+                            확인
+                          </Button>
+                        </DialogClose>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
+                  <Button
+                    variant="default"
+                    size="default"
+                    className="w-[4rem] h-[1rem] px-4 mt-2 text-sm"
+                    onClick={() => handleDeleteAnswer(answer.id)}
+                  >
+                    삭제
+                  </Button>
+                </div>
               )}
             </div>
           )
