@@ -52,9 +52,9 @@ export const Answer = () => {
         <p className="text-xl text-center">{question}</p>
         <p className="font-bold text-center">{author}</p>
         <p className="mt-4 text-center">{content}</p>
+        <p>댓글 {submittedAnswers.length}</p>
       </div>
 
-      <p>댓글 {submittedAnswers.length}</p>
       <div className="h-[50vh] mt-4 overflow-y-auto">
         {submittedAnswers.map(({ id, author, content }) => (
           <div
@@ -67,15 +67,15 @@ export const Answer = () => {
             </p>
           </div>
         ))}
+        <NavLink
+          to={`/comments/${questionId}`}
+          state={{ questionId, question, submittedAnswers }}
+        >
+          <Button variant="link" size="sm">
+            댓글을 남겨보세요.
+          </Button>
+        </NavLink>
       </div>
-      <NavLink
-        to={`/comments/${questionId}`}
-        state={{ questionId, question, submittedAnswers }}
-      >
-        <Button variant="link" size="lg">
-          댓글을 남겨보세요.
-        </Button>
-      </NavLink>
     </Layout>
   );
 };
