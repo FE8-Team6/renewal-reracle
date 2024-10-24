@@ -11,7 +11,6 @@ import { db } from "../firebase";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogTrigger,
   DialogContent,
   DialogHeader,
   DialogFooter,
@@ -19,6 +18,12 @@ import {
   DialogDescription,
   DialogClose,
 } from "@/components/ui/dialog";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover";
+import { MoreHorizontal } from "lucide-react";
 
 const Comments = () => {
   const location = useLocation();
@@ -138,12 +143,17 @@ const Comments = () => {
               </p>
               {currentUser && currentUser.uid === answer.authorUid && (
                 <div>
-                  <Dialog>
-                    <DialogTrigger asChild>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button variant="ghost" size="icon">
+                        <MoreHorizontal className="w-4 h-4" />
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-48">
                       <Button
                         variant="default"
                         size="default"
-                        className="w-[4rem] h-[1rem] px-4 mt-2 text-sm"
+                        className="w-full"
                         onClick={() => {
                           setEditingAnswer(answer.id);
                           setEditedContent(answer.content);
@@ -151,7 +161,20 @@ const Comments = () => {
                       >
                         수정
                       </Button>
-                    </DialogTrigger>
+                      <Button
+                        variant="default"
+                        size="default"
+                        className="w-full"
+                        onClick={() => handleDeleteAnswer(answer.id)}
+                      >
+                        삭제
+                      </Button>
+                    </PopoverContent>
+                  </Popover>
+                  <Dialog
+                    open={editingAnswer === answer.id}
+                    onOpenChange={() => setEditingAnswer(null)}
+                  >
                     <DialogContent>
                       <DialogHeader>
                         <DialogTitle>댓글 수정</DialogTitle>
@@ -161,7 +184,9 @@ const Comments = () => {
                       </DialogHeader>
                       <textarea
                         value={editedContent}
-                        onChange={(e) => setEditedContent(e.target.value)}
+                        onChange={(event) =>
+                          setEditedContent(event.target.value)
+                        }
                         className="w-full h-28 border border-gray-300 rounded-4"
                       />
                       <DialogFooter>
@@ -177,14 +202,6 @@ const Comments = () => {
                       </DialogFooter>
                     </DialogContent>
                   </Dialog>
-                  <Button
-                    variant="default"
-                    size="default"
-                    className="w-[4rem] h-[1rem] px-4 mt-2 text-sm"
-                    onClick={() => handleDeleteAnswer(answer.id)}
-                  >
-                    삭제
-                  </Button>
                 </div>
               )}
             </div>
