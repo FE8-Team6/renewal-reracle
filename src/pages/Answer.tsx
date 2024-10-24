@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import {
   collection,
   addDoc,
@@ -22,6 +22,7 @@ type SubmittedAnswer = {
 
 export const Answer = () => {
   const location = useLocation();
+  const questionId = location.state?.questionId || "";
   const question = location.state?.question || "";
   const content = location.state?.content || "";
   const author = location.state?.author || "";
@@ -68,6 +69,15 @@ export const Answer = () => {
   }, [question]);
 
   const handleSubmit = async () => {
+    if (!currentUser.uid) {
+      alert("로그인이 필요합니다");
+      return;
+    }
+
+    if (answer.trim() === "") {
+      alert("글을 작성해주세요");
+      return;
+    }
     try {
       const docRef = await addDoc(collection(db, "answers"), {
         question: question,
@@ -101,14 +111,15 @@ export const Answer = () => {
     }
   };
 
+  console.log(submittedAnswers);
   return (
     <Layout>
-      <div className="p-2 border border-gray-300 rounded-2">
+      <div className="p-4">
         <p className="text-xl text-center">{question}</p>
         <p className="font-bold text-center">{author}</p>
         <p className="mt-4 text-center">{content}</p>
       </div>
-      <div className="mt-4 overflow-hidden text-center">
+      {/* <div className="mt-4 overflow-hidden text-center">
         <textarea
           className="w-[23rem] h-28 border border-gray-300 rounded-4"
           value={answer}
@@ -117,7 +128,7 @@ export const Answer = () => {
         <Button variant="default" size="default" onClick={handleSubmit}>
           제출
         </Button>
-      </div>
+      </div> */}
       <p>댓글 {submittedAnswers.length}</p>
       <div className="h-[40vh] mt-4 overflow-y-auto">
         {submittedAnswers.map(({ id, author, authorUid, content }) => (
@@ -142,8 +153,9 @@ export const Answer = () => {
           </div>
         ))}
       </div>
+      <NavLink to={`/comments/${questionId}`} state={{ submittedAnswers }}>
+        댓글을 남겨보세요.
+      </NavLink>
     </Layout>
   );
 };
-
-export default Answer;

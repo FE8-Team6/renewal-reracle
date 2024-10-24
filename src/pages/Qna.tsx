@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { collection, addDoc, getDocs } from "firebase/firestore";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { db } from "../firebase";
 import { Layout } from "@/components/layout/Layout";
 import QuestionModal from "@/components/modal/QuestionModal";
@@ -17,6 +17,7 @@ type QuestionList = {
   question: string;
   author: string;
   authorUid: string;
+  content: string;
 }[];
 
 export const Qna = () => {
@@ -52,6 +53,7 @@ export const Qna = () => {
           question: questionData.question,
           author: questionData.author,
           authorUid: questionData.authorUid,
+          content: questionData.content,
         });
       });
       setQuestions(questionList);
@@ -60,7 +62,10 @@ export const Qna = () => {
   }, []);
 
   const handleAddQuestion = async (title: string, content: string) => {
-    if (title.trim() === "" || content.trim() === "") return;
+    if (title.trim() === "" || content.trim() === "") {
+      alert("제목과 내용을 입력해주세요.");
+      return;
+    }
     try {
       await addDoc(collection(db, "questions"), {
         question: title,
@@ -114,16 +119,17 @@ export const Qna = () => {
             key={question.id}
             className="bg-greenLight w-full h-[5rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black "
           >
-            <Link
+            <NavLink
               to={`/answer/${question.id}`}
               state={{
+                questionId: question.id,
                 question: question.question,
                 content: question.content,
                 author: question.author,
               }}
             >
               {question.question} - {question.author} 님
-            </Link>
+            </NavLink>
           </div>
         ))}
       </div>

@@ -13,6 +13,7 @@ import {
   SignUp,
   Topic,
 } from "@/pages";
+import Comments from "@/pages/Comments";
 import Home from "@/pages/Home";
 
 export const routes = [
@@ -77,6 +78,10 @@ export const routes = [
   {
     path: "answer/:questionId",
     element: <Answer />,
+  },
+  {
+    path: "comments/:questionId",
+    element: <Comments />,
   },
   {
     path: "mypage",

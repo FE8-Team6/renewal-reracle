@@ -21,7 +21,7 @@ const QuestionModal = ({
     setCurrentDate(`${year}년 ${month}월 ${day}일`);
   });
 
-  if (!isOpen) return null;
+  if (!isOpen) return;
 
   const handleSubmit = () => {
     onSubmit(title, content);
