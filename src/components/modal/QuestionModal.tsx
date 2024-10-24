@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const QuestionModal = ({
   isOpen,
@@ -11,6 +11,15 @@ const QuestionModal = ({
 }) => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
+  const [currentDate, setCurrentDate] = useState<string>("");
+
+  useEffect(() => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    setCurrentDate(`${year}년 ${month}월 ${day}일`);
+  });
 
   if (!isOpen) return null;
 
@@ -23,7 +32,7 @@ const QuestionModal = ({
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 ">
       <div className="w-[23rem] h-auto p-4 bg-white rounded ">
-        <h2 className="mb-4 text-2xl">질문</h2>
+        <p className="mb-4 text-lg text-center">{currentDate}</p>
         <input
           type="text"
           value={title}

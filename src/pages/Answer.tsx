@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { styled } from "styled-components";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import {
   collection,
@@ -10,119 +9,39 @@ import {
   doc,
   deleteDoc,
 } from "firebase/firestore";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { db } from "../firebase";
 import { Layout } from "@/components/layout/Layout";
+import { Button } from "@/components/ui/button";
 
-const AnswerBlock = styled.button`
-  display: block;
-  margin: 1vh auto;
-  border: none;
-  background: #93fd98;
-  color: white;
-  font-size: 2vh;
-`;
-
-const AnswerContainer = styled.div`
-  text-align: center;
-  margin-top: 4vh;
-  overflow: hidden;
-`;
-
-const AnswerDisplay = styled.div`
-  margin-top: 2vh;
-  height: 50vh;
-  overflow-y: auto;
-`;
-
-const InputAnswer = styled.textarea`
-  width: 50vh;
-  height: 10vh;
-`;
-
-const AnswerBtn = styled.button`
-  width: 12vh;
-  height: 4vh;
-  border: none;
-  cursor: pointer;
-  border-radius: 10px;
-  font-size: 2vh;
-  background: #93fd98;
-  color: white;
-`;
-
-const AnswerBox = styled.div`
-  position: relative;
-  background: #93fd98;
-  width: 50vh;
-  margin: 1.5vh auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1vh;
-  border-radius: 10px;
-  color: white;
-  font-size: 2.5vh;
-`;
-
-const AnswerContent = styled.p`
-  color: black;
-  word-wrap: break-word;
-  word-break: break-all;
-  white-space: pre-wrap;
-`;
-
-const AnswerInfo = styled.div`
-  margin-top: 1vh;
-`;
-
-const DeleteButton = styled.button`
-  background: #ff4747;
-  border: none;
-  border-radius: 5px;
-  height: 2.5vh;
-  color: white;
-  cursor: pointer;
-  padding: 0 1vh;
-  font-size: 1.5vh;
-  margin-top: 1vh;
-`;
-
-const QuestionBox = styled.p`
-  text-align: center;
-  font-size: 2.5vh;
-  font-weight: bold;
-`;
+type SubmittedAnswer = {
+  id: string;
+  author: string;
+  authorUid: string;
+  content: string;
+}[];
 
 export const Answer = () => {
   const location = useLocation();
   const question = location.state?.question || "";
+  const content = location.state?.content || "";
+  const author = location.state?.author || "";
 
-  const [answer, setAnswer] = useState("");
-  const [submittedAnswers, setSubmittedAnswers] = useState<
-    { id: string; author: string; authorUid: string; content: string }[]
-  >([]);
-  const [nickname, setNickname] = useState("");
-  const [currentUser, setCurrentUser] = useState<any>(null);
+  const [answer, setAnswer] = useState<string>("");
+  const [submittedAnswers, setSubmittedAnswers] = useState<SubmittedAnswer>([]);
+  const [currentUser, setCurrentUser] = useState<{
+    uid: string;
+    displayName: string;
+  }>({
+    uid: "",
+    displayName: "",
+  });
 
   useEffect(() => {
-    const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        setCurrentUser(user);
-        const userQuery = query(
-          collection(db, "users"),
-          where("uid", "==", user.uid)
-        );
-        const querySnapshot = await getDocs(userQuery);
-        if (!querySnapshot.empty) {
-          const userData = querySnapshot.docs[0].data();
-          setNickname(userData.nickname);
-        }
-      }
-    });
-
-    return () => unsubscribe();
+    const userData = localStorage.getItem("userData");
+    const storedUser = userData ? JSON.parse(userData) : null;
+    if (storedUser) {
+      setCurrentUser(storedUser);
+    }
   }, []);
 
   useEffect(() => {
@@ -150,25 +69,24 @@ export const Answer = () => {
 
   const handleSubmit = async () => {
     try {
-      const user = getAuth().currentUser;
       const docRef = await addDoc(collection(db, "answers"), {
         question: question,
-        author: nickname,
-        authorUid: user.uid, // 작성자의 UID도 함께 저장
+        author: currentUser.displayName,
+        authorUid: currentUser.uid,
         content: answer,
       });
       setSubmittedAnswers([
         ...submittedAnswers,
         {
           id: docRef.id,
-          author: nickname,
-          authorUid: user.uid,
+          author: currentUser.displayName,
+          authorUid: currentUser.uid,
           content: answer,
         },
       ]);
       setAnswer("");
     } catch (error) {
-      console.error("Error adding document: ", error);
+      console.error("POST 에러 발생: ", error);
     }
   };
 
@@ -179,37 +97,53 @@ export const Answer = () => {
         submittedAnswers.filter((answer) => answer.id !== id)
       );
     } catch (error) {
-      console.error("Error deleting document: ", error);
+      console.error("DELETE 에러 발생: ", error);
     }
   };
 
   return (
     <Layout>
-      <div>
-        <AnswerBlock>답변하기</AnswerBlock>
-        <QuestionBox>{question}</QuestionBox>
-        <AnswerContainer>
-          <InputAnswer
-            value={answer}
-            onChange={(e) => setAnswer(e.target.value)}
-          />
-          <AnswerBtn onClick={handleSubmit}>제출</AnswerBtn>
-        </AnswerContainer>
-        <AnswerDisplay>
-          {submittedAnswers.map(({ id, author, authorUid, content }) => (
-            <AnswerBox key={id}>
-              <AnswerInfo>{author}</AnswerInfo>
-              <AnswerContent>{content}</AnswerContent>
-              {currentUser &&
-                currentUser.uid === authorUid && ( // 현재 사용자와 작성자의 UID를 비교하여 삭제 버튼 표시
-                  <DeleteButton onClick={() => handleDeleteAnswer(id)}>
-                    삭제
-                  </DeleteButton>
-                )}
-            </AnswerBox>
-          ))}
-        </AnswerDisplay>
+      <div className="p-2 border border-gray-300 rounded-2">
+        <p className="text-xl text-center">{question}</p>
+        <p className="font-bold text-center">{author}</p>
+        <p className="mt-4 text-center">{content}</p>
+      </div>
+      <div className="mt-4 overflow-hidden text-center">
+        <textarea
+          className="w-[23rem] h-28 border border-gray-300 rounded-4"
+          value={answer}
+          onChange={(event) => setAnswer(event.target.value)}
+        />
+        <Button variant="default" size="default" onClick={handleSubmit}>
+          제출
+        </Button>
+      </div>
+      <p>댓글 {submittedAnswers.length}</p>
+      <div className="h-[40vh] mt-4 overflow-y-auto">
+        {submittedAnswers.map(({ id, author, authorUid, content }) => (
+          <div
+            key={id}
+            className="relative flex flex-col items-center w-[23rem] mx-auto p-2 text-lg bg-green-400 border rounded-lg"
+          >
+            <p>{author}</p>
+            <p className="text-black break-words whitespace-pre-wrap">
+              {content}
+            </p>
+            {currentUser && currentUser.uid === authorUid && (
+              <Button
+                variant="default"
+                size="default"
+                className="w-[4rem] h-[1rem] px-4 mt-2 text-sm "
+                onClick={() => handleDeleteAnswer(id)}
+              >
+                삭제
+              </Button>
+            )}
+          </div>
+        ))}
       </div>
     </Layout>
   );
 };
+
+export default Answer;

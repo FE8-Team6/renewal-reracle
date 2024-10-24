@@ -3,7 +3,6 @@ import { collection, addDoc, getDocs } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { db } from "../firebase";
 import { Layout } from "@/components/layout/Layout";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import QuestionModal from "@/components/modal/QuestionModal";
 
 type Question = {
@@ -11,6 +10,7 @@ type Question = {
   question: string;
   author: string;
   authorUid: string;
+  content: string;
 }[];
 type QuestionList = {
   id: string;
@@ -30,22 +30,15 @@ export const Qna = () => {
   });
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
+  /**
+   * @description 로컬스토리지에 저장된 사용자 정보를 불러옵니다.
+   */
   useEffect(() => {
-    const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setCurrentUser({
-          displayName: user.displayName,
-          uid: user.uid,
-        });
-      } else {
-        setCurrentUser({
-          displayName: "",
-          uid: "",
-        });
-      }
-    });
-    return () => unsubscribe();
+    const userData = localStorage.getItem("userData");
+    const storedUser = userData ? JSON.parse(userData) : null;
+    if (storedUser) {
+      setCurrentUser(storedUser);
+    }
   }, []);
 
   useEffect(() => {
@@ -71,6 +64,7 @@ export const Qna = () => {
     try {
       await addDoc(collection(db, "questions"), {
         question: title,
+        content,
         author: currentUser.displayName,
         authorUid: currentUser.uid,
       });
@@ -82,6 +76,7 @@ export const Qna = () => {
         questionList.push({
           id: doc.id,
           question: questionData.question,
+          content: questionData.content,
           author: questionData.author,
           authorUid: questionData.authorUid,
         });
@@ -108,7 +103,7 @@ export const Qna = () => {
         R지식in
       </div>
       <button
-        className=" p-1 mx-auto text-black border"
+        className="p-1 mx-auto text-black border "
         onClick={handleOpenModal}
       >
         질문
@@ -121,9 +116,13 @@ export const Qna = () => {
           >
             <Link
               to={`/answer/${question.id}`}
-              state={{ question: question.question }}
+              state={{
+                question: question.question,
+                content: question.content,
+                author: question.author,
+              }}
             >
-              {question.question}
+              {question.question} - {question.author} 님
             </Link>
           </div>
         ))}
