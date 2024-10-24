@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import {
   collection,
-  addDoc,
   query,
   where,
   getDocs,
@@ -27,8 +26,9 @@ export const Answer = () => {
   const content = location.state?.content || "";
   const author = location.state?.author || "";
 
-  const [answer, setAnswer] = useState<string>("");
-  const [submittedAnswers, setSubmittedAnswers] = useState<SubmittedAnswer>([]);
+  const [submittedAnswers, setSubmittedAnswers] = useState<SubmittedAnswer>(
+    location.state?.submittedAnswers || []
+  );
   const [currentUser, setCurrentUser] = useState<{
     uid: string;
     displayName: string;
@@ -50,7 +50,7 @@ export const Answer = () => {
       const answersCollection = collection(db, "answers");
       const answerQuery = query(
         answersCollection,
-        where("question", "==", question)
+        where("questionId", "==", questionId)
       );
       const querySnapshot = await getDocs(answerQuery);
       const answersData = querySnapshot.docs.map(
@@ -66,39 +66,38 @@ export const Answer = () => {
     };
 
     fetchAnswers();
-  }, [question]);
+  }, [questionId]);
+  // const handleSubmit = async () => {
+  //   if (!currentUser.uid) {
+  //     alert("로그인이 필요합니다");
+  //     return;
+  //   }
 
-  const handleSubmit = async () => {
-    if (!currentUser.uid) {
-      alert("로그인이 필요합니다");
-      return;
-    }
-
-    if (answer.trim() === "") {
-      alert("글을 작성해주세요");
-      return;
-    }
-    try {
-      const docRef = await addDoc(collection(db, "answers"), {
-        question: question,
-        author: currentUser.displayName,
-        authorUid: currentUser.uid,
-        content: answer,
-      });
-      setSubmittedAnswers([
-        ...submittedAnswers,
-        {
-          id: docRef.id,
-          author: currentUser.displayName,
-          authorUid: currentUser.uid,
-          content: answer,
-        },
-      ]);
-      setAnswer("");
-    } catch (error) {
-      console.error("POST 에러 발생: ", error);
-    }
-  };
+  //   if (answer.trim() === "") {
+  //     alert("글을 작성해주세요");
+  //     return;
+  //   }
+  //   try {
+  //     const docRef = await addDoc(collection(db, "answers"), {
+  //       question: question,
+  //       author: currentUser.displayName,
+  //       authorUid: currentUser.uid,
+  //       content: answer,
+  //     });
+  //     setSubmittedAnswers([
+  //       ...submittedAnswers,
+  //       {
+  //         id: docRef.id,
+  //         author: currentUser.displayName,
+  //         authorUid: currentUser.uid,
+  //         content: answer,
+  //       },
+  //     ]);
+  //     setAnswer("");
+  //   } catch (error) {
+  //     console.error("POST 에러 발생: ", error);
+  //   }
+  // };
 
   const handleDeleteAnswer = async (id: string) => {
     try {
@@ -111,7 +110,6 @@ export const Answer = () => {
     }
   };
 
-  console.log(submittedAnswers);
   return (
     <Layout>
       <div className="p-4">
@@ -153,7 +151,10 @@ export const Answer = () => {
           </div>
         ))}
       </div>
-      <NavLink to={`/comments/${questionId}`} state={{ submittedAnswers }}>
+      <NavLink
+        to={`/comments/${questionId}`}
+        state={{ questionId, question, submittedAnswers }}
+      >
         댓글을 남겨보세요.
       </NavLink>
     </Layout>

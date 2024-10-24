@@ -12,13 +12,6 @@ type Question = {
   authorUid: string;
   content: string;
 }[];
-type QuestionList = {
-  id: string;
-  question: string;
-  author: string;
-  authorUid: string;
-  content: string;
-}[];
 
 export const Qna = () => {
   const [questions, setQuestions] = useState<Question>([]);
@@ -45,7 +38,7 @@ export const Qna = () => {
   useEffect(() => {
     const fetchQuestions = async () => {
       const querySnapshot = await getDocs(collection(db, "questions"));
-      const questionList: QuestionList = [];
+      const questionList: Question = [];
       querySnapshot.forEach((doc) => {
         const questionData = doc.data();
         questionList.push({
