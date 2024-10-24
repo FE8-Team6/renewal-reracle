@@ -67,37 +67,6 @@ export const Answer = () => {
 
     fetchAnswers();
   }, [questionId]);
-  // const handleSubmit = async () => {
-  //   if (!currentUser.uid) {
-  //     alert("로그인이 필요합니다");
-  //     return;
-  //   }
-
-  //   if (answer.trim() === "") {
-  //     alert("글을 작성해주세요");
-  //     return;
-  //   }
-  //   try {
-  //     const docRef = await addDoc(collection(db, "answers"), {
-  //       question: question,
-  //       author: currentUser.displayName,
-  //       authorUid: currentUser.uid,
-  //       content: answer,
-  //     });
-  //     setSubmittedAnswers([
-  //       ...submittedAnswers,
-  //       {
-  //         id: docRef.id,
-  //         author: currentUser.displayName,
-  //         authorUid: currentUser.uid,
-  //         content: answer,
-  //       },
-  //     ]);
-  //     setAnswer("");
-  //   } catch (error) {
-  //     console.error("POST 에러 발생: ", error);
-  //   }
-  // };
 
   const handleDeleteAnswer = async (id: string) => {
     try {
@@ -117,16 +86,7 @@ export const Answer = () => {
         <p className="font-bold text-center">{author}</p>
         <p className="mt-4 text-center">{content}</p>
       </div>
-      {/* <div className="mt-4 overflow-hidden text-center">
-        <textarea
-          className="w-[23rem] h-28 border border-gray-300 rounded-4"
-          value={answer}
-          onChange={(event) => setAnswer(event.target.value)}
-        />
-        <Button variant="default" size="default" onClick={handleSubmit}>
-          제출
-        </Button>
-      </div> */}
+
       <p>댓글 {submittedAnswers.length}</p>
       <div className="h-[40vh] mt-4 overflow-y-auto">
         {submittedAnswers.map(({ id, author, authorUid, content }) => (
