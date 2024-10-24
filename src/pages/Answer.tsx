@@ -1,16 +1,8 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  doc,
-  deleteDoc,
-} from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import { Layout } from "@/components/layout/Layout";
-import { Button } from "@/components/ui/button";
 
 type SubmittedAnswer = {
   id: string;
@@ -29,21 +21,6 @@ export const Answer = () => {
   const [submittedAnswers, setSubmittedAnswers] = useState<SubmittedAnswer>(
     location.state?.submittedAnswers || []
   );
-  const [currentUser, setCurrentUser] = useState<{
-    uid: string;
-    displayName: string;
-  }>({
-    uid: "",
-    displayName: "",
-  });
-
-  useEffect(() => {
-    const userData = localStorage.getItem("userData");
-    const storedUser = userData ? JSON.parse(userData) : null;
-    if (storedUser) {
-      setCurrentUser(storedUser);
-    }
-  }, []);
 
   useEffect(() => {
     const fetchAnswers = async () => {
@@ -68,17 +45,6 @@ export const Answer = () => {
     fetchAnswers();
   }, [questionId]);
 
-  const handleDeleteAnswer = async (id: string) => {
-    try {
-      await deleteDoc(doc(db, "answers", id));
-      setSubmittedAnswers(
-        submittedAnswers.filter((answer) => answer.id !== id)
-      );
-    } catch (error) {
-      console.error("DELETE 에러 발생: ", error);
-    }
-  };
-
   return (
     <Layout>
       <div className="p-4">
@@ -89,7 +55,7 @@ export const Answer = () => {
 
       <p>댓글 {submittedAnswers.length}</p>
       <div className="h-[40vh] mt-4 overflow-y-auto">
-        {submittedAnswers.map(({ id, author, authorUid, content }) => (
+        {submittedAnswers.map(({ id, author, content }) => (
           <div
             key={id}
             className="relative flex flex-col items-center w-[23rem] mx-auto p-2 text-lg bg-green-400 border rounded-lg"
@@ -98,16 +64,6 @@ export const Answer = () => {
             <p className="text-black break-words whitespace-pre-wrap">
               {content}
             </p>
-            {currentUser && currentUser.uid === authorUid && (
-              <Button
-                variant="default"
-                size="default"
-                className="w-[4rem] h-[1rem] px-4 mt-2 text-sm "
-                onClick={() => handleDeleteAnswer(id)}
-              >
-                삭제
-              </Button>
-            )}
           </div>
         ))}
       </div>

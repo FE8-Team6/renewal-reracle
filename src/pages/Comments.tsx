@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { db } from "@/firebase";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -63,6 +63,17 @@ const Comments = () => {
     }
   };
 
+  const handleDeleteAnswer = async (id: string) => {
+    try {
+      await deleteDoc(doc(db, "answers", id));
+      setSubmittedAnswers(
+        submittedAnswers.filter((answer) => answer.id !== id)
+      );
+    } catch (error) {
+      console.error("DELETE 에러 발생: ", error);
+    }
+  };
+
   return (
     <div>
       <header className="p-4 bg-gray-200">
@@ -73,10 +84,30 @@ const Comments = () => {
       <h2>댓글</h2>
       <div>
         {submittedAnswers.map(
-          (answer: { id: string; author: string; content: string }) => (
-            <div key={answer.id}>
+          (answer: {
+            id: string;
+            author: string;
+            content: string;
+            authorUid: string;
+          }) => (
+            <div
+              key={answer.id}
+              className="relative flex flex-col items-center w-[23rem] mx-auto p-2 text-lg bg-green-400 border rounded-lg"
+            >
               <p>{answer.author}</p>
-              <p>{answer.content}</p>
+              <p className="text-black break-words whitespace-pre-wrap">
+                {answer.content}
+              </p>
+              {currentUser && currentUser.uid === answer.authorUid && (
+                <Button
+                  variant="default"
+                  size="default"
+                  className="w-[4rem] h-[1rem] px-4 mt-2 text-sm"
+                  onClick={() => handleDeleteAnswer(answer.id)}
+                >
+                  삭제
+                </Button>
+              )}
             </div>
           )
         )}
