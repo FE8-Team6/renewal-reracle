@@ -124,7 +124,9 @@ export const Qna = () => {
                 question: question.question,
                 content: question.content,
                 author: question.author,
-                createdAt: question.createdAt,
+                createdAt: question.createdAt
+                  ? question.createdAt.toDate().toISOString()
+                  : null,
               }}
             >
               <span>{question.question}</span>

@@ -18,7 +18,9 @@ export const Answer = () => {
   const question = location.state?.question || "";
   const content = location.state?.content || "";
   const author = location.state?.author || "";
-  const createdAt = location.state?.createdAt || "";
+  const createdAt = location.state?.createdAt
+    ? new Date(location.state.createdAt)
+    : null;
 
   const [submittedAnswers, setSubmittedAnswers] = useState<SubmittedAnswer>(
     location.state?.submittedAnswers || []
@@ -34,7 +36,10 @@ export const Answer = () => {
       const querySnapshot = await getDocs(answerQuery);
       const answersData = querySnapshot.docs.map(
         (doc) =>
-          ({ id: doc.id, ...doc.data() } as {
+          ({
+            id: doc.id,
+            ...doc.data(),
+          } as {
             id: string;
             author: string;
             authorUid: string;
@@ -47,8 +52,8 @@ export const Answer = () => {
     fetchAnswers();
   }, [questionId]);
 
-  const formatDateToKoreanTime = (timestamp) => {
-    return timestamp.toDate().toLocaleString("ko-KR", {
+  const formatDateToKoreanTime = (date) => {
+    return date.toLocaleString("ko-KR", {
       timeZone: "Asia/Seoul",
       year: "numeric",
       month: "2-digit",
