@@ -118,7 +118,7 @@ const Comments = () => {
   };
 
   return (
-    <div>
+    <>
       <header className="p-4 bg-gray-200">
         <button className="text-blue-500" onClick={() => navigate(-1)}>
           뒤로 가기
@@ -135,14 +135,11 @@ const Comments = () => {
           }) => (
             <div
               key={answer.id}
-              className="relative flex flex-col items-center w-[23rem] mx-auto p-2 text-lg bg-green-400 border rounded-lg"
+              className="relative flex flex-col w-[23rem] mx-auto p-2 text-lg bg-gray-200 border rounded-2"
             >
-              <p>{answer.author}</p>
-              <p className="text-black break-words whitespace-pre-wrap">
-                {answer.content}
-              </p>
-              {currentUser && currentUser.uid === answer.authorUid && (
-                <div>
+              <div className="flex justify-between items-center ">
+                <p>{answer.author}</p>
+                {currentUser && currentUser.uid === answer.authorUid && (
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button variant="ghost" size="icon">
@@ -171,39 +168,40 @@ const Comments = () => {
                       </Button>
                     </PopoverContent>
                   </Popover>
-                  <Dialog
-                    open={editingAnswer === answer.id}
-                    onOpenChange={() => setEditingAnswer(null)}
-                  >
-                    <DialogContent>
-                      <DialogHeader>
-                        <DialogTitle>댓글 수정</DialogTitle>
-                        <DialogDescription>
-                          댓글 내용을 수정하세요.
-                        </DialogDescription>
-                      </DialogHeader>
-                      <textarea
-                        value={editedContent}
-                        onChange={(event) =>
-                          setEditedContent(event.target.value)
-                        }
-                        className="w-full h-28 border border-gray-300 rounded-4"
-                      />
-                      <DialogFooter>
-                        <DialogClose asChild>
-                          <Button
-                            variant="default"
-                            size="default"
-                            onClick={handleEditAnswer}
-                          >
-                            확인
-                          </Button>
-                        </DialogClose>
-                      </DialogFooter>
-                    </DialogContent>
-                  </Dialog>
-                </div>
-              )}
+                )}
+              </div>
+              <p className="text-black break-words whitespace-pre-wrap">
+                {answer.content}
+              </p>
+              <Dialog
+                open={editingAnswer === answer.id}
+                onOpenChange={() => setEditingAnswer(null)}
+              >
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>댓글 수정</DialogTitle>
+                    <DialogDescription>
+                      댓글 내용을 수정하세요.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <textarea
+                    value={editedContent}
+                    onChange={(event) => setEditedContent(event.target.value)}
+                    className="w-full h-28 border border-gray-300 rounded-4"
+                  />
+                  <DialogFooter>
+                    <DialogClose asChild>
+                      <Button
+                        variant="default"
+                        size="default"
+                        onClick={handleEditAnswer}
+                      >
+                        확인
+                      </Button>
+                    </DialogClose>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
             </div>
           )
         )}
@@ -218,7 +216,7 @@ const Comments = () => {
           제출
         </Button>
       </div>
-    </div>
+    </>
   );
 };
 

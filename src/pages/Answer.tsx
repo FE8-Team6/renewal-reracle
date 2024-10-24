@@ -3,6 +3,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import { Layout } from "@/components/layout/Layout";
+import { Button } from "@/components/ui/button";
 
 type SubmittedAnswer = {
   id: string;
@@ -54,7 +55,7 @@ export const Answer = () => {
       </div>
 
       <p>댓글 {submittedAnswers.length}</p>
-      <div className="h-[40vh] mt-4 overflow-y-auto">
+      <div className="h-[50vh] mt-4 overflow-y-auto">
         {submittedAnswers.map(({ id, author, content }) => (
           <div
             key={id}
@@ -71,7 +72,9 @@ export const Answer = () => {
         to={`/comments/${questionId}`}
         state={{ questionId, question, submittedAnswers }}
       >
-        댓글을 남겨보세요.
+        <Button variant="link" size="lg">
+          댓글을 남겨보세요.
+        </Button>
       </NavLink>
     </Layout>
   );
