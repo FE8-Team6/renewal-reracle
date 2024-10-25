@@ -30,6 +30,7 @@ type Question = {
   content: string;
   createdAt: Timestamp;
   likes: number;
+  commentCount: number;
 }[];
 
 export const Qna = () => {
@@ -63,8 +64,11 @@ export const Qna = () => {
       );
       const querySnapshot = await getDocs(queryOrderBy);
       const questionList: Question = [];
-      querySnapshot.forEach((doc) => {
+      for (const doc of querySnapshot.docs) {
         const questionData = doc.data();
+        const answersSnapshot = await getDocs(
+          query(collection(db, "answers"), where("questionId", "==", doc.id))
+        );
         questionList.push({
           id: doc.id,
           question: questionData.question,
@@ -73,8 +77,9 @@ export const Qna = () => {
           content: questionData.content,
           createdAt: questionData.createdAt,
           likes: questionData.likes || 0,
+          commentCount: answersSnapshot.size,
         });
-      });
+      }
       setQuestions(questionList);
     };
 
@@ -110,14 +115,18 @@ export const Qna = () => {
         authorUid: currentUser.uid,
         createdAt: serverTimestamp(),
         likes: 0,
+        commentCount: 0,
       });
 
       const updatedQuestions = await getDocs(
         query(collection(db, "questions"), orderBy("createdAt", "desc"))
       );
       const questionList: Question = [];
-      updatedQuestions.forEach((doc) => {
+      for (const doc of updatedQuestions.docs) {
         const questionData = doc.data();
+        const answersSnapshot = await getDocs(
+          query(collection(db, "answers"), where("questionId", "==", doc.id))
+        );
         questionList.push({
           id: doc.id,
           question: questionData.question,
@@ -126,8 +135,9 @@ export const Qna = () => {
           authorUid: questionData.authorUid,
           createdAt: questionData.createdAt,
           likes: questionData.likes || 0,
+          commentCount: answersSnapshot.size,
         });
-      });
+      }
       setQuestions(questionList);
       setIsModalOpen(false);
     } catch (error) {
@@ -215,6 +225,7 @@ export const Qna = () => {
                   : null,
                 likes: question.likes,
                 likedPosts: Array.from(likedPosts),
+                commentCount: question.commentCount,
                 currentUser,
               }}
             >
@@ -225,6 +236,7 @@ export const Qna = () => {
                   {formatDateToKoreanTime(question.createdAt.toDate())}
                 </p>
               )}
+              <p className="text-sm">댓글 {question.commentCount}개</p>
             </NavLink>
             <div className="flex items-center">
               <Button
