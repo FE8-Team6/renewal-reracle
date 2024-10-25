@@ -156,7 +156,9 @@ export const Qna = () => {
               <span>{question.question}</span>
               <span>{question.author} 님</span>
               {question.createdAt && (
-                <p>{formatDateToKoreanTime(question.createdAt.toDate())}</p>
+                <p className="text-sm">
+                  {formatDateToKoreanTime(question.createdAt.toDate())}
+                </p>
               )}
             </NavLink>
           </div>
