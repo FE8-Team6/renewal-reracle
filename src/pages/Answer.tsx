@@ -1,9 +1,20 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  deleteDoc,
+  setDoc,
+  updateDoc,
+  increment,
+} from "firebase/firestore";
 import { db } from "../firebase";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
+import { ThumbsUp } from "lucide-react";
 import { formatDateToKoreanTime } from "@/lib/utils/dateKoreanTime";
 
 type SubmittedAnswer = {
@@ -12,6 +23,7 @@ type SubmittedAnswer = {
   authorUid: string;
   content: string;
   createdAt: string;
+  likes: number;
 }[];
 
 export const Answer = () => {
@@ -23,9 +35,16 @@ export const Answer = () => {
   const createdAt = location.state?.createdAt
     ? new Date(location.state.createdAt)
     : null;
-
+  const currentUser = location.state?.currentUser || {
+    displayName: "",
+    uid: "",
+  };
   const [submittedAnswers, setSubmittedAnswers] = useState<SubmittedAnswer>(
     location.state?.submittedAnswers || []
+  );
+  const [likes, setLikes] = useState<number>(location.state?.likes || 0);
+  const [likedPosts, setLikedPosts] = useState<Set<string>>(
+    new Set(location.state?.likedPosts || [])
   );
 
   useEffect(() => {
@@ -48,6 +67,7 @@ export const Answer = () => {
             authorUid: string;
             content: string;
             createdAt: string;
+            likes: number;
           })
       );
       answersData.sort((a, b) => {
@@ -60,6 +80,32 @@ export const Answer = () => {
 
     fetchAnswers();
   }, [questionId]);
+
+  const handleLike = async (id: string) => {
+    try {
+      const likeDocRef = doc(db, "likes", `${currentUser.uid}_${id}`);
+      if (likedPosts.has(id)) {
+        await deleteDoc(likeDocRef);
+        await updateDoc(doc(db, "questions", id), { likes: increment(-1) });
+        setLikedPosts((prev) => {
+          const newSet = new Set(prev);
+          newSet.delete(id);
+          return newSet;
+        });
+        setLikes((prev) => prev - 1);
+      } else {
+        await setDoc(likeDocRef, {
+          userId: currentUser.uid,
+          postId: id,
+        });
+        await updateDoc(doc(db, "questions", id), { likes: increment(1) });
+        setLikedPosts((prev) => new Set(prev).add(id));
+        setLikes((prev) => prev + 1);
+      }
+    } catch (error) {
+      console.error("LIKE 에러 발생: ", error);
+    }
+  };
 
   return (
     <Layout>
@@ -90,6 +136,20 @@ export const Answer = () => {
             )}
           </div>
         ))}
+        <div className="flex items-center justify-center mt-4">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => handleLike(questionId)}
+          >
+            <ThumbsUp
+              className={`w-6 h-6 ${
+                likedPosts.has(questionId) ? "text-blue-500" : ""
+              }`}
+            />
+          </Button>
+          <span>{likes}</span>
+        </div>
         <NavLink
           to={`/comments/${questionId}`}
           state={{ questionId, question, submittedAnswers }}

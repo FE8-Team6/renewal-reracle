@@ -43,6 +43,7 @@ export const Qna = () => {
   });
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [likedPosts, setLikedPosts] = useState<Set<string>>(new Set());
+
   /**
    * @description 로컬스토리지에 저장된 사용자 정보를 불러옵니다.
    */
@@ -212,6 +213,9 @@ export const Qna = () => {
                 createdAt: question.createdAt
                   ? question.createdAt.toDate().toISOString()
                   : null,
+                likes: question.likes,
+                likedPosts: Array.from(likedPosts),
+                currentUser,
               }}
             >
               <span>{question.question}</span>
