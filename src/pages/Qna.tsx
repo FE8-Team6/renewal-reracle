@@ -196,6 +196,10 @@ export const Qna = () => {
     setIsModalOpen(true);
   };
 
+  const truncateTitle = (title: string) => {
+    return title.length > 20 ? `${title.slice(0, 20)}...` : title;
+  };
+
   return (
     <Layout>
       <div className="w-full h-[2rem] bg-purple text-center flex items-center justify-center text-white text-[2vh]">
@@ -234,8 +238,8 @@ export const Qna = () => {
                 <span className="text-sm text-gray-500">
                   {question.author} 님
                 </span>
-                <span className="text-lg font-bold text-gray-900 truncate">
-                  {question.question}
+                <span className="text-base font-bold text-gray-900 truncate">
+                  {truncateTitle(question.question)}
                 </span>
               </div>
               <div className="flex items-center justify-between mt-1">
