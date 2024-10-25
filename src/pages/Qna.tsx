@@ -207,11 +207,11 @@ export const Qna = () => {
       >
         질문
       </button>
-      <div className="w-[23rem] h-full relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] ">
+      <div className="w-[23rem] h-[60vh] relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] ">
         {questions.map((question) => (
           <div
             key={question.id}
-            className=" bg-greenLight w-full h-[5rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black "
+            className=" bg-greenLight w-full h-[6rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black "
           >
             <NavLink
               to={`/answer/${question.id}`}
@@ -228,30 +228,44 @@ export const Qna = () => {
                 commentCount: question.commentCount,
                 currentUser,
               }}
+              className="flex flex-col flex-grow"
             >
-              <span>{question.question}</span>
-              <span>{question.author} 님</span>
-              {question.createdAt && (
-                <p className="text-sm">
-                  {formatDateToKoreanTime(question.createdAt.toDate())}
-                </p>
-              )}
-              <p className="text-sm">댓글 {question.commentCount}개</p>
+              <div className="flex flex-col">
+                <span className="text-sm text-gray-500">
+                  {question.author} 님
+                </span>
+                <span className="text-lg font-bold text-gray-900 truncate">
+                  {question.question}
+                </span>
+              </div>
+              <div className="flex items-center justify-between mt-1">
+                <div className="flex gap-1">
+                  {question.createdAt && (
+                    <p className="text-sm">
+                      {formatDateToKoreanTime(question.createdAt.toDate())}
+                    </p>
+                  )}
+                  <p className="text-sm">댓글 {question.commentCount}개</p>
+                </div>
+                <div className="flex items-center">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleLike(question.id);
+                    }}
+                  >
+                    <ThumbsUp
+                      className={`w-[1rem] h-[1rem] ${
+                        likedPosts.has(question.id) ? "text-blue-500" : ""
+                      }`}
+                    />
+                  </Button>
+                  <span>{question.likes}</span>
+                </div>
+              </div>
             </NavLink>
-            <div className="flex items-center">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => handleLike(question.id)}
-              >
-                <ThumbsUp
-                  className={`w-4 h-4 ${
-                    likedPosts.has(question.id) ? "text-blue-500" : ""
-                  }`}
-                />
-              </Button>
-              <span>{question.likes}</span>
-            </div>
           </div>
         ))}
       </div>
