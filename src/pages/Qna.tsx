@@ -6,6 +6,12 @@ import {
   Timestamp,
   query,
   orderBy,
+  where,
+  doc,
+  deleteDoc,
+  setDoc,
+  updateDoc,
+  increment,
 } from "firebase/firestore";
 import { NavLink } from "react-router-dom";
 import { db } from "../firebase";
@@ -13,6 +19,8 @@ import { Layout } from "@/components/layout/Layout";
 import QuestionModal from "@/components/modal/QuestionModal";
 import { serverTimestamp } from "firebase/firestore";
 import { formatDateToKoreanTime } from "@/lib/utils/dateKoreanTime";
+import { Button } from "@/components/ui/button";
+import { ThumbsUp } from "lucide-react";
 
 type Question = {
   id: string;
@@ -21,6 +29,7 @@ type Question = {
   authorUid: string;
   content: string;
   createdAt: Timestamp;
+  likes: number;
 }[];
 
 export const Qna = () => {
@@ -33,7 +42,7 @@ export const Qna = () => {
     uid: "",
   });
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
+  const [likedPosts, setLikedPosts] = useState<Set<string>>(new Set());
   /**
    * @description 로컬스토리지에 저장된 사용자 정보를 불러옵니다.
    */
@@ -46,7 +55,7 @@ export const Qna = () => {
   }, []);
 
   useEffect(() => {
-    const fetchQuestions = async () => {
+    const getQuestions = async () => {
       const queryOrderBy = query(
         collection(db, "questions"),
         orderBy("createdAt", "desc")
@@ -62,12 +71,30 @@ export const Qna = () => {
           authorUid: questionData.authorUid,
           content: questionData.content,
           createdAt: questionData.createdAt,
+          likes: questionData.likes || 0,
         });
       });
       setQuestions(questionList);
     };
-    fetchQuestions();
-  }, []);
+
+    const fetchLikedPosts = async () => {
+      if (currentUser.uid) {
+        const q = query(
+          collection(db, "likes"),
+          where("userId", "==", currentUser.uid)
+        );
+        const querySnapshot = await getDocs(q);
+        const likedPostIds = new Set<string>();
+        querySnapshot.forEach((doc) => {
+          likedPostIds.add(doc.data().postId);
+        });
+        setLikedPosts(likedPostIds);
+      }
+    };
+
+    getQuestions();
+    fetchLikedPosts();
+  }, [currentUser.uid]);
 
   const handleAddQuestion = async (title: string, content: string) => {
     if (title.trim() === "" || content.trim() === "") {
@@ -81,6 +108,7 @@ export const Qna = () => {
         author: currentUser.displayName,
         authorUid: currentUser.uid,
         createdAt: serverTimestamp(),
+        likes: 0,
       });
 
       const updatedQuestions = await getDocs(
@@ -96,12 +124,55 @@ export const Qna = () => {
           author: questionData.author,
           authorUid: questionData.authorUid,
           createdAt: questionData.createdAt,
+          likes: questionData.likes || 0,
         });
       });
       setQuestions(questionList);
       setIsModalOpen(false);
     } catch (error) {
       console.error("질문 추가 실패:", error);
+    }
+  };
+
+  /**
+   * @description 만약 이미 좋아요를 누른 게시물이라면 좋아요를 취소하고, 아니라면 좋아요를 누릅니다.
+   * @param id
+   */
+  const handleLike = async (id: string) => {
+    try {
+      const likeDocRef = doc(db, "likes", `${currentUser.uid}_${id}`);
+      if (likedPosts.has(id)) {
+        await deleteDoc(likeDocRef);
+        await updateDoc(doc(db, "questions", id), { likes: increment(-1) });
+        setLikedPosts((prev) => {
+          const newSet = new Set(prev);
+          newSet.delete(id);
+          return newSet;
+        });
+        setQuestions((prev) =>
+          prev.map((question) =>
+            question.id === id
+              ? { ...question, likes: question.likes - 1 }
+              : question
+          )
+        );
+      } else {
+        await setDoc(likeDocRef, {
+          userId: currentUser.uid,
+          postId: id,
+        });
+        await updateDoc(doc(db, "questions", id), { likes: increment(1) });
+        setLikedPosts((prev) => new Set(prev).add(id));
+        setQuestions((prev) =>
+          prev.map((question) =>
+            question.id === id
+              ? { ...question, likes: question.likes + 1 }
+              : question
+          )
+        );
+      }
+    } catch (error) {
+      console.error("LIKE 에러 발생: ", error);
     }
   };
 
@@ -151,6 +222,20 @@ export const Qna = () => {
                 </p>
               )}
             </NavLink>
+            <div className="flex items-center">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => handleLike(question.id)}
+              >
+                <ThumbsUp
+                  className={`w-4 h-4 ${
+                    likedPosts.has(question.id) ? "text-blue-500" : ""
+                  }`}
+                />
+              </Button>
+              <span>{question.likes}</span>
+            </div>
           </div>
         ))}
       </div>
