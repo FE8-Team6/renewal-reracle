@@ -4,6 +4,7 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
+import { formatDateToKoreanTime } from "@/lib/utils/dateKoreanTime";
 
 type SubmittedAnswer = {
   id: string;
@@ -59,18 +60,6 @@ export const Answer = () => {
 
     fetchAnswers();
   }, [questionId]);
-
-  const formatDateToKoreanTime = (date: Date) => {
-    if (!date) return "알 수 없는 시간";
-    return date.toLocaleString("ko-KR", {
-      timeZone: "Asia/Seoul",
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  };
 
   return (
     <Layout>

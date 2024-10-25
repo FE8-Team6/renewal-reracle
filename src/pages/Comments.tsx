@@ -25,6 +25,7 @@ import {
   PopoverContent,
 } from "@/components/ui/popover";
 import { MoreHorizontal } from "lucide-react";
+import { formatDateToKoreanTime } from "@/lib/utils/dateKoreanTime";
 
 const Comments = () => {
   const location = useLocation();
@@ -121,18 +122,6 @@ const Comments = () => {
     }
   };
 
-  const formatDateToKoreanTime = (date: Date) => {
-    if (!date) return "알 수 없는 시간";
-    return date.toLocaleString("ko-KR", {
-      timeZone: "Asia/Seoul",
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  };
-
   return (
     <>
       <header className="p-4 bg-gray-200">
@@ -145,7 +134,14 @@ const Comments = () => {
         {submittedAnswers
           .slice()
           .sort(
-            (a, b) =>
+            (
+              a: {
+                createdAt: string;
+              },
+              b: {
+                createdAt: string;
+              }
+            ) =>
               new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
           )
           .map(

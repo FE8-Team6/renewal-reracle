@@ -12,6 +12,7 @@ import { db } from "../firebase";
 import { Layout } from "@/components/layout/Layout";
 import QuestionModal from "@/components/modal/QuestionModal";
 import { serverTimestamp } from "firebase/firestore";
+import { formatDateToKoreanTime } from "@/lib/utils/dateKoreanTime";
 
 type Question = {
   id: string;
@@ -111,17 +112,6 @@ export const Qna = () => {
       return;
     }
     setIsModalOpen(true);
-  };
-
-  const formatDateToKoreanTime = (date: Date) => {
-    return date.toLocaleString("ko-KR", {
-      timeZone: "Asia/Seoul",
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
   };
 
   return (
