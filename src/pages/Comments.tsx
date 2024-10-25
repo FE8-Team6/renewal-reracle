@@ -142,91 +142,97 @@ const Comments = () => {
       </header>
       <h2>댓글</h2>
       <div>
-        {submittedAnswers.map(
-          (answer: {
-            id: string;
-            author: string;
-            content: string;
-            authorUid: string;
-            createdAt: string;
-          }) => (
-            <div
-              key={answer.id}
-              className="relative flex flex-col w-[23rem] mx-auto p-2 text-lg bg-gray-200 border rounded-2"
-            >
-              <div className="flex items-center justify-between ">
-                <p>{answer.author}</p>
-                {answer.createdAt && (
-                  <p className="text-xs text-gray-500">
-                    {formatDateToKoreanTime(new Date(answer.createdAt))}
-                  </p>
-                )}
-                {currentUser && currentUser.uid === answer.authorUid && (
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button variant="ghost" size="icon">
-                        <MoreHorizontal className="w-4 h-4" />
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-48">
-                      <Button
-                        variant="default"
-                        size="default"
-                        className="w-full"
-                        onClick={() => {
-                          setEditingAnswer(answer.id);
-                          setEditedContent(answer.content);
-                        }}
-                      >
-                        수정
-                      </Button>
-                      <Button
-                        variant="default"
-                        size="default"
-                        className="w-full"
-                        onClick={() => handleDeleteAnswer(answer.id)}
-                      >
-                        삭제
-                      </Button>
-                    </PopoverContent>
-                  </Popover>
-                )}
-              </div>
-              <p className="text-black break-words whitespace-pre-wrap">
-                {answer.content}
-              </p>
-              <Dialog
-                open={editingAnswer === answer.id}
-                onOpenChange={() => setEditingAnswer(null)}
-              >
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>댓글 수정</DialogTitle>
-                    <DialogDescription>
-                      댓글 내용을 수정하세요.
-                    </DialogDescription>
-                  </DialogHeader>
-                  <textarea
-                    value={editedContent}
-                    onChange={(event) => setEditedContent(event.target.value)}
-                    className="w-full border border-gray-300 h-28 rounded-4"
-                  />
-                  <DialogFooter>
-                    <DialogClose asChild>
-                      <Button
-                        variant="default"
-                        size="default"
-                        onClick={handleEditAnswer}
-                      >
-                        확인
-                      </Button>
-                    </DialogClose>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog>
-            </div>
+        {submittedAnswers
+          .slice()
+          .sort(
+            (a, b) =>
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
           )
-        )}
+          .map(
+            (answer: {
+              id: string;
+              author: string;
+              content: string;
+              authorUid: string;
+              createdAt: string;
+            }) => (
+              <div
+                key={answer.id}
+                className="relative flex flex-col w-[23rem] mx-auto p-2 text-lg bg-gray-200 border rounded-2"
+              >
+                <div className="flex items-center justify-between ">
+                  <p>{answer.author}</p>
+                  {answer.createdAt && (
+                    <p className="text-xs text-gray-500">
+                      {formatDateToKoreanTime(new Date(answer.createdAt))}
+                    </p>
+                  )}
+                  {currentUser && currentUser.uid === answer.authorUid && (
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button variant="ghost" size="icon">
+                          <MoreHorizontal className="w-4 h-4" />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-48">
+                        <Button
+                          variant="default"
+                          size="default"
+                          className="w-full"
+                          onClick={() => {
+                            setEditingAnswer(answer.id);
+                            setEditedContent(answer.content);
+                          }}
+                        >
+                          수정
+                        </Button>
+                        <Button
+                          variant="default"
+                          size="default"
+                          className="w-full"
+                          onClick={() => handleDeleteAnswer(answer.id)}
+                        >
+                          삭제
+                        </Button>
+                      </PopoverContent>
+                    </Popover>
+                  )}
+                </div>
+                <p className="text-black break-words whitespace-pre-wrap">
+                  {answer.content}
+                </p>
+                <Dialog
+                  open={editingAnswer === answer.id}
+                  onOpenChange={() => setEditingAnswer(null)}
+                >
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>댓글 수정</DialogTitle>
+                      <DialogDescription>
+                        댓글 내용을 수정하세요.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <textarea
+                      value={editedContent}
+                      onChange={(event) => setEditedContent(event.target.value)}
+                      className="w-full border border-gray-300 h-28 rounded-4"
+                    />
+                    <DialogFooter>
+                      <DialogClose asChild>
+                        <Button
+                          variant="default"
+                          size="default"
+                          onClick={handleEditAnswer}
+                        >
+                          확인
+                        </Button>
+                      </DialogClose>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+              </div>
+            )
+          )}
       </div>
       <div className="mt-4 overflow-hidden text-center">
         <textarea

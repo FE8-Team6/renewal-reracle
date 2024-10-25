@@ -49,6 +49,11 @@ export const Answer = () => {
             createdAt: string;
           })
       );
+      answersData.sort((a, b) => {
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+      });
       setSubmittedAnswers(answersData);
     };
 
