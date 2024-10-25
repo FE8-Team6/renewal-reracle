@@ -1,5 +1,12 @@
 import { useState, useEffect } from "react";
-import { collection, addDoc, getDocs, Timestamp } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  Timestamp,
+  query,
+  orderBy,
+} from "firebase/firestore";
 import { NavLink } from "react-router-dom";
 import { db } from "../firebase";
 import { Layout } from "@/components/layout/Layout";
@@ -39,7 +46,11 @@ export const Qna = () => {
 
   useEffect(() => {
     const fetchQuestions = async () => {
-      const querySnapshot = await getDocs(collection(db, "questions"));
+      const queryOrderBy = query(
+        collection(db, "questions"),
+        orderBy("createdAt", "desc")
+      );
+      const querySnapshot = await getDocs(queryOrderBy);
       const questionList: Question = [];
       querySnapshot.forEach((doc) => {
         const questionData = doc.data();
@@ -71,7 +82,9 @@ export const Qna = () => {
         createdAt: serverTimestamp(),
       });
 
-      const updatedQuestions = await getDocs(collection(db, "questions"));
+      const updatedQuestions = await getDocs(
+        query(collection(db, "questions"), orderBy("createdAt", "desc"))
+      );
       const questionList: Question = [];
       updatedQuestions.forEach((doc) => {
         const questionData = doc.data();
