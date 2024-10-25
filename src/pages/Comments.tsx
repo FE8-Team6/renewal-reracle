@@ -6,6 +6,7 @@ import {
   deleteDoc,
   doc,
   updateDoc,
+  serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { Button } from "@/components/ui/button";
@@ -33,6 +34,7 @@ const Comments = () => {
   const [submittedAnswers, setSubmittedAnswers] = useState(
     location.state?.submittedAnswers || []
   );
+
   const [currentUser, setCurrentUser] = useState<{
     uid: string;
     displayName: string;
@@ -70,6 +72,7 @@ const Comments = () => {
         author: currentUser.displayName,
         authorUid: currentUser.uid,
         content: answer,
+        createdAt: serverTimestamp(),
       });
       setSubmittedAnswers([
         ...submittedAnswers,
@@ -78,6 +81,7 @@ const Comments = () => {
           author: currentUser.displayName,
           content: answer,
           authorUid: currentUser.uid,
+          createdAt: new Date().toISOString(),
         },
       ]);
       setAnswer("");
@@ -117,6 +121,18 @@ const Comments = () => {
     }
   };
 
+  const formatDateToKoreanTime = (date: Date) => {
+    if (!date) return "알 수 없는 시간";
+    return date.toLocaleString("ko-KR", {
+      timeZone: "Asia/Seoul",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
   return (
     <>
       <header className="p-4 bg-gray-200">
@@ -132,13 +148,19 @@ const Comments = () => {
             author: string;
             content: string;
             authorUid: string;
+            createdAt: string;
           }) => (
             <div
               key={answer.id}
               className="relative flex flex-col w-[23rem] mx-auto p-2 text-lg bg-gray-200 border rounded-2"
             >
-              <div className="flex justify-between items-center ">
+              <div className="flex items-center justify-between ">
                 <p>{answer.author}</p>
+                {answer.createdAt && (
+                  <p className="text-xs text-gray-500">
+                    {formatDateToKoreanTime(new Date(answer.createdAt))}
+                  </p>
+                )}
                 {currentUser && currentUser.uid === answer.authorUid && (
                   <Popover>
                     <PopoverTrigger asChild>
@@ -187,7 +209,7 @@ const Comments = () => {
                   <textarea
                     value={editedContent}
                     onChange={(event) => setEditedContent(event.target.value)}
-                    className="w-full h-28 border border-gray-300 rounded-4"
+                    className="w-full border border-gray-300 h-28 rounded-4"
                   />
                   <DialogFooter>
                     <DialogClose asChild>

@@ -12,7 +12,7 @@ type Question = {
   author: string;
   authorUid: string;
   content: string;
-  createdAt: Timestamp | null;
+  createdAt: Timestamp;
 }[];
 
 export const Qna = () => {
@@ -49,7 +49,7 @@ export const Qna = () => {
           author: questionData.author,
           authorUid: questionData.authorUid,
           content: questionData.content,
-          createdAt: questionData.createdAt || null,
+          createdAt: questionData.createdAt,
         });
       });
       setQuestions(questionList);
@@ -81,7 +81,7 @@ export const Qna = () => {
           content: questionData.content,
           author: questionData.author,
           authorUid: questionData.authorUid,
-          createdAt: questionData.createdAt || null,
+          createdAt: questionData.createdAt,
         });
       });
       setQuestions(questionList);
@@ -100,7 +100,7 @@ export const Qna = () => {
     setIsModalOpen(true);
   };
 
-  const formatDateToKoreanTime = (date) => {
+  const formatDateToKoreanTime = (date: Date) => {
     return date.toLocaleString("ko-KR", {
       timeZone: "Asia/Seoul",
       year: "numeric",
