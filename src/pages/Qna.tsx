@@ -100,6 +100,17 @@ export const Qna = () => {
     setIsModalOpen(true);
   };
 
+  const formatDateToKoreanTime = (date) => {
+    return date.toLocaleString("ko-KR", {
+      timeZone: "Asia/Seoul",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
   return (
     <Layout>
       <div className="w-full h-[2rem] bg-purple text-center flex items-center justify-center text-white text-[2vh]">
@@ -132,13 +143,7 @@ export const Qna = () => {
               <span>{question.question}</span>
               <span>{question.author} 님</span>
               {question.createdAt && (
-                <p>
-                  {question.createdAt.toDate().toLocaleString("ko-KR", {
-                    timeZone: "Asia/Seoul",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </p>
+                <p>{formatDateToKoreanTime(question.createdAt.toDate())}</p>
               )}
             </NavLink>
           </div>
