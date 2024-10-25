@@ -1,214 +1,114 @@
-import React, { useEffect, useState } from "react";
-import { styled } from "styled-components";
-import { useLocation } from "react-router-dom";
-import {
-  collection,
-  addDoc,
-  query,
-  where,
-  getDocs,
-  doc,
-  deleteDoc,
-} from "firebase/firestore";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import { Layout } from "@/components/layout/Layout";
+import { Button } from "@/components/ui/button";
 
-const AnswerBlock = styled.button`
-  display: block;
-  margin: 1vh auto;
-  border: none;
-  background: #93fd98;
-  color: white;
-  font-size: 2vh;
-`;
-
-const AnswerContainer = styled.div`
-  text-align: center;
-  margin-top: 4vh;
-  overflow: hidden;
-`;
-
-const AnswerDisplay = styled.div`
-  margin-top: 2vh;
-  height: 50vh;
-  overflow-y: auto;
-`;
-
-const InputAnswer = styled.textarea`
-  width: 50vh;
-  height: 10vh;
-`;
-
-const AnswerBtn = styled.button`
-  width: 12vh;
-  height: 4vh;
-  border: none;
-  cursor: pointer;
-  border-radius: 10px;
-  font-size: 2vh;
-  background: #93fd98;
-  color: white;
-`;
-
-const AnswerBox = styled.div`
-  position: relative;
-  background: #93fd98;
-  width: 50vh;
-  margin: 1.5vh auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1vh;
-  border-radius: 10px;
-  color: white;
-  font-size: 2.5vh;
-`;
-
-const AnswerContent = styled.p`
-  color: black;
-  word-wrap: break-word;
-  word-break: break-all;
-  white-space: pre-wrap;
-`;
-
-const AnswerInfo = styled.div`
-  margin-top: 1vh;
-`;
-
-const DeleteButton = styled.button`
-  background: #ff4747;
-  border: none;
-  border-radius: 5px;
-  height: 2.5vh;
-  color: white;
-  cursor: pointer;
-  padding: 0 1vh;
-  font-size: 1.5vh;
-  margin-top: 1vh;
-`;
-
-const QuestionBox = styled.p`
-  text-align: center;
-  font-size: 2.5vh;
-  font-weight: bold;
-`;
+type SubmittedAnswer = {
+  id: string;
+  author: string;
+  authorUid: string;
+  content: string;
+  createdAt: string;
+}[];
 
 export const Answer = () => {
   const location = useLocation();
+  const questionId = location.state?.questionId || "";
   const question = location.state?.question || "";
+  const content = location.state?.content || "";
+  const author = location.state?.author || "";
+  const createdAt = location.state?.createdAt
+    ? new Date(location.state.createdAt)
+    : null;
 
-  const [answer, setAnswer] = useState("");
-  const [submittedAnswers, setSubmittedAnswers] = useState<
-    { id: string; author: string; authorUid: string; content: string }[]
-  >([]);
-  const [nickname, setNickname] = useState("");
-  const [currentUser, setCurrentUser] = useState<any>(null);
-
-  useEffect(() => {
-    const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        setCurrentUser(user);
-        const userQuery = query(
-          collection(db, "users"),
-          where("uid", "==", user.uid)
-        );
-        const querySnapshot = await getDocs(userQuery);
-        if (!querySnapshot.empty) {
-          const userData = querySnapshot.docs[0].data();
-          setNickname(userData.nickname);
-        }
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
+  const [submittedAnswers, setSubmittedAnswers] = useState<SubmittedAnswer>(
+    location.state?.submittedAnswers || []
+  );
 
   useEffect(() => {
     const fetchAnswers = async () => {
       const answersCollection = collection(db, "answers");
       const answerQuery = query(
         answersCollection,
-        where("question", "==", question)
+        where("questionId", "==", questionId)
       );
       const querySnapshot = await getDocs(answerQuery);
       const answersData = querySnapshot.docs.map(
         (doc) =>
-          ({ id: doc.id, ...doc.data() } as {
+          ({
+            id: doc.id,
+            ...doc.data(),
+            createdAt: doc.data().createdAt.toDate().toISOString(),
+          } as {
             id: string;
             author: string;
             authorUid: string;
             content: string;
+            createdAt: string;
           })
       );
+      answersData.sort((a, b) => {
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+      });
       setSubmittedAnswers(answersData);
     };
 
     fetchAnswers();
-  }, [question]);
+  }, [questionId]);
 
-  const handleSubmit = async () => {
-    try {
-      const user = getAuth().currentUser;
-      const docRef = await addDoc(collection(db, "answers"), {
-        question: question,
-        author: nickname,
-        authorUid: user.uid, // 작성자의 UID도 함께 저장
-        content: answer,
-      });
-      setSubmittedAnswers([
-        ...submittedAnswers,
-        {
-          id: docRef.id,
-          author: nickname,
-          authorUid: user.uid,
-          content: answer,
-        },
-      ]);
-      setAnswer("");
-    } catch (error) {
-      console.error("Error adding document: ", error);
-    }
-  };
-
-  const handleDeleteAnswer = async (id: string) => {
-    try {
-      await deleteDoc(doc(db, "answers", id));
-      setSubmittedAnswers(
-        submittedAnswers.filter((answer) => answer.id !== id)
-      );
-    } catch (error) {
-      console.error("Error deleting document: ", error);
-    }
+  const formatDateToKoreanTime = (date: Date) => {
+    if (!date) return "알 수 없는 시간";
+    return date.toLocaleString("ko-KR", {
+      timeZone: "Asia/Seoul",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
   };
 
   return (
     <Layout>
-      <div>
-        <AnswerBlock>답변하기</AnswerBlock>
-        <QuestionBox>{question}</QuestionBox>
-        <AnswerContainer>
-          <InputAnswer
-            value={answer}
-            onChange={(e) => setAnswer(e.target.value)}
-          />
-          <AnswerBtn onClick={handleSubmit}>제출</AnswerBtn>
-        </AnswerContainer>
-        <AnswerDisplay>
-          {submittedAnswers.map(({ id, author, authorUid, content }) => (
-            <AnswerBox key={id}>
-              <AnswerInfo>{author}</AnswerInfo>
-              <AnswerContent>{content}</AnswerContent>
-              {currentUser &&
-                currentUser.uid === authorUid && ( // 현재 사용자와 작성자의 UID를 비교하여 삭제 버튼 표시
-                  <DeleteButton onClick={() => handleDeleteAnswer(id)}>
-                    삭제
-                  </DeleteButton>
-                )}
-            </AnswerBox>
-          ))}
-        </AnswerDisplay>
+      <div className="p-4">
+        <p className="text-xl text-center">{question}</p>
+        <p className="font-bold text-center">{author}</p>
+        {createdAt && (
+          <p className="text-center">{formatDateToKoreanTime(createdAt)}</p>
+        )}
+        <p className="mt-4 text-center">{content}</p>
+        <p>댓글 {submittedAnswers.length}</p>
+      </div>
+
+      <div className="h-[50vh] mt-4 overflow-y-auto">
+        {submittedAnswers.map(({ id, author, content, createdAt }) => (
+          <div
+            key={id}
+            className="relative flex flex-col items-center w-[23rem] mx-auto p-2 text-lg bg-green-400 border rounded-lg"
+          >
+            <p>{author}</p>
+            <p className="text-black break-words whitespace-pre-wrap">
+              {content}
+            </p>
+            {createdAt && (
+              <p className="text-xs text-gray-500">
+                {formatDateToKoreanTime(new Date(createdAt))}
+              </p>
+            )}
+          </div>
+        ))}
+        <NavLink
+          to={`/comments/${questionId}`}
+          state={{ questionId, question, submittedAnswers }}
+        >
+          <Button variant="link" size="sm">
+            댓글을 남겨보세요.
+          </Button>
+        </NavLink>
       </div>
     </Layout>
   );

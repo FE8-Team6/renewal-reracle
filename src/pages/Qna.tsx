@@ -1,121 +1,66 @@
-import { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { collection, addDoc, getDocs, deleteDoc } from 'firebase/firestore';
-import { Link } from 'react-router-dom';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { db } from '../firebase';
-import { Layout } from '@/components/layout/Layout';
+import { useState, useEffect } from "react";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  Timestamp,
+  query,
+  orderBy,
+} from "firebase/firestore";
+import { NavLink } from "react-router-dom";
+import { db } from "../firebase";
+import { Layout } from "@/components/layout/Layout";
+import QuestionModal from "@/components/modal/QuestionModal";
+import { serverTimestamp } from "firebase/firestore";
 
-const HeaderQna = styled.div`
-  width: 56.3vh;
-  height: 3.75vh;
-  background: #9747ff;
-  text-align: center;
-  align-content: center;
-  color: white;
-  font-size: 2vh;
-`;
-
-const Question = styled.button`
-  display: block;
-  margin: 1vh auto;
-  border: none;
-  background: #93fd98;
-  color: white;
-  font-size: 2vh;
-`;
-
-const QnaArea = styled.div`
-  text-align: center;
-`;
-
-const QuestionListContainer = styled.div`
-  max-height: 60vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  margin: 1.5vh auto;
-  width: 52vh;
-  position: relative;
-`;
-
-const QuestionContainer = styled.div`
-  background: #93fd98;
-  width: 50vh;
-  margin: 1.5vh auto;
-  height: 3.75vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1vh;
-  border-radius: 10px;
-  color: white;
-  font-size: 2vh;
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: white;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  display: inline-block;
-  width: 35vh;
-`;
-
-const QuestionInput = styled.input`
-  background: #ffffff;
-  border: none;
-  border-radius: 5px;
-  height: 2.5vh;
-  width: 35vh;
-  padding: 0.5vh;
-  font-size: 1.5vh;
-`;
-
-const AddButton = styled.button`
-  background: #9747ff;
-  border: none;
-  border-radius: 5px;
-  height: 2.5vh;
-  color: white;
-  cursor: pointer;
-  padding: 0 1vh;
-  font-size: 1.5vh;
-`;
-
-const DeleteButton = styled.button`
-  background: #ff4747;
-  border: none;
-  border-radius: 5px;
-  height: 2.5vh;
-  color: white;
-  cursor: pointer;
-  padding: 0 1vh;
-  font-size: 1.5vh;
-`;
+type Question = {
+  id: string;
+  question: string;
+  author: string;
+  authorUid: string;
+  content: string;
+  createdAt: Timestamp;
+}[];
 
 export const Qna = () => {
-  const [questions, setQuestions] = useState<{ question: string; author: string; authorUid: string }[]>([]);
-  const [currentQuestion, setCurrentQuestion] = useState<string>('');
-  const [currentUser, setCurrentUser] = useState<any>(null);
+  const [questions, setQuestions] = useState<Question>([]);
+  const [currentUser, setCurrentUser] = useState<{
+    displayName: string;
+    uid: string;
+  }>({
+    displayName: "",
+    uid: "",
+  });
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
+  /**
+   * @description 로컬스토리지에 저장된 사용자 정보를 불러옵니다.
+   */
   useEffect(() => {
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
-    });
+    const userData = localStorage.getItem("userData");
+    const storedUser = userData ? JSON.parse(userData) : null;
+    if (storedUser) {
+      setCurrentUser(storedUser);
+    }
   }, []);
 
   useEffect(() => {
     const fetchQuestions = async () => {
-      const querySnapshot = await getDocs(collection(db, 'questions'));
-      const questionList: { question: string; author: string; authorUid: string }[] = [];
+      const queryOrderBy = query(
+        collection(db, "questions"),
+        orderBy("createdAt", "desc")
+      );
+      const querySnapshot = await getDocs(queryOrderBy);
+      const questionList: Question = [];
       querySnapshot.forEach((doc) => {
         const questionData = doc.data();
         questionList.push({
+          id: doc.id,
           question: questionData.question,
           author: questionData.author,
           authorUid: questionData.authorUid,
+          content: questionData.content,
+          createdAt: questionData.createdAt,
         });
       });
       setQuestions(questionList);
@@ -123,90 +68,109 @@ export const Qna = () => {
     fetchQuestions();
   }, []);
 
-  const handleAddQuestion = async () => {
-    if (!currentUser) {
-      alert('질문을 추가하려면 로그인해야 합니다.');
+  const handleAddQuestion = async (title: string, content: string) => {
+    if (title.trim() === "" || content.trim() === "") {
+      alert("제목과 내용을 입력해주세요.");
       return;
     }
-    if (currentQuestion.trim() === '') return;
-
     try {
-      const docRef = await addDoc(collection(db, 'questions'), {
-        question: currentQuestion,
-        author: currentUser.displayName, // 현재 사용자의 이름 저장
-        authorUid: currentUser.uid, // 현재 사용자의 UID 저장
+      await addDoc(collection(db, "questions"), {
+        question: title,
+        content,
+        author: currentUser.displayName,
+        authorUid: currentUser.uid,
+        createdAt: serverTimestamp(),
       });
-      console.log('Document written with ID: ', docRef.id);
 
-      setQuestions([
-        ...questions,
-        { question: currentQuestion, author: currentUser.displayName, authorUid: currentUser.uid },
-      ]);
-      setCurrentQuestion('');
-    } catch (e) {
-      console.error('Error adding document: ', e);
+      const updatedQuestions = await getDocs(
+        query(collection(db, "questions"), orderBy("createdAt", "desc"))
+      );
+      const questionList: Question = [];
+      updatedQuestions.forEach((doc) => {
+        const questionData = doc.data();
+        questionList.push({
+          id: doc.id,
+          question: questionData.question,
+          content: questionData.content,
+          author: questionData.author,
+          authorUid: questionData.authorUid,
+          createdAt: questionData.createdAt,
+        });
+      });
+      setQuestions(questionList);
+      setIsModalOpen(false);
+    } catch (error) {
+      console.error("질문 추가 실패:", error);
     }
   };
 
-  const handleDeleteQuestion = async (index: number) => {
-    if (!currentUser) {
-      alert('질문을 삭제하려면 로그인해야 합니다.');
+  const handleOpenModal = () => {
+    const userData = localStorage.getItem("userData");
+    if (!userData) {
+      alert("로그인이 필요합니다.");
       return;
     }
-    if (window.confirm('정말로 삭제하시겠습니까?')) {
-      try {
-        const deletedQuestion = questions[index];
-        if (deletedQuestion.authorUid === currentUser.uid) {
-          const updatedQuestions = [...questions];
-          updatedQuestions.splice(index, 1);
-          setQuestions(updatedQuestions);
+    setIsModalOpen(true);
+  };
 
-          const querySnapshot = await getDocs(collection(db, 'questions'));
-          querySnapshot.forEach((doc) => {
-            if (
-              doc.data().question === deletedQuestion.question &&
-              doc.data().author === deletedQuestion.author
-            ) {
-              deleteDoc(doc.ref);
-            }
-          });
-        } else {
-          alert('자신의 질문만 삭제할 수 있습니다.');
-        }
-      } catch (error) {
-        console.error('Error deleting document: ', error);
-      }
-    }
+  const formatDateToKoreanTime = (date: Date) => {
+    return date.toLocaleString("ko-KR", {
+      timeZone: "Asia/Seoul",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
   };
 
   return (
     <Layout>
-      <HeaderQna>R 지식in</HeaderQna>
-      <Question>질문하기</Question>
-      <QnaArea>
-        <QuestionInput
-          type="text"
-          value={currentQuestion}
-          onChange={(e) => setCurrentQuestion(e.target.value)}
-          placeholder="질문을 입력하세요"
-        />
-        <AddButton onClick={handleAddQuestion}>추가</AddButton>
-      </QnaArea>
-
-      <QuestionListContainer>
-        {questions.map((questionData, index) => (
-          <QuestionContainer key={index}>
-            <StyledLink
-              to={`/answer/${encodeURIComponent(questionData.question)}`}
-              state={{ question: questionData.question }}>
-              {questionData.question}
-            </StyledLink>
-            {currentUser && questionData.authorUid === currentUser.uid && (
-              <DeleteButton onClick={() => handleDeleteQuestion(index)}>삭제</DeleteButton>
-            )}
-          </QuestionContainer>
+      <div className="w-full h-[2rem] bg-purple text-center flex items-center justify-center text-white text-[2vh]">
+        R지식in
+      </div>
+      <button
+        className="p-1 mx-auto text-black border "
+        onClick={handleOpenModal}
+      >
+        질문
+      </button>
+      <div className="w-[23rem] h-full relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] ">
+        {questions.map((question) => (
+          <div
+            key={question.id}
+            className=" bg-greenLight w-full h-[5rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black "
+          >
+            <NavLink
+              to={`/answer/${question.id}`}
+              state={{
+                questionId: question.id,
+                question: question.question,
+                content: question.content,
+                author: question.author,
+                createdAt: question.createdAt
+                  ? question.createdAt.toDate().toISOString()
+                  : null,
+              }}
+            >
+              <span>{question.question}</span>
+              <span>{question.author} 님</span>
+              {question.createdAt && (
+                <p className="text-sm">
+                  {formatDateToKoreanTime(question.createdAt.toDate())}
+                </p>
+              )}
+            </NavLink>
+          </div>
         ))}
-      </QuestionListContainer>
+      </div>
+      <QuestionModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleAddQuestion}
+      />
     </Layout>
   );
 };
+
+export default Qna;

@@ -3,7 +3,6 @@ import MyPage from "@/components/MyPage/MyPage";
 import Nav from "@/components/Nav/Nav";
 import CategoryDetailItems from "@/components/WasteCategory/CategoryDetailItems";
 import CategoryItems from "@/components/WasteCategory/CategoryItems";
-// import WasteCategoryItems from "@/components/WasteCategoryItems";
 import {
   Answer,
   Login,
@@ -14,6 +13,7 @@ import {
   SignUp,
   Topic,
 } from "@/pages";
+import Comments from "@/pages/Comments";
 import Home from "@/pages/Home";
 
 export const routes = [
@@ -76,8 +76,12 @@ export const routes = [
     element: <Topic />,
   },
   {
-    path: "answer/:questionIndex",
+    path: "answer/:questionId",
     element: <Answer />,
+  },
+  {
+    path: "comments/:questionId",
+    element: <Comments />,
   },
   {
     path: "mypage",
