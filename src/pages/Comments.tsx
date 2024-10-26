@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import {
   collection,
   addDoc,
@@ -25,10 +25,11 @@ import {
   PopoverContent,
 } from "@/components/ui/popover";
 import { MoreHorizontal } from "lucide-react";
+import { formatDateToKoreanTime } from "@/lib/utils/dateKoreanTime";
+import BackHeader from "@/lib/common/BackHeader";
 
 const Comments = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const questionId = location.state?.questionId || "";
   const question = location.state?.question || "";
   const [submittedAnswers, setSubmittedAnswers] = useState(
@@ -121,31 +122,22 @@ const Comments = () => {
     }
   };
 
-  const formatDateToKoreanTime = (date: Date) => {
-    if (!date) return "알 수 없는 시간";
-    return date.toLocaleString("ko-KR", {
-      timeZone: "Asia/Seoul",
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  };
-
   return (
     <>
-      <header className="p-4 bg-gray-200">
-        <button className="text-blue-500" onClick={() => navigate(-1)}>
-          뒤로 가기
-        </button>
-      </header>
+      <BackHeader />
       <h2>댓글</h2>
       <div>
         {submittedAnswers
           .slice()
           .sort(
-            (a, b) =>
+            (
+              a: {
+                createdAt: string;
+              },
+              b: {
+                createdAt: string;
+              }
+            ) =>
               new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
           )
           .map(
