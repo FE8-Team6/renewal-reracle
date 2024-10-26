@@ -44,8 +44,8 @@ type SubmittedAnswer = {
 export const Answer = () => {
   const location = useLocation();
   const questionId = location.state?.questionId || "";
-  const question = location.state?.question || "";
-  const content = location.state?.content || "";
+  const initialQuestion = location.state?.question || "";
+  const initialContent = location.state?.content || "";
   const author = location.state?.author || "";
   const createdAt = location.state?.createdAt
     ? new Date(location.state.createdAt)
@@ -63,10 +63,12 @@ export const Answer = () => {
     new Set(location.state?.likedPosts || [])
   );
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
-  const [editTitle, setEditTitle] = useState<string>(question);
-  const [editContent, setEditContent] = useState<string>(content);
+  const [editTitle, setEditTitle] = useState<string>(initialQuestion);
+  const [editContent, setEditContent] = useState<string>(initialContent);
+  const [question, setQuestion] = useState<string>(initialQuestion);
+  const [content, setContent] = useState<string>(initialContent);
 
-  const navgate = useNavigate();
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchAnswers = async () => {
       const answersCollection = collection(db, "answers");
@@ -130,7 +132,7 @@ export const Answer = () => {
   const handleDeleteQuestion = async () => {
     try {
       await deleteDoc(doc(db, "questions", questionId));
-      navgate("/qna");
+      navigate("/qna");
     } catch (error) {
       console.error("DELETE 에러 발생: ", error);
     }
@@ -142,7 +144,8 @@ export const Answer = () => {
         question: editTitle,
         content: editContent,
       });
-      // 수정 후 필요한 추가 작업을 여기에 추가하세요.
+      setQuestion(editTitle);
+      setContent(editContent);
       setIsEditModalOpen(false);
     } catch (error) {
       console.error("UPDATE 에러 발생: ", error);
