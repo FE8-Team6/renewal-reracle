@@ -118,14 +118,26 @@ export const Answer = () => {
           <p className="text-center">{formatDateToKoreanTime(createdAt)}</p>
         )}
         <p className="mt-4 text-center">{content}</p>
-        <p>댓글 {submittedAnswers.length}</p>
+        <div className="flex gap-3">
+          <p>댓글 {submittedAnswers.length}</p>
+          <div className="flex items-center">
+            <button className="pr-1" onClick={() => handleLike(questionId)}>
+              <ThumbsUp
+                className={`w-5 h-5 ${
+                  likedPosts.has(questionId) ? "text-blue-500" : ""
+                }`}
+              />
+            </button>
+            <span>{likes}</span>
+          </div>
+        </div>
       </div>
 
       <div className="h-[50vh] mt-4 overflow-y-auto">
         {submittedAnswers.map(({ id, author, content, createdAt }) => (
           <div
             key={id}
-            className="relative flex flex-col items-center w-[23rem] mx-auto p-2 text-lg bg-green-400 border rounded-lg"
+            className="relative flex flex-col items-center w-[23rem] mx-auto p-2 text-lg bg-purpleLight border rounded-lg"
           >
             <p>{author}</p>
             <p className="text-black break-words whitespace-pre-wrap">
@@ -138,29 +150,15 @@ export const Answer = () => {
             )}
           </div>
         ))}
-        <div className="flex items-center justify-center mt-4">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => handleLike(questionId)}
-          >
-            <ThumbsUp
-              className={`w-6 h-6 ${
-                likedPosts.has(questionId) ? "text-blue-500" : ""
-              }`}
-            />
-          </Button>
-          <span>{likes}</span>
-        </div>
-        <NavLink
-          to={`/comments/${questionId}`}
-          state={{ questionId, question, submittedAnswers }}
-        >
-          <Button variant="link" size="sm">
-            댓글을 남겨보세요.
-          </Button>
-        </NavLink>
       </div>
+      <NavLink
+        to={`/comments/${questionId}`}
+        state={{ questionId, question, submittedAnswers }}
+      >
+        <Button variant="link" size="sm">
+          댓글을 남겨보세요.
+        </Button>
+      </NavLink>
       <Nav />
     </>
   );

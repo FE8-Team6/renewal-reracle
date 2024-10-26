@@ -283,15 +283,13 @@ export const Qna = () => {
               className="flex flex-col flex-grow"
             >
               <div className="flex flex-col">
-                <span className="text-sm text-gray-500">
-                  {question.author} 님
-                </span>
-                <span className="text-base font-bold text-gray-900 truncate">
+                <span className="text-base font-semibold text-gray-900 truncate">
                   {truncateTitle(question.question)}
                 </span>
+                <span className="text-sm text-gray-500">{question.author}</span>
               </div>
               <div className="flex items-center justify-between mt-1">
-                <div className="flex gap-1">
+                <div className="flex gap-2">
                   {question.createdAt && (
                     <p className="text-sm">
                       {formatDateToKoreanTime(question.createdAt.toDate())}
@@ -301,10 +299,11 @@ export const Qna = () => {
                 </div>
                 <div className="flex items-center">
                   <Button
-                    variant="ghost"
+                    className="bg-transparent hover:bg-transparent"
+                    variant="secondary"
                     size="icon"
-                    onClick={(e) => {
-                      e.preventDefault();
+                    onClick={(event) => {
+                      event.preventDefault();
                       handleLike(question.id);
                     }}
                   >
