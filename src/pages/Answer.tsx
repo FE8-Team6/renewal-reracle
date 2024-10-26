@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
   collection,
   query,
@@ -66,6 +66,7 @@ export const Answer = () => {
   const [editTitle, setEditTitle] = useState<string>(question);
   const [editContent, setEditContent] = useState<string>(content);
 
+  const navgate = useNavigate();
   useEffect(() => {
     const fetchAnswers = async () => {
       const answersCollection = collection(db, "answers");
@@ -129,7 +130,7 @@ export const Answer = () => {
   const handleDeleteQuestion = async () => {
     try {
       await deleteDoc(doc(db, "questions", questionId));
-      // 삭제 후 필요한 추가 작업을 여기에 추가하세요.
+      navgate("/qna");
     } catch (error) {
       console.error("DELETE 에러 발생: ", error);
     }
@@ -153,9 +154,38 @@ export const Answer = () => {
       <BackHeader />
       <div className="p-4">
         <p className="font-semibold">{author}</p>
-        {createdAt && (
-          <p className="text-sm">{formatDateToKoreanTime(createdAt)}</p>
-        )}
+        <div className="flex items-center justify-between">
+          {createdAt && (
+            <p className="text-sm">{formatDateToKoreanTime(createdAt)}</p>
+          )}
+          {currentUser.uid === authorUid && (
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <MoreHorizontal className="w-5 h-5" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-[6rem]">
+                <Button
+                  variant="default"
+                  size="sm"
+                  className="w-full"
+                  onClick={() => setIsEditModalOpen(true)}
+                >
+                  수정
+                </Button>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  className="w-full"
+                  onClick={handleDeleteQuestion}
+                >
+                  삭제
+                </Button>
+              </PopoverContent>
+            </Popover>
+          )}
+        </div>
         <div className="mt-2">
           <p className="text-lg text-center">{question}</p>
           <p className="mt-2 text-base text-center">{content}</p>
@@ -173,33 +203,6 @@ export const Answer = () => {
             <span>{likes}</span>
           </div>
         </div>
-        {currentUser.uid === authorUid && (
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <MoreHorizontal className="w-5 h-5" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-48">
-              <Button
-                variant="default"
-                size="default"
-                className="w-full"
-                onClick={() => setIsEditModalOpen(true)}
-              >
-                수정
-              </Button>
-              <Button
-                variant="default"
-                size="default"
-                className="w-full"
-                onClick={handleDeleteQuestion}
-              >
-                삭제
-              </Button>
-            </PopoverContent>
-          </Popover>
-        )}
       </div>
 
       <div className="h-[50vh] mt-4 space-y-2 overflow-y-auto">
@@ -249,12 +252,12 @@ export const Answer = () => {
           />
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="default" size="lg" onClick={handleEditQuestion}>
+              <Button variant="default" size="sm" onClick={handleEditQuestion}>
                 수정
               </Button>
             </DialogClose>
             <DialogClose asChild>
-              <Button variant="default" size="lg">
+              <Button variant="secondary" size="sm">
                 닫기
               </Button>
             </DialogClose>
