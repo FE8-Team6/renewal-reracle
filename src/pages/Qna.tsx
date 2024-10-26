@@ -279,6 +279,7 @@ export const Qna = () => {
                 likedPosts: Array.from(likedPosts),
                 commentCount: question.commentCount,
                 currentUser,
+                authorUid: question.authorUid,
               }}
               className="flex flex-col flex-grow"
             >

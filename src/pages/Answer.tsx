@@ -13,10 +13,24 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { Button } from "@/components/ui/button";
-import { ThumbsUp } from "lucide-react";
+import { ThumbsUp, MoreHorizontal } from "lucide-react";
 import { formatDateToKoreanTime } from "@/lib/utils/dateKoreanTime";
 import Nav from "@/components/Nav/Nav";
 import BackHeader from "@/lib/common/BackHeader";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover";
 
 type SubmittedAnswer = {
   id: string;
@@ -40,6 +54,7 @@ export const Answer = () => {
     displayName: "",
     uid: "",
   };
+  const authorUid = location.state?.authorUid || "";
   const [submittedAnswers, setSubmittedAnswers] = useState<SubmittedAnswer>(
     location.state?.submittedAnswers || []
   );
@@ -47,6 +62,9 @@ export const Answer = () => {
   const [likedPosts, setLikedPosts] = useState<Set<string>>(
     new Set(location.state?.likedPosts || [])
   );
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+  const [editTitle, setEditTitle] = useState<string>(question);
+  const [editContent, setEditContent] = useState<string>(content);
 
   useEffect(() => {
     const fetchAnswers = async () => {
@@ -108,6 +126,28 @@ export const Answer = () => {
     }
   };
 
+  const handleDeleteQuestion = async () => {
+    try {
+      await deleteDoc(doc(db, "questions", questionId));
+      // 삭제 후 필요한 추가 작업을 여기에 추가하세요.
+    } catch (error) {
+      console.error("DELETE 에러 발생: ", error);
+    }
+  };
+
+  const handleEditQuestion = async () => {
+    try {
+      await updateDoc(doc(db, "questions", questionId), {
+        question: editTitle,
+        content: editContent,
+      });
+      // 수정 후 필요한 추가 작업을 여기에 추가하세요.
+      setIsEditModalOpen(false);
+    } catch (error) {
+      console.error("UPDATE 에러 발생: ", error);
+    }
+  };
+
   return (
     <>
       <BackHeader />
@@ -133,9 +173,36 @@ export const Answer = () => {
             <span>{likes}</span>
           </div>
         </div>
+        {currentUser.uid === authorUid && (
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <MoreHorizontal className="w-5 h-5" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-48">
+              <Button
+                variant="default"
+                size="default"
+                className="w-full"
+                onClick={() => setIsEditModalOpen(true)}
+              >
+                수정
+              </Button>
+              <Button
+                variant="default"
+                size="default"
+                className="w-full"
+                onClick={handleDeleteQuestion}
+              >
+                삭제
+              </Button>
+            </PopoverContent>
+          </Popover>
+        )}
       </div>
 
-      <div className="h-[50vh] mt-4 space-y-2">
+      <div className="h-[50vh] mt-4 space-y-2 overflow-y-auto">
         {submittedAnswers.map(({ id, author, content, createdAt }) => (
           <div
             key={id}
@@ -150,16 +217,50 @@ export const Answer = () => {
             )}
           </div>
         ))}
+        <NavLink
+          to={`/comments/${questionId}`}
+          state={{ questionId, question, submittedAnswers }}
+        >
+          <Button variant="link" size="sm">
+            댓글을 남겨보세요.
+          </Button>
+        </NavLink>
       </div>
-      <NavLink
-        to={`/comments/${questionId}`}
-        state={{ questionId, question, submittedAnswers }}
-      >
-        <Button variant="link" size="sm">
-          댓글을 남겨보세요.
-        </Button>
-      </NavLink>
+
       <Nav />
+      <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>게시글 수정</DialogTitle>
+            <DialogDescription>게시글을 수정하세요.</DialogDescription>
+          </DialogHeader>
+          <input
+            type="text"
+            value={editTitle}
+            onChange={(event) => setEditTitle(event.target.value)}
+            placeholder="제목"
+            className="w-full p-2 mb-2 border"
+          />
+          <textarea
+            value={editContent}
+            onChange={(event) => setEditContent(event.target.value)}
+            placeholder="내용"
+            className="w-full h-[30vh] p-2 mb-2 border"
+          />
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button variant="default" size="lg" onClick={handleEditQuestion}>
+                수정
+              </Button>
+            </DialogClose>
+            <DialogClose asChild>
+              <Button variant="default" size="lg">
+                닫기
+              </Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
