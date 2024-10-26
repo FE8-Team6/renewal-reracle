@@ -133,16 +133,14 @@ export const Answer = () => {
         </div>
       </div>
 
-      <div className="h-[50vh] mt-4 overflow-y-auto">
+      <div className="h-[50vh] mt-4 space-y-2">
         {submittedAnswers.map(({ id, author, content, createdAt }) => (
           <div
             key={id}
-            className="relative flex flex-col items-center w-[23rem] mx-auto p-2 text-lg bg-purpleLight border rounded-lg"
+            className="relative flex flex-col w-[23rem] mx-auto p-2 text-lg bg-purpleLight "
           >
-            <p>{author}</p>
-            <p className="text-black break-words whitespace-pre-wrap">
-              {content}
-            </p>
+            <p className="text-lg text-black">{content}</p>
+            <p className="text-sm">{author}</p>
             {createdAt && (
               <p className="text-xs text-gray-500">
                 {formatDateToKoreanTime(new Date(createdAt))}
