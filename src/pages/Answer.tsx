@@ -41,7 +41,7 @@ type SubmittedAnswer = {
   likes: number;
 }[];
 
-export const Answer = () => {
+const Answer = () => {
   const location = useLocation();
   const questionId = location.state?.questionId || "";
   const initialQuestion = location.state?.question || "";
@@ -270,3 +270,5 @@ export const Answer = () => {
     </>
   );
 };
+
+export default Answer;
