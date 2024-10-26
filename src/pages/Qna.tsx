@@ -94,7 +94,7 @@ export const Qna = () => {
       setQuestions(questionList);
     };
 
-    const fetchLikedPosts = async () => {
+    const getLiked = async () => {
       if (currentUser.uid) {
         const q = query(
           collection(db, "likes"),
@@ -110,7 +110,7 @@ export const Qna = () => {
     };
 
     getQuestions();
-    fetchLikedPosts();
+    getLiked();
   }, [currentUser.uid]);
 
   const handleAddQuestion = async () => {
@@ -162,8 +162,12 @@ export const Qna = () => {
    * @description 만약 이미 좋아요를 누른 게시물이라면 좋아요를 취소하고, 아니라면 좋아요를 누릅니다.
    * @param id
    */
-  const handleLike = async (id: string) => {
+  const handleLiked = async (id: string) => {
     try {
+      if (!currentUser.uid) {
+        alert("로그인을 해주세요.");
+        return;
+      }
       const likeDocRef = doc(db, "likes", `${currentUser.uid}_${id}`);
       if (likedPosts.has(id)) {
         await deleteDoc(likeDocRef);
@@ -305,7 +309,7 @@ export const Qna = () => {
                     size="icon"
                     onClick={(event) => {
                       event.preventDefault();
-                      handleLike(question.id);
+                      handleLiked(question.id);
                     }}
                   >
                     <ThumbsUp
