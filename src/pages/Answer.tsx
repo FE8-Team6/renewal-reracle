@@ -112,12 +112,14 @@ export const Answer = () => {
     <>
       <BackHeader />
       <div className="p-4">
-        <p className="text-xl text-center">{question}</p>
-        <p className="font-bold text-center">{author}</p>
+        <p className="font-semibold">{author}</p>
         {createdAt && (
-          <p className="text-center">{formatDateToKoreanTime(createdAt)}</p>
+          <p className="text-sm">{formatDateToKoreanTime(createdAt)}</p>
         )}
-        <p className="mt-4 text-center">{content}</p>
+        <div className="mt-2">
+          <p className="text-lg text-center">{question}</p>
+          <p className="mt-2 text-base text-center">{content}</p>
+        </div>
         <div className="flex gap-3">
           <p>댓글 {submittedAnswers.length}</p>
           <div className="flex items-center">
