@@ -12,10 +12,11 @@ import {
   increment,
 } from "firebase/firestore";
 import { db } from "../firebase";
-import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { ThumbsUp } from "lucide-react";
 import { formatDateToKoreanTime } from "@/lib/utils/dateKoreanTime";
+import Nav from "@/components/Nav/Nav";
+import BackHeader from "@/lib/common/BackHeader";
 
 type SubmittedAnswer = {
   id: string;
@@ -108,7 +109,8 @@ export const Answer = () => {
   };
 
   return (
-    <Layout>
+    <>
+      <BackHeader />
       <div className="p-4">
         <p className="text-xl text-center">{question}</p>
         <p className="font-bold text-center">{author}</p>
@@ -159,6 +161,7 @@ export const Answer = () => {
           </Button>
         </NavLink>
       </div>
-    </Layout>
+      <Nav />
+    </>
   );
 };

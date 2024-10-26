@@ -16,11 +16,20 @@ import {
 import { NavLink } from "react-router-dom";
 import { db } from "../firebase";
 import { Layout } from "@/components/layout/Layout";
-import QuestionModal from "@/components/modal/QuestionModal";
 import { serverTimestamp } from "firebase/firestore";
 import { formatDateToKoreanTime } from "@/lib/utils/dateKoreanTime";
 import { Button } from "@/components/ui/button";
 import { ThumbsUp } from "lucide-react";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
 
 type Question = {
   id: string;
@@ -44,6 +53,8 @@ export const Qna = () => {
   });
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [likedPosts, setLikedPosts] = useState<Set<string>>(new Set());
+  const [title, setTitle] = useState<string>("");
+  const [content, setContent] = useState<string>("");
 
   /**
    * @description 로컬스토리지에 저장된 사용자 정보를 불러옵니다.
@@ -102,7 +113,7 @@ export const Qna = () => {
     fetchLikedPosts();
   }, [currentUser.uid]);
 
-  const handleAddQuestion = async (title: string, content: string) => {
+  const handleAddQuestion = async () => {
     if (title.trim() === "" || content.trim() === "") {
       alert("제목과 내용을 입력해주세요.");
       return;
@@ -140,6 +151,8 @@ export const Qna = () => {
       }
       setQuestions(questionList);
       setIsModalOpen(false);
+      setTitle("");
+      setContent("");
     } catch (error) {
       console.error("질문 추가 실패:", error);
     }
@@ -205,12 +218,47 @@ export const Qna = () => {
       <div className="w-full h-[2rem] bg-purple text-center flex items-center justify-center text-white text-[2vh]">
         R지식in
       </div>
-      <button
-        className="p-1 mx-auto text-black border "
-        onClick={handleOpenModal}
-      >
-        질문
-      </button>
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogTrigger asChild>
+          <button
+            className="p-1 mx-auto text-black border "
+            onClick={handleOpenModal}
+          >
+            질문
+          </button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>질문</DialogTitle>
+            <DialogDescription>질문을 추가하세요.</DialogDescription>
+          </DialogHeader>
+          <input
+            type="text"
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+            placeholder="제목"
+            className="w-full p-2 mb-2 border"
+          />
+          <textarea
+            value={content}
+            onChange={(event) => setContent(event.target.value)}
+            placeholder="내용"
+            className="w-full h-[30vh] p-2 mb-2 border"
+          />
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button variant="default" size="lg" onClick={handleAddQuestion}>
+                추가
+              </Button>
+            </DialogClose>
+            <DialogClose asChild>
+              <Button variant="default" size="lg">
+                닫기
+              </Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
       <div className="w-[23rem] h-[60vh] relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] ">
         {questions.map((question) => (
           <div
@@ -273,11 +321,6 @@ export const Qna = () => {
           </div>
         ))}
       </div>
-      <QuestionModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSubmit={handleAddQuestion}
-      />
     </Layout>
   );
 };

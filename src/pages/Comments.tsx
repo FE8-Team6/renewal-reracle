@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import {
   collection,
   addDoc,
@@ -26,10 +26,10 @@ import {
 } from "@/components/ui/popover";
 import { MoreHorizontal } from "lucide-react";
 import { formatDateToKoreanTime } from "@/lib/utils/dateKoreanTime";
+import BackHeader from "@/lib/common/BackHeader";
 
 const Comments = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const questionId = location.state?.questionId || "";
   const question = location.state?.question || "";
   const [submittedAnswers, setSubmittedAnswers] = useState(
@@ -124,11 +124,7 @@ const Comments = () => {
 
   return (
     <>
-      <header className="p-4 bg-gray-200">
-        <button className="text-blue-500" onClick={() => navigate(-1)}>
-          뒤로 가기
-        </button>
-      </header>
+      <BackHeader />
       <h2>댓글</h2>
       <div>
         {submittedAnswers
