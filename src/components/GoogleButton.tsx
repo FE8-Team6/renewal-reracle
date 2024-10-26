@@ -1,33 +1,16 @@
-import { useState } from "react";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { Button } from "@/components/ui/button";
 import { auth } from "@/firebase";
 import { useNavigate } from "react-router-dom";
 
-type userDate = {
-  uid: string;
-  email: string;
-  displayName: string;
-};
-
 const GoogleButton = () => {
-  const [userData, setUserData] = useState<userDate>({
-    uid: "",
-    email: "",
-    displayName: "",
-  });
   const navigate = useNavigate();
 
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
     try {
       const data = await signInWithPopup(auth, provider);
-      setUserData({
-        uid: data.user.uid,
-        email: data.user.email || "",
-        displayName: data.user.displayName || "",
-      });
-      console.log(data);
+
       localStorage.setItem(
         "userData",
         JSON.stringify({

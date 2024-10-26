@@ -4,7 +4,6 @@ import Nav from "@/components/Nav/Nav";
 import CategoryDetailItems from "@/components/WasteCategory/CategoryDetailItems";
 import CategoryItems from "@/components/WasteCategory/CategoryItems";
 import {
-  Answer,
   Login,
   MyQuestion,
   NotFound,
@@ -13,6 +12,7 @@ import {
   SignUp,
   Topic,
 } from "@/pages";
+import Answer from "@/pages/Answer";
 import Comments from "@/pages/Comments";
 import Home from "@/pages/Home";
 
