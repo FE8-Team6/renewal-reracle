@@ -3,6 +3,7 @@ import MyPage from "@/components/MyPage/MyPage";
 import Nav from "@/components/Nav/Nav";
 import CategoryDetailItems from "@/components/WasteCategory/CategoryDetailItems";
 import CategoryItems from "@/components/WasteCategory/CategoryItems";
+import BackHeader from "@/lib/common/BackHeader";
 import {
   Login,
   MyQuestion,
@@ -62,9 +63,11 @@ export const routes = [
   {
     path: "category/:categoryId/item/:itemId",
     element: (
-      <Layout>
+      <>
+        <BackHeader />
         <CategoryDetailItems />
-      </Layout>
+        <Nav />
+      </>
     ),
   },
   {

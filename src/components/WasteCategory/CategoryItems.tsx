@@ -17,7 +17,6 @@ type Category = {
 const CategoryItems = () => {
   const { categoryId } = useParams();
   const [categoryItems, setCategoryItems] = useState<Category[]>([]);
-
   const getCategoryItems = async () => {
     try {
       if (!categoryId) {
@@ -65,7 +64,7 @@ const CategoryItems = () => {
                     <div className="bg-yellowLight w-3/4 h-[6rem] flex justify-center items-center rounded-lg mx-auto hover:bg-yellow cursor-pointer">
                       {item.imageURL && (
                         <img
-                          src={categoryItems.imageURL}
+                          src={item.imageURL}
                           alt={item.name}
                           className="w-[2.5rem] h-[2.5rem]"
                         />

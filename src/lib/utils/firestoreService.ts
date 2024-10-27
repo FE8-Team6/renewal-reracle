@@ -22,80 +22,94 @@ const wasteCategories = [
       {
         id: "2",
         name: "쌀포대",
-        imageURL: "ricebag",
-        description: "쌀포대 버리는 방법",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fricebag.svg?alt=media&token=6bb3365a-3708-4ad5-b88a-019f1d0f3702",
+        description:
+          "종이 쌀포대는 재활용이 가능합니다. 분리배출표시가 없다면 한쪽 면만 코팅된 종이포대는 종이류로, 양면이 모두 코팅된 종이류는 비닐류로 배출하시기 바랍니다.",
       },
       {
         id: "3",
         name: "수첩",
-        imageURL: "notebook",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fnotebook.svg?alt=media&token=7d79f77d-e55e-4705-bb28-d4dec92f3e7d",
         description: "스프링 등 종이류와 다른 재질은 제거한 후 배출해야합니다.",
       },
       {
         id: "4",
         name: "잡지",
-        imageURL: "magazine",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fmagazine.svg?alt=media&token=501b8ba1-af6e-46b0-9593-40683c4806fb",
         description: "스프링 등 종이류와 다른 재질은 제거한 후 배출해야합니다.",
       },
       {
         id: "5",
         name: "가격표",
-        imageURL: "priceTag",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FpriceTag.svg?alt=media&token=264cbb16-733d-417c-a6be-5e8dead0bb76",
         description:
           "물기에 젖지 않도록 하고 반듯하게 펴서 차곡차곡 쌓은 후 묶어서 배출 해야 합니다. 또한, 비닐코팅된 광고지, 비닐류, 기타 오물이 섞이지 않도록 해야 합니다.",
       },
       {
         id: "6",
         name: "골판지",
-        imageURL: "cardboard",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fcardboard.svg?alt=media&token=67e38859-2882-468a-8aa0-b86d44996f7b",
         description:
           "비닐코팅 부분, 상자에 붙어있는 테이프ㆍ철핀, 알루미늄박 등을 제거하고 접어서 배출 - 야외 별도 보관 장소마련 등 다른 종이류와 섞이지 않게 배출 해야 합니다.",
       },
       {
         id: "7",
         name: "전단지",
-        imageURL: "flyer",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fflyer.svg?alt=media&token=93f78d20-0438-4d02-8ef5-041571b3f459",
         description:
           "비닐 코팅된 종이, 공책의 스프링, 비닐포장지 등은 제거 후 배출 해야 합니다.",
       },
       {
         id: "8",
         name: "종이컵",
-        imageURL: "paperCup",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FpaperCup.svg?alt=media&token=79ccda7c-bd9e-4df0-b20a-614f4f01ae53",
         description:
           "내용물을 비우고 물로 헹군 후 압착하여 투명한 비닐에 넣어서 배출 해야 합니다.",
       },
       {
         id: "9",
         name: "명함",
-        imageURL: "businessCard",
-        description: "명함 버리는 방법",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FbusinessCard.svg?alt=media&token=2ed838e5-a7f8-4d8f-a7c8-9482e72c643b",
+        description:
+          "일반 쓰레기로 배출하면 됩니다. 하지만, 개인정보 유출 우려가 있을 경우 파쇄 후 배출 해야 합니다.",
       },
       {
         id: "10",
         name: "백과사전",
-        imageURL: "encyclopedia",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FbusinessCard.svg?alt=media&token=2ed838e5-a7f8-4d8f-a7c8-9482e72c643b",
         description:
           "비닐 코팅된 종이, 공책의 스프링, 비닐포장지 등은 제거 후 배출 해야 합니다.",
       },
       {
         id: "11",
         name: "종이상자",
-        imageURL: "paperbox",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fpaperbox.svg?alt=media&token=65dc632b-7a81-477a-a01f-59ca61994f92",
         description:
           "비닐코팅 부분, 상자에 붙어있는 테이프ㆍ철핀, 알루미늄박 등을 제거하고 접어서 배출 - 야외 별도 보관 장소마련 등 다른 종이류와 섞이지 않게 배출 해야 합니다.",
       },
       {
         id: "12",
         name: "책",
-        imageURL: "book",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fbook.svg?alt=media&token=2e7d7a18-b744-4c5b-be34-a13b7176a58d",
         description:
           "비닐 코팅된 종이, 공책의 스프링, 비닐포장지 등은 제거 후 배출 해야 합니다.",
       },
       {
         id: "13",
         name: "캘린더",
-        imageURL: "calendar",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fcalendar.svg?alt=media&token=38362a56-7201-451a-b661-328121d038bb",
         description:
           "비닐 코팅된 종이, 공책의 스프링, 비닐포장지 등은 제거 후 배출 해야 합니다.",
       },
@@ -110,7 +124,8 @@ const wasteCategories = [
       {
         id: "1",
         name: "우유팩",
-        imageURL: "milkpack",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fmilkpack.svg?alt=media&token=8f216eae-030a-4b5d-90d2-ba6247ade1c7",
         description:
           "내용물을 비우고, 물로 깨끗이 세척해서 배출 해야 합니다. 또한, 빨대, 비닐, 플라스틱 뚜껑 등 다른 재질은 분리해서 재질별로 분리 배출 해야 합니다.",
       },
