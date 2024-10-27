@@ -140,20 +140,23 @@ const wasteCategories = [
       {
         id: "1",
         name: "스프레이",
-        imageURL: "spray",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fspray.svg?alt=media&token=568c16eb-c7ef-44c3-9c05-fc3dedc6fff5",
         description: "내용물을 제거한 후 배출 해야 합니다.",
       },
       {
         id: "2",
         name: "통조림",
-        imageURL: "cannedFood",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FcannedFood.svg?alt=media&token=e41ec9a4-eaca-466e-8b5a-b2256107166f",
         description:
           "내용물을 비우고 물로 헹구는 등 이물질을 제거하여 배출 해야 합니다. 담배꽁초 등 이물질을 넣지 않고 배출 해야 합니다. 플라스틱 뚜껑 등 금속캔과 다른 재질은 제거한 후 배출 해야 합니다.",
       },
       {
         id: "3",
         name: "음료캔",
-        imageURL: "beverageCan",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fcan.svg?alt=media&token=0944300a-43c6-4db2-8989-f2897cdce304",
         description:
           "내용물을 비우고 물로 헹구는 등 이물질을 제거하여 배출 해야 합니다. 담배꽁초 등 이물질을 넣지 않고 배출 해야 합니다. 플라스틱 뚜껑 등 금속캔과 다른 재질은 제거한 후 배출 해야 합니다.",
       },
@@ -755,25 +758,29 @@ const wasteCategories = [
       {
         id: "1",
         name: "바나나껍질",
-        imageURL: "bananaPeel",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FbananaPeel.svg?alt=media&token=5e1ac525-9cb3-4ce8-af35-ab22b38951df",
         description: "음식물 쓰레기에 버리세요",
       },
       {
         id: "2",
         name: "상한음식",
-        imageURL: "rottenFood",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FrottenFood.svg?alt=media&token=cb883e53-dead-45e8-b276-9b952c203584",
         description: "음식물 쓰레기에 버리세요",
       },
       {
         id: "3",
         name: "생선",
-        imageURL: "fish",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Ffish.svg?alt=media&token=dcf9c679-d6fa-405d-8c1c-ef2f29b1335e",
         description: "일반 쓰레기로 분류되어 종량제 봉투에 버리세요",
       },
       {
         id: "4",
         name: "오렌지껍질",
-        imageURL: "orangePeel",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2ForangePeel.svg?alt=media&token=504768ae-6ee2-471e-8d0d-5df4091b753f",
         description: "음식물 쓰레기에 버리세요",
       },
     ],
