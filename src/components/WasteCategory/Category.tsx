@@ -7,7 +7,7 @@ import {
   SlCarousel,
   SlCarouselItem,
 } from "@shoelace-style/shoelace/dist/react";
-import CategorySearchBar from "../CategorySearchBar";
+import { SearchBar } from "@/lib/common/CategorySearchBar";
 
 type Category = {
   id: string;
@@ -41,8 +41,10 @@ const Category = () => {
   const chunkedCategories = chunkArray(categories, 9);
 
   return (
-    <section className="w-full h-[76vh] flex flex-col justify-center overflow-y-auto">
-      <CategorySearchBar />
+    <section className="w-full h-[70vh] flex flex-col justify-center overflow-y-auto">
+      <div className="mx-auto">
+        <SearchBar />
+      </div>
       <h2 className="ml-[5vh] text-xl font-bold text-purple">재활용품 분류</h2>
       <SlCarousel
         pagination
