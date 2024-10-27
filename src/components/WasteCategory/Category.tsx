@@ -7,6 +7,7 @@ import {
   SlCarousel,
   SlCarouselItem,
 } from "@shoelace-style/shoelace/dist/react";
+import CategorySearchBar from "../CategorySearchBar";
 
 type Category = {
   id: string;
@@ -41,6 +42,7 @@ const Category = () => {
 
   return (
     <section className="w-full h-[76vh] flex flex-col justify-center overflow-y-auto">
+      <CategorySearchBar />
       <h2 className="ml-[5vh] text-xl font-bold text-purple">재활용품 분류</h2>
       <SlCarousel
         pagination
