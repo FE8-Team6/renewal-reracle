@@ -41,11 +41,13 @@ const Category = () => {
   const chunkedCategories = chunkArray(categories, 9);
 
   return (
-    <section className="w-full h-[70vh] flex flex-col justify-center overflow-y-auto">
-      <div className="mx-auto">
+    <section className="w-full h-[73vh] flex flex-col justify-center overflow-y-auto">
+      <div className="mx-auto mt-1">
         <SearchBar />
       </div>
-      <h2 className="ml-[5vh] text-xl font-bold text-purple">재활용품 분류</h2>
+      <h2 className="ml-[5vh] mt-[2vh] text-xl font-bold text-purple">
+        재활용품 분류
+      </h2>
       <SlCarousel
         pagination
         mouse-dragging
