@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
-import { useSearchStore } from "@/lib/store/useSearchStore";
 import LoginToSignUpTitle from "../LoginToSignUpTitle";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -9,12 +8,21 @@ import {
   MdAlternateEmail,
   MdOutlineDriveFileRenameOutline,
 } from "react-icons/md";
+import { getRecentSearchHistory } from "@/api/searchAPI/recentSearch";
 
+type RecentSearchHistory = {
+  categoryId: string;
+  itemId: string;
+  query: string;
+  userId: string;
+}[];
 const MyPage = () => {
   const [user, setUser] = useState<{ displayName: string; email: string }>({
     displayName: "",
     email: "",
   });
+  const [recentSearchHistory, setRecentSearchHistory] =
+    useState<RecentSearchHistory>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,8 +30,14 @@ const MyPage = () => {
     const storedUser = userData ? JSON.parse(userData) : null;
     if (storedUser) {
       setUser(storedUser);
+      fetchRecentSearchHistory(storedUser.uid);
     }
   }, []);
+
+  const fetchRecentSearchHistory = async (uid: string) => {
+    const history = await getRecentSearchHistory(uid);
+    setRecentSearchHistory(history);
+  };
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUser((user) => ({ ...user, displayName: event.target!.value }));
@@ -41,10 +55,8 @@ const MyPage = () => {
     alert("회원정보가 수정되었습니다");
   };
 
-  const searchHistory = useSearchStore((state) => state.searchHistory);
-
   const handleNavClick = (categoryId: string, itemId: string) => {
-    navigate(`/${categoryId}/${itemId}`);
+    navigate(`/category/${categoryId}/item/${itemId}`);
   };
 
   return (
@@ -106,15 +118,15 @@ const MyPage = () => {
             나의 최근 재활용품 검색 리스트
           </span>
           <ul className="w-[46vh] h-[4vh] flex flex-wrap py-[2vh] gap-[1.5vh]">
-            {searchHistory.map((historyItem, index) => (
+            {recentSearchHistory.map((historyItem) => (
               <li
                 onClick={() =>
                   handleNavClick(historyItem.categoryId, historyItem.itemId)
                 }
-                key={index}
+                key={`${historyItem.categoryId}-${historyItem.itemId}`}
                 className="p-[1vh] bg-yellow text-purple cursor-pointer text-center text-[2vh] font-bold rounded-[14px] transition duration-200"
               >
-                {`#${historyItem.queryData}`}
+                {`#${historyItem.query}`}
               </li>
             ))}
           </ul>

@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/firebase";
+import { postSearchHistory } from "@/api/searchAPI/recentSearch";
 
 interface SearchBarProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;
@@ -78,8 +79,18 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
       handleSearch();
     }, [value]);
 
-    const handleResultClick = (categoryId: string, itemId: string) => {
+    const handleResultClick = async (
+      query: string,
+      categoryId: string,
+      itemId: string
+    ) => {
       navigate(`/category/${categoryId}/item/${itemId}`);
+
+      const userId = localStorage.getItem("userData");
+      if (userId) {
+        const { uid } = JSON.parse(userId);
+        await postSearchHistory(uid, query, categoryId, itemId);
+      }
     };
 
     return (
@@ -121,7 +132,9 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
               <div
                 key={result.id}
                 className="p-2 cursor-pointer hover:bg-gray-200"
-                onClick={() => handleResultClick(result.categoryId, result.id)}
+                onClick={() =>
+                  handleResultClick(value, result.categoryId, result.id)
+                }
               >
                 {result.name}
               </div>
