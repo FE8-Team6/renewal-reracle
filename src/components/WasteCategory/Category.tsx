@@ -7,7 +7,7 @@ import {
   SlCarousel,
   SlCarouselItem,
 } from "@shoelace-style/shoelace/dist/react";
-import { SearchBar } from "@/lib/common/CategorySearchBar";
+import { SearchBar } from "@/lib/common/SearchBar";
 
 type Category = {
   id: string;
