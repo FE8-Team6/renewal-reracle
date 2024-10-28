@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
 import { AlertCircle, Search, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
