@@ -7,6 +7,8 @@ import {
   orderBy,
   limit,
   getDocs,
+  doc,
+  deleteDoc,
 } from "firebase/firestore";
 import { db } from "@/firebase";
 
@@ -45,11 +47,26 @@ const getRecentSearchHistory = async (userId: string) => {
       limit(8)
     );
     const querySnapshot = await getDocs(searchHistoryQuery);
-    return querySnapshot.docs.map((doc) => doc.data());
+    return querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
   } catch (error) {
     console.error("최근 검색 기록 가져오기 실패:", error);
     return [];
   }
 };
 
-export { getRecentSearchHistory, postSearchHistory };
+/**
+ * @description Firestore에서 검색 기록 삭제
+ */
+const deleteSearchHistory = async (docId: string) => {
+  try {
+    const searchHistoryDocRef = doc(db, "SearchHistory", docId);
+    await deleteDoc(searchHistoryDocRef);
+  } catch (error) {
+    console.error("검색 기록 삭제 실패:", error);
+  }
+};
+
+export { getRecentSearchHistory, postSearchHistory, deleteSearchHistory };

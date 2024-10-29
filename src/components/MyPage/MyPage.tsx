@@ -8,9 +8,15 @@ import {
   MdAlternateEmail,
   MdOutlineDriveFileRenameOutline,
 } from "react-icons/md";
-import { getRecentSearchHistory } from "@/api/searchAPI/recentSearch";
+
+import {
+  deleteSearchHistory,
+  getRecentSearchHistory,
+} from "@/api/searchAPI/recentSearch";
+import { X } from "lucide-react";
 
 type RecentSearchHistory = {
+  id: string;
   categoryId: string;
   itemId: string;
   query: string;
@@ -24,6 +30,7 @@ const MyPage = () => {
   const [recentSearchHistory, setRecentSearchHistory] =
     useState<RecentSearchHistory>([]);
   const navigate = useNavigate();
+  console.log(recentSearchHistory);
 
   useEffect(() => {
     const userData = localStorage.getItem("userData");
@@ -57,6 +64,15 @@ const MyPage = () => {
 
   const handleNavClick = (categoryId: string, itemId: string) => {
     navigate(`/category/${categoryId}/item/${itemId}`);
+  };
+
+  const handleDeleteClick = async (docId: string) => {
+    await deleteSearchHistory(docId);
+    const userData = localStorage.getItem("userData");
+    if (userData) {
+      const { uid } = JSON.parse(userData);
+      fetchRecentSearchHistory(uid);
+    }
   };
 
   return (
@@ -120,13 +136,20 @@ const MyPage = () => {
           <ul className="flex flex-wrap w-full h-auto gap-4 py-2 mx-auto">
             {recentSearchHistory.map((historyItem) => (
               <li
-                onClick={() =>
-                  handleNavClick(historyItem.categoryId, historyItem.itemId)
-                }
                 key={`${historyItem.categoryId}-${historyItem.itemId}`}
-                className="p-[1vh] bg-yellow text-purple cursor-pointer text-center text-lg font-bold rounded-4 hover:bg-yellowLight"
+                className="relative p-[1vh] bg-yellow text-purple cursor-pointer text-center text-lg font-bold rounded-4 hover:text-purpleDark"
               >
-                {`#${historyItem.query}`}
+                <span
+                  onClick={() =>
+                    handleNavClick(historyItem.categoryId, historyItem.itemId)
+                  }
+                >
+                  {`#${historyItem.query}`}
+                </span>
+                <X
+                  className="absolute top-0 right-0 w-4 h-4 cursor-pointer"
+                  onClick={() => handleDeleteClick(historyItem.id)}
+                />
               </li>
             ))}
           </ul>
