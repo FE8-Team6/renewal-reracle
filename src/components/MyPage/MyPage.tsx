@@ -24,7 +24,6 @@ const MyPage = () => {
   const [recentSearchHistory, setRecentSearchHistory] =
     useState<RecentSearchHistory>([]);
   const navigate = useNavigate();
-  console.log(recentSearchHistory);
 
   useEffect(() => {
     const userData = localStorage.getItem("userData");
