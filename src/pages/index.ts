@@ -4,5 +4,5 @@ export * from "./Login";
 export * from "./PasswordReset";
 export * from "./NotFound";
 export * from "./Qna";
-export * from "./Topic";
+export * from "./Announcement";
 export * from "./MyQuestion";

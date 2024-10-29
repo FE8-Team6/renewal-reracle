@@ -30,7 +30,7 @@ const Nav = () => {
         <NavBtn
           image="/breaking_news_FILL0_wght400_GRAD0_opsz24.svg"
           text="게시판"
-          onClick={() => handleNavClick("/topic")}
+          onClick={() => handleNavClick("/announcement")}
         />
       </div>
     </div>

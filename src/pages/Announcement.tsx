@@ -36,7 +36,7 @@ const TopicItem = ({
   );
 };
 
-export const Topic = () => {
+export const Announcement = () => {
   return (
     <Layout>
       <div className="w-full h-[3.75vh] bg-[#fcd118] text-[#9747ff] text-center align-center leading-[3.75vh] text-[2vh]">
