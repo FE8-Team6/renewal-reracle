@@ -51,7 +51,7 @@ const Category = () => {
       <SlCarousel
         pagination
         mouse-dragging
-        className="w-full h-[28rem] mx-auto"
+        className="w-full h-[30rem] mx-auto"
       >
         {chunkedCategories.map((chunk, index) => (
           <SlCarouselItem key={index}>
