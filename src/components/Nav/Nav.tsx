@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import NavBtn from "@/components/Nav/NavBtn";
 import { AiOutlineNotification } from "react-icons/ai";
+import { IoHomeOutline } from "react-icons/io5";
+import { LuClipboardEdit } from "react-icons/lu";
+import { HiOutlineQuestionMarkCircle } from "react-icons/hi2";
 
 const Nav = () => {
   const navigation = useNavigate();
@@ -16,22 +18,39 @@ const Nav = () => {
         찾고자 하는 재활용품이 없을 때 R지식in에 질문 남겨주세요.
       </div>
       <div className="w-full h-[10.2vh] absolute bottom-0 bg-green rounded-b-lg flex justify-evenly items-center">
-        <NavBtn
-          image="/home_FILL0_wght400_GRAD0_opsz24.svg"
-          text="홈"
-          onClick={() => handleNavClick("/")}
-        />
-        <NavBtn
-          image="/question_exchange_FILL0_wght400_GRAD0_opsz24.svg"
-          text="R지식in"
-          onClick={() => handleNavClick("/qna")}
-        />
-
-        <NavBtn
-          image="/breaking_news_FILL0_wght400_GRAD0_opsz24.svg"
-          text="게시판"
-          onClick={() => handleNavClick("/announcement")}
-        />
+        <div className="relative flex items-center w-auto h-auto">
+          <button
+            onClick={() => handleNavClick("/")}
+            className="border-none w-[8vh] bg-transparent flex flex-col items-center"
+          >
+            <IoHomeOutline className="w-5 h-5" />
+            <div className="mt-1 text-sm font-medium text-center text-grayDark">
+              홈
+            </div>
+          </button>
+        </div>
+        <div className="relative flex items-center w-auto h-auto">
+          <button
+            onClick={() => handleNavClick("/qna")}
+            className="border-none w-[8vh] bg-transparent flex flex-col items-center"
+          >
+            <HiOutlineQuestionMarkCircle className="w-5 h-5" />
+            <div className="mt-1 text-sm font-medium text-center text-grayDark">
+              R지식in
+            </div>
+          </button>
+        </div>
+        <div className="relative flex items-center w-auto h-auto">
+          <button
+            onClick={() => handleNavClick("/qna")}
+            className="border-none w-[8vh] bg-transparent flex flex-col items-center"
+          >
+            <LuClipboardEdit className="w-5 h-5" />
+            <div className="mt-1 text-sm font-medium text-center text-grayDark">
+              게시판
+            </div>
+          </button>
+        </div>
       </div>
     </div>
   );
