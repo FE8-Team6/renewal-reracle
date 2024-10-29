@@ -61,7 +61,7 @@ const MyPage = () => {
 
   return (
     <Layout>
-      <section className="w-full h-full bg-white relative flex flex-col items-center gap-[2vh] overflow-y-auto">
+      <section className="w-full h-[75vh] bg-white relative flex flex-col items-center gap-[2vh] overflow-y-auto">
         <LoginToSignUpTitle title="프로필" />
         <div className="mt-4">
           <div className="w-full h-[5rem] relative">
@@ -110,21 +110,21 @@ const MyPage = () => {
           size="sm"
           onClick={() => navigate("/myquestion")}
         >
-          <span> 나의 R지식in 보러가기</span>
+          <h2> 나의 R지식in 보러가기</h2>
         </Button>
-        <div className="w-full">
-          <div className="w-full h-[1px] mt-4 mb-1 bg-purple" />
+        <div className="w-full h-[1px] mt-2 mb-1 bg-purple" />
+        <div className="w-[23rem]">
           <span className="ml-2 text-lg font-bold text-purple">
             나의 최근 재활용품 검색 리스트
           </span>
-          <ul className="w-[46vh] h-[4vh] flex flex-wrap py-[2vh] gap-[1.5vh]">
+          <ul className="flex flex-wrap w-full h-auto gap-4 py-2 mx-auto">
             {recentSearchHistory.map((historyItem) => (
               <li
                 onClick={() =>
                   handleNavClick(historyItem.categoryId, historyItem.itemId)
                 }
                 key={`${historyItem.categoryId}-${historyItem.itemId}`}
-                className="p-[1vh] bg-yellow text-purple cursor-pointer text-center text-[2vh] font-bold rounded-[14px] transition duration-200"
+                className="p-[1vh] bg-yellow text-purple cursor-pointer text-center text-lg font-bold rounded-4 hover:bg-yellowLight"
               >
                 {`#${historyItem.query}`}
               </li>
