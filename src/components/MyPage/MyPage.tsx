@@ -9,12 +9,12 @@ import {
   MdOutlineDriveFileRenameOutline,
 } from "react-icons/md";
 
+import { X } from "lucide-react";
+import { RecentSearchHistory } from "@/lib/types/search";
 import {
   deleteSearchHistory,
   getRecentSearchHistory,
 } from "@/api/searchAPI/recentSearch";
-import { X } from "lucide-react";
-import { RecentSearchHistory } from "@/lib/types/search";
 
 const MyPage = () => {
   const [user, setUser] = useState<{ displayName: string; email: string }>({
