@@ -87,7 +87,7 @@ export const SignUp = () => {
         setErrorKey((prev) => prev + 1);
       }
     } catch (error) {
-      setError(error.message);
+      // setError(error.message);
       setErrorKey((prev) => prev + 1);
     }
   };

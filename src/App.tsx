@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 // import { setBasePath } from "@shoelace-style/shoelace/dist/utilities/base-path";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "@shoelace-style/shoelace/dist/themes/light.css";
-import Loading from "./pages/Loading";
+// import Loading from "./pages/Loading";
 import { routes } from "./router/routes";
 import { saveWasteCategories } from "./lib/utils/firestoreService";
 // setBasePath(
@@ -12,9 +12,6 @@ import { saveWasteCategories } from "./lib/utils/firestoreService";
 const router = createBrowserRouter(routes);
 
 const App = () => {
-  /**
-   * @description Firestore에 재활용 카테고리 데이터 저장하는 함수
-   */
   useEffect(() => {
     saveWasteCategories();
   }, []);
