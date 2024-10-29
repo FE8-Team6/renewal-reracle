@@ -5,3 +5,9 @@ export type RecentSearchHistory = {
   query: string;
   userId: string;
 }[];
+
+export type SearchResults = {
+  categoryId: string;
+  id: string;
+  name: string;
+}[];

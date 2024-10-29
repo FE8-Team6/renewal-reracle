@@ -5,16 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/firebase";
 import { postSearchHistory } from "@/api/searchAPI/recentSearch";
+import { SearchResults } from "../types/search";
 
 interface SearchBarProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;
 }
-
-type SearchResults = {
-  categoryId: string;
-  id: string;
-  name: string;
-}[];
 
 type Category = {
   id: string;

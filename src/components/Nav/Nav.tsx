@@ -13,7 +13,7 @@ const Nav = () => {
     <div className="w-full h-[14vh] fixed bottom-0">
       <div className="w-full h-[3.75vh] absolute border-t border-b border-purple bg-purpleLight text-[1.5vh] font-bold text-purple flex justify-center items-center gap-2">
         <AiOutlineNotification className="w-4 h-4" />
-        2024-05-03 09:00 ~ 10:00 (1시간) 점검 예정입니다.
+        찾고자 하는 재활용품이 없을 때 R지식in에 질문 남겨주세요.
       </div>
       <div className="w-full h-[10.2vh] absolute bottom-0 bg-green rounded-b-lg flex justify-evenly items-center">
         <NavBtn
