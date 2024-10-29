@@ -10,8 +10,6 @@ import {
 } from "firebase/firestore";
 import { db } from "@/firebase";
 
-import {} from "firebase/firestore";
-
 /**
  * @description Firestore에 검색 기록 저장
  */

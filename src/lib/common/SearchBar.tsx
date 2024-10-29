@@ -28,7 +28,7 @@ type Category = {
 
 const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
   ({ error, className, ...props }, ref) => {
-    const [value, setValue] = useState("");
+    const [value, setValue] = useState<string>("");
     const [searchResults, setSearchResults] = useState<SearchResults>([]);
     const navigate = useNavigate();
 
@@ -80,7 +80,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
     }, [value]);
 
     const handleResultClick = async (
-      query: string,
+      selectedQuery: string,
       categoryId: string,
       itemId: string
     ) => {
@@ -89,7 +89,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
       const userId = localStorage.getItem("userData");
       if (userId) {
         const { uid } = JSON.parse(userId);
-        await postSearchHistory(uid, query, categoryId, itemId);
+        await postSearchHistory(uid, selectedQuery, categoryId, itemId);
       }
     };
 
@@ -133,7 +133,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
                 key={result.id}
                 className="p-2 cursor-pointer hover:bg-gray-200"
                 onClick={() =>
-                  handleResultClick(value, result.categoryId, result.id)
+                  handleResultClick(result.name, result.categoryId, result.id)
                 }
               >
                 {result.name}
