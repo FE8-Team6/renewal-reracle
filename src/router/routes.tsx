@@ -11,7 +11,7 @@ import {
   PasswordReset,
   Qna,
   SignUp,
-  Topic,
+  Announcement,
 } from "@/pages";
 import Answer from "@/pages/Answer";
 import Comments from "@/pages/Comments";
@@ -75,8 +75,8 @@ export const routes = [
     element: <Qna />,
   },
   {
-    path: "topic",
-    element: <Topic />,
+    path: "announcement",
+    element: <Announcement />,
   },
   {
     path: "answer/:questionId",

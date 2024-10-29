@@ -5,16 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/firebase";
 import { postSearchHistory } from "@/api/searchAPI/recentSearch";
+import { SearchResults } from "../types/search";
 
 interface SearchBarProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;
 }
-
-type SearchResults = {
-  categoryId: string;
-  id: string;
-  name: string;
-}[];
 
 type Category = {
   id: string;
@@ -111,7 +106,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
             }`}
             placeholder={
               props.placeholder ||
-              "ex. 명함, 수첩 등 분리 수거 품목을 입력해주세요"
+              "ex. 명함, 수첩 등 재활용품을 입력해 주세요. "
             }
           />
           {value && (

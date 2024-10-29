@@ -14,14 +14,8 @@ import {
   getRecentSearchHistory,
 } from "@/api/searchAPI/recentSearch";
 import { X } from "lucide-react";
+import { RecentSearchHistory } from "@/lib/types/search";
 
-type RecentSearchHistory = {
-  id: string;
-  categoryId: string;
-  itemId: string;
-  query: string;
-  userId: string;
-}[];
 const MyPage = () => {
   const [user, setUser] = useState<{ displayName: string; email: string }>({
     displayName: "",
@@ -30,7 +24,6 @@ const MyPage = () => {
   const [recentSearchHistory, setRecentSearchHistory] =
     useState<RecentSearchHistory>([]);
   const navigate = useNavigate();
-  console.log(recentSearchHistory);
 
   useEffect(() => {
     const userData = localStorage.getItem("userData");
@@ -136,7 +129,7 @@ const MyPage = () => {
           <ul className="flex flex-wrap w-full h-auto gap-4 py-2 mx-auto">
             {recentSearchHistory.map((historyItem) => (
               <li
-                key={`${historyItem.categoryId}-${historyItem.itemId}`}
+                key={historyItem.id}
                 className="relative p-[1vh] bg-yellow text-purple cursor-pointer text-center text-lg font-bold rounded-4 hover:text-purpleDark"
               >
                 <span

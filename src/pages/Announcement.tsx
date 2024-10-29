@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 
 const TopicItem = ({
@@ -18,7 +18,7 @@ const TopicItem = ({
 
   return (
     <div
-      className={`my-[1.5vh] mx-auto w-[50vh] ${
+      className={`my-[1.5vh] mx-auto w-[23rem] ${
         isExpanded
           ? "h-auto bg-[#9747ff] text-white"
           : "h-[5.75vh] bg-[#fef3c1] text-black "
@@ -36,10 +36,10 @@ const TopicItem = ({
   );
 };
 
-export const Topic = () => {
+export const Announcement = () => {
   return (
     <Layout>
-      <div className="w-[56.3vh] h-[3.75vh] bg-[#fcd118] text-[#9747ff] text-center align-center leading-[3.75vh] text-[2vh]">
+      <div className="w-full h-[3.75vh] bg-[#fcd118] text-[#9747ff] text-center align-center leading-[3.75vh] text-[2vh]">
         공지사항
       </div>
       <TopicItem

@@ -213,32 +213,42 @@ const wasteCategories = [
       {
         id: "1",
         name: "세탁기",
-        imageURL: "washingmachine",
-        description: "세탁기 버리는 방법",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fwashingmachine.svg?alt=media&token=4bf9376a-303b-40ea-907f-0c44b0884c1f",
+        description:
+          "세탁기는 폐가전 무상방문수거 서비스를 통해 배출합니다. 세탁기, 냉장고, TV, 에어컨 등 대형 가전제품은 1개 품목이라도 무료수거를 신청할 수 있고, 청소기, 전기밥솥, 모니터 등의 소형 가전제품은 배출 품목이 5개 이상일 때 무료 수거 신청을 할 수 있습니다. 또한, 대형 생활 폐기물로 폐기물 스티커를 발급받아 버릴 수도 있습니다. 지자체별로 수거 품목이 다를 수 있으므로 주민센터, 구청 등을 통해 품목을 먼저 확인해야합니다.",
       },
       {
         id: "2",
         name: "텔레비전",
-        imageURL: "tv",
-        description: "TV 버리는 방법",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Ftv.svg?alt=media&token=5a3977cf-8d2e-4376-9a64-035e120b942d",
+        description:
+          "세탁기는 폐가전 무상방문수거 서비스를 통해 배출합니다. 세탁기, 냉장고, TV, 에어컨 등 대형 가전제품은 1개 품목이라도 무료수거를 신청할 수 있고, 청소기, 전기밥솥, 모니터 등의 소형 가전제품은 배출 품목이 5개 이상일 때 무료 수거 신청을 할 수 있습니다. 또한, 대형 생활 폐기물로 폐기물 스티커를 발급받아 버릴 수도 있습니다. 지자체별로 수거 품목이 다를 수 있으므로 주민센터, 구청 등을 통해 품목을 먼저 확인해야합니다.",
       },
       {
         id: "3",
         name: "냉장고",
-        imageURL: "refrigerator",
-        description: "냉장고 버리는 방법",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Frefrigerator.svg?alt=media&token=5bc6012b-340a-4cf9-a575-f3aeaa7d59c9",
+        description:
+          "더 이상 사용할 수 없는 냉장고는 폐가전 무상방문수거 서비스를 통해 배출합니다. 냉장고, 세탁기, 에어컨, TV 등 대형 가전제품은 1개 품목이라도 신청할 수 있고, 청소기, 전기밥솥, 모니터 등 소형 가전제품은 배출 품목이 5개 이상일 때 무료 수거 신청을 할 수 있습니다. 대형 생활 폐기물처럼 유료로 폐기물 스티커를 발급받아 버릴 수도 있습니다. 지자체별로 수거 품목이 다를 수 있으므로 주민센터, 구청 등을 통해 품목을 먼저 확인해야합니다.",
       },
       {
         id: "4",
         name: "가습기",
-        imageURL: "humidifier",
-        description: "가습기 버리는 방법",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fhumidifier.svg?alt=media&token=66044415-be9c-4c27-a626-e01c346fdf1f",
+        description:
+          "주민센터, 구청, 아파트 관리사무소 등에 설치된 소형 가전 전용 수거함에 배출하세요. 수거함을 찾기 어려운 경우, 비닐봉지에 담아 재활용품 수거일에 배출하시면 됩니다.",
       },
       {
         id: "5",
         name: "오디오세트",
-        imageURL: "audioSet",
-        description: "오디오세트 버리는 방법",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FaudioSet.svg?alt=media&token=3e24fc26-eeb3-4780-9a17-830f1c6f8ac6",
+        description:
+          "오디오세트는 '폐가전 무상 방문 수거 서비스'를 통해 무료로 수거할 수 있는 품목 중 하나입니다.",
       },
       {
         id: "6",
@@ -794,23 +804,26 @@ const wasteCategories = [
       {
         id: "1",
         name: "폐건전지",
-        imageURL: "battery",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fbattery.svg?alt=media&token=2e8b3a9d-0715-4ae4-b9bb-132da5266d69",
         description:
-          "폐건전는 망간, 수은, 카드뮴 등 중그목 유해물질을 함유하고 있다. 환경오염 및 인체에 나쁜 영향을 일으킬 수 있으므로 전용수거함에 안전하게 배출 해야 합니다.",
+          "폐건전는 망간, 수은, 카드뮴 등 중그목 유해물질을 함유하고 있습니다. 환경오염 및 인체에 나쁜 영향을 일으킬 수 있으므로 전용수거함에 안전하게 배출 해야 합니다.",
       },
       {
         id: "2",
         name: "폐형광등",
-        imageURL: "fluorescentLamp",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FfluorescentLamp.svg?alt=media&token=286dbf55-8140-4cbc-acae-ff731dd86c03",
         description:
-          "형광등 안에는 유해물질인 수은이 함유되어 있다. 인체에 위험한 수은이 노출되지 않도록 깨어지지 않게 주의하여 전용 수거함에 안전하게 배출 해야 합니다.",
+          "형광등 안에는 유해물질인 수은이 함유되어 있습니다. 인체에 위험한 수은이 노출되지 않도록 깨어지지 않게 주의하여 전용 수거함에 안전하게 배출 해야 합니다.",
       },
       {
         id: "3",
         name: "폐의약품",
-        imageURL: "medicine",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fmedicine.svg?alt=media&token=f08a722c-a23e-4785-b41f-db4e7216c0f8",
         description:
-          "가정 내 폐의약품이 매립되거나 도시하수로 배출될 경우 공기, 토양, 수질 등의 환경오염을 유발하고 생태계 고랸의 원인이 된다. 폐의약품은 모아서 약국에 비치된 전용수거함으로 배출 해야 합니다.",
+          "가정 내 폐의약품이 매립되거나 도시하수로 배출될 경우 공기, 토양, 수질 등의 환경오염을 유발하고 생태계 고랸의 원인이 됩니다. 폐의약품은 모아서 약국에 비치된 전용수거함으로 배출 해야 합니다.",
       },
     ],
   },

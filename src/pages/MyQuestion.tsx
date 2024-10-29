@@ -1,10 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { styled } from 'styled-components';
-import { collection, getDocs, query, where, deleteDoc, doc } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
-import { Link } from 'react-router-dom';
-import { db } from '../firebase';
-import { Layout } from '@/components/layout/Layout';
+import { useState, useEffect } from "react";
+import { styled } from "styled-components";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { Link } from "react-router-dom";
+import { db } from "../firebase";
+import { Layout } from "@/components/layout/Layout";
 
 const HeaderQna = styled.div`
   width: 56.3vh;
@@ -69,9 +76,17 @@ export const MyQuestion = () => {
   useEffect(() => {
     if (currentUser) {
       const fetchQuestions = async () => {
-        const q = query(collection(db, 'questions'), where('authorUid', '==', currentUser.uid));
+        const q = query(
+          collection(db, "questions"),
+          where("authorUid", "==", currentUser.uid)
+        );
         const querySnapshot = await getDocs(q);
-        const questionList: { id: string; question: string; author: string; authorUid: string }[] = [];
+        const questionList: {
+          id: string;
+          question: string;
+          author: string;
+          authorUid: string;
+        }[] = [];
         querySnapshot.forEach((doc) => {
           const questionData = doc.data();
           questionList.push({
@@ -89,10 +104,10 @@ export const MyQuestion = () => {
 
   const handleDeleteQuestion = async (id: string) => {
     try {
-      await deleteDoc(doc(db, 'questions', id));
+      await deleteDoc(doc(db, "questions", id));
       setQuestions(questions.filter((question) => question.id !== id));
     } catch (error) {
-      console.error('Error deleting document: ', error);
+      console.error("Error deleting document: ", error);
     }
   };
 
@@ -104,10 +119,15 @@ export const MyQuestion = () => {
       <QuestionListContainer>
         {questions.map((questionData, index) => (
           <QuestionContainer key={index}>
-            <StyledLink to={`/answer/${questionData.id}`} state={{ question: questionData.question }}>
+            <StyledLink
+              to={`/answer/${questionData.id}`}
+              state={{ question: questionData.question }}
+            >
               {questionData.question}
             </StyledLink>
-            <DeleteButton onClick={() => handleDeleteQuestion(questionData.id)}>삭제</DeleteButton>
+            <DeleteButton onClick={() => handleDeleteQuestion(questionData.id)}>
+              삭제
+            </DeleteButton>
           </QuestionContainer>
         ))}
       </QuestionListContainer>
