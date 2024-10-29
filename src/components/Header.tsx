@@ -17,14 +17,14 @@ const Header = () => {
   return (
     <div className="w-full h-[3rem] bg-purpleLight rounded-t-lg flex items-center">
       <img
-        src="/public/icon/REracle_logo.svg"
+        src="/icon/REracle_logo.svg"
         alt="reracle 아이콘"
         onClick={() => handleNavClick("/")}
         className="w-[5rem] absolute ml-4 cursor-pointer"
       />
       <RxPerson
         onClick={handleUserIconClick}
-        className="w-5 h-5 absolute right-0 mr-4 cursor-pointer"
+        className="absolute right-0 w-5 h-5 mr-4 cursor-pointer"
       />
     </div>
   );
