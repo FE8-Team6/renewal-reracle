@@ -7,6 +7,7 @@ import {
   SlCarousel,
   SlCarouselItem,
 } from "@shoelace-style/shoelace/dist/react";
+import { SearchBar } from "@/lib/common/SearchBar";
 
 type Category = {
   id: string;
@@ -40,12 +41,17 @@ const Category = () => {
   const chunkedCategories = chunkArray(categories, 9);
 
   return (
-    <section className="w-full h-[76vh] flex flex-col justify-center overflow-y-auto">
-      <h2 className="ml-[5vh] text-xl font-bold text-purple">재활용품 분류</h2>
+    <section className="w-full h-[73vh] flex flex-col justify-center overflow-y-auto">
+      <div className="mx-auto mt-1">
+        <SearchBar />
+      </div>
+      <h2 className="ml-[5vh] mt-[2vh] text-xl font-bold text-purple">
+        재활용품 분류
+      </h2>
       <SlCarousel
         pagination
         mouse-dragging
-        className="w-full h-[28rem] mx-auto"
+        className="w-full h-[30rem] mx-auto"
       >
         {chunkedCategories.map((chunk, index) => (
           <SlCarouselItem key={index}>

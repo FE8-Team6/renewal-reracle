@@ -16,6 +16,39 @@
   --color-white: #ffffff;
   --color-pink: #ede0ff;
   --color-pink-light: #f9f4ff;
+
+  --color-error-5: #fdf2f3;
+  --color-error-10: #fbd6d8;
+  --color-error-20: #f5a3a8;
+  --color-error-30: #f1747c;
+  --color-error-40: #ec4651;
+  --color-error-50: #e71825;
+  --color-error-60: #b9131e;
+  --color-error-70: #8b0e16;
+  --color-error-80: #5c0a0f;
+  --color-error-90: #2e0507;
+
+  --color-warn-5: #fff8e9;
+  --color-warn-10: #ffeac1;
+  --color-warn-20: #ffe2a7;
+  --color-warn-30: #ffd47c;
+  --color-warn-40: #ffc550;
+  --color-warn-50: #ffb724;
+  --color-warn-60: #98690a;
+  --color-warn-70: #66490e;
+  --color-warn-80: #4d370b;
+  --color-warn-90: #332507;
+
+  --color-success-5: #effaf0;
+  --color-success-10: #c8efc9;
+  --color-success-20: #a0e3a3;
+  --color-success-30: #79d87d;
+  --color-success-40: #51cc56;
+  --color-success-50: #35b53a;
+  --color-success-60: #2a8e2e;
+  --color-success-70: #1e6721;
+  --color-success-80: #123f14;
+  --color-success-90: #071808;
 }
 
 body {
