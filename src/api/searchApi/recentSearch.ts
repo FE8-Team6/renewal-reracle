@@ -11,6 +11,7 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { db } from "@/firebase";
+import { RecentSearchHistory } from "@/lib/types/search";
 
 /**
  * @description Firestore에 검색 기록 저장
@@ -50,7 +51,7 @@ const getRecentSearchHistory = async (userId: string) => {
     return querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
-    }));
+    })) as RecentSearchHistory;
   } catch (error) {
     console.error("최근 검색 기록 가져오기 실패:", error);
     return [];
