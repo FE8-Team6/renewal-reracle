@@ -253,61 +253,71 @@ const wasteCategories = [
       {
         id: "6",
         name: "정수기",
-        imageURL: "waterPurifier",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FwaterPurifier.svg?alt=media&token=b6d276f7-aa7b-4e6f-87e5-e1f4824ad739",
         description: "정수기 버리는 방법",
       },
       {
         id: "7",
         name: "스캐너",
-        imageURL: "scanner",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fscanner.svg?alt=media&token=79845c70-15ea-436b-8d79-87cd7778ca7a",
         description: "스캐너 버리는 방법",
       },
       {
         id: "8",
         name: "스피커",
-        imageURL: "speaker",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fspeaker.svg?alt=media&token=3ba57d54-f92e-4a0c-8084-28e6e9228310",
         description: "스피커 버리는 방법",
       },
       {
         id: "9",
         name: "식기세척기",
-        imageURL: "dishwasher",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fdishwasher.svg?alt=media&token=af863df6-fb52-4ab7-bd3f-d71168540aa1",
         description: "식기세척기 버리는 방법",
       },
       {
         id: "10",
         name: "선풍기",
-        imageURL: "fan",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Ffan.svg?alt=media&token=50cac052-8d5d-42d5-bcb4-2769de063c4e",
         description: "선풍기 버리는 방법",
       },
       {
         id: "11",
         name: "비디오카메라",
-        imageURL: "videocamera",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fvideocamera.svg?alt=media&token=569cab8c-f2f7-46fd-aefa-cb2b1493fa4d",
         description: "비디오카메라 버리는 방법",
       },
       {
         id: "12",
         name: "비데",
-        imageURL: "bidet",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fbidet.svg?alt=media&token=504bd7f1-55f9-4256-8e5f-c3d97846b77b",
         description: "비데 버리는 방법",
       },
       {
         id: "13",
         name: "스탠드",
-        imageURL: "stand",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fstand.svg?alt=media&token=9b951869-a721-4616-9967-bc761cfc47a4",
         description: "스탠드 버리는 방법",
       },
       {
         id: "14",
         name: "온풍기",
-        imageURL: "heater",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fheater.svg?alt=media&token=a32b1382-81e0-489c-b099-099e4d568ac1",
         description: "온풍기 버리는 방법",
       },
       {
         id: "15",
         name: "와인셀러",
-        imageURL: "wineCeller",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FwineCeller.svg?alt=media&token=6d188021-131a-4820-907c-2d98e040ee21",
         description: "와인셀러 버리는 방법",
       },
       {
@@ -320,79 +330,91 @@ const wasteCategories = [
       {
         id: "17",
         name: "전기밥솥",
-        imageURL: "riceCooker",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FriceCooker.svg?alt=media&token=eebf9db3-51bf-4058-9f41-f21dbdb5c82f",
         description: "전기밥솥 버리는 방법",
       },
       {
         id: "18",
         name: "전기포트",
-        imageURL: "electricPot",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FelectricPot.svg?alt=media&token=3dcae96a-d307-4e79-bf84-1556684ab3e1",
         description: "전기포트 버리는 방법",
       },
       {
         id: "19",
         name: "전자레인지",
-        imageURL: "microwave",
+        imageURL: "microwave 이미지 없음",
         description: "전자레인지 버리는 방법",
       },
       {
         id: "20",
         name: "전자사전",
-        imageURL: "electronicDictionary",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FelectronicDictionary.svg?alt=media&token=1aa64f1c-4311-4bcc-bb43-9542949e4317",
         description: "전자사전 버리는 방법",
       },
       {
         id: "21",
         name: "전화기",
-        imageURL: "telephone",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Ftelephone.svg?alt=media&token=b67c74fa-817f-4fa6-abb5-b34e46c9bbe9",
         description: "전화기 버리는 방법",
       },
       {
         id: "22",
         name: "청소기",
-        imageURL: "cleaner",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fcleaner.svg?alt=media&token=b35a1782-5fd9-4262-a0cc-2de5239294b2",
         description: "청소기 버리는 방법",
       },
       {
         id: "23",
         name: "키보드",
-        imageURL: "keyboard",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fkeyboard.svg?alt=media&token=4e17520f-47b0-4404-afc0-a0d2074ef955",
         description: "키보드 버리는 방법",
       },
       {
         id: "24",
         name: "커피메이커",
-        imageURL: "coffeeMaker",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FcoffeeMaker.svg?alt=media&token=a6559abb-3da4-4897-ad40-2e410f8e6144",
         description: "커피메이커 버리는 방법",
       },
       {
         id: "25",
         name: "컴퓨터",
-        imageURL: "computer",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fcomputer.svg?alt=media&token=c4ae9ad8-93a7-4b21-ac05-cf1cd66bceab",
         description: "컴퓨터 버리는 방법",
       },
       {
         id: "26",
         name: "토스터기",
-        imageURL: "toasters",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Ftoasters.svg?alt=media&token=8b890b10-5fd3-49d6-a3a3-9e2066c74678",
         description: "토스터기 버리는 방법",
       },
       {
         id: "27",
         name: "프린터",
-        imageURL: "printer",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fprinter.svg?alt=media&token=e19dff61-2f3d-4533-bf26-9f1a1c5a63ce",
         description: "프린터 버리는 방법",
       },
       {
         id: "28",
         name: "헤드폰",
-        imageURL: "headphone",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fheadphone.svg?alt=media&token=dba5ffea-7d7c-4ddb-ab4d-8f3718ce96e5",
         description: "헤드폰 버리는 방법",
       },
       {
         id: "29",
         name: "휴대용플레이어",
-        imageURL: "portablePlayer",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FportablePlayer.svg?alt=media&token=2a3e55ed-7d3d-46e9-97e9-e31251e26d5f",
         description: "휴대용플레이어 버리는 방법",
       },
     ],
