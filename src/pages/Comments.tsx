@@ -125,7 +125,7 @@ const Comments = () => {
 
   return (
     <>
-      <BackHeader />
+      <BackHeader comment={submittedAnswers} />
       <div className="space-y-2 overflow-y-auto h-[55vh] mt-4">
         {submittedAnswers
           .slice()

@@ -68,6 +68,8 @@ const Answer = () => {
   const [question, setQuestion] = useState<string>(initialQuestion);
   const [content, setContent] = useState<string>(initialContent);
 
+  console.log(submittedAnswers);
+
   const navigate = useNavigate();
   useEffect(() => {
     const fetchAnswers = async () => {
@@ -156,11 +158,8 @@ const Answer = () => {
     <>
       <BackHeader />
       <div className="p-4">
-        <p className="font-semibold">{author}</p>
         <div className="flex items-center justify-between">
-          {createdAt && (
-            <p className="text-sm">{formatDateToKoreanTime(createdAt)}</p>
-          )}
+          <p className="font-semibold">{author}</p>
           {currentUser.uid === authorUid && (
             <Popover>
               <PopoverTrigger asChild>
@@ -189,6 +188,9 @@ const Answer = () => {
             </Popover>
           )}
         </div>
+        {createdAt && (
+          <p className="text-sm">{formatDateToKoreanTime(createdAt)}</p>
+        )}
         <div className="mt-2">
           <p className="text-lg text-center">{question}</p>
           <p className="mt-2 text-base text-center">{content}</p>
