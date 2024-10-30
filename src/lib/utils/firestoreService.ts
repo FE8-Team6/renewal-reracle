@@ -858,87 +858,100 @@ const wasteCategories = [
       {
         id: "1",
         name: "거울",
-        imageURL: "mirror",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fmirror.svg?alt=media&token=5bc3cf9b-cd53-4f33-b44d-21955b95aea3",
         description:
           "불연성폐기물로 배출 크기가 많이 큰 경우에 대형 폐기물로 배출",
       },
       {
         id: "2",
         name: "그릇",
-        imageURL: "bowl",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fbowl.svg?alt=media&token=64ab0051-4666-414e-89e4-2ccd0ef38559",
         description: "불연성폐기물로 배출",
       },
       {
         id: "3",
         name: "깨진유리",
-        imageURL: "brokenGlass",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FbrokenGlass.svg?alt=media&token=9b12e66a-801f-465c-b76d-b7e137b30a7d",
         description: "",
       },
       {
         id: "4",
         name: "내열 식기류",
-        imageURL: "heatResistantTableware",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FheatResistantTableware.svg?alt=media&token=27cc7c46-21d4-439b-a90c-910656d8f2ad",
         description: "불연성폐기물로 배출",
       },
       {
         id: "5",
         name: "도자기",
-        imageURL: "ceramic",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fceramic.svg?alt=media&token=f29aefd3-8e47-443e-a8c2-957af152211c",
         description: "불연성폐기물로 배출",
       },
       {
         id: "6",
         name: "뚝배기",
-        imageURL: "earthenPot",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FearthenPot.svg?alt=media&token=ecc11ccc-af65-4223-a53a-e2bb96b7938e",
         description: "불연성폐기물로 배출",
       },
       {
         id: "7",
         name: "머그컵",
-        imageURL: "mugCup",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FmugCup.svg?alt=media&token=4206881a-f01e-4c1c-ac39-44a5dc04dcd6",
         description: "불연성폐기물로 배출",
       },
       {
         id: "8",
         name: "백열전구",
-        imageURL: "incandescentLightBulb",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FincandescentLightBulb.svg?alt=media&token=bd774686-cd64-44de-a661-f639a9c5c1a6",
         description: "불연성폐기물로 배출",
       },
       {
         id: "9",
         name: "벽돌",
-        imageURL: "brick",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fbrick.svg?alt=media&token=ab1fb7a3-4625-44ab-89c9-9d8717533ade",
         description: "불연성폐기물로 배출",
       },
       {
         id: "10",
         name: "유리판,유리제품",
-        imageURL: "glassPlate",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FglassPlate.svg?alt=media&token=a24779d4-74e9-48ec-9520-d7841946eb5f",
         description:
           "불연성폐기물로 배출 크기가 많이 큰 경우에 대형 폐기물로 배출",
       },
       {
         id: "11",
         name: "재떨이(도자기,유리)",
-        imageURL: "ashtray",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fashtray.svg?alt=media&token=5db806db-7b6e-45d9-b989-40d0b55e090c",
         description: "불연성폐기물로 배출",
       },
       {
         id: "12",
         name: "찻잔(도자기류)",
-        imageURL: "teacup",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fteacup.svg?alt=media&token=32c0cc51-97de-4020-9d3d-56308a6ee382",
         description: "불연성폐기물로 배출",
       },
       {
         id: "13",
         name: "컵(도자기,유리컵)",
-        imageURL: "cup",
+        imageURL: "cup 이미지 없음",
         description: "불연성폐기물로 배출",
       },
       {
         id: "14",
         name: "화분",
-        imageURL: "pot",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fpot.svg?alt=media&token=cb98a531-c5f4-443b-87c1-64a46d0c3b5d",
         description: "불연성폐기물로 배출하되 재질에 맞게 배출",
       },
     ],
