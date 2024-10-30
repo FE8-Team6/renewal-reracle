@@ -42,7 +42,7 @@ const Nav = () => {
         </div>
         <div className="relative flex items-center w-auto h-auto">
           <button
-            onClick={() => handleNavClick("/qna")}
+            onClick={() => handleNavClick("/announcement")}
             className="border-none w-[8vh] bg-transparent flex flex-col items-center"
           >
             <LuClipboardEdit className="w-5 h-5" />

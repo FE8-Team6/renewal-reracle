@@ -222,48 +222,7 @@ export const Qna = () => {
       <div className="w-full h-[2rem] bg-purple text-center flex items-center justify-center text-white text-[2vh]">
         R지식in
       </div>
-      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogTrigger asChild>
-          <button
-            className="p-1 mx-auto text-black border "
-            onClick={handleOpenModal}
-          >
-            질문
-          </button>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>질문</DialogTitle>
-            <DialogDescription>질문을 추가하세요.</DialogDescription>
-          </DialogHeader>
-          <input
-            type="text"
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
-            placeholder="제목"
-            className="w-full p-2 mb-2 border"
-          />
-          <textarea
-            value={content}
-            onChange={(event) => setContent(event.target.value)}
-            placeholder="내용"
-            className="w-full h-[30vh] p-2 mb-2 border"
-          />
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="default" size="lg" onClick={handleAddQuestion}>
-                추가
-              </Button>
-            </DialogClose>
-            <DialogClose asChild>
-              <Button variant="default" size="lg">
-                닫기
-              </Button>
-            </DialogClose>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-      <div className="w-[23rem] h-[60vh] relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] ">
+      <div className="w-[22rem] h-[67vh] relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4 ">
         {questions.map((question) => (
           <div
             key={question.id}
@@ -324,6 +283,50 @@ export const Qna = () => {
             </NavLink>
           </div>
         ))}
+      </div>
+      <div className="fixed bottom-[16vh] left-1/2 transform -translate-x-1/2">
+        <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+          <DialogTrigger asChild>
+            <button onClick={handleOpenModal}>
+              <img
+                src="/icon/earth.svg"
+                alt="R지식in 질문할 수 있는 지구 아이콘"
+                className="w-10 h-10"
+              />
+            </button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>질문</DialogTitle>
+              <DialogDescription>질문을 추가하세요.</DialogDescription>
+            </DialogHeader>
+            <input
+              type="text"
+              value={title}
+              onChange={(event) => setTitle(event.target.value)}
+              placeholder="제목"
+              className="w-full p-2 mb-2 border"
+            />
+            <textarea
+              value={content}
+              onChange={(event) => setContent(event.target.value)}
+              placeholder="내용"
+              className="w-full h-[30vh] p-2 mb-2 border"
+            />
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="default" size="lg" onClick={handleAddQuestion}>
+                  추가
+                </Button>
+              </DialogClose>
+              <DialogClose asChild>
+                <Button variant="default" size="lg">
+                  닫기
+                </Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </Layout>
   );
