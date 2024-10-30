@@ -27,6 +27,7 @@ import {
 import { MoreHorizontal } from "lucide-react";
 import { formatDateToKoreanTime } from "@/lib/utils/dateKoreanTime";
 import BackHeader from "@/lib/common/BackHeader";
+import Nav from "@/components/Nav/Nav";
 
 const Comments = () => {
   const location = useLocation();
@@ -125,8 +126,7 @@ const Comments = () => {
   return (
     <>
       <BackHeader />
-      <h2>댓글</h2>
-      <div>
+      <div className="space-y-2 overflow-y-auto h-[55vh] mt-4">
         {submittedAnswers
           .slice()
           .sort(
@@ -150,27 +150,21 @@ const Comments = () => {
             }) => (
               <div
                 key={answer.id}
-                className="relative flex flex-col w-[23rem] mx-auto p-2 text-lg bg-gray-200 border rounded-2"
+                className="relative flex flex-col w-[23rem] mx-auto p-2 text-lg bg-purpleLight border rounded-2"
               >
-                <div className="flex items-center justify-between ">
-                  <p>{answer.author}</p>
-                  {answer.createdAt && (
-                    <p className="text-xs text-gray-500">
-                      {formatDateToKoreanTime(new Date(answer.createdAt))}
-                    </p>
-                  )}
+                <div className="flex items-center justify-between">
+                  <p className="text-sm">{answer.author}</p>
                   {currentUser && currentUser.uid === answer.authorUid && (
                     <Popover>
                       <PopoverTrigger asChild>
-                        <Button variant="ghost" size="icon">
+                        <Button variant="ghost" size="icon" className="w-4 h-4">
                           <MoreHorizontal className="w-4 h-4" />
                         </Button>
                       </PopoverTrigger>
-                      <PopoverContent className="w-48">
+                      <PopoverContent className="w-auto">
                         <Button
                           variant="default"
-                          size="default"
-                          className="w-full"
+                          size="sm"
                           onClick={() => {
                             setEditingAnswer(answer.id);
                             setEditedContent(answer.content);
@@ -180,8 +174,7 @@ const Comments = () => {
                         </Button>
                         <Button
                           variant="default"
-                          size="default"
-                          className="w-full"
+                          size="sm"
                           onClick={() => handleDeleteAnswer(answer.id)}
                         >
                           삭제
@@ -190,9 +183,12 @@ const Comments = () => {
                     </Popover>
                   )}
                 </div>
-                <p className="text-black break-words whitespace-pre-wrap">
-                  {answer.content}
-                </p>
+                <p className="text-lg text-black">{answer.content}</p>
+                {answer.createdAt && (
+                  <p className="text-xs text-gray-500">
+                    {formatDateToKoreanTime(new Date(answer.createdAt))}
+                  </p>
+                )}
                 <Dialog
                   open={editingAnswer === answer.id}
                   onOpenChange={() => setEditingAnswer(null)}
@@ -228,7 +224,7 @@ const Comments = () => {
       </div>
       <div className="mt-4 overflow-hidden text-center">
         <textarea
-          className="w-[23rem] h-28 border border-gray-300 rounded-4"
+          className="w-[23rem] h-[8vh] border border-gray-300 rounded-4"
           value={answer}
           onChange={(event) => setAnswer(event.target.value)}
         />
@@ -236,6 +232,7 @@ const Comments = () => {
           제출
         </Button>
       </div>
+      <Nav />
     </>
   );
 };

@@ -214,8 +214,8 @@ const Answer = () => {
             key={id}
             className="relative flex flex-col w-[23rem] mx-auto p-2 text-lg bg-purpleLight "
           >
-            <p className="text-lg text-black">{content}</p>
             <p className="text-sm">{author}</p>
+            <p className="text-lg text-black">{content}</p>
             {createdAt && (
               <p className="text-xs text-gray-500">
                 {formatDateToKoreanTime(new Date(createdAt))}
