@@ -203,7 +203,7 @@ const Comments = () => {
                     <textarea
                       value={editedContent}
                       onChange={(event) => setEditedContent(event.target.value)}
-                      className="w-full border border-gray-300 h-28 rounded-4"
+                      className="w-[20rem] border border-gray-300 h-28 rounded-4"
                     />
                     <DialogFooter>
                       <DialogClose asChild>
@@ -211,6 +211,7 @@ const Comments = () => {
                           variant="default"
                           size="default"
                           onClick={handleEditAnswer}
+                          className="w-[20rem]"
                         >
                           확인
                         </Button>
