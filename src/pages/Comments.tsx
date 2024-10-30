@@ -126,7 +126,7 @@ const Comments = () => {
   return (
     <>
       <BackHeader comment={submittedAnswers} />
-      <div className="space-y-2 overflow-y-auto h-[55vh] mt-4">
+      <div className="space-y-2 overflow-y-auto h-[70vh] mt-4">
         {submittedAnswers
           .slice()
           .sort(
@@ -150,7 +150,7 @@ const Comments = () => {
             }) => (
               <div
                 key={answer.id}
-                className="relative flex flex-col w-[23rem] mx-auto p-2 text-lg bg-purpleLight border rounded-2"
+                className="relative flex flex-col w-[22rem] mx-auto p-2 text-lg bg-purpleLight border rounded-4"
               >
                 <div className="flex items-center justify-between">
                   <p className="text-sm">{answer.author}</p>
@@ -221,17 +221,23 @@ const Comments = () => {
               </div>
             )
           )}
+        <div className="mt-4 text-center">
+          <textarea
+            className="w-[22rem] h-[8vh] border border-gray-300 rounded-4"
+            value={answer}
+            onChange={(event) => setAnswer(event.target.value)}
+          />
+          <Button
+            variant="default"
+            size="default"
+            onClick={handleSubmit}
+            className="w-[22rem]"
+          >
+            제출
+          </Button>
+        </div>
       </div>
-      <div className="mt-4 overflow-hidden text-center">
-        <textarea
-          className="w-[23rem] h-[8vh] border border-gray-300 rounded-4"
-          value={answer}
-          onChange={(event) => setAnswer(event.target.value)}
-        />
-        <Button variant="default" size="default" onClick={handleSubmit}>
-          제출
-        </Button>
-      </div>
+
       <Nav />
     </>
   );
