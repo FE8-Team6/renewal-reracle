@@ -210,7 +210,7 @@ const Answer = () => {
         </div>
       </div>
 
-      <div className="h-[52vh] mt-4 space-y-2 overflow-y-auto">
+      <div className="h-[54vh]  space-y-2 overflow-y-auto">
         {submittedAnswers.map(({ id, author, content, createdAt }) => (
           <div
             key={id}
