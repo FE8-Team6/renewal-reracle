@@ -106,7 +106,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
             }`}
             placeholder={
               props.placeholder ||
-              "ex. 가발, 수첩 등 재활용품을 입력해 주세요. "
+              "ex. 가발, 거울 등 재활용품을 입력해 주세요. "
             }
           />
           {value && (
