@@ -286,15 +286,13 @@ export const Qna = () => {
       </div>
       <div className="fixed bottom-[16vh] left-1/2 transform -translate-x-1/2">
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-          <DialogTrigger asChild>
-            <button onClick={handleOpenModal}>
-              <img
-                src="/icon/earth.svg"
-                alt="R지식in 질문할 수 있는 지구 아이콘"
-                className="w-10 h-10"
-              />
-            </button>
-          </DialogTrigger>
+          <button onClick={handleOpenModal}>
+            <img
+              src="/icon/earth.svg"
+              alt="R지식in 질문할 수 있는 지구 아이콘"
+              className="w-10 h-10"
+            />
+          </button>
           <DialogContent>
             <DialogHeader>
               <DialogTitle>질문</DialogTitle>
