@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/firebase";
 import { SearchResults } from "../types/search";
-import { postSearchHistory } from "@/api/searchAPI/recentSearch";
+import { postSearchHistory } from "@/api/searchssApi/recentSearch";
 
 interface SearchBarProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;

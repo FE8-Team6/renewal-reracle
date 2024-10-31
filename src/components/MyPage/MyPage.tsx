@@ -14,7 +14,7 @@ import { RecentSearchHistory } from "@/lib/types/search";
 import {
   deleteSearchHistory,
   getRecentSearchHistory,
-} from "@/api/searchAPI/recentSearch";
+} from "@/api/searchssApi/recentSearch";
 
 const MyPage = () => {
   const [user, setUser] = useState<{ displayName: string; email: string }>({
