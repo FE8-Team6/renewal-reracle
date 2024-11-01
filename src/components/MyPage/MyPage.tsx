@@ -93,6 +93,7 @@ const MyPage = () => {
               onChange={handleEmailChange}
               placeholder="이메일을 입력해주세요"
               className="w-full h-[2.5rem] text-xl bg-transparent focus:outline-none focus:shadow-none pl-10"
+              readOnly
             />
           </div>
         </div>
