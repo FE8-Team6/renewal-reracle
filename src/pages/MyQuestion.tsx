@@ -33,6 +33,7 @@ export const MyQuestion = () => {
     displayName: "",
     uid: "",
   });
+  const [likedPosts, setLikedPosts] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const userData = localStorage.getItem("userData");
@@ -43,7 +44,7 @@ export const MyQuestion = () => {
   }, []);
 
   useEffect(() => {
-    if (currentUser) {
+    if (currentUser.uid) {
       const fetchQuestions = async () => {
         const q = query(
           collection(db, "questions"),
@@ -66,6 +67,19 @@ export const MyQuestion = () => {
         });
         setQuestions(questionList);
       };
+      const fetchLikedPosts = async () => {
+        const q = query(
+          collection(db, "likes"),
+          where("userId", "==", currentUser.uid)
+        );
+        const querySnapshot = await getDocs(q);
+        const likedPostIds = new Set<string>();
+        querySnapshot.forEach((doc) => {
+          likedPostIds.add(doc.data().postId);
+        });
+        setLikedPosts(likedPostIds);
+      };
+      fetchLikedPosts();
       fetchQuestions();
     }
   }, [currentUser]);
@@ -104,6 +118,7 @@ export const MyQuestion = () => {
                 commentCount: questionData.commentCount,
                 currentUser,
                 authorUid: questionData.authorUid,
+                likedPosts: Array.from(likedPosts),
               }}
               className="text-black overflow-hidden whitespace-nowrap text-ellipsis inline-block w-[35vh] no-underline"
             >
