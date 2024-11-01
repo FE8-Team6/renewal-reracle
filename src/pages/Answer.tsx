@@ -68,8 +68,6 @@ const Answer = () => {
   const [question, setQuestion] = useState<string>(initialQuestion);
   const [content, setContent] = useState<string>(initialContent);
 
-  console.log(submittedAnswers);
-
   const navigate = useNavigate();
   useEffect(() => {
     const fetchAnswers = async () => {
@@ -107,6 +105,11 @@ const Answer = () => {
 
   const handleLike = async (id: string) => {
     try {
+      const userData = localStorage.getItem("userData");
+      if (!userData) {
+        alert("로그인이 필요합니다.");
+        return;
+      }
       const likeDocRef = doc(db, "likes", `${currentUser.uid}_${id}`);
       if (likedPosts.has(id)) {
         await deleteDoc(likeDocRef);
