@@ -68,7 +68,7 @@ export const Qna = () => {
   }, []);
 
   useEffect(() => {
-    const getQuestions = async () => {
+    const fetchQuestions = async () => {
       const queryOrderBy = query(
         collection(db, "questions"),
         orderBy("createdAt", "desc")
@@ -94,7 +94,7 @@ export const Qna = () => {
       setQuestions(questionList);
     };
 
-    const getLiked = async () => {
+    const fetchLiked = async () => {
       if (currentUser.uid) {
         const q = query(
           collection(db, "likes"),
@@ -109,8 +109,8 @@ export const Qna = () => {
       }
     };
 
-    getQuestions();
-    getLiked();
+    fetchQuestions();
+    fetchLiked();
   }, [currentUser.uid]);
 
   const handleAddQuestion = async () => {

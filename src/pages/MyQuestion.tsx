@@ -7,11 +7,13 @@ import {
   deleteDoc,
   doc,
   Timestamp,
+  orderBy,
 } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { db } from "../firebase";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { formatDateToKoreanTime } from "@/lib/utils/dateKoreanTime";
 
 type Question = {
   id: string;
@@ -48,9 +50,11 @@ export const MyQuestion = () => {
       const fetchQuestions = async () => {
         const q = query(
           collection(db, "questions"),
-          where("authorUid", "==", currentUser.uid)
+          where("authorUid", "==", currentUser.uid),
+          orderBy("createdAt", "desc")
         );
         const querySnapshot = await getDocs(q);
+
         const questionList: Question = [];
         querySnapshot.forEach((doc) => {
           const questionData = doc.data();
@@ -61,7 +65,7 @@ export const MyQuestion = () => {
             authorUid: questionData.authorUid,
             content: questionData.content,
             createdAt: questionData.createdAt,
-            likes: questionData.likes,
+            likes: questionData.likes || 0,
             commentCount: questionData.commentCount,
           });
         });
@@ -123,12 +127,22 @@ export const MyQuestion = () => {
               className="text-black overflow-hidden whitespace-nowrap text-ellipsis inline-block w-[35vh] no-underline"
             >
               <p>{questionData.question}</p>
-              <p className="text-sm pl-1 pt-1">{questionData.content}</p>
+              <p className="text-sm mt-2">{questionData.content}</p>
+              <div className="flex items-center justify-between mt-2">
+                <div className="flex gap-2">
+                  {questionData.createdAt && (
+                    <p className="text-sm">
+                      {formatDateToKoreanTime(questionData.createdAt.toDate())}
+                    </p>
+                  )}
+                  {/* <p className="text-sm">댓글 {questionData.commentCount}개</p> */}
+                </div>
+              </div>
             </Link>
             <Button
               variant="ghost"
               size="icon"
-              className="text-black hover:text-warn-50"
+              className="text-black hover:text-purple"
               onClick={() => handleDeleteQuestion(questionData.id)}
             >
               <X width={15} height={15} />
