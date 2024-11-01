@@ -6,17 +6,41 @@ import {
   where,
   deleteDoc,
   doc,
+  Timestamp,
 } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
 import { Link } from "react-router-dom";
 import { db } from "../firebase";
-import { Layout } from "@/components/layout/Layout";
+import { X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+type Question = {
+  id: string;
+  question: string;
+  author: string;
+  authorUid: string;
+  content: string;
+  createdAt: Timestamp;
+  likes: number;
+  commentCount: number;
+}[];
 
 export const MyQuestion = () => {
-  const [questions, setQuestions] = useState<
-    { id: string; question: string; author: string; authorUid: string }[]
-  >([]);
-  const currentUser = getAuth().currentUser;
+  const [questions, setQuestions] = useState<Question>([]);
+  const [currentUser, setCurrentUser] = useState<{
+    displayName: string;
+    uid: string;
+  }>({
+    displayName: "",
+    uid: "",
+  });
+
+  useEffect(() => {
+    const userData = localStorage.getItem("userData");
+    const storedUser = userData ? JSON.parse(userData) : null;
+    if (storedUser) {
+      setCurrentUser(storedUser);
+    }
+  }, []);
 
   useEffect(() => {
     if (currentUser) {
@@ -26,12 +50,7 @@ export const MyQuestion = () => {
           where("authorUid", "==", currentUser.uid)
         );
         const querySnapshot = await getDocs(q);
-        const questionList: {
-          id: string;
-          question: string;
-          author: string;
-          authorUid: string;
-        }[] = [];
+        const questionList: Question = [];
         querySnapshot.forEach((doc) => {
           const questionData = doc.data();
           questionList.push({
@@ -39,6 +58,10 @@ export const MyQuestion = () => {
             question: questionData.question,
             author: questionData.author,
             authorUid: questionData.authorUid,
+            content: questionData.content,
+            createdAt: questionData.createdAt,
+            likes: questionData.likes,
+            commentCount: questionData.commentCount,
           });
         });
         setQuestions(questionList);
@@ -52,37 +75,52 @@ export const MyQuestion = () => {
       await deleteDoc(doc(db, "questions", id));
       setQuestions(questions.filter((question) => question.id !== id));
     } catch (error) {
-      console.error("Error deleting document: ", error);
+      console.error("삭제 실패 오류: ", error);
     }
   };
 
   return (
-    <Layout>
-      <div className="w-full h-[3.75vh] bg-purple text-center flex items-center justify-center text-white text-[2vh]">
+    <>
+      <div className="w-full h-[2rem] bg-purple text-center flex items-center justify-center text-white text-[2vh]">
         마이 R지식in
       </div>
-      <div className="overflow-y-auto my-[1.5vh] mx-auto w-[22rem] relative">
-        {questions.map((questionData, index) => (
+      <div className="overflow-y-auto my-[1.5vh] mx-auto w-[22rem] h-[67vh] relative">
+        {questions.map((questionData) => (
           <div
-            key={index}
-            className="bg-greenLight  my-[1.5vh] mx-auto h-[3.75vh] flex items-center justify-between px-[1vh] rounded-[10px] text-white text-[2vh]"
+            key={questionData.id}
+            className="bg-greenLight my-[1.5vh] mx-auto h-[6rem] flex items-center justify-between px-[1vh] rounded-[10px] text-white text-[2vh]"
           >
             <Link
               to={`/answer/${questionData.id}`}
-              state={{ question: questionData.question }}
+              state={{
+                questionId: questionData.id,
+                question: questionData.question,
+                content: questionData.content,
+                author: questionData.author,
+                createdAt: questionData.createdAt
+                  ? questionData.createdAt.toDate().toISOString()
+                  : null,
+                likes: questionData.likes,
+                commentCount: questionData.commentCount,
+                currentUser,
+                authorUid: questionData.authorUid,
+              }}
               className="text-black overflow-hidden whitespace-nowrap text-ellipsis inline-block w-[35vh] no-underline"
             >
-              {questionData.question}
+              <p>{questionData.question}</p>
+              <p className="text-sm pl-1 pt-1">{questionData.content}</p>
             </Link>
-            <button
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-black hover:text-warn-50"
               onClick={() => handleDeleteQuestion(questionData.id)}
-              className="bg-error-40 border-none rounded-[5px] h-[2.5vh] text-white cursor-pointer px-[1vh] text-[1.5vh]"
             >
-              삭제
-            </button>
+              <X width={15} height={15} />
+            </Button>
           </div>
         ))}
       </div>
-    </Layout>
+    </>
   );
 };

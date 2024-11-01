@@ -93,6 +93,10 @@ export const routes = [
 
   {
     path: "myquestion",
-    element: <MyQuestion />,
+    element: (
+      <Layout>
+        <MyQuestion />
+      </Layout>
+    ),
   },
 ];
