@@ -122,7 +122,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
           )}
         </div>
         {searchResults.length > 0 && (
-          <div className="absolute bg-white border shadow-lg rounded-4 w-[23rem] z-10">
+          <div className="absolute bg-white border shadow-lg rounded-4 w-[22rem] z-10">
             {searchResults.map((result) => (
               <div
                 key={result.id}
