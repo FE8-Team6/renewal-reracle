@@ -54,10 +54,12 @@ export const MyQuestion = () => {
           orderBy("createdAt", "desc")
         );
         const querySnapshot = await getDocs(q);
-
         const questionList: Question = [];
-        querySnapshot.forEach((doc) => {
+        for (const doc of querySnapshot.docs) {
           const questionData = doc.data();
+          const answersSnapshot = await getDocs(
+            query(collection(db, "answers"), where("questionId", "==", doc.id))
+          );
           questionList.push({
             id: doc.id,
             question: questionData.question,
@@ -66,9 +68,9 @@ export const MyQuestion = () => {
             content: questionData.content,
             createdAt: questionData.createdAt,
             likes: questionData.likes || 0,
-            commentCount: questionData.commentCount,
+            commentCount: answersSnapshot.size,
           });
-        });
+        }
         setQuestions(questionList);
       };
       const fetchLikedPosts = async () => {
@@ -137,7 +139,7 @@ export const MyQuestion = () => {
                       {formatDateToKoreanTime(questionData.createdAt.toDate())}
                     </p>
                   )}
-                  {/* <p className="text-sm">댓글 {questionData.commentCount}개</p> */}
+                  <p className="text-sm">댓글 {questionData.commentCount}개</p>
                 </div>
               </div>
             </Link>
