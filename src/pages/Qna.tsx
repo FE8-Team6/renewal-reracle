@@ -312,13 +312,13 @@ export const Qna = () => {
             />
             <DialogFooter>
               <DialogClose asChild>
-                <Button variant="default" size="lg" onClick={handleAddQuestion}>
-                  추가
+                <Button variant="secondary" size="lg">
+                  닫기
                 </Button>
               </DialogClose>
               <DialogClose asChild>
-                <Button variant="default" size="lg">
-                  닫기
+                <Button variant="default" size="lg" onClick={handleAddQuestion}>
+                  추가
                 </Button>
               </DialogClose>
             </DialogFooter>
