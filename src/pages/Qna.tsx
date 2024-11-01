@@ -29,6 +29,7 @@ import {
   DialogFooter,
   DialogClose,
 } from "@/components/ui/dialog";
+import { GoPencil } from "react-icons/go";
 
 type Question = {
   id: string;
@@ -283,14 +284,13 @@ export const Qna = () => {
           </div>
         ))}
       </div>
-      <div className="fixed bottom-[16vh] left-1/2 transform -translate-x-1/2">
+      <div className="fixed bottom-[16vh] left-[50%] transform -translate-x-1/2">
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-          <button onClick={handleOpenModal}>
-            <img
-              src="/icon/earth.svg"
-              alt="R지식in 질문할 수 있는 지구 아이콘"
-              className="w-10 h-10"
-            />
+          <button
+            onClick={handleOpenModal}
+            className="border bg-purple p-2 rounded-10"
+          >
+            <GoPencil className="w-5 h-5 text-white" />
           </button>
           <DialogContent>
             <DialogHeader>
@@ -312,13 +312,13 @@ export const Qna = () => {
             />
             <DialogFooter>
               <DialogClose asChild>
-                <Button variant="default" size="lg" onClick={handleAddQuestion}>
-                  추가
+                <Button variant="secondary" size="lg">
+                  닫기
                 </Button>
               </DialogClose>
               <DialogClose asChild>
-                <Button variant="default" size="lg">
-                  닫기
+                <Button variant="default" size="lg" onClick={handleAddQuestion}>
+                  추가
                 </Button>
               </DialogClose>
             </DialogFooter>
