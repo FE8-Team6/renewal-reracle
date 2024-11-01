@@ -127,7 +127,9 @@ export const MyQuestion = () => {
               className="text-black overflow-hidden whitespace-nowrap text-ellipsis inline-block w-[35vh] no-underline"
             >
               <p>{questionData.question}</p>
-              <p className="text-sm mt-2">{questionData.content}</p>
+              <span className="text-sm text-gray-500">
+                {questionData.author}
+              </span>
               <div className="flex items-center justify-between mt-2">
                 <div className="flex gap-2">
                   {questionData.createdAt && (
