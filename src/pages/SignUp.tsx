@@ -38,7 +38,6 @@ export const SignUp = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
   const [displayNameError, setDisplayNameError] = useState<string>("");
   const [emailError, setEmailError] = useState<string>("");
   const [passwordError, setPasswordError] = useState<string>("");
@@ -116,7 +115,11 @@ export const SignUp = () => {
 
   const checkConfirmPassword = () => {
     setConfirmPasswordError("");
-    if (password !== confirmPassword) {
+    setPasswordError("");
+    if (password.length < 8) {
+      setPasswordError("비밀번호는 8자 이상이어야 합니다.");
+      return false;
+    } else if (password !== confirmPassword) {
       setConfirmPasswordError("비밀번호가 일치하지 않습니다.");
       return false;
     }
@@ -125,7 +128,6 @@ export const SignUp = () => {
 
   const handleSignUp = async (event: React.FormEvent) => {
     event.preventDefault();
-    setError("");
 
     const result = signUpSchema.safeParse({
       displayName,
@@ -135,17 +137,27 @@ export const SignUp = () => {
     });
 
     if (!result.success) {
-      setError(result.error.errors[0].message);
+      const errorField = result.error.errors[0].path[0];
+      const errorMessage = result.error.errors[0].message;
+      if (errorField === "displayName") {
+        setDisplayNameError(errorMessage);
+      } else if (errorField === "email") {
+        setEmailError(errorMessage);
+      } else if (errorField === "password") {
+        setPasswordError(errorMessage);
+      } else if (errorField === "confirmPassword") {
+        setConfirmPasswordError(errorMessage);
+      }
       return;
     }
 
     if (!isDisplayNameChecked) {
-      setError("닉네임 중복 확인을 해주세요.");
+      setDisplayNameError("닉네임 중복 확인을 해주세요.");
       return;
     }
 
     if (!isEmailChecked) {
-      setError("이메일 중복 확인을 해주세요.");
+      setEmailError("이메일 중복 확인을 해주세요.");
       return;
     }
 
@@ -172,11 +184,10 @@ export const SignUp = () => {
         localStorage.setItem("userData", JSON.stringify(userInfo));
         navigate("/login");
       } else {
-        setError("사용자 정보를 불러오는 데 실패했습니다.");
+        console.error("회원가입 후 사용자 정보를 불러오지 못했습니다.");
       }
     } catch (error) {
-      // setError(error.message);
-      setError("회원가입 중 오류가 발생했습니다.");
+      console.error("회원가입 중 오류:", error);
     }
   };
 
@@ -268,6 +279,8 @@ export const SignUp = () => {
           {confirmPasswordError && (
             <p className="text-error-30 mb-2">{confirmPasswordError}</p>
           )}
+          {/* {error && <p className="text-error-30 mb-2">{error}</p>} */}
+
           <Button variant="default" type="submit" size="default">
             회원가입
           </Button>
