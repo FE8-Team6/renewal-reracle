@@ -47,7 +47,7 @@ const Nav = () => {
           >
             <LuClipboardEdit className="w-5 h-5" />
             <div className="mt-1 text-sm font-medium text-center text-grayDark">
-              게시판
+              공지
             </div>
           </button>
         </div>

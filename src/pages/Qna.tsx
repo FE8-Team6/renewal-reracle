@@ -15,7 +15,6 @@ import {
 } from "firebase/firestore";
 import { NavLink } from "react-router-dom";
 import { db } from "../firebase";
-import { Layout } from "@/components/layout/Layout";
 import { serverTimestamp } from "firebase/firestore";
 import { formatDateToKoreanTime } from "@/lib/utils/dateKoreanTime";
 import { Button } from "@/components/ui/button";
@@ -219,7 +218,7 @@ export const Qna = () => {
   };
 
   return (
-    <Layout>
+    <>
       <div className="w-full h-[2rem] bg-purple text-center flex items-center justify-center text-white text-[2vh]">
         R지식in
       </div>
@@ -326,7 +325,7 @@ export const Qna = () => {
           </DialogContent>
         </Dialog>
       </div>
-    </Layout>
+    </>
   );
 };
 

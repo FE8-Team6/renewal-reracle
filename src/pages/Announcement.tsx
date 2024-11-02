@@ -3,16 +3,13 @@ import {
   collection,
   addDoc,
   getDocs,
-  Timestamp,
   query,
   orderBy,
   doc,
-  deleteDoc,
   setDoc,
   serverTimestamp,
 } from "firebase/firestore";
 import { db, auth } from "../firebase";
-import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -27,47 +24,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { GoPencil } from "react-icons/go";
 import { formatDateToKoreanTime } from "@/lib/utils/dateKoreanTime";
-
-const TopicItem = ({
-  date,
-  title,
-  details,
-  onDelete,
-  onEdit,
-}: {
-  date: string;
-  title: string;
-  details: string;
-  onDelete?: () => void;
-  onEdit?: () => void;
-}) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const handleToggle = () => {
-    setIsExpanded(!isExpanded);
-  };
-
-  return (
-    <div
-      className={`my-[1.5vh] mx-auto w-[23rem] ${
-        isExpanded
-          ? "h-auto bg-[#9747ff] text-white"
-          : "h-[5.75vh] bg-[#fef3c1] text-black "
-      } rounded-xl text-center pt-4 font-bold text-sm cursor-pointer  transition-all duration-300 ease-in-out overflow-hidden`}
-      onClick={handleToggle}
-    >
-      {date} 점검 예정입니다.
-      {isExpanded && (
-        <div>
-          <h3>{title}</h3>
-          <p>{details}</p>
-          {onDelete && <Button onClick={onDelete}>삭제</Button>}
-          {onEdit && <Button onClick={onEdit}>수정</Button>}
-        </div>
-      )}
-    </div>
-  );
-};
+import { NavLink } from "react-router-dom";
 
 export const Announcement = () => {
   const [announcements, setAnnouncements] = useState([]);
@@ -75,9 +32,25 @@ export const Announcement = () => {
   const [newAnnouncement, setNewAnnouncement] = useState({
     title: "",
     details: "",
+    author: "",
+  });
+  const [currentUser, setCurrentUser] = useState<{
+    displayName: string;
+    uid: string;
+  }>({
+    displayName: "",
+    uid: "",
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editId, setEditId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const userData = localStorage.getItem("userData");
+    const storedUser = userData ? JSON.parse(userData) : null;
+    if (storedUser) {
+      setCurrentUser(storedUser);
+    }
+  }, []);
 
   useEffect(() => {
     const checkAdmin = async () => {
@@ -117,15 +90,17 @@ export const Announcement = () => {
         await setDoc(doc(db, "announcements", editId), {
           ...newAnnouncement,
           createdAt: serverTimestamp(),
+          author: currentUser.displayName,
         });
         setEditId(null);
       } else {
         await addDoc(collection(db, "announcements"), {
           ...newAnnouncement,
           createdAt: serverTimestamp(),
+          author: currentUser.displayName,
         });
       }
-      setNewAnnouncement({ title: "", details: "" });
+      setNewAnnouncement({ title: "", details: "", author: "" });
       fetchAnnouncements();
       setIsModalOpen(false);
     } catch (error) {
@@ -133,101 +108,91 @@ export const Announcement = () => {
     }
   };
 
-  const handleDeleteAnnouncement = async (id: string) => {
-    try {
-      await deleteDoc(doc(db, "announcements", id));
-      fetchAnnouncements();
-    } catch (error) {
-      console.error("공지사항 삭제 실패:", error);
-    }
-  };
-
-  const handleEditAnnouncement = (announcement: any) => {
-    setNewAnnouncement({
-      title: announcement.title,
-      details: announcement.details,
-    });
-    setEditId(announcement.id);
-    setIsModalOpen(true);
-  };
-
   return (
-    <Layout>
-      <div className="w-full h-[3.75vh] bg-[#fcd118] text-[#9747ff] text-center align-center leading-[3.75vh] text-[2vh]">
+    <>
+      <div className="w-full h-[3.75vh] bg-yellow text-purple text-center align-center leading-[3.75vh] text-[2vh]">
         공지사항
       </div>
       <div className="w-[22rem] h-[67vh] relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4 ">
         {isAdmin && (
-          <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-            <DialogTrigger asChild>
-              <button className=" border bg-purple p-2 rounded-10">
-                <GoPencil className="w-5 h-5 text-white" />
-              </button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>공지사항</DialogTitle>
-                <DialogDescription>
-                  새로운 공지사항을 작성하세요.
-                </DialogDescription>
-              </DialogHeader>
-              <Input
-                type="text"
-                placeholder="제목"
-                value={newAnnouncement.title}
-                className="w-full p-2 mb-2 border"
-                onChange={(e) =>
-                  setNewAnnouncement({
-                    ...newAnnouncement,
-                    title: e.target.value,
-                  })
-                }
-              />
-              <textarea
-                placeholder="상세 내용"
-                value={newAnnouncement.details}
-                className="w-full h-[10rem] "
-                onChange={(e) =>
-                  setNewAnnouncement({
-                    ...newAnnouncement,
-                    details: e.target.value,
-                  })
-                }
-              />
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button variant="secondary" size="lg">
-                    닫기
+          <div className="fixed bottom-[16vh] left-[50%] transform -translate-x-1/2">
+            <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+              <DialogTrigger asChild>
+                <button className=" border bg-purple p-2 rounded-10">
+                  <GoPencil className="w-5 h-5 text-white" />
+                </button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>공지사항</DialogTitle>
+                  <DialogDescription>
+                    새로운 공지사항을 작성하세요.
+                  </DialogDescription>
+                </DialogHeader>
+                <Input
+                  type="text"
+                  placeholder="제목"
+                  value={newAnnouncement.title}
+                  className="w-full p-2 mb-2 border"
+                  onChange={(e) =>
+                    setNewAnnouncement({
+                      ...newAnnouncement,
+                      title: e.target.value,
+                    })
+                  }
+                />
+                <textarea
+                  placeholder="상세 내용"
+                  value={newAnnouncement.details}
+                  className="w-full h-[10rem] border border-purple rounded-4 p-2 mb-2 "
+                  onChange={(event) =>
+                    setNewAnnouncement({
+                      ...newAnnouncement,
+                      details: event.target.value,
+                    })
+                  }
+                />
+                <DialogFooter>
+                  <DialogClose asChild>
+                    <Button variant="secondary" size="lg">
+                      닫기
+                    </Button>
+                  </DialogClose>
+                  <Button
+                    variant="default"
+                    size="lg"
+                    onClick={handleAddAnnouncement}
+                  >
+                    {editId ? "수정" : "추가"}
                   </Button>
-                </DialogClose>
-                <Button
-                  variant="default"
-                  size="lg"
-                  onClick={handleAddAnnouncement}
-                >
-                  {editId ? "수정" : "추가"}
-                </Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </div>
         )}
         {announcements.map((announcement) => (
-          <TopicItem
+          <div
             key={announcement.id}
-            date={formatDateToKoreanTime(announcement.createdAt.toDate())}
-            title={announcement.title}
-            details={announcement.details}
-            onDelete={
-              isAdmin
-                ? () => handleDeleteAnnouncement(announcement.id)
-                : undefined
-            }
-            onEdit={
-              isAdmin ? () => handleEditAnnouncement(announcement) : undefined
-            }
-          />
+            className="my-3 mx-auto w-full h-[6rem] bg-[#fef3c1]  px-3 rounded-4 font-bold text-sm cursor-pointer"
+          >
+            <NavLink to={`/announcement/${announcement.id}`}>
+              <div className="flex justify-between items-center">
+                <div>
+                  <p className="text-base font-semibold">
+                    {announcement.title}
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    {formatDateToKoreanTime(announcement.createdAt.toDate())}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">{announcement.author}</p>
+                </div>
+              </div>
+            </NavLink>
+          </div>
         ))}
       </div>
-    </Layout>
+    </>
   );
 };
