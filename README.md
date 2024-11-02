@@ -34,7 +34,7 @@
 ### 설치 및 실행
 
 ```bash
-git clone
+git clone https://github.com/FE8-Team6/renewal-reracle.git
 ```
 
 ```bash
