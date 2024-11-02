@@ -90,9 +90,11 @@ export const routes = [
   {
     path: "announcement/:announcementId",
     element: (
-      <Layout>
+      <>
+        <BackHeader />
         <AnnouncementDetailItem />
-      </Layout>
+        <Nav />
+      </>
     ),
   },
   {

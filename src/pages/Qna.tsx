@@ -214,7 +214,7 @@ export const Qna = () => {
   };
 
   const truncateTitle = (title: string) => {
-    return title.length > 20 ? `${title.slice(0, 20)}...` : title;
+    return title.length > 25 ? `${title.slice(0, 25)}...` : title;
   };
 
   return (

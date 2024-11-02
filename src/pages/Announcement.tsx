@@ -26,8 +26,14 @@ import { GoPencil } from "react-icons/go";
 import { formatDateToKoreanTime } from "@/lib/utils/dateKoreanTime";
 import { NavLink } from "react-router-dom";
 
+type Announcement = {
+  id: string;
+  title: string;
+  details: string;
+};
+
 export const Announcement = () => {
-  const [announcements, setAnnouncements] = useState([]);
+  const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [newAnnouncement, setNewAnnouncement] = useState({
     title: "",
@@ -108,6 +114,10 @@ export const Announcement = () => {
     }
   };
 
+  const truncateTitle = (title: string) => {
+    return title.length > 25 ? `${title.slice(0, 25)}...` : title;
+  };
+
   return (
     <>
       <div className="w-full h-[3.75vh] bg-yellow text-purple text-center align-center leading-[3.75vh] text-[2vh]">
@@ -173,20 +183,27 @@ export const Announcement = () => {
         {announcements.map((announcement) => (
           <div
             key={announcement.id}
-            className="my-3 mx-auto w-full h-[6rem] bg-[#fef3c1]  px-3 rounded-4 font-bold text-sm cursor-pointer"
+            className=" bg-yellowLight w-full h-[6rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black "
           >
-            <NavLink to={`/announcement/${announcement.id}`}>
-              <div className="flex justify-between items-center">
-                <div>
-                  <p className="text-base font-semibold">
-                    {announcement.title}
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    {formatDateToKoreanTime(announcement.createdAt.toDate())}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">{announcement.author}</p>
+            <NavLink
+              to={`/announcement/${announcement.id}`}
+              className="flex flex-col flex-grow"
+            >
+              <div className="flex flex-col">
+                <span className="text-base font-semibold text-gray-900 truncate">
+                  {truncateTitle(announcement.title)}
+                </span>
+                <span className="text-sm text-gray-500">
+                  {announcement.author}
+                </span>
+              </div>
+              <div className="flex items-center justify-between mt-1">
+                <div className="flex gap-2">
+                  {announcement.createdAt && (
+                    <p className="text-sm">
+                      {formatDateToKoreanTime(announcement.createdAt.toDate())}
+                    </p>
+                  )}
                 </div>
               </div>
             </NavLink>
