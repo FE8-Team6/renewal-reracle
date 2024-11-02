@@ -25,6 +25,7 @@ import {
   PopoverTrigger,
   PopoverContent,
 } from "@/components/ui/popover";
+import { MoreHorizontal } from "lucide-react";
 
 const AnnouncementDetailItem = () => {
   const { announcementId } = useParams();
@@ -100,7 +101,7 @@ const AnnouncementDetailItem = () => {
             <Popover>
               <PopoverTrigger asChild>
                 <Button variant="ghost" size="icon">
-                  수정/삭제
+                  <MoreHorizontal className="w-5 h-5" />
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-[6rem]">
