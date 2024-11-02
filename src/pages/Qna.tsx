@@ -30,6 +30,7 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { GoPencil } from "react-icons/go";
+import { Input } from "@/components/ui/input";
 
 type Question = {
   id: string;
@@ -297,7 +298,7 @@ export const Qna = () => {
               <DialogTitle>질문</DialogTitle>
               <DialogDescription>질문을 추가하세요.</DialogDescription>
             </DialogHeader>
-            <input
+            <Input
               type="text"
               value={title}
               onChange={(event) => setTitle(event.target.value)}
