@@ -24,7 +24,7 @@ import { z } from "zod";
 const signUpSchema = z
   .object({
     displayName: z.string().min(2, "닉네임은 2자 이상이어야 합니다."),
-    email: z.string().email("이메일 형식이 올바르지 않습니다."),
+    email: z.string().email("이메일을 올바르게 입력해주세요."),
     password: z.string().min(8, "비밀번호는 8자 이상이어야 합니다."),
     confirmPassword: z.string(),
   })
@@ -39,6 +39,10 @@ export const SignUp = () => {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [displayNameError, setDisplayNameError] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
+  const [passwordError, setPasswordError] = useState<string>("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState<string>("");
   const [isDisplayNameChecked, setIsDisplayNameChecked] =
     useState<boolean>(false);
   const [isEmailChecked, setIsEmailChecked] = useState<boolean>(false);
@@ -62,9 +66,9 @@ export const SignUp = () => {
   };
 
   const checkDisplayName = async () => {
-    setError("");
+    setDisplayNameError("");
     if (displayName.length < 2) {
-      setError("닉네임은 2자 이상이어야 합니다.");
+      setDisplayNameError("닉네임은 2자 이상이어야 합니다.");
       setIsDisplayNameChecked(false);
       return;
     }
@@ -74,7 +78,7 @@ export const SignUp = () => {
     );
     const querySnapshot = await getDocs(q);
     if (!querySnapshot.empty) {
-      setError("이미 사용 중인 닉네임입니다.");
+      setDisplayNameError("이미 사용 중인 닉네임입니다.");
       setIsDisplayNameChecked(false);
     } else {
       alert("사용 가능한 닉네임입니다.");
@@ -82,17 +86,41 @@ export const SignUp = () => {
     }
   };
 
-  const handleCheckEmail = async () => {
-    setError("");
+  const checkEmail = async () => {
+    setEmailError("");
+    const emailSchema = z.string().email("이메일 형식이 올바르지 않습니다.");
+    const result = emailSchema.safeParse(email);
+    if (!result.success) {
+      setEmailError(result.error.errors[0].message);
+      return;
+    }
     const q = query(collection(db, "users"), where("email", "==", email));
     const querySnapshot = await getDocs(q);
     if (!querySnapshot.empty) {
-      setError("이미 사용 중인 이메일입니다.");
+      setEmailError("이미 사용 중인 이메일입니다.");
       setIsEmailChecked(false);
     } else {
       alert("사용 가능한 이메일입니다.");
       setIsEmailChecked(true);
     }
+  };
+
+  const checkPassword = () => {
+    setPasswordError("");
+    if (password.length < 8) {
+      setPasswordError("비밀번호는 8자 이상이어야 합니다.");
+      return false;
+    }
+    return true;
+  };
+
+  const checkConfirmPassword = () => {
+    setConfirmPasswordError("");
+    if (password !== confirmPassword) {
+      setConfirmPasswordError("비밀번호가 일치하지 않습니다.");
+      return false;
+    }
+    return true;
   };
 
   const handleSignUp = async (event: React.FormEvent) => {
@@ -118,6 +146,10 @@ export const SignUp = () => {
 
     if (!isEmailChecked) {
       setError("이메일 중복 확인을 해주세요.");
+      return;
+    }
+
+    if (!checkPassword() || !checkConfirmPassword()) {
       return;
     }
 
@@ -164,6 +196,7 @@ export const SignUp = () => {
               onChange={(event) => {
                 setDisplayName(event.target.value);
                 setIsDisplayNameChecked(false);
+                setDisplayNameError("");
               }}
               className="w-[16.8rem]"
             />
@@ -177,6 +210,9 @@ export const SignUp = () => {
               중복 확인
             </Button>
           </div>
+          {displayNameError && (
+            <p className="text-error-30 mb-2">{displayNameError}</p>
+          )}
           <div className="relative flex flex-row items-center mb-2 gap-1">
             <Input
               type="text"
@@ -185,6 +221,7 @@ export const SignUp = () => {
               onChange={(event) => {
                 setEmail(event.target.value);
                 setIsEmailChecked(false);
+                setEmailError("");
               }}
               className="w-[16.8rem]"
             />
@@ -192,31 +229,45 @@ export const SignUp = () => {
             <Button
               variant="secondary"
               size="sm"
-              onClick={handleCheckEmail}
+              onClick={checkEmail}
               className="mt-2"
             >
               중복 확인
             </Button>
           </div>
+          {emailError && <p className="text-error-30 mb-2">{emailError}</p>}
           <div className="relative flex flex-col mb-2">
             <Input
               type="password"
               placeholder="비밀번호"
               value={password}
-              onChange={(event) => setPassword(event.target.value)}
+              onChange={(event) => {
+                setPassword(event.target.value);
+                setPasswordError("");
+              }}
+              onBlur={checkPassword}
             />
             <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
           </div>
+          {passwordError && (
+            <p className="text-error-30 mb-2">{passwordError}</p>
+          )}
           <div className="relative flex flex-col mb-2">
             <Input
               type="password"
               placeholder="비밀번호 확인"
               value={confirmPassword}
-              onChange={(event) => setConfirmPassword(event.target.value)}
+              onChange={(event) => {
+                setConfirmPassword(event.target.value);
+                setConfirmPasswordError("");
+              }}
+              onBlur={checkConfirmPassword}
             />
             <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
           </div>
-          {error && <p className="text-error-30 mb-2">{error}</p>}
+          {confirmPasswordError && (
+            <p className="text-error-30 mb-2">{confirmPasswordError}</p>
+          )}
           <Button variant="default" type="submit" size="default">
             회원가입
           </Button>
