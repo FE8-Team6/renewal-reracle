@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import {
+  doc,
+  setDoc,
+  getDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +27,8 @@ export const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [errorKey, setErrorKey] = useState<number>(0);
+  const [isDisplayNameChecked, setIsDisplayNameChecked] =
+    useState<boolean>(false);
   const navigate = useNavigate();
 
   const saveUserInfoToFirestore = async (
@@ -38,9 +48,33 @@ export const SignUp = () => {
     }
   };
 
+  const checkDisplayName = async () => {
+    setError("");
+    const q = query(
+      collection(db, "users"),
+      where("displayName", "==", displayName)
+    );
+    const querySnapshot = await getDocs(q);
+    if (!querySnapshot.empty) {
+      setError("이미 사용 중인 닉네임입니다.");
+      setErrorKey((prev) => prev + 1);
+      setIsDisplayNameChecked(false);
+    } else {
+      setError("사용 가능한 닉네임입니다.");
+      setErrorKey((prev) => prev + 1);
+      setIsDisplayNameChecked(true);
+    }
+  };
+
   const handleSignUp = async (event: React.FormEvent) => {
     event.preventDefault();
     setError("");
+
+    if (!isDisplayNameChecked) {
+      setError("닉네임 중복 확인을 해주세요.");
+      setErrorKey((prev) => prev + 1);
+      return;
+    }
 
     if (displayName.length < 2) {
       setError("닉네임은 2자 이상이어야 합니다.");
@@ -100,14 +134,26 @@ export const SignUp = () => {
           onSubmit={handleSignUp}
           className="relative flex flex-col items-center justify-center "
         >
-          <div className="relative flex flex-col mb-2">
+          <div className="relative flex flex-row items-center mb-2 gap-1">
             <Input
               type="text"
               placeholder="닉네임"
               value={displayName}
-              onChange={(event) => setDisplayName(event.target.value)}
+              onChange={(event) => {
+                setDisplayName(event.target.value);
+                setIsDisplayNameChecked(false);
+              }}
+              className="w-[16.8rem]"
             />
             <MdOutlineTagFaces className="absolute text-xl left-3 top-4 text-purple" />
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={checkDisplayName}
+              className="mt-2"
+            >
+              중복 확인
+            </Button>
           </div>
           <div className="relative flex flex-col mb-2">
             <Input
@@ -125,7 +171,6 @@ export const SignUp = () => {
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             />
-
             <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
           </div>
           <div className="relative flex flex-col mb-2">
@@ -133,15 +178,12 @@ export const SignUp = () => {
               type="password"
               placeholder="비밀번호 확인"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={(event) => setConfirmPassword(event.target.value)}
             />
             <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
           </div>
           {error && (
-            <p
-              key={errorKey}
-              className="absolute bottom-[7.5vh] animate-vibration text-gray-dark"
-            >
+            <p key={errorKey} className="text-error-30 mb-2">
               {error}
             </p>
           )}
