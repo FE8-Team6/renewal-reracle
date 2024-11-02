@@ -105,54 +105,64 @@ export const MyQuestion = () => {
         마이 R지식in
       </div>
       <div className="overflow-y-auto my-[1.5vh] mx-auto w-[22rem] h-[67vh] relative">
-        {questions.map((questionData) => (
-          <div
-            key={questionData.id}
-            className="bg-greenLight my-[1.5vh] mx-auto h-[6rem] flex items-center justify-between px-[1vh] rounded-[10px] text-white text-[2vh]"
-          >
-            <Link
-              to={`/answer/${questionData.id}`}
-              state={{
-                questionId: questionData.id,
-                question: questionData.question,
-                content: questionData.content,
-                author: questionData.author,
-                createdAt: questionData.createdAt
-                  ? questionData.createdAt.toDate().toISOString()
-                  : null,
-                likes: questionData.likes,
-                commentCount: questionData.commentCount,
-                currentUser,
-                authorUid: questionData.authorUid,
-                likedPosts: Array.from(likedPosts),
-              }}
-              className="text-black overflow-hidden whitespace-nowrap text-ellipsis inline-block w-[35vh] no-underline"
-            >
-              <p>{questionData.question}</p>
-              <span className="text-sm text-gray-500">
-                {questionData.author}
-              </span>
-              <div className="flex items-center justify-between mt-2">
-                <div className="flex gap-2">
-                  {questionData.createdAt && (
-                    <p className="text-sm">
-                      {formatDateToKoreanTime(questionData.createdAt.toDate())}
-                    </p>
-                  )}
-                  <p className="text-sm">댓글 {questionData.commentCount}개</p>
-                </div>
-              </div>
-            </Link>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-black hover:text-purple"
-              onClick={() => handleDeleteQuestion(questionData.id)}
-            >
-              <X width={15} height={15} />
-            </Button>
+        {!questions.length ? (
+          <div className="text-center">
+            <span>작성한 질문이 없습니다.</span>
           </div>
-        ))}
+        ) : (
+          questions.map((questionData) => (
+            <div
+              key={questionData.id}
+              className="bg-greenLight my-[1.5vh] mx-auto h-[6rem] flex items-center justify-between px-[1vh] rounded-[10px] text-white text-[2vh]"
+            >
+              <Link
+                to={`/answer/${questionData.id}`}
+                state={{
+                  questionId: questionData.id,
+                  question: questionData.question,
+                  content: questionData.content,
+                  author: questionData.author,
+                  createdAt: questionData.createdAt
+                    ? questionData.createdAt.toDate().toISOString()
+                    : null,
+                  likes: questionData.likes,
+                  commentCount: questionData.commentCount,
+                  currentUser,
+                  authorUid: questionData.authorUid,
+                  likedPosts: Array.from(likedPosts),
+                }}
+                className="text-black overflow-hidden whitespace-nowrap text-ellipsis inline-block w-[35vh] no-underline"
+              >
+                <p>{questionData.question}</p>
+                <span className="text-sm text-gray-500">
+                  {questionData.author}
+                </span>
+                <div className="flex items-center justify-between mt-2">
+                  <div className="flex gap-2">
+                    {questionData.createdAt && (
+                      <p className="text-sm">
+                        {formatDateToKoreanTime(
+                          questionData.createdAt.toDate()
+                        )}
+                      </p>
+                    )}
+                    <p className="text-sm">
+                      댓글 {questionData.commentCount}개
+                    </p>
+                  </div>
+                </div>
+              </Link>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-black hover:text-purple"
+                onClick={() => handleDeleteQuestion(questionData.id)}
+              >
+                <X width={15} height={15} />
+              </Button>
+            </div>
+          ))
+        )}
       </div>
     </>
   );
