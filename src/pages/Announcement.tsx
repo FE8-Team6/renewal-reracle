@@ -30,6 +30,8 @@ type Announcement = {
   id: string;
   title: string;
   details: string;
+  createdAt: Date;
+  author: string;
 };
 
 export const Announcement = () => {
@@ -78,7 +80,10 @@ export const Announcement = () => {
     const querySnapshot = await getDocs(queryOrderBy);
     const announcementList = querySnapshot.docs.map((doc) => ({
       id: doc.id,
-      ...doc.data(),
+      title: doc.data().title,
+      details: doc.data().details,
+      createdAt: doc.data().createdAt.toDate(),
+      author: doc.data().author,
     }));
     setAnnouncements(announcementList);
   };
@@ -115,7 +120,7 @@ export const Announcement = () => {
   };
 
   const truncateTitle = (title: string) => {
-    return title.length > 25 ? `${title.slice(0, 25)}...` : title;
+    return title.length > 23 ? `${title.slice(0, 23)}...` : title;
   };
 
   return (
@@ -201,7 +206,7 @@ export const Announcement = () => {
                 <div className="flex gap-2">
                   {announcement.createdAt && (
                     <p className="text-sm">
-                      {formatDateToKoreanTime(announcement.createdAt.toDate())}
+                      {formatDateToKoreanTime(announcement.createdAt)}
                     </p>
                   )}
                 </div>
