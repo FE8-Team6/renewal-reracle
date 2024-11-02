@@ -222,7 +222,7 @@ export const SignUp = () => {
             </Button>
           </div>
           {displayNameError && (
-            <p className="text-error-30 mb-2">{displayNameError}</p>
+            <p className="text-error-50 mb-2">{displayNameError}</p>
           )}
           <div className="relative flex flex-row items-center mb-2 gap-1">
             <Input

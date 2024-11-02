@@ -13,6 +13,12 @@ import GoogleButton from "@/components/GoogleButton";
 import { Input } from "@/components/ui/input";
 import { getUserProfile } from "@/api/userApi/user";
 import { auth } from "@/firebase";
+import { z } from "zod";
+
+const loginSchema = z.object({
+  email: z.string().email("이메일 형식이 올바르지 않습니다."),
+  password: z.string().min(8, "비밀번호는 8자 이상이어야 합니다."),
+});
 
 export const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -24,6 +30,13 @@ export const Login = () => {
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
     setError("");
+
+    const result = loginSchema.safeParse({ email, password });
+
+    if (!result.success) {
+      setError(result.error.errors[0].message);
+      return;
+    }
 
     try {
       const userCredential = await signInWithEmailAndPassword(
@@ -37,6 +50,7 @@ export const Login = () => {
 
       navigate("/");
     } catch (error) {
+      setError("이메일 또는 비밀번호가 잘못되었습니다.");
       console.error("이메일 로그인 실패:", error);
     }
   };
@@ -83,7 +97,7 @@ export const Login = () => {
               {isShowPassword ? <MdVisibilityOff /> : <MdVisibility />}
             </button>
           </div>
-          {error && <p className="mt-1 text-sm text-red">{error}</p>}
+          {error && <p className="mb-2 text-error-50">{error}</p>}
           <Button variant="default" type="submit" size="default">
             로그인
           </Button>
