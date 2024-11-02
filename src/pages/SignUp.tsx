@@ -39,9 +39,9 @@ export const SignUp = () => {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
-  const [errorKey, setErrorKey] = useState<number>(0);
   const [isDisplayNameChecked, setIsDisplayNameChecked] =
     useState<boolean>(false);
+  const [isEmailChecked, setIsEmailChecked] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const saveUserInfoToFirestore = async (
@@ -65,7 +65,6 @@ export const SignUp = () => {
     setError("");
     if (displayName.length < 2) {
       setError("닉네임은 2자 이상이어야 합니다.");
-      setErrorKey((prev) => prev + 1);
       setIsDisplayNameChecked(false);
       return;
     }
@@ -76,12 +75,23 @@ export const SignUp = () => {
     const querySnapshot = await getDocs(q);
     if (!querySnapshot.empty) {
       setError("이미 사용 중인 닉네임입니다.");
-      setErrorKey((prev) => prev + 1);
       setIsDisplayNameChecked(false);
     } else {
-      setError("사용 가능한 닉네임입니다.");
-      setErrorKey((prev) => prev + 1);
+      alert("사용 가능한 닉네임입니다.");
       setIsDisplayNameChecked(true);
+    }
+  };
+
+  const handleCheckEmail = async () => {
+    setError("");
+    const q = query(collection(db, "users"), where("email", "==", email));
+    const querySnapshot = await getDocs(q);
+    if (!querySnapshot.empty) {
+      setError("이미 사용 중인 이메일입니다.");
+      setIsEmailChecked(false);
+    } else {
+      alert("사용 가능한 이메일입니다.");
+      setIsEmailChecked(true);
     }
   };
 
@@ -98,13 +108,16 @@ export const SignUp = () => {
 
     if (!result.success) {
       setError(result.error.errors[0].message);
-      setErrorKey((prev) => prev + 1);
       return;
     }
 
     if (!isDisplayNameChecked) {
       setError("닉네임 중복 확인을 해주세요.");
-      setErrorKey((prev) => prev + 1);
+      return;
+    }
+
+    if (!isEmailChecked) {
+      setError("이메일 중복 확인을 해주세요.");
       return;
     }
 
@@ -128,11 +141,10 @@ export const SignUp = () => {
         navigate("/login");
       } else {
         setError("사용자 정보를 불러오는 데 실패했습니다.");
-        setErrorKey((prev) => prev + 1);
       }
     } catch (error) {
       // setError(error.message);
-      setErrorKey((prev) => prev + 1);
+      setError("회원가입 중 오류가 발생했습니다.");
     }
   };
 
@@ -165,14 +177,26 @@ export const SignUp = () => {
               중복 확인
             </Button>
           </div>
-          <div className="relative flex flex-col mb-2">
+          <div className="relative flex flex-row items-center mb-2 gap-1">
             <Input
               type="text"
               placeholder="이메일"
               value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              onChange={(event) => {
+                setEmail(event.target.value);
+                setIsEmailChecked(false);
+              }}
+              className="w-[16.8rem]"
             />
             <MdAlternateEmail className="absolute text-xl left-3 top-4 text-purple" />
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={handleCheckEmail}
+              className="mt-2"
+            >
+              중복 확인
+            </Button>
           </div>
           <div className="relative flex flex-col mb-2">
             <Input
@@ -192,11 +216,7 @@ export const SignUp = () => {
             />
             <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
           </div>
-          {error && (
-            <p key={errorKey} className="text-error-30 mb-2">
-              {error}
-            </p>
-          )}
+          {error && <p className="text-error-30 mb-2">{error}</p>}
           <Button variant="default" type="submit" size="default">
             회원가입
           </Button>
