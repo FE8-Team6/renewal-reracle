@@ -19,6 +19,19 @@ import {
 } from "react-icons/md";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { z } from "zod";
+
+const signUpSchema = z
+  .object({
+    displayName: z.string().min(2, "닉네임은 2자 이상이어야 합니다."),
+    email: z.string().email("이메일 형식이 올바르지 않습니다."),
+    password: z.string().min(8, "비밀번호는 8자 이상이어야 합니다."),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "비밀번호가 일치하지 않습니다.",
+    path: ["confirmPassword"],
+  });
 
 export const SignUp = () => {
   const [displayName, setDisplayName] = useState<string>("");
@@ -50,6 +63,12 @@ export const SignUp = () => {
 
   const checkDisplayName = async () => {
     setError("");
+    if (displayName.length < 2) {
+      setError("닉네임은 2자 이상이어야 합니다.");
+      setErrorKey((prev) => prev + 1);
+      setIsDisplayNameChecked(false);
+      return;
+    }
     const q = query(
       collection(db, "users"),
       where("displayName", "==", displayName)
@@ -70,30 +89,21 @@ export const SignUp = () => {
     event.preventDefault();
     setError("");
 
-    if (!isDisplayNameChecked) {
-      setError("닉네임 중복 확인을 해주세요.");
+    const result = signUpSchema.safeParse({
+      displayName,
+      email,
+      password,
+      confirmPassword,
+    });
+
+    if (!result.success) {
+      setError(result.error.errors[0].message);
       setErrorKey((prev) => prev + 1);
       return;
     }
 
-    if (displayName.length < 2) {
-      setError("닉네임은 2자 이상이어야 합니다.");
-      setErrorKey((prev) => prev + 1);
-      return;
-    }
-    if (password.length < 8) {
-      setError("비밀번호는 8자 이상이어야 합니다.");
-      setErrorKey((prev) => prev + 1);
-      return;
-    }
-    if (password !== confirmPassword) {
-      setError("비밀번호가 일치하지 않습니다.");
-      setErrorKey((prev) => prev + 1);
-      return;
-    }
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-      setError("이메일 형식이 올바르지 않습니다.");
+    if (!isDisplayNameChecked) {
+      setError("닉네임 중복 확인을 해주세요.");
       setErrorKey((prev) => prev + 1);
       return;
     }
