@@ -29,7 +29,11 @@ import { MoreHorizontal } from "lucide-react";
 
 const AnnouncementDetailItem = () => {
   const { announcementId } = useParams();
-  const [announcement, setAnnouncement] = useState(null);
+  const [announcement, setAnnouncement] = useState({
+    title: "",
+    details: "",
+    createdAt: new Date(),
+  });
   const [isAdmin, setIsAdmin] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editAnnouncement, setEditAnnouncement] = useState({
@@ -51,7 +55,13 @@ const AnnouncementDetailItem = () => {
         const docRef = doc(db, "announcements", announcementId);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          setAnnouncement(docSnap.data());
+          setAnnouncement(
+            docSnap.data() as {
+              title: string;
+              details: string;
+              createdAt: Date;
+            }
+          );
           setEditAnnouncement({
             title: docSnap.data().title,
             details: docSnap.data().details,
@@ -96,7 +106,7 @@ const AnnouncementDetailItem = () => {
         <>
           <h1>{announcement.title}</h1>
           <p>{announcement.details}</p>
-          <p>{formatDateToKoreanTime(announcement.createdAt.toDate())}</p>
+          <p>{formatDateToKoreanTime(announcement.createdAt)}</p>
           {isAdmin && (
             <Popover>
               <PopoverTrigger asChild>
