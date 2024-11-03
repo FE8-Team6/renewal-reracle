@@ -13,6 +13,7 @@ import {
   SignUp,
   Announcement,
 } from "@/pages";
+import AnnouncementDetailItem from "@/pages/AnnouncementDetailItem";
 import Answer from "@/pages/Answer";
 import Comments from "@/pages/Comments";
 import Home from "@/pages/Home";
@@ -72,11 +73,29 @@ export const routes = [
   },
   {
     path: "qna",
-    element: <Qna />,
+    element: (
+      <Layout>
+        <Qna />
+      </Layout>
+    ),
   },
   {
     path: "announcement",
-    element: <Announcement />,
+    element: (
+      <Layout>
+        <Announcement />
+      </Layout>
+    ),
+  },
+  {
+    path: "announcement/:announcementId",
+    element: (
+      <>
+        <BackHeader />
+        <AnnouncementDetailItem />
+        <Nav />
+      </>
+    ),
   },
   {
     path: "answer/:questionId",
@@ -88,7 +107,11 @@ export const routes = [
   },
   {
     path: "mypage",
-    element: <MyPage />,
+    element: (
+      <Layout>
+        <MyPage />
+      </Layout>
+    ),
   },
 
   {

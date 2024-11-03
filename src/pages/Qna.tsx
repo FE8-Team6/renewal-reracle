@@ -15,7 +15,6 @@ import {
 } from "firebase/firestore";
 import { NavLink } from "react-router-dom";
 import { db } from "../firebase";
-import { Layout } from "@/components/layout/Layout";
 import { serverTimestamp } from "firebase/firestore";
 import { formatDateToKoreanTime } from "@/lib/utils/dateKoreanTime";
 import { Button } from "@/components/ui/button";
@@ -30,6 +29,7 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { GoPencil } from "react-icons/go";
+import { Input } from "@/components/ui/input";
 
 type Question = {
   id: string;
@@ -214,11 +214,11 @@ export const Qna = () => {
   };
 
   const truncateTitle = (title: string) => {
-    return title.length > 20 ? `${title.slice(0, 20)}...` : title;
+    return title.length > 23 ? `${title.slice(0, 23)}...` : title;
   };
 
   return (
-    <Layout>
+    <>
       <div className="w-full h-[2rem] bg-purple text-center flex items-center justify-center text-white text-[2vh]">
         R지식in
       </div>
@@ -297,7 +297,7 @@ export const Qna = () => {
               <DialogTitle>질문</DialogTitle>
               <DialogDescription>질문을 추가하세요.</DialogDescription>
             </DialogHeader>
-            <input
+            <Input
               type="text"
               value={title}
               onChange={(event) => setTitle(event.target.value)}
@@ -325,7 +325,7 @@ export const Qna = () => {
           </DialogContent>
         </Dialog>
       </div>
-    </Layout>
+    </>
   );
 };
 
