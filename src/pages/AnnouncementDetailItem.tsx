@@ -55,16 +55,15 @@ const AnnouncementDetailItem = () => {
         const docRef = doc(db, "announcements", announcementId);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          setAnnouncement(
-            docSnap.data() as {
-              title: string;
-              details: string;
-              createdAt: Date;
-            }
-          );
+          const data = docSnap.data();
+          setAnnouncement({
+            title: data.title,
+            details: data.details,
+            createdAt: data.createdAt.toDate(),
+          });
           setEditAnnouncement({
-            title: docSnap.data().title,
-            details: docSnap.data().details,
+            title: data.title,
+            details: data.details,
           });
         }
       }
