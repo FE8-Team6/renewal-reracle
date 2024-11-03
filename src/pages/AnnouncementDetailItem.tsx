@@ -29,14 +29,23 @@ import { MoreHorizontal } from "lucide-react";
 
 const AnnouncementDetailItem = () => {
   const { announcementId } = useParams();
-  const [announcement, setAnnouncement] = useState({
+  const [announcement, setAnnouncement] = useState<{
+    title: string;
+    details: string;
+    createdAt: Date;
+    author: string;
+  }>({
     title: "",
     details: "",
     createdAt: new Date(),
+    author: "",
   });
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [editAnnouncement, setEditAnnouncement] = useState({
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+  const [editAnnouncement, setEditAnnouncement] = useState<{
+    title: string;
+    details: string;
+  }>({
     title: "",
     details: "",
   });
@@ -60,6 +69,7 @@ const AnnouncementDetailItem = () => {
             title: data.title,
             details: data.details,
             createdAt: data.createdAt.toDate(),
+            author: data.author,
           });
           setEditAnnouncement({
             title: data.title,
@@ -90,6 +100,7 @@ const AnnouncementDetailItem = () => {
         await setDoc(doc(db, "announcements", announcementId), {
           ...editAnnouncement,
           createdAt: serverTimestamp(),
+          author: announcement.author,
         });
         setIsEditModalOpen(false);
         navigate("/announcement");
@@ -100,40 +111,49 @@ const AnnouncementDetailItem = () => {
   };
 
   return (
-    <div>
-      {announcement && (
+    <div className="p-4">
+      {announcement ? (
         <>
-          <h1>{announcement.title}</h1>
-          <p>{announcement.details}</p>
-          <p>{formatDateToKoreanTime(announcement.createdAt)}</p>
-          {isAdmin && (
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <MoreHorizontal className="w-5 h-5" />
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-[6rem]">
-                <Button
-                  variant="default"
-                  size="sm"
-                  className="w-full"
-                  onClick={() => setIsEditModalOpen(true)}
-                >
-                  수정
-                </Button>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  className="w-full"
-                  onClick={handleDeleteAnnouncement}
-                >
-                  삭제
-                </Button>
-              </PopoverContent>
-            </Popover>
-          )}
+          <div className="flex items-center justify-between">
+            <p className="font-semibold">{announcement.author}</p>
+            {isAdmin && (
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="ghost" size="icon">
+                    <MoreHorizontal className="w-5 h-5" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-[6rem]">
+                  <Button
+                    variant="default"
+                    size="sm"
+                    className="w-full"
+                    onClick={() => setIsEditModalOpen(true)}
+                  >
+                    수정
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    className="w-full"
+                    onClick={handleDeleteAnnouncement}
+                  >
+                    삭제
+                  </Button>
+                </PopoverContent>
+              </Popover>
+            )}
+          </div>
+          <p className="text-sm">
+            {formatDateToKoreanTime(announcement.createdAt)}
+          </p>
+          <div className="mt-2">
+            <p className="text-lg text-center">{announcement.title}</p>
+            <p className="mt-2 text-base text-center">{announcement.details}</p>
+          </div>
         </>
+      ) : (
+        <p className="text-black">공지사항이 없습니다.</p>
       )}
       <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
         <DialogContent>
