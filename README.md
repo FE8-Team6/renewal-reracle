@@ -132,3 +132,8 @@ npm run dev
 <br/><br/>
 
 - [피그마 링크](https://www.figma.com/design/rEXJRUKlp9Mkb7XeR6jPlf/%EC%9E%AC%ED%99%9C%EC%9A%A9%EC%A0%95%EB%B3%B4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8?node-id=0-1&node-type=canvas&t=jmZkWg7pCGFI6jqY-0)
+
+## 개발 과정에서 고민했던 내용
+
+- [Styled-components에서 Tailwind로 전환](https://yho7955.tistory.com/55)
+- [뷰포트 단위에서 rem, px, %, vh로 리팩토링](https://wiggly-baroness-02b.notion.site/rem-px-vh-1236a40423b880deb679cc9cbdf706e9)
