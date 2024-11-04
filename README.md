@@ -1,16 +1,15 @@
 <br/>
 
 <div align="center">
-  <img src="" width="200px" />
+  <img src="/images/loginPageImg.png" width="200px" alt="Reracle 로고 사진" />
 </div>
 
 <h3 align="center">
-    Recycle
+    Reracle 재활용품 별 분리수거 방법 서비스
 </h3>
 <p align="center">
 
-미니 게임을 통해 응모권을 얻어 다양한 상품에 응모할 수 있으며, 원하는 상품을 직접 결제하여 응모할 수 있습니다.
-다양한 상품에 응모를 해보세요!
+Reracle은 사용자들이 쉽고 정확하게 재활용품을 분리수거할 수 있도록 도와주는 웹 기반 서비스입니다. React와 Firebase를 활용하여 개발된 이 서비스는 실시간 데이터 업데이트 기능을 제공합니다.
 
 </p>
 
@@ -25,11 +24,11 @@
 
 ## 배포 링크
 
-### [https://recycle.cloudfront.net/](https://d1lm1urvrp5cfb.cloudfront.net/)
+### [https://reracle.netlify.app/](https://reracle.netlify.app/)
 
 <br/><br/>
 
-## 시작하기
+## 시작
 
 ### 설치 및 실행
 
@@ -131,3 +130,5 @@ npm run dev
 </table>
 
 <br/><br/>
+
+- [피그마 링크](https://www.figma.com/design/rEXJRUKlp9Mkb7XeR6jPlf/%EC%9E%AC%ED%99%9C%EC%9A%A9%EC%A0%95%EB%B3%B4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8?node-id=0-1&node-type=canvas&t=jmZkWg7pCGFI6jqY-0)
