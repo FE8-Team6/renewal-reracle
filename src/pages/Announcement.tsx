@@ -36,7 +36,7 @@ type Announcement = {
 
 export const Announcement = () => {
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const [newAnnouncement, setNewAnnouncement] = useState({
     title: "",
     details: "",
@@ -49,8 +49,8 @@ export const Announcement = () => {
     displayName: "",
     uid: "",
   });
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editId, setEditId] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [editId, setEditId] = useState<string>("");
 
   useEffect(() => {
     const userData = localStorage.getItem("userData");
@@ -103,7 +103,7 @@ export const Announcement = () => {
           createdAt: serverTimestamp(),
           author: currentUser.displayName,
         });
-        setEditId(null);
+        setEditId("");
       } else {
         await addDoc(collection(db, "announcements"), {
           ...newAnnouncement,
