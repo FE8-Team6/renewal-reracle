@@ -1,7 +1,7 @@
 <br/>
 
 <div align="center">
-  <img src="/images/loginPageImg.png" width="200px" alt="Reracle 로고 사진" />
+  <img src="/public/images/loginPageImg.png" width="200px" alt="Reracle 로고 사진" />
 </div>
 
 <h3 align="center">
@@ -17,7 +17,7 @@ Reracle은 사용자들이 쉽고 정확하게 재활용품을 분리수거할 �
 <div align="center">
   <img src="" width="50%" />
   <img src="" width="50%" />
-    <img src="" width="50%" />
+  <img src="" width="50%" />
 </div>
 
 <br/><br />
