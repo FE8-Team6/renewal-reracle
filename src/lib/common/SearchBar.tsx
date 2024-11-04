@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { AlertCircle, Search, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
@@ -25,7 +25,9 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
   ({ error, className, ...props }, ref) => {
     const [value, setValue] = useState<string>("");
     const [searchResults, setSearchResults] = useState<SearchResults>([]);
+    const [selectedIndex, setSelectedIndex] = useState<number>(-1);
     const navigate = useNavigate();
+    const resultsRef = useRef<HTMLDivElement>(null);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setValue(event.target.value);
@@ -37,6 +39,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
     const handleClear = () => {
       setValue("");
       setSearchResults([]);
+      setSelectedIndex(-1);
       if (props.onChange) {
         props.onChange({
           target: { value: "" },
@@ -88,6 +91,34 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
       }
     };
 
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === "ArrowDown") {
+        setSelectedIndex((prevIndex) =>
+          prevIndex < searchResults.length - 1 ? prevIndex + 1 : prevIndex
+        );
+      } else if (event.key === "ArrowUp") {
+        setSelectedIndex((prevIndex) =>
+          prevIndex > 0 ? prevIndex - 1 : prevIndex
+        );
+      } else if (event.key === "Enter" && selectedIndex >= 0) {
+        const selectedResult = searchResults[selectedIndex];
+        handleResultClick(
+          selectedResult.name,
+          selectedResult.categoryId,
+          selectedResult.id
+        );
+      }
+    };
+
+    useEffect(() => {
+      if (resultsRef.current && selectedIndex >= 0) {
+        const selectedElement = resultsRef.current.children[
+          selectedIndex
+        ] as HTMLElement;
+        selectedElement.scrollIntoView({ block: "nearest" });
+      }
+    }, [selectedIndex]);
+
     return (
       <div className={`${className || "w-full"}`}>
         <div className={"relative flex items-center w-full"}>
@@ -99,6 +130,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
             ref={ref}
             value={value}
             onChange={handleChange}
+            onKeyDown={handleKeyDown}
             className={`h-[50px] rounded-5 focus:outline-none ${
               error
                 ? "focus:border focus:border-error-40"
@@ -122,11 +154,16 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
           )}
         </div>
         {searchResults.length > 0 && (
-          <div className="absolute bg-white border shadow-lg rounded-4 w-[22rem] z-10">
-            {searchResults.map((result) => (
+          <div
+            ref={resultsRef}
+            className="absolute bg-white border shadow-lg rounded-4 w-[22rem] z-10"
+          >
+            {searchResults.map((result, index) => (
               <div
                 key={result.id}
-                className="p-2 cursor-pointer hover:bg-gray-200"
+                className={`p-2 cursor-pointer hover:bg-gray-200 ${
+                  index === selectedIndex ? "bg-gray-200" : ""
+                }`}
                 onClick={() =>
                   handleResultClick(result.name, result.categoryId, result.id)
                 }
