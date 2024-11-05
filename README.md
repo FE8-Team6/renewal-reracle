@@ -5,11 +5,11 @@
 </div>
 
 <h3 align="center">
-    Reracle 재활용품 별 분리수거 방법 서비스
+    REracle 재활용품 별 분리수거 방법 서비스
 </h3>
 <p align="center">
 
-Reracle은 사용자들이 쉽고 정확하게 재활용품을 분리수거할 수 있도록 도와주는 웹 기반 서비스입니다. React와 Firebase를 활용하여 개발된 이 서비스는 실시간 데이터 업데이트 기능을 제공합니다.
+REracle 사용자들이 쉽고 정확하게 재활용품을 분리수거할 수 있도록 도와주는 웹 기반 서비스입니다. React와 Firebase를 활용하여 개발된 이 서비스는 실시간 데이터 업데이트 기능을 제공합니다.
 
 </p>
 
@@ -131,9 +131,19 @@ npm run dev
 
 <br/><br/>
 
-- [피그마 링크](https://www.figma.com/design/rEXJRUKlp9Mkb7XeR6jPlf/%EC%9E%AC%ED%99%9C%EC%9A%A9%EC%A0%95%EB%B3%B4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8?node-id=0-1&node-type=canvas&t=jmZkWg7pCGFI6jqY-0)
+## REracle 개발 과정
 
-## 개발 과정에서 고민했던 내용
+1️⃣ 먼저 피그마로 기획을 했습니다.
+
+### [🖼️ 피그마 링크](https://www.figma.com/design/rEXJRUKlp9Mkb7XeR6jPlf/%EC%9E%AC%ED%99%9C%EC%9A%A9%EC%A0%95%EB%B3%B4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8?node-id=0-1&node-type=canvas&t=jmZkWg7pCGFI6jqY-0)
+
+- 초반 REracle 프로젝트는 처음에 4명에서 기획을 하여 1명이 피그마로 와이어프레임을 작성하였습니다.
+- 디자인 시안을 확인할 수 있습니다.
+
+### 2️⃣ 개발 과정에서 고민 했던 내용
+
+- REracle을 혼자서 기획 및 구현하면서 고민했던 내용들을 볼 수 있습니다.
 
 - [Styled-components에서 Tailwind로 전환](https://yho7955.tistory.com/55)
 - [뷰포트 단위에서 rem, px, %, vh로 리팩토링](https://wiggly-baroness-02b.notion.site/rem-px-vh-1236a40423b880deb679cc9cbdf706e9)
+-
