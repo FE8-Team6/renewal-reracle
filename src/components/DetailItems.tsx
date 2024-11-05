@@ -3,6 +3,7 @@ import { GoChevronLeft } from "react-icons/go";
 import { wasteCategories } from "@/lib/constants/wasteCategories";
 import { Layout } from "./layout/Layout";
 import { wasteCategoryItemsImages } from "@/lib/constants/wasteCategoryItemsImages";
+import KakaoAdfit320x100 from "./KakaoAdfit320x100";
 
 const DetailItems = () => {
   const navigate = useNavigate();

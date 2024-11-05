@@ -30,6 +30,7 @@ import {
 } from "@/components/ui/dialog";
 import { GoPencil } from "react-icons/go";
 import { Input } from "@/components/ui/input";
+import KakaoAdfit320x50 from "@/components/KakaoAdfit320x50";
 
 type Question = {
   id: string;
@@ -222,6 +223,7 @@ export const Qna = () => {
       <div className="w-full h-[2rem] bg-purple text-center flex items-center justify-center text-white text-[2vh]">
         R지식in
       </div>
+      <KakaoAdfit320x50 />
       <div className="w-[22rem] h-[67vh] relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4 ">
         {questions.map((question) => (
           <div
@@ -288,7 +290,7 @@ export const Qna = () => {
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
           <button
             onClick={handleOpenModal}
-            className="border bg-purple p-2 rounded-10"
+            className="p-2 border bg-purple rounded-10"
           >
             <GoPencil className="w-5 h-5 text-white" />
           </button>

@@ -25,6 +25,7 @@ import { Input } from "@/components/ui/input";
 import { GoPencil } from "react-icons/go";
 import { formatDateToKoreanTime } from "@/lib/utils/dateKoreanTime";
 import { NavLink } from "react-router-dom";
+import KakaoAdfit320x50 from "@/components/KakaoAdfit320x50";
 
 type Announcement = {
   id: string;
@@ -125,15 +126,16 @@ export const Announcement = () => {
 
   return (
     <>
-      <div className="w-full h-[3.75vh] bg-yellow text-purple text-center align-center leading-[3.75vh] text-[2vh]">
+      <div className="w-full h-[2rem] bg-yellow text-purple text-center flex items-center justify-center  text-[2vh]">
         공지사항
       </div>
+      <KakaoAdfit320x50 />
       <div className="w-[22rem] h-[67vh] relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4 ">
         {isAdmin && (
           <div className="fixed bottom-[16vh] left-[50%] transform -translate-x-1/2">
             <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
               <DialogTrigger asChild>
-                <button className=" border bg-yellow p-2 rounded-10">
+                <button className="p-2 border bg-yellow rounded-10">
                   <GoPencil className="w-5 h-5 text-white" />
                 </button>
               </DialogTrigger>

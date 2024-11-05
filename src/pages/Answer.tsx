@@ -31,6 +31,7 @@ import {
   PopoverTrigger,
   PopoverContent,
 } from "@/components/ui/popover";
+import KakaoAdfit320x50 from "@/components/KakaoAdfit320x50";
 
 type SubmittedAnswer = {
   id: string;
@@ -214,6 +215,8 @@ const Answer = () => {
       </div>
 
       <div className="h-[54vh]  space-y-2 overflow-y-auto">
+        <KakaoAdfit320x50 />
+
         {submittedAnswers.map(({ id, author, content, createdAt }) => (
           <div
             key={id}
