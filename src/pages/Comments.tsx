@@ -29,7 +29,6 @@ import { formatDateToKoreanTime } from "@/lib/utils/dateKoreanTime";
 import BackHeader from "@/lib/common/BackHeader";
 import Nav from "@/components/Nav/Nav";
 import KakaoAdfit320x50 from "@/components/KakaoAdfit320x50";
-import KakaoAdfit320x100 from "@/components/KakaoAdfit320x100";
 
 const Comments = () => {
   const location = useLocation();
