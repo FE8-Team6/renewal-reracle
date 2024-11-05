@@ -133,7 +133,7 @@ npm run dev
 
 ## REracle 개발 과정
 
-1️⃣ 먼저 피그마로 기획을 했습니다.
+### 1️⃣ 먼저 피그마로 기획을 했습니다.
 
 ### [🖼️ 피그마 링크](https://www.figma.com/design/rEXJRUKlp9Mkb7XeR6jPlf/%EC%9E%AC%ED%99%9C%EC%9A%A9%EC%A0%95%EB%B3%B4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8?node-id=0-1&node-type=canvas&t=jmZkWg7pCGFI6jqY-0)
 
@@ -144,6 +144,6 @@ npm run dev
 
 - REracle을 혼자서 기획 및 구현하면서 고민했던 내용들을 볼 수 있습니다.
 
-- [Styled-components에서 Tailwind로 전환](https://yho7955.tistory.com/55)
-- [뷰포트 단위에서 rem, px, %, vh로 리팩토링](https://wiggly-baroness-02b.notion.site/rem-px-vh-1236a40423b880deb679cc9cbdf706e9)
--
+[Styled-components에서 Tailwind로 전환](https://yho7955.tistory.com/55)
+
+[뷰포트 단위에서 rem, px, %, vh로 리팩토링](https://wiggly-baroness-02b.notion.site/rem-px-vh-1236a40423b880deb679cc9cbdf706e9)
