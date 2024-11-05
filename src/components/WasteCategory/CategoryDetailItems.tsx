@@ -2,6 +2,7 @@ import { db } from "@/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import KakaoAdfit320x50 from "../KakaoAdfit320x50";
 
 type ItemsDetails = {
   id: string;
@@ -40,24 +41,27 @@ const CategoryDetailItems = () => {
   }, [categoryId, itemId]);
 
   return (
-    <div className="fixed w-full h-auto top-20">
-      <h3 className="text-xl font-bold text-purple ml-[6vh]">
-        {itemsDetails?.name}
-      </h3>
-      {itemsDetails?.imageURL && (
-        <div className="w-[20rem] h-[12rem] bg-purpleLight rounded-lg flex justify-center items-center my-4 mx-auto">
-          <img
-            src={itemsDetails.imageURL}
-            alt={itemsDetails.name}
-            className="max-w-[40%] h-auto object-contain"
-          />
-        </div>
-      )}
-      <h3 className="text-xl font-bold text-purple ml-[6vh]">배출방법</h3>
-      <p className="w-[20rem] mx-auto my-4 font-semibold ml-[6vh]">
-        {itemsDetails?.description}
-      </p>
-    </div>
+    <section className="flex flex-col justify-center w-full overflow-y-auto ">
+      <KakaoAdfit320x50 />
+      <div className="h-[70vh]">
+        <h3 className="text-xl font-bold text-purple ml-[6vh]">
+          {itemsDetails?.name}
+        </h3>
+        {itemsDetails?.imageURL && (
+          <div className="w-[20rem] h-[12rem] bg-purpleLight rounded-lg flex justify-center items-center my-2 mx-auto">
+            <img
+              src={itemsDetails.imageURL}
+              alt={itemsDetails.name}
+              className="max-w-[40%] h-auto object-contain"
+            />
+          </div>
+        )}
+        <h3 className="text-xl font-bold text-purple ml-[6vh]">배출방법</h3>
+        <p className="w-[20rem] mx-auto my-2 font-semibold ml-[6vh]">
+          {itemsDetails?.description}
+        </p>
+      </div>
+    </section>
   );
 };
 

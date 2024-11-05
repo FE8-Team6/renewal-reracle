@@ -26,6 +26,7 @@ import {
   PopoverContent,
 } from "@/components/ui/popover";
 import { MoreHorizontal } from "lucide-react";
+import KakaoAdfit320x100 from "@/components/KakaoAdfit320x100";
 
 const AnnouncementDetailItem = () => {
   const { announcementId } = useParams();
@@ -111,96 +112,101 @@ const AnnouncementDetailItem = () => {
   };
 
   return (
-    <div className="p-4">
-      {announcement ? (
-        <>
-          <div className="flex items-center justify-between">
-            <p className="font-semibold">{announcement.author}</p>
-            {isAdmin && (
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    <MoreHorizontal className="w-5 h-5" />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-[6rem]">
-                  <Button
-                    variant="default"
-                    size="sm"
-                    className="w-full"
-                    onClick={() => setIsEditModalOpen(true)}
-                  >
-                    수정
-                  </Button>
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    className="w-full"
-                    onClick={handleDeleteAnnouncement}
-                  >
-                    삭제
-                  </Button>
-                </PopoverContent>
-              </Popover>
-            )}
-          </div>
-          <p className="text-sm">
-            {formatDateToKoreanTime(announcement.createdAt)}
-          </p>
-          <div className="mt-2">
-            <p className="text-lg text-center">{announcement.title}</p>
-            <p className="mt-2 text-base text-center">{announcement.details}</p>
-          </div>
-        </>
-      ) : (
-        <p className="text-black">공지사항이 없습니다.</p>
-      )}
-      <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>공지사항 수정</DialogTitle>
-            <DialogDescription>공지사항을 수정하세요.</DialogDescription>
-          </DialogHeader>
-          <Input
-            type="text"
-            placeholder="제목"
-            value={editAnnouncement.title}
-            className="w-full p-2 mb-2 border"
-            onChange={(e) =>
-              setEditAnnouncement({
-                ...editAnnouncement,
-                title: e.target.value,
-              })
-            }
-          />
-          <textarea
-            placeholder="상세 내용"
-            value={editAnnouncement.details}
-            className="w-full h-[10rem] "
-            onChange={(e) =>
-              setEditAnnouncement({
-                ...editAnnouncement,
-                details: e.target.value,
-              })
-            }
-          />
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="secondary" size="lg">
-                닫기
+    <>
+      <KakaoAdfit320x100 />
+      <section className="p-4">
+        {announcement ? (
+          <>
+            <div className="flex items-center justify-between">
+              <p className="font-semibold">{announcement.author}</p>
+              {isAdmin && (
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button variant="ghost" size="icon">
+                      <MoreHorizontal className="w-5 h-5" />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-[6rem]">
+                    <Button
+                      variant="default"
+                      size="sm"
+                      className="w-full"
+                      onClick={() => setIsEditModalOpen(true)}
+                    >
+                      수정
+                    </Button>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      className="w-full"
+                      onClick={handleDeleteAnnouncement}
+                    >
+                      삭제
+                    </Button>
+                  </PopoverContent>
+                </Popover>
+              )}
+            </div>
+            <p className="text-sm">
+              {formatDateToKoreanTime(announcement.createdAt)}
+            </p>
+            <div className="mt-2">
+              <p className="text-lg text-center">{announcement.title}</p>
+              <p className="mt-2 text-base text-center">
+                {announcement.details}
+              </p>
+            </div>
+          </>
+        ) : (
+          <p className="text-black">공지사항이 없습니다.</p>
+        )}
+        <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>공지사항 수정</DialogTitle>
+              <DialogDescription>공지사항을 수정하세요.</DialogDescription>
+            </DialogHeader>
+            <Input
+              type="text"
+              placeholder="제목"
+              value={editAnnouncement.title}
+              className="w-full p-2 mb-2 border"
+              onChange={(e) =>
+                setEditAnnouncement({
+                  ...editAnnouncement,
+                  title: e.target.value,
+                })
+              }
+            />
+            <textarea
+              placeholder="상세 내용"
+              value={editAnnouncement.details}
+              className="w-full h-[10rem] "
+              onChange={(e) =>
+                setEditAnnouncement({
+                  ...editAnnouncement,
+                  details: e.target.value,
+                })
+              }
+            />
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="secondary" size="lg">
+                  닫기
+                </Button>
+              </DialogClose>
+              <Button
+                variant="default"
+                size="lg"
+                onClick={handleEditAnnouncement}
+              >
+                수정
               </Button>
-            </DialogClose>
-            <Button
-              variant="default"
-              size="lg"
-              onClick={handleEditAnnouncement}
-            >
-              수정
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    </div>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </section>
+    </>
   );
 };
 

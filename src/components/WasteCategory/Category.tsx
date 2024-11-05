@@ -8,6 +8,7 @@ import {
   SlCarouselItem,
 } from "@shoelace-style/shoelace/dist/react";
 import { SearchBar } from "@/lib/common/SearchBar";
+import KakaoAdfit320x50 from "../KakaoAdfit320x50";
 
 type Category = {
   id: string;
@@ -41,45 +42,48 @@ const Category = () => {
   const chunkedCategories = chunkArray(categories, 9);
 
   return (
-    <section className="w-full h-[73vh] flex flex-col justify-center overflow-y-auto">
-      <div className="mx-auto mt-1">
-        <SearchBar />
-      </div>
-      <h2 className="ml-[5vh] mt-[2vh] text-xl font-bold text-purple">
-        재활용품 분류
-      </h2>
-      <SlCarousel
-        pagination
-        mouse-dragging
-        className="w-full h-[30rem] mx-auto"
-      >
-        {chunkedCategories.map((chunk, index) => (
-          <SlCarouselItem key={index}>
-            <div className="grid grid-cols-3 gap-y-2 w-[25rem]">
-              {chunk.map((category) => (
-                <div key={category.id}>
-                  <NavLink
-                    to={`/category/${category.id}`}
-                    className="no-underline"
-                  >
-                    <div className="bg-yellowLight w-3/4 h-[6rem] flex justify-center items-center rounded-lg mx-auto hover:bg-yellow cursor-pointer">
-                      <img
-                        src={category.imageURL}
-                        alt={category.name}
-                        className="w-[2.5rem] h-[2.5rem]"
-                      />
-                    </div>
-                    <p className="text-sm font-semibold text-center ">
-                      {category.name}
-                    </p>
-                  </NavLink>
-                </div>
-              ))}
-            </div>
-          </SlCarouselItem>
-        ))}
-      </SlCarousel>
-    </section>
+    <>
+      <KakaoAdfit320x50 />
+      <section className="w-full h-[73vh] flex flex-col justify-center overflow-y-auto">
+        <div className="mx-auto mt-1">
+          <SearchBar />
+        </div>
+        <h2 className="ml-[5vh] mt-[2vh] text-xl font-bold text-purple">
+          재활용품 분류
+        </h2>
+        <SlCarousel
+          pagination
+          mouse-dragging
+          className="w-full h-[28rem] mx-auto"
+        >
+          {chunkedCategories.map((chunk, index) => (
+            <SlCarouselItem key={index}>
+              <div className="grid grid-cols-3 gap-y-2 w-[25rem]">
+                {chunk.map((category) => (
+                  <div key={category.id}>
+                    <NavLink
+                      to={`/category/${category.id}`}
+                      className="no-underline"
+                    >
+                      <div className="bg-yellowLight w-3/4 h-[6rem] flex justify-center items-center rounded-lg mx-auto hover:bg-yellow cursor-pointer">
+                        <img
+                          src={category.imageURL}
+                          alt={category.name}
+                          className="w-[2.5rem] h-[2.5rem]"
+                        />
+                      </div>
+                      <p className="text-sm font-semibold text-center ">
+                        {category.name}
+                      </p>
+                    </NavLink>
+                  </div>
+                ))}
+              </div>
+            </SlCarouselItem>
+          ))}
+        </SlCarousel>
+      </section>
+    </>
   );
 };
 
