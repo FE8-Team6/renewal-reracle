@@ -6,14 +6,15 @@ importScripts(
 );
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBN3DWCVIUc05MLqFeY_FI5Y2x8UpmxJUI",
-  authDomain: "web-game-5b1b6.firebaseapp.com",
-  projectId: "web-game-5b1b6",
-  storageBucket: "web-game-5b1b6.appspot.com",
-  messagingSenderId: "512220286729",
-  appId: "1:512220286729:web:32be683c83ad211b0d8dd8",
-  measurementId: "G-080QL0GFHM",
+  apiKey: import.meta.env.VITE_APP_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_APP_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_APP_FIREBASE_MEASUREMENT_ID,
 };
+
 firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 
