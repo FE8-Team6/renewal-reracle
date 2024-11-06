@@ -15,8 +15,7 @@ const NotificationWebApi = () => {
       const permission = await Notification.requestPermission();
       if (permission === "granted") {
         const token = await getToken(messaging, {
-          vapidKey:
-            "BCVj54gMWhvuspDe57rl7SCO8dbRbKPdtGb5IYs9O18AVQPeW1zKZaAVWWNYpLeG3Svh_whLfyGmDBSpQ-u31Gs", // 생성된 VAPID 키 사용
+          vapidKey: import.meta.env.VITE_APP_FIREBASE_VAPID_KEY,
         });
         console.log("FCM Token:", token);
         const user = auth.currentUser;
