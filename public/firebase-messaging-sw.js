@@ -21,7 +21,7 @@ messaging.onBackgroundMessage((payload) => {
   const title = payload.notification.title + " (onBackgroundMessage)";
   const notificationOptions = {
     body: payload.notification.body,
-    icon: "https://avatars.githubusercontent.com/u/110236953?v=4",
+    icon: "/REracle.svg",
   };
 
   self.registration.showNotification(title, notificationOptions);
@@ -30,7 +30,7 @@ messaging.onBackgroundMessage((payload) => {
 self.addEventListener("notificationclick", function (event) {
   event.notification.close();
 
-  const redirectUrl = event?.notification?.data?.redirectUrl;
+  const redirectUrl = event?.notification?.data?.redirectUrl || "/announcement";
 
   event.waitUntil(
     clients
