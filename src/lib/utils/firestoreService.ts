@@ -428,347 +428,359 @@ const wasteCategories = [
       {
         id: "1",
         name: "가구류",
-        imageURL: "furniture",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Ffurniture.svg?alt=media&token=99474f05-df66-45de-9ccc-bfb2428f12a8",
         description: "대형 생활 폐기물로 신고 한 후 스티커 부착",
       },
       {
         id: "2",
         name: "씽크대",
-        imageURL: "sink",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fsink.svg?alt=media&token=0bc5b1aa-6fe4-4a7f-8cee-65019380b82a",
         description: "대형 생활 폐기물로 신고 한 후 스티커 부착",
       },
       {
         id: "3",
         name: "나뭇가지",
-        imageURL: "woodPiece",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FwoodPiece.svg?alt=media&token=12fdd09a-fff3-4a51-a1e2-0bc9bb2bcb76",
         description: "나뭇가지 버리는 방법",
       },
       {
         id: "4",
         name: "낚싯대",
-        imageURL: "fishingRod",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FfishingRod.svg?alt=media&token=f4a0ad3c-eb21-4e48-9f9c-90abdac2245a",
         description: "낚싯대 버리는 방법",
       },
       {
         id: "5",
         name: "골프백",
-        imageURL: "golfBag",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FgolfBag.svg?alt=media&token=6aa26311-1e9d-4d4f-b7bc-43a7167bacc4",
         description: "골프백 버리는 방법",
       },
       {
         id: "6",
         name: "악기",
-        imageURL: "instrument",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Finstrument.svg?alt=media&token=a645b2f1-8330-4ffc-89e7-7f5a0a445db1",
         description: "악기 버리는 방법",
       },
       {
         id: "7",
         name: "라켓",
-        imageURL: "racket",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fracket.svg?alt=media&token=51d8f574-1bed-4213-8745-42cbdb5eda8c",
         description: "라켓 버리는 방법",
       },
       {
         id: "8",
         name: "목발",
-        imageURL: "crutch",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fcrutch.svg?alt=media&token=35214de1-7d8c-4f2e-9ff1-ab1c5d5ca482",
         description: "목발 버리는 방법",
       },
       {
         id: "9",
         name: "목재",
-        imageURL: "lumber",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Flumber.svg?alt=media&token=374497d1-152b-413a-a292-2dce7e1d3531",
         description: "목재 버리는 방법",
       },
       {
         id: "10",
         name: "문짝",
-        imageURL: "door",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fdoor.svg?alt=media&token=b3bb928c-4013-4577-b2ba-bef567d06b32",
         description: "문짝 버리는 방법",
       },
       {
         id: "11",
         name: "매트",
-        imageURL: "airMat",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FairMat.svg?alt=media&token=014bfee0-b1ec-42db-ac54-43f517b072f7",
         description: "매트 버리는 방법",
       },
       {
         id: "12",
         name: "바베큐그릴",
-        imageURL: "bbqGrill",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FbbqGrill.svg?alt=media&token=a36fd756-c4e5-4ed4-87ab-c5dc01610c90",
         description: "바베큐그릴 버리는 방법",
       },
       {
         id: "13",
         name: "밥상",
-        imageURL: "table",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Ftable.svg?alt=media&token=9b9eb3d3-ebae-4526-993d-322043af5154",
         description: "밥상 버리는 방법",
       },
       {
         id: "14",
         name: "시계",
-        imageURL: "clock",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fclock.svg?alt=media&token=139b6564-f2a2-4ab2-a03c-8b1b22a3ec1a",
         description: "시계 버리는 방법",
       },
       {
         id: "15",
         name: "블라인드",
-        imageURL: "blind",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fblind.svg?alt=media&token=f3dc087e-5dd8-48b3-8afc-6b06f0c77017",
         description: "블라인드 버리는 방법",
       },
       {
         id: "16",
         name: "사다리",
-        imageURL: "ladder",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fladder.svg?alt=media&token=7c6b3445-ba67-405a-b733-7af9abce74e2",
         description: "사다리 버리는 방법",
       },
       {
         id: "17",
         name: "삽",
-        imageURL: "shovel",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fshovel.svg?alt=media&token=caa89f76-48d8-437a-83e5-3204ac3fdadb",
         description: "삽 버리는 방법",
       },
       {
         id: "18",
         name: "쌀통",
-        imageURL: "riceContainer",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FriceContainer.svg?alt=media&token=42c65760-a6e8-4103-9716-137d57d5b14e",
         description: "쌀통 버리는 방법",
       },
       {
         id: "19",
         name: "서랍장",
-        imageURL: "drawers",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fdrawers.svg?alt=media&token=db3cd4fa-f21b-4325-8480-613c6605b141",
         description: "서랍장 버리는 방법",
       },
       {
         id: "20",
         name: "세면대",
-        imageURL: "washbasin",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fwashbasin.svg?alt=media&token=71c54eb7-29ad-4ea0-8e9f-d883678a47ed",
         description: "세면대 버리는 방법",
       },
       {
         id: "21",
         name: "솜이불",
-        imageURL: "bedding",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fbedding.svg?alt=media&token=7835d9f9-8f42-4d0b-8bb4-5e83fc55fa66",
         description: "솜이불 버리는 방법",
       },
       {
         id: "22",
         name: "수족관, 어항",
-        imageURL: "aquarium",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Faquarium.svg?alt=media&token=dca01537-0bca-4d03-b6b3-93471f0a132e",
         description: "수족관, 어항 버리는 방법",
       },
       {
         id: "23",
         name: "스노우보드",
-        imageURL: "snowboard",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fsnowboard.svg?alt=media&token=41d26a15-eb66-49b9-9c51-75c7b902eb49",
         description: "스노우보드 버리는 방법",
       },
       {
         id: "24",
         name: "스키용구류",
-        imageURL: "skiEquipment",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FskiEquipment.svg?alt=media&token=9f35944a-848b-451c-82de-eda034063894",
         description: "스키용구류 버리는 방법",
       },
       {
         id: "25",
         name: "식물",
-        imageURL: "plant",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fplant.svg?alt=media&token=75fcaf84-5bbe-4052-8afa-7d65bb72707e",
         description: "식물, 나무 버리는 방법",
       },
       {
         id: "26",
         name: "신발장",
-        imageURL: "shoeRack",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FshoeRack.svg?alt=media&token=db15a8c4-7f9c-413a-b674-bcff7b27af52",
         description: "신발장 버리는 방법",
       },
       {
         id: "27",
         name: "아기욕조",
-        imageURL: "babyBath",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FbabyBath.svg?alt=media&token=771b3c5c-aa4d-4e38-aa04-adce48dd8d19",
         description: "아기욕조 버리는 방법",
       },
       {
         id: "28",
-        name: "침구류",
-        imageURL: "bedding",
-        description: "침구류 버리는 방법",
-      },
-      {
-        id: "29",
         name: "침대",
-        imageURL: "bed",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fbed.svg?alt=media&token=8ff9b2a5-7d63-4e60-bd4e-90602703ea1f",
         description: "침대 버리는 방법",
       },
       {
-        id: "30",
+        id: "29",
         name: "액자",
-        imageURL: "album",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Falbum.svg?alt=media&token=b305f76a-7c25-4a6b-a3b5-0561a6c7b13c",
         description: "액자 버리는 방법",
       },
       {
-        id: "31",
-        name: "앨범",
-        imageURL: "album",
-        description: "앨범 버리는 방법",
-      },
-      {
-        id: "32",
-        name: "에어매트",
-        imageURL: "airMat",
-        description: "에어매트 버리는 방법",
-      },
-      {
-        id: "33",
+        id: "30",
         name: "여행가방",
-        imageURL: "travelBag",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FtravelBag.svg?alt=media&token=c3b800aa-8e02-47e9-aaba-8d67db5a84ba",
         description: "여행가방 버리는 방법",
       },
       {
-        id: "34",
+        id: "31",
         name: "유리판",
         imageURL: "glassPlate",
         description: "유리판 버리는 방법",
       },
       {
-        id: "35",
+        id: "32",
         name: "유모차",
         imageURL: "stroller",
         description: "유모차 버리는 방법",
       },
       {
-        id: "36",
+        id: "33",
         name: "의자",
         imageURL: "chair",
         description: "의자 버리는 방법",
       },
       {
-        id: "37",
+        id: "34",
         name: "이불",
         imageURL: "bedding",
         description: "이불 버리는 방법",
       },
       {
-        id: "38",
+        id: "35",
         name: "인형",
         imageURL: "doll",
         description: "인형 버리는 방법",
       },
       {
-        id: "39",
+        id: "36",
         name: "자전거",
         imageURL: "bicycle",
         description: "자전거 버리는 방법",
       },
       {
-        id: "40",
+        id: "37",
         name: "장난감류",
         imageURL: "toys",
         description: "장난감류 버리는 방법",
       },
       {
-        id: "41",
+        id: "38",
         name: "대걸레",
         imageURL: "mop",
         description: "자루걸레 버리는 방법",
       },
       {
-        id: "42",
+        id: "39",
         name: "장롱",
         imageURL: "wardrobe",
         description: "장롱 버리는 방법",
       },
       {
-        id: "43",
+        id: "40",
         name: "장식장",
         imageURL: "dresser",
         description: "장식장 버리는 방법",
       },
       {
-        id: "44",
+        id: "41",
         name: "장판",
         imageURL: "vinylFlooring",
         description: "장판 버리는 방법",
       },
       {
-        id: "45",
+        id: "42",
         name: "전기장판",
         imageURL: "vinylFlooring",
         description: "전기장판 버리는 방법",
       },
       {
-        id: "46",
+        id: "43",
         name: "피아노",
         imageURL: "electronicPiano",
         description: "피아노 버리는 방법",
       },
       {
-        id: "47",
+        id: "44",
         name: "진열대",
         imageURL: "shelf",
         description: "진열대 버리는 방법",
       },
       {
-        id: "48",
+        id: "45",
         name: "책상",
         imageURL: "table",
         description: "책상 버리는 방법",
       },
       {
-        id: "49",
+        id: "46",
         name: "천체망원경",
         imageURL: "telescope",
         description: "천체망원경 버리는 방법",
       },
       {
-        id: "50",
+        id: "47",
         name: "체중계",
         imageURL: "weightMeasuringMachine",
         description: "체중계 버리는 방법",
       },
       {
-        id: "51",
+        id: "48",
         name: "카펫",
         imageURL: "carpet",
         description: "카펫 버리는 방법",
       },
       {
-        id: "52",
+        id: "49",
         name: "캐비넷",
         imageURL: "cabinet",
         description: "캐비넷 버리는 방법",
       },
       {
-        id: "53",
+        id: "50",
         name: "커튼",
         imageURL: "curtain",
         description: "커튼 버리는 방법",
       },
       {
-        id: "54",
+        id: "51",
         name: "쿠션",
         imageURL: "cushion",
         description: "쿠션 버리는 방법",
       },
       {
-        id: "55",
+        id: "52",
         name: "텐트",
         imageURL: "tent",
         description: "텐트 버리는 방법",
       },
       {
-        id: "56",
+        id: "53",
         name: "항아리",
         imageURL: "jar",
         description: "항아리 버리는 방법",
       },
       {
-        id: "57",
+        id: "54",
         name: "화로",
         imageURL: "brazier",
         description: "화로 버리는 방법",
       },
       {
-        id: "58",
+        id: "55",
         name: "화장대",
         imageURL: "vanity",
         description: "화장대 버리는 방법",
@@ -1392,12 +1404,6 @@ const wasteCategories = [
           "뼈대와 비닐을 분리하여, 각각의 분리수거함으로 배출,분리가 어렵다면 종량제봉투로 배출",
       },
       {
-        id: "72",
-        name: "이불",
-        imageURL: "bedding",
-        description: "종량제 봉투에 담을 수 없는경우 대형폐기물로 처리",
-      },
-      {
         id: "73",
         name: "인형",
         imageURL: "doll",
@@ -1494,12 +1500,6 @@ const wasteCategories = [
         name: "축구공",
         imageURL: "soccer",
         description: "종량제 봉투로 배출",
-      },
-      {
-        id: "89",
-        name: "침구류",
-        imageURL: "bedding",
-        description: "종량제 봉투에 담을 수 없는 경우 대형폐기물로 처리",
       },
       {
         id: "90",
