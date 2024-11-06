@@ -39,7 +39,7 @@ const NotificationWebApi = () => {
       ) {
         new Notification(payload.notification.title, {
           body: payload.notification.body,
-          icon: "/icons/icon-96.png",
+          icon: "REracle.svg",
         });
       }
     });
