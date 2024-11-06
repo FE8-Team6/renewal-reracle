@@ -21,7 +21,7 @@ messaging.onBackgroundMessage((payload) => {
   const title = payload.notification.title + " (onBackgroundMessage)";
   const notificationOptions = {
     body: payload.notification.body,
-    icon: "https://avatars.githubusercontent.com/u/110236953?v=4",
+    icon: "/REracle.svg",
   };
 
   self.registration.showNotification(title, notificationOptions);
@@ -30,7 +30,7 @@ messaging.onBackgroundMessage((payload) => {
 self.addEventListener("notificationclick", function (event) {
   event.notification.close();
 
-  const redirectUrl = event?.notification?.data?.redirectUrl;
+  const redirectUrl = event?.notification?.data?.redirectUrl || "/announcement";
 
   event.waitUntil(
     clients
@@ -50,14 +50,14 @@ self.addEventListener("notificationclick", function (event) {
   );
 });
 
-/**
- * @description 오프라인 지원
- */
+// /**
+//  * @description 오프라인 지원
+//  */
 
-self.addEventListener("install", (event) => {
-  event.waitUntil(self.skipWaiting());
-});
+// self.addEventListener("install", (event) => {
+//   event.waitUntil(self.skipWaiting());
+// });
 
-self.addEventListener("activate", (event) => {
-  event.waitUntil(self.clients.claim());
-});
+// self.addEventListener("activate", (event) => {
+//   event.waitUntil(self.clients.claim());
+// });

@@ -3,7 +3,7 @@ import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { app, auth, db } from "@/firebase";
 import { doc, setDoc } from "firebase/firestore";
 
-export default function NotificationComponent() {
+const NotificationWebApi = () => {
   useEffect(() => {
     const messaging = getMessaging(app);
 
@@ -47,9 +47,7 @@ export default function NotificationComponent() {
     requestPermission();
   }, []);
 
-  return (
-    <button onClick={() => Notification.requestPermission()}>
-      알림 허용하기
-    </button>
-  );
-}
+  return <div></div>;
+};
+
+export default NotificationWebApi;
