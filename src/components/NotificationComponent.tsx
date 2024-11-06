@@ -1,3 +1,5 @@
+// /components/NotificationComponent
+
 import { useEffect } from "react";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { app, auth, db } from "@/firebase";
