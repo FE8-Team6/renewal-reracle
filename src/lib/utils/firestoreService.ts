@@ -1091,7 +1091,7 @@ const wasteCategories = [
         id: "14",
         name: "낫손잡이",
         imageURL:
-          "sickleHhttps://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FsickleHandle.svg?alt=media&token=6d23d912-bcae-4800-9887-c091f7b9a81candle",
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FsickleHandle.svg?alt=media&token=6d23d912-bcae-4800-9887-c091f7b9a81candle",
         description:
           "고철로 배출하되, 가능하다면 손잡이 부분(나무재질 등)을 분리하여 배출",
       },
