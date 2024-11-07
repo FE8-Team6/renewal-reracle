@@ -70,7 +70,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
             categoryId: category.id,
           }))
       );
-      setSearchResults(results);
+      setSearchResults(results.slice(0, 8));
     };
 
     useEffect(() => {
