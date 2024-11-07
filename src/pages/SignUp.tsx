@@ -30,7 +30,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import KakaoAdfit320x100 from "@/components/KakaoAdfit320x100";
+import KakaoAdfit320x50 from "@/components/KakaoAdfit320x50";
 
 const signUpSchema = z.object({
   displayName: z.string().min(2, "닉네임은 2자 이상이어야 합니다."),
@@ -162,8 +162,8 @@ export const SignUp = () => {
   return (
     <>
       <LoginToSignUpTitle title="회원가입" />
-      <KakaoAdfit320x100 />
-      <section className="w-full h-[63vh] bg-white relative flex flex-col justify-center items-center gap-3 overflow-y-auto">
+      <KakaoAdfit320x50 />
+      <section className="w-full h-[70vh] bg-white relative flex flex-col justify-center items-center gap-3 overflow-y-auto">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
             <FormField
