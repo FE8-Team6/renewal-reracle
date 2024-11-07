@@ -161,75 +161,91 @@ export const SignUp = () => {
           onSubmit={handleSignUp}
           className="relative flex flex-col items-center justify-center "
         >
-          <div className="relative flex flex-row items-center mb-2 gap-1">
-            <Input
-              type="text"
-              placeholder="닉네임"
-              value={displayName}
-              onChange={(event) => {
-                setDisplayName(event.target.value);
-                setIsDisplayNameChecked(false);
-                setError("");
-              }}
-              className="w-[16.8rem]"
-            />
-            <MdOutlineTagFaces className="absolute text-xl left-3 top-4 text-purple" />
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={checkDisplayName}
-              className="mt-2"
-            >
-              중복 확인
-            </Button>
+          <div className="relative flex flex-col mb-2">
+            <label htmlFor="displayName" className="font-bold text-purple">
+              닉네임
+            </label>
+            <div className="relative flex items-center gap-1">
+              <MdOutlineTagFaces className="absolute text-xl left-3 top-4 text-purple" />
+              <Input
+                id="displayName"
+                type="text"
+                placeholder="닉네임"
+                value={displayName}
+                onChange={(event) => {
+                  setDisplayName(event.target.value);
+                  setIsDisplayNameChecked(false);
+                  setError("");
+                }}
+                className="w-[16.8rem]"
+              />
+              <Button variant="secondary" size="sm" onClick={checkDisplayName}>
+                중복 확인
+              </Button>
+            </div>
           </div>
-          <div className="relative flex flex-row items-center mb-2 gap-1">
-            <Input
-              type="text"
-              placeholder="이메일"
-              value={email}
-              onChange={(event) => {
-                setEmail(event.target.value);
-                setIsEmailChecked(false);
-                setError("");
-              }}
-              className="w-[16.8rem]"
-            />
-            <MdAlternateEmail className="absolute text-xl left-3 top-4 text-purple" />
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={checkEmail}
-              className="mt-2"
-            >
-              중복 확인
-            </Button>
+          <div className="relative flex flex-col mb-2 ">
+            <label htmlFor="email" className="font-bold text-purple">
+              이메일
+            </label>
+            <div className="relative flex items-center gap-1">
+              <MdAlternateEmail className="absolute text-xl left-3 top-4 text-purple" />
+              <Input
+                id="email"
+                type="text"
+                placeholder="이메일"
+                value={email}
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                  setIsEmailChecked(false);
+                  setError("");
+                }}
+                className="w-[16.8rem]"
+              />
+              <Button variant="secondary" size="sm" onClick={checkEmail}>
+                중복 확인
+              </Button>
+            </div>
           </div>
           <div className="relative flex flex-col mb-2">
-            <Input
-              type="password"
-              placeholder="비밀번호"
-              value={password}
-              onChange={(event) => {
-                setPassword(event.target.value);
-                setError("");
-              }}
-            />
-            <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
+            <label htmlFor="password" className="font-bold text-purple">
+              비밀번호
+            </label>
+            <div className="relative flex items-center gap-2">
+              <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
+              <Input
+                id="password"
+                type="password"
+                placeholder="비밀번호"
+                value={password}
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                  setError("");
+                }}
+                className="pl-10"
+              />
+            </div>
           </div>
-          <div className="relative flex flex-col mb-2">
-            <Input
-              type="password"
-              placeholder="비밀번호 확인"
-              value={confirmPassword}
-              onChange={(event) => {
-                setConfirmPassword(event.target.value);
-                setError("");
-              }}
-            />
-            <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
+          <div className="relative flex flex-col mb-2 ">
+            <label htmlFor="confirmPassword" className="font-bold text-purple">
+              비밀번호 확인
+            </label>
+            <div className="relative flex items-center gap-2">
+              <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
+              <Input
+                id="confirmPassword"
+                type="password"
+                placeholder="비밀번호 확인"
+                value={confirmPassword}
+                onChange={(event) => {
+                  setConfirmPassword(event.target.value);
+                  setError("");
+                }}
+                className="pl-10"
+              />
+            </div>
           </div>
-          {error && <p className="text-error-30 mb-2">{error}</p>}
+          {error && <p className="mb-2 text-error-30">{error}</p>}
           <Button variant="default" type="submit" size="default">
             회원가입
           </Button>
