@@ -34,7 +34,7 @@ const NotificationBanner = () => {
         <div className="flex items-center gap-2">
           <AiOutlineNotification className="w-4 h-4" />
           {latestAnnouncement
-            ? `공지: ${latestAnnouncement}`
+            ? ` ${latestAnnouncement}`
             : "공지사항이 없습니다."}
         </div>
       </NavLink>

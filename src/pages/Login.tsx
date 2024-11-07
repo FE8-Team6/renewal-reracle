@@ -14,6 +14,16 @@ import { Input } from "@/components/ui/input";
 import { getUserProfile } from "@/api/userApi/user";
 import { auth } from "@/firebase";
 import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 const loginSchema = z.object({
   email: z.string().email("이메일 형식이 올바르지 않습니다."),
@@ -21,42 +31,37 @@ const loginSchema = z.object({
 });
 
 export const Login = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const handleLogin = async (event: React.FormEvent) => {
-    event.preventDefault();
-    setError("");
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
-    const result = loginSchema.safeParse({ email, password });
+  const togglePasswordVisibility = () => {
+    setIsShowPassword((prevShowPassword) => !prevShowPassword);
+  };
 
-    if (!result.success) {
-      setError(result.error.errors[0].message);
-      return;
-    }
-
+  const onSubmit = async (values: z.infer<typeof loginSchema>) => {
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
-        email,
-        password
+        values.email,
+        values.password
       );
       const user = userCredential.user;
       const userData = await getUserProfile(user.uid);
       localStorage.setItem("userData", JSON.stringify(userData));
-
       navigate("/");
     } catch (error) {
       setError("이메일 또는 비밀번호가 잘못되었습니다.");
       console.error("이메일 로그인 실패:", error);
     }
-  };
-
-  const togglePasswordVisibility = () => {
-    setIsShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
   return (
@@ -68,40 +73,70 @@ export const Login = () => {
           alt="로그인 페이지 이미지"
           className="w-[14rem] h-[14rem] mb-4"
         />
-        <form
-          onSubmit={handleLogin}
-          className="relative flex flex-col items-center justify-center "
-        >
-          <div className="relative flex flex-col mb-2">
-            <MdAlternateEmail className="absolute text-xl left-3 top-4 text-purple" />
-            <Input
-              type="text"
-              placeholder="email@example.com"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg text-purple">이메일</FormLabel>
+                  <FormControl>
+                    <div className="relative">
+                      <MdAlternateEmail className="absolute text-xl left-3 top-4 text-purple" />
+                      <Input
+                        placeholder="email@example.com"
+                        {...field}
+                        className="pl-10"
+                      />
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
-          <div className="relative flex flex-col mb-2">
-            <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
-            <Input
-              placeholder="Password"
-              type={isShowPassword ? "text" : "password"}
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg text-purple">
+                    비밀번호
+                  </FormLabel>
+                  <FormControl>
+                    <div className="relative">
+                      <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
+                      <Input
+                        type={isShowPassword ? "text" : "password"}
+                        placeholder="Password"
+                        {...field}
+                        className="pl-10"
+                      />
+                      <button
+                        type="button"
+                        onClick={togglePasswordVisibility}
+                        className="absolute text-xl right-3 top-4 text-purple"
+                      >
+                        {isShowPassword ? (
+                          <MdVisibilityOff />
+                        ) : (
+                          <MdVisibility />
+                        )}
+                      </button>
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-            <button
-              type="button"
-              onClick={togglePasswordVisibility}
-              className="absolute text-xl right-3 top-4 text-purple"
-            >
-              {isShowPassword ? <MdVisibilityOff /> : <MdVisibility />}
-            </button>
-          </div>
-          {error && <p className="mb-2 text-error-50">{error}</p>}
-          <Button variant="default" type="submit" size="default">
-            로그인
-          </Button>
-        </form>
+            {error && (
+              <p className="text-sm font-medium text-error-40">{error}</p>
+            )}
+            <Button variant="default" type="submit" size="default">
+              로그인
+            </Button>
+          </form>
+        </Form>
         <GoogleButton />
         <Button variant="link" size="sm" onClick={() => navigate("/signup")}>
           <span>회원가입</span>

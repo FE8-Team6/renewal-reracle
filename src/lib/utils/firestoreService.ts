@@ -344,7 +344,8 @@ const wasteCategories = [
       {
         id: "19",
         name: "전자레인지",
-        imageURL: "microwave 이미지 없음",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fmicrowave.svg?alt=media&token=39436034-f09a-4811-a6c3-4afdc97c541b",
         description: "전자레인지 버리는 방법",
       },
       {
@@ -428,349 +429,386 @@ const wasteCategories = [
       {
         id: "1",
         name: "가구류",
-        imageURL: "furniture",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Ffurniture.svg?alt=media&token=99474f05-df66-45de-9ccc-bfb2428f12a8",
         description: "대형 생활 폐기물로 신고 한 후 스티커 부착",
       },
       {
         id: "2",
         name: "씽크대",
-        imageURL: "sink",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fsink.svg?alt=media&token=0bc5b1aa-6fe4-4a7f-8cee-65019380b82a",
         description: "대형 생활 폐기물로 신고 한 후 스티커 부착",
       },
       {
         id: "3",
         name: "나뭇가지",
-        imageURL: "woodPiece",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FwoodPiece.svg?alt=media&token=12fdd09a-fff3-4a51-a1e2-0bc9bb2bcb76",
         description: "나뭇가지 버리는 방법",
       },
       {
         id: "4",
         name: "낚싯대",
-        imageURL: "fishingRod",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FfishingRod.svg?alt=media&token=f4a0ad3c-eb21-4e48-9f9c-90abdac2245a",
         description: "낚싯대 버리는 방법",
       },
       {
         id: "5",
         name: "골프백",
-        imageURL: "golfBag",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FgolfBag.svg?alt=media&token=6aa26311-1e9d-4d4f-b7bc-43a7167bacc4",
         description: "골프백 버리는 방법",
       },
       {
         id: "6",
         name: "악기",
-        imageURL: "instrument",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Finstrument.svg?alt=media&token=a645b2f1-8330-4ffc-89e7-7f5a0a445db1",
         description: "악기 버리는 방법",
       },
       {
         id: "7",
         name: "라켓",
-        imageURL: "racket",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fracket.svg?alt=media&token=51d8f574-1bed-4213-8745-42cbdb5eda8c",
         description: "라켓 버리는 방법",
       },
       {
         id: "8",
         name: "목발",
-        imageURL: "crutch",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fcrutch.svg?alt=media&token=35214de1-7d8c-4f2e-9ff1-ab1c5d5ca482",
         description: "목발 버리는 방법",
       },
       {
         id: "9",
         name: "목재",
-        imageURL: "lumber",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Flumber.svg?alt=media&token=374497d1-152b-413a-a292-2dce7e1d3531",
         description: "목재 버리는 방법",
       },
       {
         id: "10",
         name: "문짝",
-        imageURL: "door",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fdoor.svg?alt=media&token=b3bb928c-4013-4577-b2ba-bef567d06b32",
         description: "문짝 버리는 방법",
       },
       {
         id: "11",
         name: "매트",
-        imageURL: "airMat",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FairMat.svg?alt=media&token=014bfee0-b1ec-42db-ac54-43f517b072f7",
         description: "매트 버리는 방법",
       },
       {
         id: "12",
         name: "바베큐그릴",
-        imageURL: "bbqGrill",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FbbqGrill.svg?alt=media&token=a36fd756-c4e5-4ed4-87ab-c5dc01610c90",
         description: "바베큐그릴 버리는 방법",
       },
       {
         id: "13",
         name: "밥상",
-        imageURL: "table",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Ftable.svg?alt=media&token=9b9eb3d3-ebae-4526-993d-322043af5154",
         description: "밥상 버리는 방법",
       },
       {
         id: "14",
         name: "시계",
-        imageURL: "clock",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fclock.svg?alt=media&token=139b6564-f2a2-4ab2-a03c-8b1b22a3ec1a",
         description: "시계 버리는 방법",
       },
       {
         id: "15",
         name: "블라인드",
-        imageURL: "blind",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fblind.svg?alt=media&token=f3dc087e-5dd8-48b3-8afc-6b06f0c77017",
         description: "블라인드 버리는 방법",
       },
       {
         id: "16",
         name: "사다리",
-        imageURL: "ladder",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fladder.svg?alt=media&token=7c6b3445-ba67-405a-b733-7af9abce74e2",
         description: "사다리 버리는 방법",
       },
       {
         id: "17",
         name: "삽",
-        imageURL: "shovel",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fshovel.svg?alt=media&token=caa89f76-48d8-437a-83e5-3204ac3fdadb",
         description: "삽 버리는 방법",
       },
       {
         id: "18",
         name: "쌀통",
-        imageURL: "riceContainer",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FriceContainer.svg?alt=media&token=42c65760-a6e8-4103-9716-137d57d5b14e",
         description: "쌀통 버리는 방법",
       },
       {
         id: "19",
         name: "서랍장",
-        imageURL: "drawers",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fdrawers.svg?alt=media&token=db3cd4fa-f21b-4325-8480-613c6605b141",
         description: "서랍장 버리는 방법",
       },
       {
         id: "20",
         name: "세면대",
-        imageURL: "washbasin",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fwashbasin.svg?alt=media&token=71c54eb7-29ad-4ea0-8e9f-d883678a47ed",
         description: "세면대 버리는 방법",
       },
       {
         id: "21",
         name: "솜이불",
-        imageURL: "bedding",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fbedding.svg?alt=media&token=7835d9f9-8f42-4d0b-8bb4-5e83fc55fa66",
         description: "솜이불 버리는 방법",
       },
       {
         id: "22",
         name: "수족관, 어항",
-        imageURL: "aquarium",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Faquarium.svg?alt=media&token=dca01537-0bca-4d03-b6b3-93471f0a132e",
         description: "수족관, 어항 버리는 방법",
       },
       {
         id: "23",
         name: "스노우보드",
-        imageURL: "snowboard",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fsnowboard.svg?alt=media&token=41d26a15-eb66-49b9-9c51-75c7b902eb49",
         description: "스노우보드 버리는 방법",
       },
       {
         id: "24",
         name: "스키용구류",
-        imageURL: "skiEquipment",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FskiEquipment.svg?alt=media&token=9f35944a-848b-451c-82de-eda034063894",
         description: "스키용구류 버리는 방법",
       },
       {
         id: "25",
         name: "식물",
-        imageURL: "plant",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fplant.svg?alt=media&token=75fcaf84-5bbe-4052-8afa-7d65bb72707e",
         description: "식물, 나무 버리는 방법",
       },
       {
         id: "26",
         name: "신발장",
-        imageURL: "shoeRack",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FshoeRack.svg?alt=media&token=db15a8c4-7f9c-413a-b674-bcff7b27af52",
         description: "신발장 버리는 방법",
       },
       {
         id: "27",
         name: "아기욕조",
-        imageURL: "babyBath",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FbabyBath.svg?alt=media&token=771b3c5c-aa4d-4e38-aa04-adce48dd8d19",
         description: "아기욕조 버리는 방법",
       },
       {
         id: "28",
-        name: "침구류",
-        imageURL: "bedding",
-        description: "침구류 버리는 방법",
-      },
-      {
-        id: "29",
         name: "침대",
-        imageURL: "bed",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fbed.svg?alt=media&token=8ff9b2a5-7d63-4e60-bd4e-90602703ea1f",
         description: "침대 버리는 방법",
       },
       {
-        id: "30",
+        id: "29",
         name: "액자",
-        imageURL: "album",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Falbum.svg?alt=media&token=b305f76a-7c25-4a6b-a3b5-0561a6c7b13c",
         description: "액자 버리는 방법",
       },
       {
-        id: "31",
-        name: "앨범",
-        imageURL: "album",
-        description: "앨범 버리는 방법",
-      },
-      {
-        id: "32",
-        name: "에어매트",
-        imageURL: "airMat",
-        description: "에어매트 버리는 방법",
-      },
-      {
-        id: "33",
+        id: "30",
         name: "여행가방",
-        imageURL: "travelBag",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FtravelBag.svg?alt=media&token=c3b800aa-8e02-47e9-aaba-8d67db5a84ba",
         description: "여행가방 버리는 방법",
       },
       {
-        id: "34",
+        id: "31",
         name: "유리판",
-        imageURL: "glassPlate",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FglassPlate.svg?alt=media&token=eb31dd8c-2cc9-486e-86ad-dc59475f1e91",
         description: "유리판 버리는 방법",
       },
       {
-        id: "35",
+        id: "32",
         name: "유모차",
-        imageURL: "stroller",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fstroller.svg?alt=media&token=c445a902-8623-4250-9ced-86bb72f5a0ce",
         description: "유모차 버리는 방법",
       },
       {
-        id: "36",
+        id: "33",
         name: "의자",
-        imageURL: "chair",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fchair.svg?alt=media&token=afc3be68-e300-452a-9e17-5a2116a5fcbf",
         description: "의자 버리는 방법",
       },
       {
-        id: "37",
+        id: "34",
         name: "이불",
-        imageURL: "bedding",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fbedding.svg?alt=media&token=7835d9f9-8f42-4d0b-8bb4-5e83fc55fa66",
         description: "이불 버리는 방법",
       },
       {
-        id: "38",
+        id: "35",
         name: "인형",
-        imageURL: "doll",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fdoll.svg?alt=media&token=53d35af3-8ed0-4c82-ada6-1c80d66ec784",
         description: "인형 버리는 방법",
       },
       {
-        id: "39",
+        id: "36",
         name: "자전거",
-        imageURL: "bicycle",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fbicycle.svg?alt=media&token=7640651d-e538-4791-bb55-41ee2e65d37b",
         description: "자전거 버리는 방법",
       },
       {
-        id: "40",
+        id: "37",
         name: "장난감류",
-        imageURL: "toys",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Ftoys.svg?alt=media&token=de39d0b7-a982-4d03-97d1-d632a7e8160a",
         description: "장난감류 버리는 방법",
       },
       {
-        id: "41",
+        id: "38",
         name: "대걸레",
-        imageURL: "mop",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fmop.svg?alt=media&token=f8d2e25c-cef7-4394-bf5a-10dca5e6502d",
         description: "자루걸레 버리는 방법",
       },
       {
-        id: "42",
+        id: "39",
         name: "장롱",
-        imageURL: "wardrobe",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fwardrobe.svg?alt=media&token=6a25c4b4-e318-4f6a-bd70-57ad6c5759b7",
         description: "장롱 버리는 방법",
       },
       {
-        id: "43",
+        id: "40",
         name: "장식장",
-        imageURL: "dresser",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fdresser.svg?alt=media&token=5b88770c-d39a-437a-acbd-84caa0285420",
         description: "장식장 버리는 방법",
       },
       {
-        id: "44",
+        id: "41",
         name: "장판",
-        imageURL: "vinylFlooring",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FvinylFlooring.svg?alt=media&token=c8dda934-99e8-41a4-bef8-0b8902123b7a",
         description: "장판 버리는 방법",
       },
       {
-        id: "45",
+        id: "42",
         name: "전기장판",
-        imageURL: "vinylFlooring",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FvinylFlooring.svg?alt=media&token=c8dda934-99e8-41a4-bef8-0b8902123b7a",
         description: "전기장판 버리는 방법",
       },
       {
-        id: "46",
+        id: "43",
         name: "피아노",
-        imageURL: "electronicPiano",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FelectronicPiano.svg?alt=media&token=c0134cd6-83f2-411d-836b-a0e8d8e61e21",
         description: "피아노 버리는 방법",
       },
       {
-        id: "47",
+        id: "44",
         name: "진열대",
-        imageURL: "shelf",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fshelf.svg?alt=media&token=09b0a4e8-99c4-467d-ab9b-d1fa4102e362",
         description: "진열대 버리는 방법",
       },
       {
-        id: "48",
+        id: "45",
         name: "책상",
-        imageURL: "table",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Ftable.svg?alt=media&token=9b9eb3d3-ebae-4526-993d-322043af5154",
         description: "책상 버리는 방법",
       },
       {
-        id: "49",
+        id: "46",
         name: "천체망원경",
-        imageURL: "telescope",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Ftelescope.svg?alt=media&token=dba12208-034c-46e3-bc47-373c3432385e",
         description: "천체망원경 버리는 방법",
       },
       {
-        id: "50",
+        id: "47",
         name: "체중계",
-        imageURL: "weightMeasuringMachine",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FweightMeasuringMachine.svg?alt=media&token=587bccb5-32c1-46da-8249-1e96c77e1ae0",
         description: "체중계 버리는 방법",
       },
       {
-        id: "51",
+        id: "48",
         name: "카펫",
-        imageURL: "carpet",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fcarpet.svg?alt=media&token=743c6c44-de1f-472b-b6fe-6667cc0deff3",
         description: "카펫 버리는 방법",
       },
       {
-        id: "52",
+        id: "49",
         name: "캐비넷",
-        imageURL: "cabinet",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fcabinet.svg?alt=media&token=055099b9-cf3b-469b-b8d6-db51f545f701",
         description: "캐비넷 버리는 방법",
       },
       {
-        id: "53",
+        id: "50",
         name: "커튼",
-        imageURL: "curtain",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fcurtain.svg?alt=media&token=832ab7ae-eba6-47ff-b9a8-c18865bc0ab7",
         description: "커튼 버리는 방법",
       },
       {
-        id: "54",
+        id: "51",
         name: "쿠션",
-        imageURL: "cushion",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fcushion.svg?alt=media&token=0c16c0e3-c268-44d3-bb11-c4d6d2d7b2f6",
         description: "쿠션 버리는 방법",
       },
       {
-        id: "55",
+        id: "52",
         name: "텐트",
-        imageURL: "tent",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Ftent.svg?alt=media&token=30f2929e-b07c-462a-b5f4-a62b14c66b0a",
         description: "텐트 버리는 방법",
       },
       {
-        id: "56",
+        id: "53",
         name: "항아리",
-        imageURL: "jar",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fjar.svg?alt=media&token=fb4317e7-c8cd-427f-bd23-2c57bf2a1445",
         description: "항아리 버리는 방법",
       },
       {
-        id: "57",
+        id: "54",
         name: "화로",
-        imageURL: "brazier",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fbrazier.svg?alt=media&token=7d8de9f2-a5b5-4c91-8f04-eb92d8d9baa2",
         description: "화로 버리는 방법",
       },
       {
-        id: "58",
+        id: "55",
         name: "화장대",
-        imageURL: "vanity",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fvanity.svg?alt=media&token=98468ba3-5f0c-44ad-b190-296bbdc34154",
         description: "화장대 버리는 방법",
       },
     ],
@@ -938,7 +976,8 @@ const wasteCategories = [
       {
         id: "13",
         name: "컵(도자기,유리컵)",
-        imageURL: "cup 이미지 없음",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fcup.svg?alt=media&token=9f085991-a8a2-478c-bef8-88dbea4bafa4",
         description: "불연성폐기물로 배출",
       },
       {
@@ -959,667 +998,646 @@ const wasteCategories = [
       {
         id: "1",
         name: "가발",
-        imageURL: "wig",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fwig.svg?alt=media&token=dc66032a-224c-4004-b241-a6096f12b20a",
         description: "종량제 봉투로 배출",
       },
       {
         id: "2",
         name: "가위",
-        imageURL: "scissors",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fscissors.svg?alt=media&token=19f9be46-2c94-49aa-b999-49d21e5fb96e",
         description:
           "재질에 맞게 배출하되,여러재질이 섞인 경우,종량제 봉투로 배출",
       },
       {
         id: "3",
         name: "걸레",
-        imageURL: "dishcloth",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fdishcloth.svg?alt=media&token=752fcd51-a8ea-4b44-88b9-e27d3ef5464d",
         description: "종량제 봉투로 배출",
       },
       {
         id: "4",
         name: "계란껍질",
-        imageURL: "eggshell",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Feggshell.svg?alt=media&token=c2e7f922-80e8-4d9d-92ad-43d5da29bbc7",
         description: "종량제 봉투로 배출",
       },
       {
         id: "5",
         name: "고무장갑",
-        imageURL: "rubberGlove",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FrubberGlove.svg?alt=media&token=0845ce78-0d81-494c-a76f-0bce0537363a",
         description: "종량제 봉투로 배출",
       },
       {
         id: "6",
         name: "골프공",
-        imageURL: "golfBall",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FgolfBall.svg?alt=media&token=91bc6a08-bf22-49cb-89a2-c98669ad433c",
         description: "종량제 봉투로 배출",
       },
       {
         id: "7",
         name: "나무국자",
-        imageURL: "woodenLadle",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FwoodenLadle.svg?alt=media&token=bee49bf1-c00f-49f8-8b6b-9bcb0918c74d",
         description: "종량제 봉투로 배출",
       },
       {
         id: "8",
         name: "나무젓가락",
-        imageURL: "woodenChopsticks",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FwoodenChopsticks.svg?alt=media&token=b6287349-5a79-4d9f-b952-10ff21f64b16",
         description: "종량제 봉투로 배출",
       },
       {
         id: "9",
         name: "나무조각",
-        imageURL: "woodPiece",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FwoodPiece.svg?alt=media&token=d75ce597-9ec0-49e6-9b48-cf513ac5972b",
         description: "종량제 봉투에 담을 수 없는경우 대형폐기물로 처리",
       },
       {
         id: "10",
         name: "나뭇가지",
-        imageURL: "woodPiece",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FwoodPiece.svg?alt=media&token=12fdd09a-fff3-4a51-a1e2-0bc9bb2bcb76",
         description: "종량제 봉투에 담을 수 없는경우 대형폐기물로 처리",
       },
       {
         id: "11",
         name: "나무줄기",
-        imageURL: "treeTrunk",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FtreeTrunk.svg?alt=media&token=75bebd8d-e3d3-4752-9bd2-da5aa142c49c",
         description: "종량제 봉투에 담을 수 없는경우 대형폐기물로 처리",
       },
       {
         id: "12",
         name: "나침반",
-        imageURL: "compass",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fcompass.svg?alt=media&token=1d29d8d4-4575-4716-94f7-1b1b5cd69806",
         description: "종량제 봉투로 배출",
       },
       {
         id: "13",
         name: "낙엽",
-        imageURL: "fallenLeaves",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FfallenLeaves.svg?alt=media&token=96e3917d-0b18-42a7-bb09-bb70af5ff9fd",
         description: "종량제 봉투로 배출",
       },
       {
         id: "14",
         name: "낫손잡이",
-        imageURL: "sickleHandle",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FsickleHandle.svg?alt=media&token=6d23d912-bcae-4800-9887-c091f7b9a81candle",
         description:
           "고철로 배출하되, 가능하다면 손잡이 부분(나무재질 등)을 분리하여 배출",
       },
       {
         id: "15",
         name: "냄비뚜껑(강화유리)",
-        imageURL: "potLid",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FpotLid.svg?alt=media&token=ec860687-793b-45c1-8475-5426bf1b38ce",
         description: "종량제 봉투로 배출",
       },
       {
         id: "16",
         name: "도끼 손잡이",
-        imageURL: "axHandle",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FaxHandle.svg?alt=media&token=f5f3eeb7-e6d2-4af1-8b2e-9f1a8d6aafa3",
         description: "종량제 봉투로 배출",
       },
       {
         id: "17",
         name: "나무도마",
-        imageURL: "woodenCuttingBoard",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FwoodenCuttingBoard.svg?alt=media&token=5323a935-2cf7-4dbc-8809-cd42740c0516",
         description: "종량제 봉투로 배출",
       },
       {
         id: "18",
         name: "돋보기",
-        imageURL: "magnifyingGlasses",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FmagnifyingGlasses.svg?alt=media&token=1be6fbeb-cb30-4aae-b744-785a453d3279",
         description: "종량제 봉투로 배출",
       },
       {
         id: "19",
         name: "라이터",
-        imageURL: "lighter",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Flighter.svg?alt=media&token=bde4d48e-5af1-4aad-969b-68d8c7545c37",
         description: "모두 사용한 후 종량제 봉투로 배출",
       },
       {
         id: "20",
         name: "라켓",
-        imageURL: "racket",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fracket.svg?alt=media&token=59a673bb-ee62-4bd8-994e-5109590a4354",
         description: "종량제 봉투에 담을 수 없다면 대형으로처리",
       },
       {
         id: "21",
         name: "랩",
-        imageURL: "lab",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Flab.svg?alt=media&token=0e557817-ab65-4ca0-b33e-ccbe326e88ac",
         description: "사용한 랩은 쓰레기 종량제 봉투로 배출",
       },
       {
         id: "22",
         name: "마스크",
-        imageURL: "mask",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fmask.svg?alt=media&token=fb52b11c-cce3-4f48-83ea-fbeea750c2fd",
         description: "종량제 봉투로 배출",
       },
       {
         id: "23",
         name: "마우스패드",
-        imageURL: "mousePad",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FmousePad.svg?alt=media&token=52fc87c6-2c82-42c3-b1af-0f675ae6c8e3",
         description: "종량제 봉투로 배출",
       },
       {
         id: "24",
         name: "만년필(마커펜)",
-        imageURL: "fountainPen",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FfountainPen.svg?alt=media&token=60f3ce10-3588-45a4-910a-710cb41f3cd2",
         description: "종량제 봉투로 배출",
       },
       {
         id: "25",
         name: "일회용면도기",
-        imageURL: "disposableRazor",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FdisposableRazor.svg?alt=media&token=1cb51972-d18a-449f-8ef4-e243378a7ea7",
         description: "종량제 봉투로 배출",
       },
       {
         id: "26",
         name: "면도칼",
-        imageURL: "razor",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Frazor.svg?alt=media&token=f0e3f563-f475-4d62-a5e2-beff7598a427",
         description:
           "수거원이 다치지 않도록 종이 등으로 감싸서 종량제 봉투로 배출",
       },
       {
         id: "27",
         name: "면봉",
-        imageURL: "cottonSwab",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FcottonSwab.svg?alt=media&token=371a2956-291e-43e8-a83b-5107a2c4245f",
         description: "종량제 봉투로 배출",
       },
       {
         id: "28",
         name: "명함",
-        imageURL: "businessCard",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FbusinessCard.svg?alt=media&token=31a71731-5962-495a-b82a-d40bbb702d36",
         description:
           "종이류로 배출하며, 플라스틱 합성지 등 다른 재질 포함시 종량제봉투에 배출",
       },
       {
         id: "29",
         name: "명함지갑",
-        imageURL: "businessCardWallet",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FbusinessCard.svg?alt=media&token=31a71731-5962-495a-b82a-d40bbb702d36",
         description: "종량제 봉투로 배출",
       },
       {
         id: "30",
         name: "모자",
-        imageURL: "hat",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fhat.svg?alt=media&token=56c20dfc-6d97-4edb-a7d3-ad31fb0b04ad",
         description:
           "의류 및 원단류 배출 방법을 참고하여 배출하거나 종량제 봉투로 배출",
       },
       {
         id: "31",
         name: "목재",
-        imageURL: "wood",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fwood.svg?alt=media&token=63bd28c2-8dac-4e66-b7a8-482db3ad6784",
         description: "종량제 봉투에 담을 수 없는 경우 대형폐기물로 처리",
       },
       {
         id: "32",
         name: "물티슈",
-        imageURL: "wetTissue",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FwetTissue.svg?alt=media&token=36f2c854-c9e2-4525-8305-32e8bd2856b0",
         description: "종량제 봉투로 배출",
       },
       {
         id: "33",
         name: "밀짚모자",
-        imageURL: "strawHat",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FstrawHat.svg?alt=media&token=385508b9-ae6e-41f3-ac11-290131ef2b07",
         description: "종량제 봉투로 배출",
       },
       {
         id: "34",
         name: "바둑판",
-        imageURL: "checkerboard",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fcheckerboard.svg?alt=media&token=e073f927-f1f2-4699-8968-a0c8e6267fde",
         description: "종량제 봉투에 담을 수 없는경우 대형폐기물로 처리",
       },
       {
         id: "35",
         name: "방석",
-        imageURL: "cushion",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fcushion.svg?alt=media&token=4c1580c4-102b-4271-83ee-25ad15fdb57f",
         description: "종량제 봉투로 배출",
       },
       {
         id: "36",
         name: "배트민턴공",
-        imageURL: "badmintonBall",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FbadmintonBall.svg?alt=media&token=dcfb2229-f8b5-4d48-8597-9f36904c9fe5",
         description: "종량제 봉투로 배출",
       },
       {
         id: "37",
-        name: "벼루",
-        imageURL: "inkStone",
+        name: "보온병",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fthermos.svg?alt=media&token=a20568de-2028-4388-bec9-96fc623e9e21",
         description: "종량제 봉투로 배출",
       },
       {
         id: "38",
-        name: "보온병",
-        imageURL: "thermos",
+        name: "볼펜",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fpen.svg?alt=media&token=658b3e40-7da3-4cda-8e6a-d31eb09f6f2b",
         description: "종량제 봉투로 배출",
       },
       {
         id: "39",
-        name: "볼펜",
-        imageURL: "pen",
+        name: "붓",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fbrush.svg?alt=media&token=b7e79ac5-b459-477a-8a27-59d650c964b7",
         description: "종량제 봉투로 배출",
       },
       {
         id: "40",
-        name: "붓",
-        imageURL: "brush",
+        name: "비닐코팅종이",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FvinylCoatedPaper.svg?alt=media&token=2940cd05-a282-4a05-b56c-6ce202262086",
         description: "종량제 봉투로 배출",
       },
       {
         id: "41",
-        name: "비닐장판",
-        imageURL: "vinylFlooring",
-        description: "종량제 봉투에 담을 수 없는경우 대형폐기물로 처리",
-      },
-      {
-        id: "42",
-        name: "비닐코팅종이",
-        imageURL: "vinylCoatedPaper",
-        description: "종량제 봉투로 배출",
-      },
-      {
-        id: "43",
         name: "빗",
-        imageURL: "comb",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fcomb.svg?alt=media&token=3c4f3873-f2e7-4eab-914a-61fcdacfcdba",
         description:
           "재질에 맞게 배출하되 나무 빗 등은 쓰레기 종량제봉투로 배출",
       },
       {
-        id: "44",
+        id: "42",
         name: "사인펜",
-        imageURL: "markerPen",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FmarkerPen.svg?alt=media&token=0a473f77-83dd-449f-b704-48cb95800584",
+        description: "종량제 봉투로 배출",
+      },
+      {
+        id: "43",
+        name: "사진",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fpicture.svg?alt=media&token=a249fb74-6033-4596-85af-08ece6a64132",
+        description: "종량제 봉투로 배출",
+      },
+      {
+        id: "44",
+        name: "사진인화지",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FphotoPaper.svg?alt=media&token=b3399ccb-31c1-4b85-9b7b-bd5a56c56982",
         description: "종량제 봉투로 배출",
       },
       {
         id: "45",
-        name: "사진",
-        imageURL: "picture",
+        name: "생선뼈",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FfishBone.svg?alt=media&token=27e4b5cb-a8d3-4f1b-837f-06d389e6dcff",
         description: "종량제 봉투로 배출",
       },
       {
         id: "46",
-        name: "사진인화지",
-        imageURL: "photoPaper",
+        name: "샤프펜슬",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FmechanicalPencil.svg?alt=media&token=3eb29e4e-f24c-41e6-8092-9ef381f75ac6",
         description: "종량제 봉투로 배출",
       },
       {
         id: "47",
-        name: "생선뼈",
-        imageURL: "fishBone",
-        description: "종량제 봉투로 배출",
+        name: "성냥",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fmatches.svg?alt=media&token=7f99198b-98ee-468f-9970-0c9fd2538c27",
+        description: "물에 적신 후 종량제 봉투로 배출",
       },
       {
         id: "48",
-        name: "샤프펜슬",
-        imageURL: "mechanicalPencil",
+        name: "송곳",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fawl.svg?alt=media&token=a281dcb9-c928-4dbb-b750-c5a8ab6b5c6f",
         description: "종량제 봉투로 배출",
       },
       {
         id: "49",
-        name: "성냥",
-        imageURL: "matches",
-        description: "물에 적신 후 종량제 봉투로 배출",
+        name: "수세미",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fscrubbers.svg?alt=media&token=39ee46ff-e6a6-4cfa-9d6a-8639999a1c4c",
+        description: "종량제 봉투로 배출",
       },
       {
         id: "50",
-        name: "솜",
-        imageURL: "cotton",
+        name: "숯",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fcharcoal.svg?alt=media&token=a2d9337f-c83a-4214-b4f8-42e70eb3fa17",
         description: "종량제 봉투로 배출",
       },
       {
         id: "51",
-        name: "송곳",
-        imageURL: "awl",
+        name: "스폰지",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fsponge.svg?alt=media&token=f00a22dc-b092-43c2-a740-520f5d019936",
         description: "종량제 봉투로 배출",
       },
       {
         id: "52",
-        name: "수세미",
-        imageURL: "scrubbers",
-        description: "종량제 봉투로 배출",
-      },
-      {
-        id: "53",
-        name: "숯",
-        imageURL: "charcoal",
-        description: "종량제 봉투로 배출",
-      },
-      {
-        id: "54",
-        name: "스폰지",
-        imageURL: "sponge",
-        description: "종량제 봉투로 배출",
-      },
-      {
-        id: "55",
         name: "시계",
-        imageURL: "watch",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fwatch.svg?alt=media&token=e4d92f1a-9361-4991-8b24-db8ad27bb809",
         description:
           "종량제 종투에 담을 수 없는 경우 대형폐기물로 처리, 건전지는 분리하여 전용수거함으로 배출",
       },
       {
-        id: "56",
+        id: "53",
         name: "신발",
-        imageURL: "shoes",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fshoes.svg?alt=media&token=db449c10-2152-4427-8658-380430b12acf",
+        description: "종량제 봉투로 배출",
+      },
+      {
+        id: "54",
+        name: "아이스팩",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FicePack.svg?alt=media&token=1b98f699-bdf8-4ee6-bf5e-f0086df24df2",
+        description: "종량제 봉투로 배출",
+      },
+      {
+        id: "55",
+        name: "애완동물 용변 시트",
+        imageURL: "petToiletSeat 이미지 없음",
+        description: "종량제 봉투로 배출",
+      },
+      {
+        id: "56",
+        name: "야구공",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FbaseballBall.svg?alt=media&token=ddf1005a-d99e-4803-9a68-0830c7decbc4",
         description: "종량제 봉투로 배출",
       },
       {
         id: "57",
-        name: "식물,나무",
-        imageURL: "plant",
-        description: "종량제 봉투에 담을 수 없는 경우 대형폐기물로 처리",
+        name: "야구글러브",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FbaseballGlove.svg?alt=media&token=f86e5b29-8a46-4db4-b7bc-27f49517eab9",
+        description: "종량제 봉투로 배출",
       },
       {
         id: "58",
-        name: "아이스팩",
-        imageURL: "icePack",
+        name: "나무야구배트",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FwoodenBaseballBat.svg?alt=media&token=99163db3-ad12-49f0-af7c-c8407e0866fe",
         description: "종량제 봉투로 배출",
       },
       {
         id: "59",
-        name: "악기",
-        imageURL: "instrument",
-        description:
-          "종량제 봉투에 담을 수 없는경우 대형페기물로 배출 ※ 악기는 폐가전 제품 무상방문 수거 대상품목이 아님",
-      },
-      {
-        id: "60",
-        name: "애완동물 용변 시트",
-        imageURL: "petToiletSeat",
+        name: "양초",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fcandle.svg?alt=media&token=169d2f14-47e7-4381-9029-d6ab566ae091",
         description: "종량제 봉투로 배출",
       },
       {
-        id: "61",
-        name: "액자",
-        imageURL: "photoFrame",
+        id: "60",
+        name: "에어매트",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FairMat.svg?alt=media&token=014bfee0-b1ec-42db-ac54-43f517b072f7",
         description: "종량제 봉투에 담을 수 없는경우 대형폐기물로 처리",
+      },
+      {
+        id: "61",
+        name: "연필(색연필)",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fpencil.svg?alt=media&token=c46643bd-a971-4513-afb2-8de6455002de",
+        description: "종량제 봉투로 배출",
       },
       {
         id: "62",
-        name: "앨범",
-        imageURL: "album",
-        description: "종량제 봉투에 담을 수 없는경우 대형폐기물로 처리",
+        name: "연필깎이",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FpencilSharpener.svg?alt=media&token=abb14771-79bf-4d34-8f70-7d0b3dd216c1",
+        description: "종량제 봉투로 배출",
       },
       {
         id: "63",
-        name: "야구공",
-        imageURL: "baseballBall",
+        name: "요가매트",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FyogaMat.svg?alt=media&token=f7aceacf-af21-4035-aaaa-b5e22bd9956a",
         description: "종량제 봉투로 배출",
       },
       {
         id: "64",
-        name: "야구글러브",
-        imageURL: "baseballGlove",
-        description: "종량제 봉투로 배출",
-      },
-      {
-        id: "65",
-        name: "나무야구배트",
-        imageURL: "woodenBaseballBat",
-        description: "종량제 봉투로 배출",
-      },
-      {
-        id: "66",
-        name: "양초",
-        imageURL: "candle",
-        description: "종량제 봉투로 배출",
-      },
-      {
-        id: "67",
-        name: "에어매트",
-        imageURL: "airMat",
-        description: "종량제 봉투에 담을 수 없는경우 대형폐기물로 처리",
-      },
-      {
-        id: "68",
-        name: "연필(색연필)",
-        imageURL: "pencil",
-        description: "종량제 봉투로 배출",
-      },
-      {
-        id: "69",
-        name: "연필깎이",
-        imageURL: "pencilSharpener",
-        description: "종량제 봉투로 배출",
-      },
-      {
-        id: "70",
-        name: "요가매트",
-        imageURL: "yogaMat",
-        description: "종량제 봉투로 배출",
-      },
-      {
-        id: "71",
         name: "우산",
-        imageURL: "umbrella",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fumbrella.svg?alt=media&token=7cff4fd1-a836-4d27-be8a-2dafddf52dba",
         description:
           "뼈대와 비닐을 분리하여, 각각의 분리수거함으로 배출,분리가 어렵다면 종량제봉투로 배출",
       },
       {
+        id: "65",
+        name: "자석",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fmagnet.svg?alt=media&token=cf08ddd5-a135-4d45-986a-745d0da456d1",
+        description: "종량제 봉투로 배출",
+      },
+      {
+        id: "66",
+        name: "전기코드",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FelectricalCord.svg?alt=media&token=fdcdafcd-9b2f-4a53-b2d8-609f277af351",
+        description: "종량제 봉투로 배출",
+      },
+      {
+        id: "67",
+        name: "전동칫솔",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FelectricToothbrush.svg?alt=media&token=c8b25523-21e8-4cfd-88e8-37df06af808b",
+        description: "종량제 봉투로 배출",
+      },
+      {
+        id: "68",
+        name: "접착제",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fglue.svg?alt=media&token=19c22437-42dd-4e66-a113-244d34fa880d",
+        description: "종량제 봉투로 배출",
+      },
+      {
+        id: "69",
+        name: "젖꼭지(아기용품)",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fnipple.svg?alt=media&token=e957abcf-e981-45bb-8fb4-02a1f65f2cfd",
+        description: "종량제 봉투로 배출",
+      },
+      {
+        id: "70",
+        name: "조각칼",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FcarvingKnife.svg?alt=media&token=5aabe4e9-2868-41cd-88f3-4755ac5643b8",
+        description: "수거원이 다치지 않도록 종이 등으로 감싸서 배출",
+      },
+      {
+        id: "71",
+        name: "종이 기저귀",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FpaperDiapers.svg?alt=media&token=4b71dd20-36c1-4a11-90e5-367203a3ee6e",
+        description: "종량제 봉투로 배출",
+      },
+      {
         id: "72",
-        name: "이불",
-        imageURL: "bedding",
-        description: "종량제 봉투에 담을 수 없는경우 대형폐기물로 처리",
+        name: "줄자",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FtapeMeasure.svg?alt=media&token=fb7890ac-12af-4f39-859d-d8588c5bf204",
+        description: "재질에 맞게 배출 또는 종량제 봉투로 배출",
       },
       {
         id: "73",
-        name: "인형",
-        imageURL: "doll",
-        description: "종량제 봉투에 담을 수 없는경우 대형폐기물로 처리",
+        name: "지우개",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Feraser.svg?alt=media&token=ab4cd119-4d41-4447-8391-4cdcedbed62a",
+        description: "종량제 봉투로 배출",
       },
       {
         id: "74",
-        name: "자석",
-        imageURL: "magnet",
+        name: "차 찌꺼기",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FcoffeeBeanIngredients.svg?alt=media&token=dff78633-5878-4d6f-a59d-58802feda72b",
         description: "종량제 봉투로 배출",
       },
       {
         id: "75",
-        name: "장난감",
-        imageURL: "toys",
-        description:
-          "크기에 따라 대형폐기물 또는 재질에 맞게 배출(여러재질이 섞인 경우 종량제 봉투로 배출)",
+        name: "체온계",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fthermometer.svg?alt=media&token=df941842-0935-4eeb-916b-d018eb7ec9c0",
+        description: "건전지는 분리하여 전용수거함으로 배출",
       },
       {
         id: "76",
-        name: "전기코드",
-        imageURL: "electricalCord",
-        description: "종량제 봉투로 배출",
+        name: "체중계",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FweightMeasuringMachine.svg?alt=media&token=c3c2ab3a-2478-4f92-82ce-740253789821",
+        description: "종량제 봉투에 담을 수 없는 경우 대형폐기물로 처리",
       },
       {
         id: "77",
-        name: "전동칫솔",
-        imageURL: "electricToothbrush",
+        name: "축구공",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fsoccer.svg?alt=media&token=96141d81-b397-46e9-a221-0ed826f6e07f",
         description: "종량제 봉투로 배출",
       },
       {
         id: "78",
-        name: "전자피아노",
-        imageURL: "electronicPiano",
-        description:
-          "종량제 봉투에 담을 수 없는경우 대형폐기물로 처리 ※ 악기는 폐가전 제품 무상방문 수거 대상품목이 아님",
+        name: "커피원두 찌꺼기",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FcoffeeBeanIngredients.svg?alt=media&token=dff78633-5878-4d6f-a59d-58802feda72b",
+        description: "종량제 봉투로 배출",
       },
       {
         id: "79",
-        name: "접착제",
-        imageURL: "glue",
-        description: "종량제 봉투로 배출",
-      },
-      {
-        id: "80",
-        name: "젖꼭지(아기용품)",
-        imageURL: "nipple",
-        description: "종량제 봉투로 배출",
-      },
-      {
-        id: "81",
-        name: "조각칼",
-        imageURL: "carvingKnife",
-        description: "수거원이 다치지 않도록 종이 등으로 감싸서 배출",
-      },
-      {
-        id: "82",
-        name: "종이기저귀",
-        imageURL: "paperDiapers",
-        description: "종량제 봉투로 배출",
-      },
-      {
-        id: "83",
-        name: "줄자",
-        imageURL: "tapeMeasure",
-        description: "재질에 맞게 배출 또는 종량제 봉투로 배출",
-      },
-      {
-        id: "84",
-        name: "지우개",
-        imageURL: "eraser",
-        description: "종량제 봉투로 배출",
-      },
-      {
-        id: "85",
-        name: "차 찌꺼기",
-        imageURL: "teaIngredients",
-        description: "종량제 봉투로 배출",
-      },
-      {
-        id: "86",
-        name: "체온계",
-        imageURL: "thermometer",
-        description: "건전지는 분리하여 전용수거함으로 배출",
-      },
-      {
-        id: "87",
-        name: "체중계",
-        imageURL: "weightMeasuringMachine",
-        description: "종량제 봉투에 담을 수 없는 경우 대형폐기물로 처리",
-      },
-      {
-        id: "88",
-        name: "축구공",
-        imageURL: "soccer",
-        description: "종량제 봉투로 배출",
-      },
-      {
-        id: "89",
-        name: "침구류",
-        imageURL: "bedding",
-        description: "종량제 봉투에 담을 수 없는 경우 대형폐기물로 처리",
-      },
-      {
-        id: "90",
-        name: "칫솔",
-        imageURL: "electricToothbrush",
-        description: "종량제 봉투로 배출",
-      },
-      {
-        id: "91",
-        name: "카펫(융단)",
-        imageURL: "carpet",
-        description: "종량제 봉투에 담을 수 없는 경우 대형폐기물로 처리",
-      },
-      {
-        id: "92",
-        name: "커튼(커튼레일)",
-        imageURL: "curtain",
-        description: "종량제 봉투에 담을 수 없는 경우 대형폐기물로 처리",
-      },
-      {
-        id: "93",
-        name: "커피원두 찌꺼기",
-        imageURL: "coffeeBeanIngredients",
-        description: "종량제 봉투로 배출",
-      },
-      {
-        id: "94",
         name: "코르크따개",
-        imageURL: "corkscrew",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fcorkscrew.svg?alt=media&token=764aecd3-5d17-4385-bc18-56e21f11716b",
         description:
           " 수거원이 다치지 않도록 종이 등으로 감싸서 배출, 재질에 맞게 해당 분리수거함으로 배출",
       },
       {
-        id: "95",
+        id: "80",
         name: "코르크마개",
-        imageURL: "corkStopper",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FcorkStopper.svg?alt=media&token=c25c1af4-61de-483e-bcd7-5b510db98b51",
         description: "종량제 봉투로 배출",
       },
       {
-        id: "96",
-        name: "종이(코팅)",
-        imageURL: "coatedPaper",
-        description: "종량제 봉투로 배출",
-      },
-      {
-        id: "97",
+        id: "81",
         name: "콘센트",
-        imageURL: "powerSocket",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FpowerSocket.svg?alt=media&token=ec827a86-6a9c-4a4c-b387-ec2721293c45",
         description: "종량제 봉투로 배출",
       },
       {
-        id: "98",
+        id: "82",
         name: "콘텍트렌즈",
-        imageURL: "contactLenses",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FcontactLenses.svg?alt=media&token=6074f1b0-05c8-4935-8b90-086ea00feffc",
         description: "종량제 봉투로 배출",
       },
       {
-        id: "99",
-        name: "쿠션",
-        imageURL: "cushion",
-        description: "종량제 봉투에 담을 수 없는 경우 대형폐기물로 처리",
-      },
-      {
-        id: "100",
+        id: "83",
         name: "크레용",
-        imageURL: "crayon",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fcrayon.svg?alt=media&token=ff562e23-bcca-47ca-a51f-e64f4d43f62b",
         description: "종량제 봉투로 배출",
       },
       {
-        id: "101",
-        name: "텐트",
-        imageURL: "tent",
-        description: "종량제 봉투에 담을 수 없는 경우 대형폐기물로 처리",
-      },
-      {
-        id: "102",
+        id: "84",
         name: "틀니",
-        imageURL: "denture",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fdenture.svg?alt=media&token=6b5c046a-0016-480a-9e8d-fa3a88fe2bc6",
         description: "종량제 봉투로 배출",
       },
       {
-        id: "103",
+        id: "85",
         name: "티백(녹차)",
-        imageURL: "teaBag",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FteaBag.svg?alt=media&token=53dc2cd9-5605-480b-99b0-e48326a9b062",
         description: "종량제 봉투로 배출",
       },
       {
-        id: "104",
+        id: "86",
         name: "파인애플껍질",
-        imageURL: "pineapplePeel",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FpineapplePeel.svg?alt=media&token=49c790ac-bea6-4fe4-b198-369bec383598",
         description: "종량제 봉투로 배출",
       },
       {
-        id: "105",
+        id: "87",
         name: "필름(사진용)",
-        imageURL: "photoFilm",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FphotoFilm.svg?alt=media&token=71df9d05-d0ff-4631-9240-610844f81913",
         description: "종량제 봉투로 배출",
       },
       {
-        id: "106",
+        id: "88",
         name: "핫팩",
-        imageURL: "hotPack",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FhotPack.svg?alt=media&token=d5e16fd3-4bb5-4c34-9c70-71f4efcd95a9",
         description: "종량제 봉투로 배출",
       },
       {
-        id: "107",
+        id: "89",
         name: "헝겊",
-        imageURL: "hotPack",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fpieceofcloth.svg?alt=media&token=5f172ec5-8910-4de6-94d9-e16f601cb2a3",
         description: "종량제 봉투로 배출",
       },
       {
-        id: "108",
+        id: "90",
         name: "헬멧",
-        imageURL: "helmet",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fhelmet.svg?alt=media&token=c0a772d8-dc7f-4605-9ab1-a0a24bd50c99",
         description: "분리하여 재질별로 분리배출 가능",
       },
       {
-        id: "109",
+        id: "91",
         name: "호일",
-        imageURL: "lab",
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Flab.svg?alt=media&token=0e557817-ab65-4ca0-b33e-ccbe326e88ac",
         description: "종량제 봉투로 배출",
       },
     ],
