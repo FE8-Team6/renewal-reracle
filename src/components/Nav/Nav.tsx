@@ -14,7 +14,7 @@ const Nav = () => {
   return (
     <div className="w-full h-[14vh] fixed bottom-0">
       <NotificationBanner />
-      <div className="w-full h-[10.2vh] absolute bottom-0 bg-green rounded-b-lg flex justify-evenly items-center">
+      <div className="w-full h-[10.2vh] absolute bottom-0 bg-green flex justify-evenly items-center">
         <div className="relative flex items-center w-auto h-auto">
           <button
             onClick={() => handleNavClick("/")}
