@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   doc,
   setDoc,
@@ -20,30 +20,42 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import KakaoAdfit320x100 from "@/components/KakaoAdfit320x100";
 
-const signUpSchema = z
-  .object({
-    displayName: z.string().min(2, "닉네임은 2자 이상이어야 합니다."),
-    email: z.string().email("이메일을 올바르게 입력해주세요."),
-    password: z.string().min(8, "비밀번호는 8자 이상이어야 합니다."),
-    confirmPassword: z.string(),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "비밀번호가 일치하지 않습니다.",
-    path: ["confirmPassword"],
-  });
+const signUpSchema = z.object({
+  displayName: z.string().min(2, "닉네임은 2자 이상이어야 합니다."),
+  email: z.string().email("이메일을 올바르게 입력해주세요."),
+  password: z.string().min(8, "비밀번호는 8자 이상이어야 합니다."),
+  confirmPassword: z.string().min(8, "비밀번호는 8자 이상이어야 합니다."),
+});
 
 export const SignUp = () => {
-  const [displayName, setDisplayName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
   const [isDisplayNameChecked, setIsDisplayNameChecked] =
     useState<boolean>(false);
   const [isEmailChecked, setIsEmailChecked] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  const form = useForm<z.infer<typeof signUpSchema>>({
+    resolver: zodResolver(signUpSchema),
+    defaultValues: {
+      displayName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
 
   const saveUserInfoToFirestore = async (
     userId: string,
@@ -64,6 +76,7 @@ export const SignUp = () => {
 
   const checkDisplayName = async () => {
     setError("");
+    const displayName = form.getValues("displayName");
     if (displayName.length < 2) {
       setError("닉네임은 2자 이상이어야 합니다.");
       setIsDisplayNameChecked(false);
@@ -85,16 +98,18 @@ export const SignUp = () => {
 
   const checkEmail = async () => {
     setError("");
+    setEmailError("");
+    const email = form.getValues("email");
     const emailSchema = z.string().email("이메일 형식이 올바르지 않습니다.");
     const result = emailSchema.safeParse(email);
     if (!result.success) {
-      setError(result.error.errors[0].message);
+      setEmailError(result.error.errors[0].message);
       return;
     }
     const q = query(collection(db, "users"), where("email", "==", email));
     const querySnapshot = await getDocs(q);
     if (!querySnapshot.empty) {
-      setError("이미 사용 중인 이메일입니다.");
+      setEmailError("이미 사용 중인 이메일입니다.");
       setIsEmailChecked(false);
     } else {
       alert("사용 가능한 이메일입니다.");
@@ -102,22 +117,7 @@ export const SignUp = () => {
     }
   };
 
-  const handleSignUp = async (event: React.FormEvent) => {
-    event.preventDefault();
-    setError("");
-
-    const result = signUpSchema.safeParse({
-      displayName,
-      email,
-      password,
-      confirmPassword,
-    });
-
-    if (!result.success) {
-      setError(result.error.errors[0].message);
-      return;
-    }
-
+  const onSubmit = async (values: z.infer<typeof signUpSchema>) => {
     if (!isDisplayNameChecked) {
       setError("닉네임 중복 확인을 해주세요.");
       return;
@@ -128,16 +128,21 @@ export const SignUp = () => {
       return;
     }
 
+    if (values.password !== values.confirmPassword) {
+      setError("회원가입 중 오류가 발생했습니다.");
+      return;
+    }
+
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
-        email,
-        password
+        values.email,
+        values.password
       );
       await saveUserInfoToFirestore(
         userCredential.user.uid,
-        email,
-        displayName
+        values.email,
+        values.displayName
       );
       const userInfoDoc = await getDoc(
         doc(db, "users", userCredential.user.uid)
@@ -147,7 +152,7 @@ export const SignUp = () => {
         localStorage.setItem("userData", JSON.stringify(userInfo));
         navigate("/login");
       } else {
-        setError("사용자 정보를 불러오는 데 실패했습니다.");
+        setError("회원가입 중 오류가 발생했습니다.");
       }
     } catch (error) {
       setError("회원가입 중 오류가 발생했습니다.");
@@ -159,99 +164,131 @@ export const SignUp = () => {
       <LoginToSignUpTitle title="회원가입" />
       <KakaoAdfit320x100 />
       <section className="w-full h-[63vh] bg-white relative flex flex-col justify-center items-center gap-3 overflow-y-auto">
-        <form
-          onSubmit={handleSignUp}
-          className="relative flex flex-col items-center justify-center "
-        >
-          <div className="relative flex flex-col mb-2">
-            <label htmlFor="displayName" className="font-bold text-purple">
-              닉네임
-            </label>
-            <div className="relative flex items-center gap-1">
-              <MdOutlineTagFaces className="absolute text-xl left-3 top-4 text-purple" />
-              <Input
-                id="displayName"
-                type="text"
-                placeholder="닉네임"
-                value={displayName}
-                onChange={(event) => {
-                  setDisplayName(event.target.value);
-                  setIsDisplayNameChecked(false);
-                  setError("");
-                }}
-                className="w-[16.8rem]"
-              />
-              <Button variant="secondary" size="sm" onClick={checkDisplayName}>
-                중복 확인
-              </Button>
-            </div>
-          </div>
-          <div className="relative flex flex-col mb-2 ">
-            <label htmlFor="email" className="font-bold text-purple">
-              이메일
-            </label>
-            <div className="relative flex items-center gap-1">
-              <MdAlternateEmail className="absolute text-xl left-3 top-4 text-purple" />
-              <Input
-                id="email"
-                type="text"
-                placeholder="이메일"
-                value={email}
-                onChange={(event) => {
-                  setEmail(event.target.value);
-                  setIsEmailChecked(false);
-                  setError("");
-                }}
-                className="w-[16.8rem]"
-              />
-              <Button variant="secondary" size="sm" onClick={checkEmail}>
-                중복 확인
-              </Button>
-            </div>
-          </div>
-          <div className="relative flex flex-col mb-2">
-            <label htmlFor="password" className="font-bold text-purple">
-              비밀번호
-            </label>
-            <div className="relative flex items-center gap-2">
-              <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
-              <Input
-                id="password"
-                type="password"
-                placeholder="비밀번호"
-                value={password}
-                onChange={(event) => {
-                  setPassword(event.target.value);
-                  setError("");
-                }}
-                className="pl-10"
-              />
-            </div>
-          </div>
-          <div className="relative flex flex-col mb-2 ">
-            <label htmlFor="confirmPassword" className="font-bold text-purple">
-              비밀번호 확인
-            </label>
-            <div className="relative flex items-center gap-2">
-              <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
-              <Input
-                id="confirmPassword"
-                type="password"
-                placeholder="비밀번호 확인"
-                value={confirmPassword}
-                onChange={(event) => {
-                  setConfirmPassword(event.target.value);
-                  setError("");
-                }}
-                className="pl-10"
-              />
-            </div>
-          </div>
-          {error && <p className="mb-2 text-error-30">{error}</p>}
-          <Button variant="default" type="submit" size="default">
-            회원가입
-          </Button>
-        </form>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+            <FormField
+              control={form.control}
+              name="displayName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg font-bold text-purple">
+                    닉네임
+                  </FormLabel>
+                  <FormControl>
+                    <div className="relative flex items-center gap-2">
+                      <MdOutlineTagFaces className="absolute text-xl left-3 top-4 text-purple" />
+                      <Input
+                        placeholder="닉네임"
+                        {...field}
+                        className="w-full pl-10"
+                      />
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        onClick={checkDisplayName}
+                        className="mt-2"
+                      >
+                        중복 확인
+                      </Button>
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg font-bold text-purple">
+                    이메일
+                  </FormLabel>
+                  <FormControl>
+                    <div className="relative flex items-center gap-2">
+                      <MdAlternateEmail className="absolute text-xl left-3 top-4 text-purple" />
+                      <Input
+                        placeholder="이메일"
+                        {...field}
+                        className="w-full pl-10"
+                      />
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        onClick={checkEmail}
+                        className="mt-2"
+                      >
+                        중복 확인
+                      </Button>
+                    </div>
+                  </FormControl>
+                  {emailError && (
+                    <FormMessage className="text-error-40">
+                      {emailError}
+                    </FormMessage>
+                  )}
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg font-bold text-purple">
+                    비밀번호
+                  </FormLabel>
+                  <FormControl>
+                    <div className="relative flex items-center gap-2">
+                      <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
+                      <Input
+                        type="password"
+                        placeholder="비밀번호"
+                        {...field}
+                        className="w-full pl-10"
+                      />
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg font-bold text-purple">
+                    비밀번호 확인
+                  </FormLabel>
+                  <FormControl>
+                    <div className="relative flex items-center gap-2">
+                      <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
+                      <Input
+                        type="password"
+                        placeholder="비밀번호 확인"
+                        {...field}
+                        className="w-full pl-10"
+                      />
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {error && (
+              <p className="text-sm font-medium text-error-40">{error}</p>
+            )}
+            <Button
+              variant="default"
+              type="submit"
+              size="default"
+              className="w-full"
+            >
+              회원가입
+            </Button>
+          </form>
+        </Form>
         <Button variant="link" size="sm" onClick={() => navigate("/login")}>
           <span>로그인</span>
         </Button>
