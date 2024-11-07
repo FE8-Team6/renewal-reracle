@@ -72,9 +72,15 @@ const MyPage = () => {
       <LoginToSignUpTitle title="프로필" />
       <div className="mt-4">
         <div className="w-full h-[5rem] relative">
-          <label className="text-lg font-bold text-purple">닉네임</label>
+          <label
+            htmlFor="displayName"
+            className="text-lg font-bold text-purple"
+          >
+            닉네임
+          </label>
           <MdOutlineDriveFileRenameOutline className="absolute text-xl left-3 top-10 text-purple" />
           <Input
+            id="displayName"
             type="text"
             value={user.displayName}
             onChange={handleNameChange}
@@ -83,9 +89,12 @@ const MyPage = () => {
           />
         </div>
         <div className="w-full h-[5rem] relative">
-          <label className="text-lg font-bold text-purple">이메일</label>
+          <label htmlFor="email" className="text-lg font-bold text-purple">
+            이메일
+          </label>
           <MdAlternateEmail className="absolute text-xl left-3 top-10 text-purple" />
           <Input
+            id="email"
             type="email"
             value={user.email}
             onChange={handleEmailChange}
