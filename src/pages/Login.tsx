@@ -72,30 +72,42 @@ export const Login = () => {
           onSubmit={handleLogin}
           className="relative flex flex-col items-center justify-center "
         >
-          <div className="relative flex flex-col mb-2">
-            <MdAlternateEmail className="absolute text-xl left-3 top-4 text-purple" />
-            <Input
-              type="text"
-              placeholder="email@example.com"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-            />
+          <div className="w-full h-[5rem] relative mb-2">
+            <label htmlFor="email" className="text-lg font-bold text-purple">
+              이메일
+            </label>
+            <div className="relative flex flex-col">
+              <MdAlternateEmail className="absolute text-xl left-3 top-4 text-purple" />
+              <Input
+                id="email"
+                type="text"
+                placeholder="email@example.com"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+              />
+            </div>
           </div>
-          <div className="relative flex flex-col mb-2">
-            <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
-            <Input
-              placeholder="Password"
-              type={isShowPassword ? "text" : "password"}
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-            />
-            <button
-              type="button"
-              onClick={togglePasswordVisibility}
-              className="absolute text-xl right-3 top-4 text-purple"
-            >
-              {isShowPassword ? <MdVisibilityOff /> : <MdVisibility />}
-            </button>
+          <div className="w-full h-[5rem] relative mb-2">
+            <label htmlFor="password" className="text-lg font-bold text-purple">
+              비밀번호
+            </label>
+            <div className="relative flex flex-col ">
+              <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
+              <Input
+                id="password"
+                placeholder="Password"
+                type={isShowPassword ? "text" : "password"}
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+              />
+              <button
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="absolute text-xl right-3 top-4 text-purple"
+              >
+                {isShowPassword ? <MdVisibilityOff /> : <MdVisibility />}
+              </button>
+            </div>
           </div>
           {error && <p className="mb-2 text-error-50">{error}</p>}
           <Button variant="default" type="submit" size="default">
