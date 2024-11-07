@@ -20,6 +20,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { z } from "zod";
+import KakaoAdfit320x100 from "@/components/KakaoAdfit320x100";
 
 const signUpSchema = z
   .object({
@@ -156,7 +157,8 @@ export const SignUp = () => {
   return (
     <>
       <LoginToSignUpTitle title="회원가입" />
-      <section className="w-full h-[79vh] bg-white relative flex flex-col justify-center items-center gap-3 overflow-hidden">
+      <KakaoAdfit320x100 />
+      <section className="w-full h-[63vh] bg-white relative flex flex-col justify-center items-center gap-3 overflow-y-auto">
         <form
           onSubmit={handleSignUp}
           className="relative flex flex-col items-center justify-center "
