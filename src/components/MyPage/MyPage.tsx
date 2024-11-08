@@ -1,30 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import {
-  MdAlternateEmail,
-  MdOutlineDriveFileRenameOutline,
-} from "react-icons/md";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
+import { MdAlternateEmail, MdOutlineDriveFileRenameOutline } from 'react-icons/md';
 
-import { X } from "lucide-react";
-import { RecentSearchHistory } from "@/lib/types/search";
-import {
-  deleteSearchHistory,
-  getRecentSearchHistory,
-} from "@/api/searchssApi/recentSearch";
+import { X } from 'lucide-react';
+import { RecentSearchHistory } from '@/lib/types/search';
+import { deleteSearchHistory, getRecentSearchHistory } from '@/api/searchssApi/recentSearch';
 
 const MyPage = () => {
   const [user, setUser] = useState<{ displayName: string; email: string }>({
-    displayName: "",
-    email: "",
+    displayName: '',
+    email: '',
   });
-  const [recentSearchHistory, setRecentSearchHistory] =
-    useState<RecentSearchHistory>([]);
+  const [recentSearchHistory, setRecentSearchHistory] = useState<RecentSearchHistory>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const userData = localStorage.getItem("userData");
+    const userData = localStorage.getItem('userData');
     const storedUser = userData ? JSON.parse(userData) : null;
     if (storedUser) {
       setUser(storedUser);
@@ -45,12 +38,10 @@ const MyPage = () => {
     setUser((user) => ({ ...user, email: event.target!.value }));
   };
 
-  const handleClick = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
-    localStorage.setItem("userData", JSON.stringify(user));
-    alert("회원정보가 수정되었습니다");
+    localStorage.setItem('userData', JSON.stringify(user));
+    alert('회원정보가 수정되었습니다');
   };
 
   const handleNavClick = (categoryId: string, itemId: string) => {
@@ -59,7 +50,7 @@ const MyPage = () => {
 
   const handleDeleteClick = async (docId: string) => {
     await deleteSearchHistory(docId);
-    const userData = localStorage.getItem("userData");
+    const userData = localStorage.getItem('userData');
     if (userData) {
       const { uid } = JSON.parse(userData);
       fetchRecentSearchHistory(uid);
@@ -70,10 +61,7 @@ const MyPage = () => {
     <section className="w-full h-[75vh] bg-white relative flex flex-col items-center gap-[2vh] overflow-y-auto">
       <div className="mt-4">
         <div className="w-full h-[5rem] relative">
-          <label
-            htmlFor="displayName"
-            className="text-lg font-bold text-purple"
-          >
+          <label htmlFor="displayName" className="text-lg font-bold text-purple">
             닉네임
           </label>
           <MdOutlineDriveFileRenameOutline className="absolute text-xl left-3 top-10 text-purple" />
@@ -102,43 +90,32 @@ const MyPage = () => {
           />
         </div>
       </div>
-      <Button
-        variant="default"
-        type="submit"
-        size="default"
-        onClick={handleClick}
-      >
+      <Button variant="default" type="submit" size="default" onClick={handleClick}>
         회원정보 수정
       </Button>
       <Button
         variant="secondary"
         size="default"
         onClick={() => {
-          localStorage.removeItem("userData");
-          navigate("/login");
+          localStorage.removeItem('userData');
+          navigate('/login');
         }}
       >
         로그아웃
       </Button>
-      <Button variant="link" size="sm" onClick={() => navigate("/myquestion")}>
+      <Button variant="link" size="sm" onClick={() => navigate('/myquestion')}>
         <h2> 나의 R지식in 보러가기</h2>
       </Button>
       <div className="w-full h-[1px] mt-2 mb-1 bg-purple" />
       <div className="w-[23rem]">
-        <span className="ml-2 text-lg font-bold text-purple">
-          나의 최근 재활용품 검색 리스트
-        </span>
+        <span className="ml-2 text-lg font-bold text-purple">나의 최근 재활용품 검색 리스트</span>
         <ul className="flex flex-wrap w-full h-auto gap-4 py-2 mx-auto">
           {recentSearchHistory.map((historyItem) => (
             <li
               key={historyItem.id}
               className="relative p-[1vh] bg-yellow text-purple cursor-pointer text-center text-lg font-bold rounded-4 hover:text-purpleDark"
             >
-              <span
-                onClick={() =>
-                  handleNavClick(historyItem.categoryId, historyItem.itemId)
-                }
-              >
+              <span onClick={() => handleNavClick(historyItem.categoryId, historyItem.itemId)}>
                 {`#${historyItem.query}`}
               </span>
               <X

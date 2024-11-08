@@ -1,4 +1,4 @@
-import Category from "@/components/WasteCategory/Category";
+import Category from '@/components/WasteCategory/Category';
 
 const Home = () => {
   return <Category />;

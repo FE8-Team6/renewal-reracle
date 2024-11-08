@@ -112,12 +112,7 @@ export const PasswordReset = () => {
       <Container>
         <PwResetFrom onSubmit={handlePasswordReset}>
           <InputContainer>
-            <TextInput
-              type="text"
-              placeholder="이메일"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+            <TextInput type="text" placeholder="이메일" value={email} onChange={(e) => setEmail(e.target.value)} />
             <EmailLabel />
           </InputContainer>
           {error && <ErrorMessage key={errorKey}>{error}</ErrorMessage>}
