@@ -16,47 +16,61 @@ const wasteCategories = [
         name: '신문지',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fnewspaper.svg?alt=media&token=3d789c90-5ae7-41a2-bec1-eb61ea0ebf37',
-        description:
+        recyclingInstructions: [
           '물기에 젖지 않도록 하고 반듯하게 펴서 차곡차곡 쌓은 후 묶어서 배출합니다. 비닐코팅된 광고지, 비닐류, 기타 오물이 섞이지 않도록 해야 합니다.',
+        ],
       },
       {
         id: '2',
         name: '쌀포대',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fricebag.svg?alt=media&token=6bb3365a-3708-4ad5-b88a-019f1d0f3702',
-        description: '종이 쌀포대는 재활용이 가능합니다. ',
-        description2:
+        recyclingInstructions: [
+          '종이 쌀포대는 재활용이 가능합니다.',
           '분리배출표시가 없다면 한쪽 면만 코팅된 종이포대는 종이류로, 양면이 모두 코팅된 종이류는 비닐류로 배출하시기 바랍니다.',
+        ],
       },
       {
         id: '3',
         name: '수첩',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fnotebook.svg?alt=media&token=7d79f77d-e55e-4705-bb28-d4dec92f3e7d',
-        description: '스프링 등 종이류와 다른 재질은 제거한 후 배출해야합니다.',
+        recyclingInstructions: [
+          '수첩에 있는 스프링이나 철제 부분을 제거합니다. 스프링은 금속류로 분류되므로 별도로 고철 수거함에 배출할 수 있습니다',
+          '비닐이나 플라스틱으로 코팅된 표지가 있다면 이를 제거해서 배출해주세요. 코팅된 표지는 일반 종이와 함께 재활용되기 어렵습니다.',
+        ],
       },
       {
         id: '4',
         name: '잡지',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fmagazine.svg?alt=media&token=501b8ba1-af6e-46b0-9593-40683c4806fb',
-        description: '스프링 등 종이류와 다른 재질은 제거한 후 배출해야합니다.',
+        recyclingInstructions: [
+          '잡지에 스프링이 있다면 먼저 제거하고, 스프링은 금속류로 별도 분리배출 해야 합니다.',
+          '비닐 코팅된 겉표지는 일반쓰레기로 분류하고, 내부의 종이 부분은 종이류 재활용으로 분리하세요.',
+          '종이 부분에 붙어있는 스티커나 테이프 등 이물질은 가능한 한 제거합니다.',
+        ],
       },
       {
         id: '5',
         name: '가격표',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FpriceTag.svg?alt=media&token=264cbb16-733d-417c-a6be-5e8dead0bb76',
-        description:
-          '물기에 젖지 않도록 하고 반듯하게 펴서 차곡차곡 쌓은 후 묶어서 배출 해야 합니다. 또한, 비닐코팅된 광고지, 비닐류, 기타 오물이 섞이지 않도록 해야 합니다.',
+        recyclingInstructions: [
+          '가격표가 물에 젖지 않도록 주의해야 합니다. 젖은 종이는 재활용이 어려워집니다.',
+          '만약 가격표에 비닐코팅이 되어 있다면, 가능한 한 이를 제거해야 합니다. 비닐코팅된 부분은 일반 종이와 함께 재활용되기 어렵습니다',
+          '비닐류나 기타 오물이 섞이지 않도록 주의해야 합니다. 순수한 종이 재질만 종이류 재활용품으로 배출해야 합니다',
+        ],
       },
       {
         id: '6',
         name: '골판지',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fcardboard.svg?alt=media&token=67e38859-2882-468a-8aa0-b86d44996f7b',
-        description:
-          '비닐코팅 부분, 상자에 붙어있는 테이프ㆍ철핀, 알루미늄박 등을 제거하고 접어서 배출 - 야외 별도 보관 장소마련 등 다른 종이류와 섞이지 않게 배출 해야 합니다.',
+        recyclingInstructions: [
+          '비닐코팅 부분, 테이프, 철핀, 알루미늄박 등을 모두 제거합니다. 택배 송장이나 스티커도 제거해야 합니다.',
+          '골판지가 물에 젖거나 오염되지 않도록 주의합니다. 젖거나 오염된 골판지는 재활용이 어려워집니다.',
+        ],
       },
       {
         id: '7',
