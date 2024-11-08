@@ -77,14 +77,18 @@ const wasteCategories = [
         name: '전단지',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fflyer.svg?alt=media&token=93f78d20-0438-4d02-8ef5-041571b3f459',
-        recyclingInstructions: ['비닐 코팅된 종이, 공책의 스프링, 비닐포장지 등은 제거 후 배출 해야 합니다.'],
+        recyclingInstructions: [
+          '전단지에 비닐 코팅이 되어 있다면 이를 제거 해야 합니다. 비닐 코팅된 부분은 일반 종이와 함께 재활용되기 어렵습니다.',
+          '전단지에 붙어있는 스티커, 테이프 등의 이물질을 모두 제거합니다.',
+          '비닐포장지가 있다면 이를 분리합니다. 비닐은 별도로 비닐류 재활용품으로 배출해야 합니다.'
+        ],
       },
       {
         id: '8',
         name: '종이컵',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FpaperCup.svg?alt=media&token=79ccda7c-bd9e-4df0-b20a-614f4f01ae53',
-        recyclingInstructions: ['내용물을 비우고 물로 헹군 후 압착하여 투명한 비닐에 넣어서 배출 해야 합니다.'],
+        recyclingInstructions: ['종이컵 안에 남아있는 음료나 내용물을 완전히 비우고, 종이류 재활용 수거함에 배출하면 됩니다.',],
       },
       {
         id: '9',
@@ -108,7 +112,8 @@ const wasteCategories = [
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fpaperbox.svg?alt=media&token=65dc632b-7a81-477a-a01f-59ca61994f92',
         recyclingInstructions: [
-          '비닐코팅 부분, 상자에 붙어있는 테이프ㆍ철핀, 알루미늄박 등을 제거하고 접어서 배출 - 야외 별도 보관 장소마련 등 다른 종이류와 섞이지 않게 배출 해야 합니다.',
+          '비닐코팅 부분, 상자에 붙어있는 테이프ㆍ철핀, 알루미늄박 등을 제거하고 접어서 배출 해야 합니다.',
+          '야외 별도 보관 장소마련 등 다른 종이류와 섞이지 않게 배출 해야 합니다.',
         ],
       },
       {
@@ -139,7 +144,11 @@ const wasteCategories = [
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fmilkpack.svg?alt=media&token=8f216eae-030a-4b5d-90d2-ba6247ade1c7',
         recyclingInstructions:
-          '내용물을 비우고, 물로 깨끗이 세척해서 배출 해야 합니다. 또한, 빨대, 비닐, 플라스틱 뚜껑 등 다른 재질은 분리해서 재질별로 분리 배출 해야 합니다.',
+        [
+
+          '내용물을 비우고, 물로 깨끗이 세척해서 배출 해야 합니다.', 
+          '또한, 빨대, 비닐, 플라스틱 뚜껑 등 다른 재질은 분리해서 재질별로 분리 배출 해야 합니다.',
+        ]
       },
     ],
   },
@@ -154,23 +163,32 @@ const wasteCategories = [
         name: '스프레이',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fspray.svg?alt=media&token=568c16eb-c7ef-44c3-9c05-fc3dedc6fff5',
-        recyclingInstructions: '내용물을 제거한 후 배출 해야 합니다.',
+        recyclingInstructions: [
+          '스프레이 용기에 남아있는 가스를 완전히 배출 해야 합니다.',
+          '내용물과 가스가 완전히 제거된 스프레이 용기는 캔류 재활용품으로 배출합니다.'
+        ]
       },
       {
         id: '2',
         name: '통조림',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FcannedFood.svg?alt=media&token=e41ec9a4-eaca-466e-8b5a-b2256107166f',
-        recyclingInstructions:
-          '내용물을 비우고 물로 헹구는 등 이물질을 제거하여 배출 해야 합니다. 담배꽁초 등 이물질을 넣지 않고 배출 해야 합니다. 플라스틱 뚜껑 등 금속캔과 다른 재질은 제거한 후 배출 해야 합니다.',
+        recyclingInstructions: [
+          '내용물을 비우고 물로 헹구는 등 이물질을 제거하여 배출 해야 합니다.', 
+          '플라스틱 뚜껑 등 금속캔과 다른 재질은 제거한 후 배출 해야 합니다.',
+          '처리가 완료된 통조림 캔은 금속캔 재활용품으로 배출합니다.'
+        ]
       },
       {
         id: '3',
         name: '음료캔',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fcan.svg?alt=media&token=0944300a-43c6-4db2-8989-f2897cdce304',
-        recyclingInstructions:
-          '내용물을 비우고 물로 헹구는 등 이물질을 제거하여 배출 해야 합니다. 담배꽁초 등 이물질을 넣지 않고 배출 해야 합니다. 플라스틱 뚜껑 등 금속캔과 다른 재질은 제거한 후 배출 해야 합니다.',
+        recyclingInstructions:[
+          '내용물을 비우고 물로 헹구는 등 이물질을 제거하여 배출 해야 합니다.', 
+          '플라스틱 뚜껑 등 금속캔과 다른 재질은 제거한 후 배출 해야 합니다.',
+          '처리가 완료된 통조림 캔은 금속캔 재활용품으로 배출합니다.'
+        ]
       },
     ],
   },
