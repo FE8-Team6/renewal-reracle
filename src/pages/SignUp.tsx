@@ -11,7 +11,6 @@ import {
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { useNavigate } from "react-router-dom";
-import LoginToSignUpTitle from "@/components/LoginToSignUpTitle";
 import {
   MdAlternateEmail,
   MdOutlinePassword,
@@ -161,7 +160,6 @@ export const SignUp = () => {
 
   return (
     <>
-      <LoginToSignUpTitle title="회원가입" />
       <KakaoAdfit320x50 />
       <section className="w-full h-[70vh] bg-white relative flex flex-col justify-center items-center gap-3 overflow-y-auto">
         <Form {...form}>

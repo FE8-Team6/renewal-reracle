@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginToSignUpTitle from "../LoginToSignUpTitle";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import {
@@ -69,7 +68,6 @@ const MyPage = () => {
 
   return (
     <section className="w-full h-[75vh] bg-white relative flex flex-col items-center gap-[2vh] overflow-y-auto">
-      <LoginToSignUpTitle title="프로필" />
       <div className="mt-4">
         <div className="w-full h-[5rem] relative">
           <label

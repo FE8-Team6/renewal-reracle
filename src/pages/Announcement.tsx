@@ -126,9 +126,6 @@ export const Announcement = () => {
 
   return (
     <>
-      <div className="w-full h-[2rem] bg-yellow text-purple text-center flex items-center justify-center  text-[2vh]">
-        공지사항
-      </div>
       <KakaoAdfit320x50 />
       <div className="w-[22rem] h-[67vh] relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4 ">
         {isAdmin && (
