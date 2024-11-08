@@ -7,7 +7,6 @@ import {
   MdVisibility,
   MdVisibilityOff,
 } from "react-icons/md";
-import LoginToSignUpTitle from "@/components/LoginToSignUpTitle";
 import { Button } from "@/components/ui/button";
 import GoogleButton from "@/components/GoogleButton";
 import { Input } from "@/components/ui/input";
@@ -24,6 +23,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import KakaoAdfit320x50 from "@/components/KakaoAdfit320x50";
 
 const loginSchema = z.object({
   email: z.string().email("이메일 형식이 올바르지 않습니다."),
@@ -66,12 +66,12 @@ export const Login = () => {
 
   return (
     <>
-      <LoginToSignUpTitle title="로그인" />
-      <section className="w-full h-[79vh] bg-white relative flex flex-col justify-center items-center gap-3 overflow-hidden">
+      <KakaoAdfit320x50 />
+      <section className="w-full h-[75vh] bg-white relative flex flex-col justify-center items-center gap-3 overflow-y-auto">
         <img
           src="/images/loginPageImg.png"
           alt="로그인 페이지 이미지"
-          className="w-[14rem] h-[14rem] mb-4"
+          className="w-[12rem] h-[12rem] "
         />
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
