@@ -54,9 +54,9 @@ npm run dev
      <td align="center" valign="middle">
         <div>
           <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png" width="500" height="1" />
-          <img width="50" src="https://github.com/fastcam-sideproject/RaffleReadmeImgs/blob/main/Icons/nextjs.png" />
+          <img width="50" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" />
           <p align="center">
-            Next.js
+            React.js
           </p>
         </div>
       </td>
@@ -72,27 +72,18 @@ npm run dev
       <td align="center" valign="middle">
         <div>
           <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png" width="500" height="1" />
-          <img width="50" src="https://github.com/fastcam-sideproject/RaffleReadmeImgs/blob/main/Icons/webpack.png" />
+          <img width="50" src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Vitejs-logo.svg" />
           <p align="center">
-            Webpack
+            Vite
           </P>
         </div>
       </td>
       <td align="center" valign="middle">
         <div>
           <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png" width="500" height="1" />
-          <img width="40" src="https://github.com/fastcam-sideproject/RaffleReadmeImgs/blob/main/Icons/tailwindcss.png" />
+          <img width="40" src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" />
           <p align="center">
             TailwindCSS
-          </p>
-        </div>
-      </td>
-      <td align="center" valign="middle">
-        <div>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png" width="500" height="1" />
-          <img width="70" src="https://github.com/fastcam-sideproject/RaffleReadmeImgs/blob/main/Icons/zustand.png" />
-          <p align="center">
-            Zustand
           </p>
         </div>
       </td>
@@ -101,7 +92,7 @@ npm run dev
       <td align="center" valign="middle">
         <div>
           <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png" width="500" height="1" />
-          <img width="50" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Invertocat_Logo.svg/640px-GitHub_Invertocat_Logo.svg.png" />
+          <img width="50" src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Git-logo.svg" />
           <p align="center">
             Git
           </p>
