@@ -1138,28 +1138,31 @@ const wasteCategories = [
         name: '바나나껍질',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FbananaPeel.svg?alt=media&token=5e1ac525-9cb3-4ce8-af35-ab22b38951df',
-        recyclingInstructions: '음식물 쓰레기에 버리세요',
+        recyclingInstructions: ['음식물 쓰레기로 배출합니다.', '스티커는 제거 후 배출합니다.'],
       },
       {
         id: '2',
         name: '상한음식',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FrottenFood.svg?alt=media&token=cb883e53-dead-45e8-b276-9b952c203584',
-        recyclingInstructions: '음식물 쓰레기에 버리세요',
+        recyclingInstructions: ['음식물 쓰레기로 배출합니다.', '포장재는 제거 후 해당 재질에 맞게 분리배출합니다.'],
       },
       {
         id: '3',
         name: '생선',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Ffish.svg?alt=media&token=dcf9c679-d6fa-405d-8c1c-ef2f29b1335e',
-        recyclingInstructions: '일반 쓰레기로 분류되어 종량제 봉투에 버리세요',
+        recyclingInstructions: [
+          '3cm 이상의 큰 뼈는 제거 후 일반 쓰레기로 배출합니다.',
+          '살점과 작은 뼈는 음식물 쓰레기로 배출 가능합니다.',
+        ],
       },
       {
         id: '4',
         name: '오렌지껍질',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2ForangePeel.svg?alt=media&token=504768ae-6ee2-471e-8d0d-5df4091b753f',
-        recyclingInstructions: '음식물 쓰레기에 버리세요',
+        recyclingInstructions: ['음식물 쓰레기로 배출합니다.', '스티커는 제거 후 배출합니다.'],
       },
     ],
   },
@@ -1174,24 +1177,39 @@ const wasteCategories = [
         name: '폐건전지',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fbattery.svg?alt=media&token=2e8b3a9d-0715-4ae4-b9bb-132da5266d69',
-        recyclingInstructions:
-          '폐건전는 망간, 수은, 카드뮴 등 중그목 유해물질을 함유하고 있습니다. 환경오염 및 인체에 나쁜 영향을 일으킬 수 있으므로 전용수거함에 안전하게 배출 해야 합니다.',
+        recyclingInstructions: [
+          '전용 수거함에 배출해야 합니다. 수거함 설치 장소:주민센터(동사무소), 구청, 아파트 단지 내 분리수거장, 대형마트, 전자제품 매장',
+          '건전지는 종류에 상관없이 모두 수거함에 배출 가능합니다.',
+          '건전지 외부의 이물질을 제거하고 배출합니다.',
+          '충전식 전지(보조배터리 등)도 같은 수거함에 배출 가능합니다.',
+          '일반 쓰레기나 종량제 봉투로 배출하면 안 됩니다.',
+        ],
       },
       {
         id: '2',
         name: '폐형광등',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FfluorescentLamp.svg?alt=media&token=286dbf55-8140-4cbc-acae-ff731dd86c03',
-        recyclingInstructions:
-          '형광등 안에는 유해물질인 수은이 함유되어 있습니다. 인체에 위험한 수은이 노출되지 않도록 깨어지지 않게 주의하여 전용 수거함에 안전하게 배출 해야 합니다.',
+        recyclingInstructions: [
+          '전용 수거함에 배출해야 합니다. 수거함 설치 장소:주민센터(동사무소), 구청, 아파트 단지 내 분리수거장, 대형마트, 전자제품 매장',
+          '깨지지 않도록 주의하여 원형 그대로 수거함에 넣습니다.',
+          '깨진 형광등은 신문지 등으로 감싸 안전하게 처리한 후 종량제 봉투로 배출합니다.',
+          'LED 전구는 종량제 봉투로 배출합니다.',
+        ],
       },
       {
         id: '3',
         name: '폐의약품',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fmedicine.svg?alt=media&token=f08a722c-a23e-4785-b41f-db4e7216c0f8',
-        recyclingInstructions:
-          '가정 내 폐의약품이 매립되거나 도시하수로 배출될 경우 공기, 토양, 수질 등의 환경오염을 유발하고 생태계 고랸의 원인이 됩니다. 폐의약품은 모아서 약국에 비치된 전용수거함으로 배출 해야 합니다.',
+        recyclingInstructions: [
+          '가까운 약국이나 보건소의 폐의약품 수거함에 배출합니다.',
+          '일부 지역에서는 우체통을 통해 배출할 수 있습니다(액체 의약품 제외).',
+          '가루약, 알약: 포장을 뜯지 않고 그대로 배출합니다.',
+          '물약: 뚜껑을 잘 닫고 용기째 배출합니다.',
+          '연고 등: 외부 종이 상자만 제거하고 용기째 배출합니다.',
+          '의약품 외의 건강기능식품 등은 폐의약품 수거함에 배출하면 안 됩니다.',
+        ],
       },
     ],
   },
