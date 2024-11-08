@@ -172,8 +172,7 @@ const Answer = () => {
           </div>
         </div>
       </div>
-
-      <div className="h-[54vh]  space-y-2 overflow-y-auto">
+      <div className="h-[54vh] space-y-2 overflow-y-auto">
         <KakaoAdfit320x100 />
         {submittedAnswers.map(({ id, author, content, createdAt }) => (
           <div key={id} className="relative flex flex-col w-[22rem] mx-auto p-2 text-lg bg-purpleLight rounded-4">
@@ -182,13 +181,14 @@ const Answer = () => {
             {createdAt && <p className="text-xs text-gray-500">{formatDateToKoreanTime(new Date(createdAt))}</p>}
           </div>
         ))}
+        <div className='flex flex-col w-[23rem] mx-auto'>
         <NavLink to={`/comments/${questionId}`} state={{ questionId, question, submittedAnswers }}>
           <Button variant="link" size="sm">
             댓글을 남겨보세요.
           </Button>
         </NavLink>
+        </div>
       </div>
-
       <Nav />
       <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
         <DialogContent>
