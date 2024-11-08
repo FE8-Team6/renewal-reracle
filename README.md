@@ -116,6 +116,15 @@ npm run dev
           </p>
         </div>
       </td>
+            <td align="center" valign="middle">
+        <div>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png" width="500" height="1" />
+          <img width="50" src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Progressive_Web_Apps_Logo.svg" />
+          <p align="center">
+            PWA
+          </p>
+        </div>
+      </td>
     </tr>
   </tbody>
 </table>
