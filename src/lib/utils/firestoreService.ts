@@ -24,8 +24,9 @@ const wasteCategories = [
         name: '쌀포대',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fricebag.svg?alt=media&token=6bb3365a-3708-4ad5-b88a-019f1d0f3702',
-        description:
-          '종이 쌀포대는 재활용이 가능합니다. 분리배출표시가 없다면 한쪽 면만 코팅된 종이포대는 종이류로, 양면이 모두 코팅된 종이류는 비닐류로 배출하시기 바랍니다.',
+        description: '종이 쌀포대는 재활용이 가능합니다. ',
+        description2:
+          '분리배출표시가 없다면 한쪽 면만 코팅된 종이포대는 종이류로, 양면이 모두 코팅된 종이류는 비닐류로 배출하시기 바랍니다.',
       },
       {
         id: '3',

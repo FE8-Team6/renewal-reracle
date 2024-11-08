@@ -32,8 +32,7 @@ const DetailItems = () => {
       <div className="w-[56.3vh] h-[13.95vh] fixed bottom-0">
         <button
           onClick={handleGoBack}
-          className="absolute mt-[2.4vh] ml-[0.3vh] h-[5.5vh] w-[5.5vh] bg-transparent border-none flex justify-center items-center text-[5.5vh] cursor-pointer"
-        >
+          className="absolute mt-[2.4vh] ml-[0.3vh] h-[5.5vh] w-[5.5vh] bg-transparent border-none flex justify-center items-center text-[5.5vh] cursor-pointer">
           <GoChevronLeft />
         </button>
         <div className="w-[46vh] h-px my-[3vh] bg-purple mx-auto" />
