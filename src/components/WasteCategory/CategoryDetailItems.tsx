@@ -9,6 +9,7 @@ type ItemsDetails = {
   name: string;
   imageURL: string;
   description: string;
+  description2: string;
 };
 
 const CategoryDetailItems = () => {
@@ -43,15 +44,18 @@ const CategoryDetailItems = () => {
   return (
     <section className="flex flex-col justify-center w-full overflow-y-auto ">
       <KakaoAdfit320x50 />
-      <div className="h-[70vh]">
-        <h3 className="text-xl font-bold text-purple ml-[6vh]">{itemsDetails?.name}</h3>
+      <div className="h-[70vh] flex flex-col items-center">
+        <h3 className="text-xl font-bold text-purple">{itemsDetails?.name}</h3>
         {itemsDetails?.imageURL && (
-          <div className="w-[20rem] h-[12rem] bg-purpleLight rounded-lg flex justify-center items-center my-2 mx-auto">
+          <div className="w-[20rem] h-[12rem] bg-purpleLight rounded-lg flex justify-center items-center my-2">
             <img src={itemsDetails.imageURL} alt={itemsDetails.name} className="max-w-[40%] h-auto object-contain" />
           </div>
         )}
-        <h3 className="text-xl font-bold text-purple ml-[6vh]">배출방법</h3>
-        <p className="w-[20rem] mx-auto my-2 font-semibold ml-[6vh]">{itemsDetails?.description}</p>
+        <h3 className="text-xl font-bold text-purple">배출방법</h3>
+        <div className="w-[20rem]">
+          <p className="my-2 font-semibold">{itemsDetails?.description}</p>
+          <p className="my-2 font-semibold">{itemsDetails?.description2}</p>
+        </div>
       </div>
     </section>
   );
