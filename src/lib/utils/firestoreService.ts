@@ -80,7 +80,7 @@ const wasteCategories = [
         recyclingInstructions: [
           '전단지에 비닐 코팅이 되어 있다면 이를 제거 해야 합니다. 비닐 코팅된 부분은 일반 종이와 함께 재활용되기 어렵습니다.',
           '전단지에 붙어있는 스티커, 테이프 등의 이물질을 모두 제거합니다.',
-          '비닐포장지가 있다면 이를 분리합니다. 비닐은 별도로 비닐류 재활용품으로 배출해야 합니다.'
+          '비닐포장지가 있다면 이를 분리합니다. 비닐은 별도로 비닐류 재활용품으로 배출해야 합니다.',
         ],
       },
       {
@@ -88,7 +88,9 @@ const wasteCategories = [
         name: '종이컵',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FpaperCup.svg?alt=media&token=79ccda7c-bd9e-4df0-b20a-614f4f01ae53',
-        recyclingInstructions: ['종이컵 안에 남아있는 음료나 내용물을 완전히 비우고, 종이류 재활용 수거함에 배출하면 됩니다.',],
+        recyclingInstructions: [
+          '종이컵 안에 남아있는 음료나 내용물을 완전히 비우고, 종이류 재활용 수거함에 배출하면 됩니다.',
+        ],
       },
       {
         id: '9',
@@ -143,12 +145,10 @@ const wasteCategories = [
         name: '우유팩',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fmilkpack.svg?alt=media&token=8f216eae-030a-4b5d-90d2-ba6247ade1c7',
-        recyclingInstructions:
-        [
-
-          '내용물을 비우고, 물로 깨끗이 세척해서 배출 해야 합니다.', 
+        recyclingInstructions: [
+          '내용물을 비우고, 물로 깨끗이 세척해서 배출 해야 합니다.',
           '또한, 빨대, 비닐, 플라스틱 뚜껑 등 다른 재질은 분리해서 재질별로 분리 배출 해야 합니다.',
-        ]
+        ],
       },
     ],
   },
@@ -165,8 +165,8 @@ const wasteCategories = [
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fspray.svg?alt=media&token=568c16eb-c7ef-44c3-9c05-fc3dedc6fff5',
         recyclingInstructions: [
           '스프레이 용기에 남아있는 가스를 완전히 배출 해야 합니다.',
-          '내용물과 가스가 완전히 제거된 스프레이 용기는 캔류 재활용품으로 배출합니다.'
-        ]
+          '내용물과 가스가 완전히 제거된 스프레이 용기는 캔류 재활용품으로 배출합니다.',
+        ],
       },
       {
         id: '2',
@@ -174,21 +174,21 @@ const wasteCategories = [
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FcannedFood.svg?alt=media&token=e41ec9a4-eaca-466e-8b5a-b2256107166f',
         recyclingInstructions: [
-          '내용물을 비우고 물로 헹구는 등 이물질을 제거하여 배출 해야 합니다.', 
+          '내용물을 비우고 물로 헹구는 등 이물질을 제거하여 배출 해야 합니다.',
           '플라스틱 뚜껑 등 금속캔과 다른 재질은 제거한 후 배출 해야 합니다.',
-          '처리가 완료된 통조림 캔은 금속캔 재활용품으로 배출합니다.'
-        ]
+          '처리가 완료된 통조림 캔은 금속캔 재활용품으로 배출합니다.',
+        ],
       },
       {
         id: '3',
         name: '음료캔',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fcan.svg?alt=media&token=0944300a-43c6-4db2-8989-f2897cdce304',
-        recyclingInstructions:[
-          '내용물을 비우고 물로 헹구는 등 이물질을 제거하여 배출 해야 합니다.', 
+        recyclingInstructions: [
+          '내용물을 비우고 물로 헹구는 등 이물질을 제거하여 배출 해야 합니다.',
           '플라스틱 뚜껑 등 금속캔과 다른 재질은 제거한 후 배출 해야 합니다.',
-          '처리가 완료된 통조림 캔은 금속캔 재활용품으로 배출합니다.'
-        ]
+          '처리가 완료된 통조림 캔은 금속캔 재활용품으로 배출합니다.',
+        ],
       },
     ],
   },
@@ -245,75 +245,108 @@ const wasteCategories = [
         name: '세탁기',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fwashingmachine.svg?alt=media&token=4bf9376a-303b-40ea-907f-0c44b0884c1f',
-        recyclingInstructions:
-          '세탁기는 폐가전 무상방문수거 서비스를 통해 배출합니다. 세탁기, 냉장고, TV, 에어컨 등 대형 가전제품은 1개 품목이라도 무료수거를 신청할 수 있고, 청소기, 전기밥솥, 모니터 등의 소형 가전제품은 배출 품목이 5개 이상일 때 무료 수거 신청을 할 수 있습니다. 또한, 대형 생활 폐기물로 폐기물 스티커를 발급받아 버릴 수도 있습니다. 지자체별로 수거 품목이 다를 수 있으므로 주민센터, 구청 등을 통해 품목을 먼저 확인해야합니다.',
+        recyclingInstructions: [
+          '세탁기는 폐가전 무상방문수거 서비스를 통해 배출합니다.',
+          '세탁기, 냉장고, TV, 에어컨 등 대형 가전제품은 1개 품목이라도 무료수거를 신청할 수 있고, 청소기, 전기밥솥, 모니터 등의 소형 가전제품은 배출 품목이 5개 이상일 때 무료 수거 신청을 할 수 있습니다. 또한, 대형 생활 폐기물로 폐기물 스티커를 발급받아 버릴 수도 있습니다.',
+          '지자체별로 수거 품목이 다를 수 있으므로 주민센터, 구청 등을 통해 품목을 먼저 확인해야합니다.',
+        ],
       },
       {
         id: '2',
         name: '텔레비전',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Ftv.svg?alt=media&token=5a3977cf-8d2e-4376-9a64-035e120b942d',
-        recyclingInstructions:
-          '세탁기는 폐가전 무상방문수거 서비스를 통해 배출합니다. 세탁기, 냉장고, TV, 에어컨 등 대형 가전제품은 1개 품목이라도 무료수거를 신청할 수 있고, 청소기, 전기밥솥, 모니터 등의 소형 가전제품은 배출 품목이 5개 이상일 때 무료 수거 신청을 할 수 있습니다. 또한, 대형 생활 폐기물로 폐기물 스티커를 발급받아 버릴 수도 있습니다. 지자체별로 수거 품목이 다를 수 있으므로 주민센터, 구청 등을 통해 품목을 먼저 확인해야합니다.',
+        recyclingInstructions: [
+          '세탁기는 폐가전 무상방문수거 서비스를 통해 배출합니다.',
+          '세탁기, 냉장고, TV, 에어컨 등 대형 가전제품은 1개 품목이라도 무료수거를 신청할 수 있고, 청소기, 전기밥솥, 모니터 등의 소형 가전제품은 배출 품목이 5개 이상일 때 무료 수거 신청을 할 수 있습니다. 또한, 대형 생활 폐기물로 폐기물 스티커를 발급받아 버릴 수도 있습니다.',
+          '지자체별로 수거 품목이 다를 수 있으므로 주민센터, 구청 등을 통해 품목을 먼저 확인 해야 합니다.',
+        ],
       },
       {
         id: '3',
         name: '냉장고',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Frefrigerator.svg?alt=media&token=5bc6012b-340a-4cf9-a575-f3aeaa7d59c9',
-        recyclingInstructions:
-          '더 이상 사용할 수 없는 냉장고는 폐가전 무상방문수거 서비스를 통해 배출합니다. 냉장고, 세탁기, 에어컨, TV 등 대형 가전제품은 1개 품목이라도 신청할 수 있고, 청소기, 전기밥솥, 모니터 등 소형 가전제품은 배출 품목이 5개 이상일 때 무료 수거 신청을 할 수 있습니다. 대형 생활 폐기물처럼 유료로 폐기물 스티커를 발급받아 버릴 수도 있습니다. 지자체별로 수거 품목이 다를 수 있으므로 주민센터, 구청 등을 통해 품목을 먼저 확인해야합니다.',
+        recyclingInstructions: [
+          '더 이상 사용할 수 없는 냉장고는 폐가전 무상방문수거 서비스를 통해 배출합니다.',
+          '냉장고, 세탁기, 에어컨, TV 등 대형 가전제품은 1개 품목이라도 신청할 수 있고, 청소기, 전기밥솥, 모니터 등 소형 가전제품은 배출 품목이 5개 이상일 때 무료 수거 신청을 할 수 있습니다. 대형 생활 폐기물처럼 유료로 폐기물 스티커를 발급받아 버릴 수도 있습니다.',
+          '지자체별로 수거 품목이 다를 수 있으므로 주민센터, 구청 등을 통해 품목을 먼저 확인 해야 합니다.',
+        ],
       },
       {
         id: '4',
         name: '가습기',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fhumidifier.svg?alt=media&token=66044415-be9c-4c27-a626-e01c346fdf1f',
-        recyclingInstructions:
-          '주민센터, 구청, 아파트 관리사무소 등에 설치된 소형 가전 전용 수거함에 배출하세요. 수거함을 찾기 어려운 경우, 비닐봉지에 담아 재활용품 수거일에 배출하시면 됩니다.',
+        recyclingInstructions: [
+          '주민센터, 구청, 아파트 관리사무소 등에 설치된 소형 가전 전용 수거함에 배출하세요.',
+          '수거함을 찾기 어려운 경우, 비닐봉지에 담아 재활용품 수거일에 배출하시면 됩니다.',
+        ],
       },
       {
         id: '5',
         name: '오디오세트',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FaudioSet.svg?alt=media&token=3e24fc26-eeb3-4780-9a17-830f1c6f8ac6',
-        recyclingInstructions:
-          "오디오세트는 '폐가전 무상 방문 수거 서비스'를 통해 무료로 수거할 수 있는 품목 중 하나입니다.",
+        recyclingInstructions: [
+          "오디오세트는 폐가전 제품으로 분류되며, 정부에서 제공하는 '폐가전 무상 방문 수거 서비스'를 통해 무료로 수거할 수 있습니다.",
+          '해당 서비스를 이용하려면 지역의 환경부 또는 관련 기관의 웹사이트를 방문하여 신청할 수 있습니다.',
+        ],
       },
       {
         id: '6',
         name: '정수기',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FwaterPurifier.svg?alt=media&token=b6d276f7-aa7b-4e6f-87e5-e1f4824ad739',
-        recyclingInstructions: '정수기 버리는 방법',
+        recyclingInstructions: [
+          '정수기는 대형 가전제품으로 분류되어 "폐가전 무상 방문 수거 서비스"를 통해 무료로 수거할 수 있습니다.',
+          '환경부 홈페이지나 관련 기관의 웹사이트를 방문하여 수거 신청을 합니다.',
+          '전화(1599-0903)나 온라인을 통해 수거 일정을 조율할 수 있습니다.',
+        ],
       },
       {
         id: '7',
         name: '스캐너',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fscanner.svg?alt=media&token=79845c70-15ea-436b-8d79-87cd7778ca7a',
-        recyclingInstructions: '스캐너 버리는 방법',
+        recyclingInstructions: [
+          '스캐너는 소형 가전제품으로 분류되며, "폐가전 무상 방문 수거 서비스"를 통해 무료로 수거할 수 있습니다.',
+          '환경부 홈페이지나 관련 기관의 웹사이트를 방문하여 수거 신청을 합니다.',
+          '전화(1599-0903)나 온라인을 통해 수거 일정을 조율할 수 있습니다.',
+        ],
       },
       {
         id: '8',
         name: '스피커',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fspeaker.svg?alt=media&token=3ba57d54-f92e-4a0c-8084-28e6e9228310',
-        recyclingInstructions: '스피커 버리는 방법',
+        recyclingInstructions: [
+          '스피커를 포함한 5개 이상의 소형 가전제품을 한 번에 버릴 경우, 무상으로 수거해 갑니다.',
+          '대형 스피커의 경우 단독으로도 무상수거가 가능합니다.',
+          '환경부 홈페이지나 전화(1599-0903)를 통해 신청할 수 있습니다.',
+        ],
       },
       {
         id: '9',
         name: '식기세척기',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fdishwasher.svg?alt=media&token=af863df6-fb52-4ab7-bd3f-d71168540aa1',
-        recyclingInstructions: '식기세척기 버리는 방법',
+        recyclingInstructions: [
+          '식기세척기는 대형 폐가전제품으로 분류되어 무상으로 수거 가능합니다.',
+          '환경부에서 운영하는 "폐가전제품 무상방문수거 서비스"를 이용하면 됩니다.',
+        ],
       },
       {
         id: '10',
         name: '선풍기',
         imageURL:
           'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Ffan.svg?alt=media&token=50cac052-8d5d-42d5-bcb4-2769de063c4e',
-        recyclingInstructions: '선풍기 버리는 방법',
+        recyclingInstructions: [
+          '높이 1미터 이상의 대형 선풍기: 대형 폐기물로 분류됩니다.',
+          '높이 1미터 이하의 가정용 선풍기: 소형 가전제품으로 분류됩니다.',
+          '1미터 이상 선풍기 처리 방법: 구입한 스티커를 선풍기에 부착 후 지정된 수거일에 거주지 앞 지정 장소에 배출합니다.',
+          '1미터 이하 선풍기 처리 방법: 구청, 주민센터, 아파트 관리사무소 등에 설치된 소형 가전 수거함에 배출합니다.',
+        ],
       },
       {
         id: '11',
