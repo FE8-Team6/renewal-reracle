@@ -8,8 +8,7 @@ type ItemsDetails = {
   id: string;
   name: string;
   imageURL: string;
-  description: string;
-  description2: string;
+  recyclingInstructions: string[];
 };
 
 const CategoryDetailItems = () => {
@@ -26,8 +25,8 @@ const CategoryDetailItems = () => {
       const categorySnap = await getDoc(categoryRef);
 
       if (categorySnap.exists()) {
-        const itmes = categorySnap.data().items;
-        const item = itmes.find((item: ItemsDetails) => item.id === itemId);
+        const items = categorySnap.data().items;
+        const item = items.find((item: ItemsDetails) => item.id === itemId);
         setItemsDetails(item);
       } else {
         console.log('카테고리가 존재하지 않습니다.');
@@ -45,16 +44,19 @@ const CategoryDetailItems = () => {
     <section className="flex flex-col justify-center w-full overflow-y-auto ">
       <KakaoAdfit320x50 />
       <div className="h-[70vh] flex flex-col items-center">
-        <h3 className="text-xl font-bold text-purple">{itemsDetails?.name}</h3>
+        <h3 className="text-xl font-bold text-purple  w-[20rem]">{itemsDetails?.name}</h3>
         {itemsDetails?.imageURL && (
           <div className="w-[20rem] h-[12rem] bg-purpleLight rounded-lg flex justify-center items-center my-2">
             <img src={itemsDetails.imageURL} alt={itemsDetails.name} className="max-w-[40%] h-auto object-contain" />
           </div>
         )}
-        <h3 className="text-xl font-bold text-purple">배출방법</h3>
+        <h3 className="text-xl font-bold text-purple  w-[20rem] ">배출방법</h3>
         <div className="w-[20rem]">
-          <p className="my-2 font-semibold">{itemsDetails?.description}</p>
-          <p className="my-2 font-semibold">{itemsDetails?.description2}</p>
+          {itemsDetails?.recyclingInstructions.map((instruction) => (
+            <p key={itemsDetails.id} className="my-2 font-semibold">
+              {instruction}
+            </p>
+          ))}
         </div>
       </div>
     </section>

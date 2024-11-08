@@ -31,6 +31,7 @@ import {
 import { GoPencil } from 'react-icons/go';
 import { Input } from '@/components/ui/input';
 import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50';
+import KakaoAdfit320x100 from '@/components/KakaoAdfit320x100';
 
 type Question = {
   id: string;
@@ -202,11 +203,11 @@ export const Qna = () => {
     <>
       <KakaoAdfit320x50 />
       <div className="w-[22rem] h-[67vh] relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4 ">
+        <KakaoAdfit320x100 />
         {questions.map((question) => (
           <div
             key={question.id}
-            className=" bg-greenLight w-full h-[6rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black "
-          >
+            className=" bg-greenLight w-full h-[6rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black ">
             <NavLink
               to={`/answer/${question.id}`}
               state={{
@@ -221,8 +222,7 @@ export const Qna = () => {
                 currentUser,
                 authorUid: question.authorUid,
               }}
-              className="flex flex-col flex-grow"
-            >
+              className="flex flex-col flex-grow">
               <div className="flex flex-col">
                 <span className="text-base font-semibold text-gray-900 truncate">
                   {truncateTitle(question.question)}
@@ -244,8 +244,7 @@ export const Qna = () => {
                     onClick={(event) => {
                       event.preventDefault();
                       handleLiked(question.id);
-                    }}
-                  >
+                    }}>
                     <ThumbsUp className={`w-[1rem] h-[1rem] ${likedPosts.has(question.id) ? 'text-blue-500' : ''}`} />
                   </Button>
                   <span>{question.likes}</span>

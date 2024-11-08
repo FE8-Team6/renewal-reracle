@@ -17,6 +17,7 @@ import { GoPencil } from 'react-icons/go';
 import { formatDateToKoreanTime } from '@/lib/utils/dateKoreanTime';
 import { NavLink } from 'react-router-dom';
 import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50';
+import KakaoAdfit320x100 from '@/components/KakaoAdfit320x100';
 
 type Announcement = {
   id: string;
@@ -113,6 +114,7 @@ export const Announcement = () => {
     <>
       <KakaoAdfit320x50 />
       <div className="w-[22rem] h-[67vh] relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4 ">
+        <KakaoAdfit320x100 />
         {isAdmin && (
           <div className="fixed bottom-[16vh] left-[50%] transform -translate-x-1/2">
             <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
@@ -166,8 +168,7 @@ export const Announcement = () => {
         {announcements.map((announcement) => (
           <div
             key={announcement.id}
-            className=" bg-yellowLight w-full h-[6rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black "
-          >
+            className=" bg-yellowLight w-full h-[6rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black ">
             <NavLink to={`/announcement/${announcement.id}`} className="flex flex-col flex-grow">
               <div className="flex flex-col">
                 <span className="text-base font-semibold text-gray-900 truncate">
