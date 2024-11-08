@@ -87,6 +87,15 @@ npm run dev
           </p>
         </div>
       </td>
+            <td align="center" valign="middle">
+        <div>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png" width="500" height="1" />
+          <img width="40" src="https://upload.wikimedia.org/wikipedia/commons/4/46/Touchicon-180.png" />
+          <p align="center">
+            Firebase
+          </p>
+        </div>
+      </td>
     </tr>
     <tr>
       <td align="center" valign="middle">
@@ -116,7 +125,7 @@ npm run dev
           </p>
         </div>
       </td>
-            <td align="center" valign="middle">
+      <td align="center" valign="middle">
         <div>
           <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png" width="500" height="1" />
           <img width="50" src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Progressive_Web_Apps_Logo.svg" />
