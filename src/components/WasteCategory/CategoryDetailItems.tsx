@@ -8,7 +8,6 @@ type ItemsDetails = {
   id: string;
   name: string;
   imageURL: string;
-  description?: string;
   recyclingInstructions: string[];
 };
 
@@ -53,7 +52,6 @@ const CategoryDetailItems = () => {
         )}
         <h3 className="text-xl font-bold text-purple  w-[20rem] ">배출방법</h3>
         <div className="w-[20rem]">
-          <p className="my-2 font-semibold">{itemsDetails?.description}</p>
           {itemsDetails?.recyclingInstructions.map((instruction) => (
             <p key={itemsDetails.id} className="my-2 font-semibold">
               {instruction}
