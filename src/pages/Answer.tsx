@@ -17,7 +17,7 @@ import {
   DialogClose,
 } from '@/components/ui/dialog';
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
-import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50';
+import KakaoAdfit320x100 from '@/components/KakaoAdfit320x100';
 
 type SubmittedAnswer = {
   id: string;
@@ -174,8 +174,7 @@ const Answer = () => {
       </div>
 
       <div className="h-[54vh]  space-y-2 overflow-y-auto">
-        <KakaoAdfit320x50 />
-
+        <KakaoAdfit320x100 />
         {submittedAnswers.map(({ id, author, content, createdAt }) => (
           <div key={id} className="relative flex flex-col w-[22rem] mx-auto p-2 text-lg bg-purpleLight rounded-4">
             <p className="text-sm">{author}</p>
