@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import { RxPerson } from "react-icons/rx";
+import { useNavigate } from 'react-router-dom';
+import { RxPerson } from 'react-icons/rx';
 
 const Header = () => {
   const navigation = useNavigate();
@@ -7,11 +7,11 @@ const Header = () => {
     navigation(path);
   };
   const handleUserIconClick = () => {
-    const userData = localStorage.getItem("userData");
+    const userData = localStorage.getItem('userData');
     if (userData) {
-      handleNavClick("/mypage");
+      handleNavClick('/mypage');
     } else {
-      handleNavClick("/login");
+      handleNavClick('/login');
     }
   };
   return (
@@ -19,13 +19,10 @@ const Header = () => {
       <img
         src="/icon/REracle_logo.svg"
         alt="reracle 아이콘"
-        onClick={() => handleNavClick("/")}
+        onClick={() => handleNavClick('/')}
         className="w-[5rem] absolute ml-4 cursor-pointer"
       />
-      <RxPerson
-        onClick={handleUserIconClick}
-        className="absolute right-0 w-5 h-5 mr-4 cursor-pointer"
-      />
+      <RxPerson onClick={handleUserIconClick} className="absolute right-0 w-5 h-5 mr-4 cursor-pointer" />
     </div>
   );
 };

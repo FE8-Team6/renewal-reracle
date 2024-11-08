@@ -9,21 +9,16 @@ import {
   getDocs,
   doc,
   deleteDoc,
-} from "firebase/firestore";
-import { db } from "@/firebase";
-import { RecentSearchHistory } from "@/lib/types/search";
+} from 'firebase/firestore';
+import { db } from '@/firebase';
+import { RecentSearchHistory } from '@/lib/types/search';
 
 /**
  * @description Firestore에 검색 기록 저장
  */
-const postSearchHistory = async (
-  userId: string,
-  query: string,
-  categoryId: string,
-  itemId: string
-) => {
+const postSearchHistory = async (userId: string, query: string, categoryId: string, itemId: string) => {
   try {
-    await addDoc(collection(db, "SearchHistory"), {
+    await addDoc(collection(db, 'SearchHistory'), {
       userId,
       query,
       categoryId,
@@ -31,7 +26,7 @@ const postSearchHistory = async (
       timestamp: serverTimestamp(),
     });
   } catch (error) {
-    console.error("검색 기록 저장 실패:", error);
+    console.error('검색 기록 저장 실패:', error);
   }
 };
 
@@ -42,10 +37,10 @@ const postSearchHistory = async (
 const getRecentSearchHistory = async (userId: string) => {
   try {
     const searchHistoryQuery = query(
-      collection(db, "SearchHistory"),
-      where("userId", "==", userId),
-      orderBy("timestamp", "desc"),
-      limit(8)
+      collection(db, 'SearchHistory'),
+      where('userId', '==', userId),
+      orderBy('timestamp', 'desc'),
+      limit(8),
     );
     const querySnapshot = await getDocs(searchHistoryQuery);
     return querySnapshot.docs.map((doc) => ({
@@ -53,7 +48,7 @@ const getRecentSearchHistory = async (userId: string) => {
       ...doc.data(),
     })) as RecentSearchHistory;
   } catch (error) {
-    console.error("최근 검색 기록 가져오기 실패:", error);
+    console.error('최근 검색 기록 가져오기 실패:', error);
     return [];
   }
 };
@@ -63,10 +58,10 @@ const getRecentSearchHistory = async (userId: string) => {
  */
 const deleteSearchHistory = async (docId: string) => {
   try {
-    const searchHistoryDocRef = doc(db, "SearchHistory", docId);
+    const searchHistoryDocRef = doc(db, 'SearchHistory', docId);
     await deleteDoc(searchHistoryDocRef);
   } catch (error) {
-    console.error("검색 기록 삭제 실패:", error);
+    console.error('검색 기록 삭제 실패:', error);
   }
 };
 

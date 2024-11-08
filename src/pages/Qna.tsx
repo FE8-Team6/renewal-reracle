@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import {
   collection,
   addDoc,
@@ -12,13 +12,13 @@ import {
   setDoc,
   updateDoc,
   increment,
-} from "firebase/firestore";
-import { NavLink } from "react-router-dom";
-import { db } from "../firebase";
-import { serverTimestamp } from "firebase/firestore";
-import { formatDateToKoreanTime } from "@/lib/utils/dateKoreanTime";
-import { Button } from "@/components/ui/button";
-import { ThumbsUp } from "lucide-react";
+} from 'firebase/firestore';
+import { NavLink } from 'react-router-dom';
+import { db } from '../firebase';
+import { serverTimestamp } from 'firebase/firestore';
+import { formatDateToKoreanTime } from '@/lib/utils/dateKoreanTime';
+import { Button } from '@/components/ui/button';
+import { ThumbsUp } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -27,10 +27,10 @@ import {
   DialogDescription,
   DialogFooter,
   DialogClose,
-} from "@/components/ui/dialog";
-import { GoPencil } from "react-icons/go";
-import { Input } from "@/components/ui/input";
-import KakaoAdfit320x50 from "@/components/KakaoAdfit320x50";
+} from '@/components/ui/dialog';
+import { GoPencil } from 'react-icons/go';
+import { Input } from '@/components/ui/input';
+import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50';
 
 type Question = {
   id: string;
@@ -49,19 +49,19 @@ export const Qna = () => {
     displayName: string;
     uid: string;
   }>({
-    displayName: "",
-    uid: "",
+    displayName: '',
+    uid: '',
   });
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [likedPosts, setLikedPosts] = useState<Set<string>>(new Set());
-  const [title, setTitle] = useState<string>("");
-  const [content, setContent] = useState<string>("");
+  const [title, setTitle] = useState<string>('');
+  const [content, setContent] = useState<string>('');
 
   /**
    * @description 로컬스토리지에 저장된 사용자 정보를 불러옵니다.
    */
   useEffect(() => {
-    const userData = localStorage.getItem("userData");
+    const userData = localStorage.getItem('userData');
     const storedUser = userData ? JSON.parse(userData) : null;
     if (storedUser) {
       setCurrentUser(storedUser);
@@ -70,17 +70,12 @@ export const Qna = () => {
 
   useEffect(() => {
     const fetchQuestions = async () => {
-      const queryOrderBy = query(
-        collection(db, "questions"),
-        orderBy("createdAt", "desc")
-      );
+      const queryOrderBy = query(collection(db, 'questions'), orderBy('createdAt', 'desc'));
       const querySnapshot = await getDocs(queryOrderBy);
       const questionList: Question = [];
       for (const doc of querySnapshot.docs) {
         const questionData = doc.data();
-        const answersSnapshot = await getDocs(
-          query(collection(db, "answers"), where("questionId", "==", doc.id))
-        );
+        const answersSnapshot = await getDocs(query(collection(db, 'answers'), where('questionId', '==', doc.id)));
         questionList.push({
           id: doc.id,
           question: questionData.question,
@@ -97,10 +92,7 @@ export const Qna = () => {
 
     const fetchLiked = async () => {
       if (currentUser.uid) {
-        const q = query(
-          collection(db, "likes"),
-          where("userId", "==", currentUser.uid)
-        );
+        const q = query(collection(db, 'likes'), where('userId', '==', currentUser.uid));
         const querySnapshot = await getDocs(q);
         const likedPostIds = new Set<string>();
         querySnapshot.forEach((doc) => {
@@ -115,12 +107,12 @@ export const Qna = () => {
   }, [currentUser.uid]);
 
   const handleAddQuestion = async () => {
-    if (title.trim() === "" || content.trim() === "") {
-      alert("제목과 내용을 입력해주세요.");
+    if (title.trim() === '' || content.trim() === '') {
+      alert('제목과 내용을 입력해주세요.');
       return;
     }
     try {
-      await addDoc(collection(db, "questions"), {
+      await addDoc(collection(db, 'questions'), {
         question: title,
         content,
         author: currentUser.displayName,
@@ -130,15 +122,11 @@ export const Qna = () => {
         commentCount: 0,
       });
 
-      const updatedQuestions = await getDocs(
-        query(collection(db, "questions"), orderBy("createdAt", "desc"))
-      );
+      const updatedQuestions = await getDocs(query(collection(db, 'questions'), orderBy('createdAt', 'desc')));
       const questionList: Question = [];
       for (const doc of updatedQuestions.docs) {
         const questionData = doc.data();
-        const answersSnapshot = await getDocs(
-          query(collection(db, "answers"), where("questionId", "==", doc.id))
-        );
+        const answersSnapshot = await getDocs(query(collection(db, 'answers'), where('questionId', '==', doc.id)));
         questionList.push({
           id: doc.id,
           question: questionData.question,
@@ -152,10 +140,10 @@ export const Qna = () => {
       }
       setQuestions(questionList);
       setIsModalOpen(false);
-      setTitle("");
-      setContent("");
+      setTitle('');
+      setContent('');
     } catch (error) {
-      console.error("질문 추가 실패:", error);
+      console.error('질문 추가 실패:', error);
     }
   };
 
@@ -166,49 +154,41 @@ export const Qna = () => {
   const handleLiked = async (id: string) => {
     try {
       if (!currentUser.uid) {
-        alert("로그인을 해주세요.");
+        alert('로그인을 해주세요.');
         return;
       }
-      const likeDocRef = doc(db, "likes", `${currentUser.uid}_${id}`);
+      const likeDocRef = doc(db, 'likes', `${currentUser.uid}_${id}`);
       if (likedPosts.has(id)) {
         await deleteDoc(likeDocRef);
-        await updateDoc(doc(db, "questions", id), { likes: increment(-1) });
+        await updateDoc(doc(db, 'questions', id), { likes: increment(-1) });
         setLikedPosts((prev) => {
           const newSet = new Set(prev);
           newSet.delete(id);
           return newSet;
         });
         setQuestions((prev) =>
-          prev.map((question) =>
-            question.id === id
-              ? { ...question, likes: question.likes - 1 }
-              : question
-          )
+          prev.map((question) => (question.id === id ? { ...question, likes: question.likes - 1 } : question)),
         );
       } else {
         await setDoc(likeDocRef, {
           userId: currentUser.uid,
           postId: id,
         });
-        await updateDoc(doc(db, "questions", id), { likes: increment(1) });
+        await updateDoc(doc(db, 'questions', id), { likes: increment(1) });
         setLikedPosts((prev) => new Set(prev).add(id));
         setQuestions((prev) =>
-          prev.map((question) =>
-            question.id === id
-              ? { ...question, likes: question.likes + 1 }
-              : question
-          )
+          prev.map((question) => (question.id === id ? { ...question, likes: question.likes + 1 } : question)),
         );
       }
     } catch (error) {
-      console.error("LIKE 에러 발생: ", error);
+      console.error('LIKE 에러 발생: ', error);
     }
   };
 
   const handleOpenModal = () => {
-    const userData = localStorage.getItem("userData");
+    const userData = localStorage.getItem('userData');
     if (!userData) {
-      alert("로그인이 필요합니다.");
+      alert('로그인이 필요합니다.');
       return;
     }
     setIsModalOpen(true);
@@ -234,9 +214,7 @@ export const Qna = () => {
                 question: question.question,
                 content: question.content,
                 author: question.author,
-                createdAt: question.createdAt
-                  ? question.createdAt.toDate().toISOString()
-                  : null,
+                createdAt: question.createdAt ? question.createdAt.toDate().toISOString() : null,
                 likes: question.likes,
                 likedPosts: Array.from(likedPosts),
                 commentCount: question.commentCount,
@@ -254,9 +232,7 @@ export const Qna = () => {
               <div className="flex items-center justify-between mt-1">
                 <div className="flex gap-2">
                   {question.createdAt && (
-                    <p className="text-sm">
-                      {formatDateToKoreanTime(question.createdAt.toDate())}
-                    </p>
+                    <p className="text-sm">{formatDateToKoreanTime(question.createdAt.toDate())}</p>
                   )}
                   <p className="text-sm">댓글 {question.commentCount}개</p>
                 </div>
@@ -270,11 +246,7 @@ export const Qna = () => {
                       handleLiked(question.id);
                     }}
                   >
-                    <ThumbsUp
-                      className={`w-[1rem] h-[1rem] ${
-                        likedPosts.has(question.id) ? "text-blue-500" : ""
-                      }`}
-                    />
+                    <ThumbsUp className={`w-[1rem] h-[1rem] ${likedPosts.has(question.id) ? 'text-blue-500' : ''}`} />
                   </Button>
                   <span>{question.likes}</span>
                 </div>
@@ -285,10 +257,7 @@ export const Qna = () => {
       </div>
       <div className="fixed bottom-[16vh] left-[50%] transform -translate-x-1/2">
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-          <button
-            onClick={handleOpenModal}
-            className="p-2 border bg-purple rounded-10"
-          >
+          <button onClick={handleOpenModal} className="p-2 border bg-purple rounded-10">
             <GoPencil className="w-5 h-5 text-white" />
           </button>
           <DialogContent>

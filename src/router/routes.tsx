@@ -1,26 +1,18 @@
-import { Layout } from "@/components/layout/Layout";
-import MyPage from "@/components/MyPage/MyPage";
-import Nav from "@/components/Nav/Nav";
-import CategoryDetailItems from "@/components/WasteCategory/CategoryDetailItems";
-import CategoryItems from "@/components/WasteCategory/CategoryItems";
-import BackHeader from "@/lib/common/BackHeader";
-import {
-  Login,
-  MyQuestion,
-  NotFound,
-  PasswordReset,
-  Qna,
-  SignUp,
-  Announcement,
-} from "@/pages";
-import AnnouncementDetailItem from "@/pages/AnnouncementDetailItem";
-import Answer from "@/pages/Answer";
-import Comments from "@/pages/Comments";
-import Home from "@/pages/Home";
+import { Layout } from '@/components/layout/Layout';
+import MyPage from '@/components/MyPage/MyPage';
+import Nav from '@/components/Nav/Nav';
+import CategoryDetailItems from '@/components/WasteCategory/CategoryDetailItems';
+import CategoryItems from '@/components/WasteCategory/CategoryItems';
+import BackHeader from '@/lib/common/BackHeader';
+import { Login, MyQuestion, NotFound, PasswordReset, Qna, SignUp, Announcement } from '@/pages';
+import AnnouncementDetailItem from '@/pages/AnnouncementDetailItem';
+import Answer from '@/pages/Answer';
+import Comments from '@/pages/Comments';
+import Home from '@/pages/Home';
 
 export const routes = [
   {
-    path: "/",
+    path: '/',
     element: (
       <Layout>
         <Home />
@@ -28,7 +20,7 @@ export const routes = [
     ),
   },
   {
-    path: "/login",
+    path: '/login',
     element: (
       <>
         <Login />
@@ -37,11 +29,11 @@ export const routes = [
     ),
   },
   {
-    path: "/pwreset",
+    path: '/pwreset',
     element: <PasswordReset />,
   },
   {
-    path: "/signup",
+    path: '/signup',
     element: (
       <>
         <SignUp />
@@ -50,11 +42,11 @@ export const routes = [
     ),
   },
   {
-    path: "*",
+    path: '*',
     element: <NotFound />,
   },
   {
-    path: "category/:categoryId",
+    path: 'category/:categoryId',
     element: (
       <Layout>
         <CategoryItems />
@@ -62,7 +54,7 @@ export const routes = [
     ),
   },
   {
-    path: "category/:categoryId/item/:itemId",
+    path: 'category/:categoryId/item/:itemId',
     element: (
       <>
         <BackHeader />
@@ -72,7 +64,7 @@ export const routes = [
     ),
   },
   {
-    path: "qna",
+    path: 'qna',
     element: (
       <Layout>
         <Qna />
@@ -80,7 +72,7 @@ export const routes = [
     ),
   },
   {
-    path: "announcement",
+    path: 'announcement',
     element: (
       <Layout>
         <Announcement />
@@ -88,7 +80,7 @@ export const routes = [
     ),
   },
   {
-    path: "announcement/:announcementId",
+    path: 'announcement/:announcementId',
     element: (
       <>
         <BackHeader />
@@ -98,15 +90,15 @@ export const routes = [
     ),
   },
   {
-    path: "answer/:questionId",
+    path: 'answer/:questionId',
     element: <Answer />,
   },
   {
-    path: "comments/:questionId",
+    path: 'comments/:questionId',
     element: <Comments />,
   },
   {
-    path: "mypage",
+    path: 'mypage',
     element: (
       <Layout>
         <MyPage />
@@ -115,7 +107,7 @@ export const routes = [
   },
 
   {
-    path: "myquestion",
+    path: 'myquestion',
     element: (
       <Layout>
         <MyQuestion />

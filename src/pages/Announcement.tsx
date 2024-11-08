@@ -1,16 +1,7 @@
-import { useState, useEffect } from "react";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  query,
-  orderBy,
-  doc,
-  setDoc,
-  serverTimestamp,
-} from "firebase/firestore";
-import { db, auth } from "../firebase";
-import { Button } from "@/components/ui/button";
+import { useState, useEffect } from 'react';
+import { collection, addDoc, getDocs, query, orderBy, doc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { db, auth } from '../firebase';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogTrigger,
@@ -20,12 +11,12 @@ import {
   DialogDescription,
   DialogFooter,
   DialogClose,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { GoPencil } from "react-icons/go";
-import { formatDateToKoreanTime } from "@/lib/utils/dateKoreanTime";
-import { NavLink } from "react-router-dom";
-import KakaoAdfit320x50 from "@/components/KakaoAdfit320x50";
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { GoPencil } from 'react-icons/go';
+import { formatDateToKoreanTime } from '@/lib/utils/dateKoreanTime';
+import { NavLink } from 'react-router-dom';
+import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50';
 
 type Announcement = {
   id: string;
@@ -39,22 +30,22 @@ export const Announcement = () => {
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const [newAnnouncement, setNewAnnouncement] = useState({
-    title: "",
-    details: "",
-    author: "",
+    title: '',
+    details: '',
+    author: '',
   });
   const [currentUser, setCurrentUser] = useState<{
     displayName: string;
     uid: string;
   }>({
-    displayName: "",
-    uid: "",
+    displayName: '',
+    uid: '',
   });
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [editId, setEditId] = useState<string>("");
+  const [editId, setEditId] = useState<string>('');
 
   useEffect(() => {
-    const userData = localStorage.getItem("userData");
+    const userData = localStorage.getItem('userData');
     const storedUser = userData ? JSON.parse(userData) : null;
     if (storedUser) {
       setCurrentUser(storedUser);
@@ -64,7 +55,7 @@ export const Announcement = () => {
   useEffect(() => {
     const checkAdmin = async () => {
       const user = auth.currentUser;
-      if (user && user.uid === "vzFV5N4PH1VjKNeZoClT83fTibN2") {
+      if (user && user.uid === 'vzFV5N4PH1VjKNeZoClT83fTibN2') {
         setIsAdmin(true);
       }
     };
@@ -74,10 +65,7 @@ export const Announcement = () => {
   }, []);
 
   const fetchAnnouncements = async () => {
-    const queryOrderBy = query(
-      collection(db, "announcements"),
-      orderBy("createdAt", "desc")
-    );
+    const queryOrderBy = query(collection(db, 'announcements'), orderBy('createdAt', 'desc'));
     const querySnapshot = await getDocs(queryOrderBy);
     const announcementList = querySnapshot.docs.map((doc) => ({
       id: doc.id,
@@ -90,33 +78,30 @@ export const Announcement = () => {
   };
 
   const handleAddAnnouncement = async () => {
-    if (
-      newAnnouncement.title.trim() === "" ||
-      newAnnouncement.details.trim() === ""
-    ) {
-      alert("제목과 내용을 입력해주세요.");
+    if (newAnnouncement.title.trim() === '' || newAnnouncement.details.trim() === '') {
+      alert('제목과 내용을 입력해주세요.');
       return;
     }
     try {
       if (editId) {
-        await setDoc(doc(db, "announcements", editId), {
+        await setDoc(doc(db, 'announcements', editId), {
           ...newAnnouncement,
           createdAt: serverTimestamp(),
           author: currentUser.displayName,
         });
-        setEditId("");
+        setEditId('');
       } else {
-        await addDoc(collection(db, "announcements"), {
+        await addDoc(collection(db, 'announcements'), {
           ...newAnnouncement,
           createdAt: serverTimestamp(),
           author: currentUser.displayName,
         });
       }
-      setNewAnnouncement({ title: "", details: "", author: "" });
+      setNewAnnouncement({ title: '', details: '', author: '' });
       fetchAnnouncements();
       setIsModalOpen(false);
     } catch (error) {
-      console.error("공지사항 추가 실패:", error);
+      console.error('공지사항 추가 실패:', error);
     }
   };
 
@@ -139,9 +124,7 @@ export const Announcement = () => {
               <DialogContent>
                 <DialogHeader>
                   <DialogTitle>공지사항</DialogTitle>
-                  <DialogDescription>
-                    새로운 공지사항을 작성하세요.
-                  </DialogDescription>
+                  <DialogDescription>새로운 공지사항을 작성하세요.</DialogDescription>
                 </DialogHeader>
                 <Input
                   type="text"
@@ -172,12 +155,8 @@ export const Announcement = () => {
                       닫기
                     </Button>
                   </DialogClose>
-                  <Button
-                    variant="default"
-                    size="lg"
-                    onClick={handleAddAnnouncement}
-                  >
-                    {editId ? "수정" : "추가"}
+                  <Button variant="default" size="lg" onClick={handleAddAnnouncement}>
+                    {editId ? '수정' : '추가'}
                   </Button>
                 </DialogFooter>
               </DialogContent>
@@ -189,24 +168,17 @@ export const Announcement = () => {
             key={announcement.id}
             className=" bg-yellowLight w-full h-[6rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black "
           >
-            <NavLink
-              to={`/announcement/${announcement.id}`}
-              className="flex flex-col flex-grow"
-            >
+            <NavLink to={`/announcement/${announcement.id}`} className="flex flex-col flex-grow">
               <div className="flex flex-col">
                 <span className="text-base font-semibold text-gray-900 truncate">
                   {truncateTitle(announcement.title)}
                 </span>
-                <span className="text-sm text-gray-500">
-                  {announcement.author}
-                </span>
+                <span className="text-sm text-gray-500">{announcement.author}</span>
               </div>
               <div className="flex items-center justify-between mt-1">
                 <div className="flex gap-2">
                   {announcement.createdAt && (
-                    <p className="text-sm">
-                      {formatDateToKoreanTime(announcement.createdAt)}
-                    </p>
+                    <p className="text-sm">{formatDateToKoreanTime(announcement.createdAt)}</p>
                   )}
                 </div>
               </div>
