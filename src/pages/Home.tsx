@@ -1,7 +1,5 @@
 import Category from '@/components/WasteCategory/Category';
 
-const Home = () => {
+export const Home = () => {
   return <Category />;
 };
-
-export default Home;

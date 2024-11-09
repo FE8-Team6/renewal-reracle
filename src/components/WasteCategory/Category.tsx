@@ -15,6 +15,9 @@ type Category = {
 
 const Category = () => {
   const [categories, setCategories] = useState<Category[]>([]);
+  const [containerWidth, setContainerWidth] = useState('w-[25rem]');
+
+  const chunkedCategories = chunkArray(categories, 9);
 
   const getCategories = async () => {
     try {
@@ -34,22 +37,32 @@ const Category = () => {
 
   useEffect(() => {
     getCategories();
-  }, []);
 
-  const chunkedCategories = chunkArray(categories, 9);
+    const updateContainerWidth = () => {
+      if (window.innerWidth <= 395) {
+        setContainerWidth('w-[21rem]');
+      } else {
+        setContainerWidth('w-[25rem]');
+      }
+    };
+
+    updateContainerWidth();
+    window.addEventListener('resize', updateContainerWidth);
+    return () => window.removeEventListener('resize', updateContainerWidth);
+  }, []);
 
   return (
     <>
       <KakaoAdfit320x50 />
-      <section className="w-full h-[73vh] flex flex-col justify-center overflow-y-auto">
+      <section className="w-full h-[72vh] flex flex-col justify-center overflow-y-auto">
         <div className="mx-auto mt-1">
           <SearchBar />
         </div>
         <h2 className="ml-[5vh] mt-[2vh] text-xl font-bold text-purple">재활용품 분류</h2>
-        <SlCarousel pagination mouse-dragging className="w-full h-[28rem] mx-auto">
+        <SlCarousel mouse-dragging className="w-full h-[28rem] mx-auto">
           {chunkedCategories.map((chunk, index) => (
             <SlCarouselItem key={index}>
-              <div className="grid grid-cols-3 gap-y-2 w-[25rem]">
+              <div className={`grid grid-cols-3 gap-y-2 ${containerWidth}`}>
                 {chunk.map((category) => (
                   <div key={category.id}>
                     <NavLink to={`/category/${category.id}`} className="no-underline">

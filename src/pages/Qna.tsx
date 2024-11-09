@@ -57,6 +57,18 @@ export const Qna = () => {
   const [likedPosts, setLikedPosts] = useState<Set<string>>(new Set());
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 395);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   /**
    * @description 로컬스토리지에 저장된 사용자 정보를 불러옵니다.
@@ -201,8 +213,12 @@ export const Qna = () => {
 
   return (
     <>
+      <div className="w-full h-[2rem] bg-purple text-center flex items-center justify-center text-white text-[2vh]">
+        R지식in
+      </div>
       <KakaoAdfit320x50 />
-      <div className="w-[22rem] h-[67vh] relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4 ">
+      <div
+        className={`mx-auto my-[1.5vh] relative overflow-y-auto overflow-x-hidden rounded-4 ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} h-[67vh]`}>
         <KakaoAdfit320x100 />
         {questions.map((question) => (
           <div

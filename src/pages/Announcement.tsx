@@ -44,6 +44,18 @@ export const Announcement = () => {
   });
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [editId, setEditId] = useState<string>('');
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 395);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const userData = localStorage.getItem('userData');
@@ -112,8 +124,12 @@ export const Announcement = () => {
 
   return (
     <>
+      <div className="w-full h-[2rem] bg-yellow text-purple text-center flex items-center justify-center leading-[3.75vh] text-[2vh]">
+        공지사항
+      </div>
       <KakaoAdfit320x50 />
-      <div className="w-[22rem] h-[67vh] relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4 ">
+      <div
+        className={`${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} h-[67vh] relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4`}>
         <KakaoAdfit320x100 />
         {isAdmin && (
           <div className="fixed bottom-[16vh] left-[50%] transform -translate-x-1/2">

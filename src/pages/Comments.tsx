@@ -19,7 +19,7 @@ import BackHeader from '@/lib/common/BackHeader';
 import Nav from '@/components/Nav/Nav';
 import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50';
 
-const Comments = () => {
+export const Comments = () => {
   const location = useLocation();
   const questionId = location.state?.questionId || '';
   const question = location.state?.question || '';
@@ -35,6 +35,18 @@ const Comments = () => {
   const [answer, setAnswer] = useState<string>('');
   const [editingAnswer, setEditingAnswer] = useState<string | null>(null);
   const [editedContent, setEditedContent] = useState<string>('');
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 395);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const userData = localStorage.getItem('userData');
@@ -128,8 +140,7 @@ const Comments = () => {
             .map((answer: { id: string; author: string; content: string; authorUid: string; createdAt: string }) => (
               <div
                 key={answer.id}
-                className="relative flex flex-col w-[22rem] mx-auto p-2 text-lg bg-purpleLight border rounded-4"
-              >
+                className={`relative flex flex-col ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'}  mx-auto p-2 text-lg bg-purpleLight border rounded-4`}>
                 <div className="flex items-center justify-between">
                   <p className="text-sm">{answer.author}</p>
                   {currentUser && currentUser.uid === answer.authorUid && (
@@ -146,8 +157,7 @@ const Comments = () => {
                           onClick={() => {
                             setEditingAnswer(answer.id);
                             setEditedContent(answer.content);
-                          }}
-                        >
+                          }}>
                           수정
                         </Button>
                         <Button variant="default" size="sm" onClick={() => handleDeleteAnswer(answer.id)}>
@@ -185,11 +195,15 @@ const Comments = () => {
             ))}
           <div className="mt-4 text-center">
             <textarea
-              className="w-[22rem] h-[8vh] border border-gray-300 rounded-4"
+              className={` ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'}  h-[8vh] border border-gray-300 rounded-4`}
               value={answer}
               onChange={(event) => setAnswer(event.target.value)}
             />
-            <Button variant="default" size="default" onClick={handleSubmit} className="w-[22rem]">
+            <Button
+              variant="default"
+              size="default"
+              onClick={handleSubmit}
+              className={`${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'}`}>
               제출
             </Button>
           </div>
@@ -200,5 +214,3 @@ const Comments = () => {
     </>
   );
 };
-
-export default Comments;

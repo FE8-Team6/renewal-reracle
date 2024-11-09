@@ -12,36 +12,27 @@ const Nav = () => {
   };
 
   return (
-    <div className="w-full h-[14vh] fixed bottom-0">
+    <div className="w-full h-[12vh] fixed bottom-0">
       <NotificationBanner />
-      <div className="w-full h-[10.2vh] absolute bottom-0 bg-green flex justify-evenly items-center">
-        <div className="relative flex items-center w-auto h-auto">
-          <button
-            onClick={() => handleNavClick('/')}
-            className="border-none w-[8vh] bg-transparent flex flex-col items-center"
-          >
-            <IoHomeOutline className="w-5 h-5" />
-            <div className="mt-1 text-sm font-medium text-center text-grayDark">홈</div>
-          </button>
-        </div>
-        <div className="relative flex items-center w-auto h-auto">
-          <button
-            onClick={() => handleNavClick('/qna')}
-            className="border-none w-[8vh] bg-transparent flex flex-col items-center"
-          >
-            <HiOutlineQuestionMarkCircle className="w-5 h-5" />
-            <div className="mt-1 text-sm font-medium text-center text-grayDark">R지식in</div>
-          </button>
-        </div>
-        <div className="relative flex items-center w-auto h-auto">
-          <button
-            onClick={() => handleNavClick('/announcement')}
-            className="border-none w-[8vh] bg-transparent flex flex-col items-center"
-          >
-            <LuClipboardEdit className="w-5 h-5" />
-            <div className="mt-1 text-sm font-medium text-center text-grayDark">공지</div>
-          </button>
-        </div>
+      <div className="w-full h-[8vh] absolute bottom-0 bg-green flex justify-evenly items-center">
+        <button
+          onClick={() => handleNavClick('/')}
+          className="flex flex-col items-center transition-colors duration-300 hover:text-gray-500">
+          <IoHomeOutline className="w-6 h-6" />
+          {/* <div className="mt-1 text-sm font-medium text-center text-grayDark">홈</div> */}
+        </button>
+        <button
+          onClick={() => handleNavClick('/qna')}
+          className="flex flex-col items-center transition-colors duration-300 hover:text-gray-500">
+          <HiOutlineQuestionMarkCircle className="w-6 h-6" />
+          {/* <div className="mt-1 text-sm font-medium text-center text-grayDark">R지식in</div> */}
+        </button>
+        <button
+          onClick={() => handleNavClick('/announcement')}
+          className="flex flex-col items-center transition-colors duration-300 hover:text-gray-500">
+          <LuClipboardEdit className="w-6 h-6" />
+          {/* <div className="mt-1 text-sm font-medium text-center text-grayDark">공지</div> */}
+        </button>
       </div>
     </div>
   );

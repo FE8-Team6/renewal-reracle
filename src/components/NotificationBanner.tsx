@@ -25,7 +25,7 @@ const NotificationBanner = () => {
   };
 
   return (
-    <div className="w-full h-[3.75vh] absolute border-t border-b border-purple bg-purpleLight text-[1.5vh] font-bold text-purple flex justify-center items-center gap-2">
+    <div className="w-full h-[4vh] absolute border-t border-b border-purple bg-purpleLight text-[1.5vh] font-bold text-purple flex justify-center items-center gap-2">
       <NavLink to="/announcement">
         <div className="flex items-center gap-2">
           <AiOutlineNotification className="w-4 h-4" />

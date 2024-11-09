@@ -4,11 +4,19 @@ import Nav from '@/components/Nav/Nav';
 import CategoryDetailItems from '@/components/WasteCategory/CategoryDetailItems';
 import CategoryItems from '@/components/WasteCategory/CategoryItems';
 import BackHeader from '@/lib/common/BackHeader';
-import { Login, MyQuestion, NotFound, PasswordReset, Qna, SignUp, Announcement } from '@/pages';
-import AnnouncementDetailItem from '@/pages/AnnouncementDetailItem';
-import Answer from '@/pages/Answer';
-import Comments from '@/pages/Comments';
-import Home from '@/pages/Home';
+import {
+  Home,
+  Comments,
+  Login,
+  MyQuestion,
+  NotFound,
+  PasswordReset,
+  Qna,
+  SignUp,
+  Announcement,
+  AnnouncementDetailItem,
+  Answer,
+} from '@/pages';
 
 export const routes = [
   {
@@ -105,7 +113,6 @@ export const routes = [
       </Layout>
     ),
   },
-
   {
     path: 'myquestion',
     element: (
