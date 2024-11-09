@@ -107,7 +107,7 @@ export const AnnouncementDetailItem = () => {
       <section className="px-4 py-2">
         {announcement ? (
           <>
-            <span className="text-xl ">{announcement.title}</span>
+            <p className="text-xl">{announcement.title}</p>
             <div className="flex items-center justify-between">
               <div className="mt-2">
                 <p className="font-semibold">{announcement.author}</p>
