@@ -132,7 +132,7 @@ export const AnnouncementDetailItem = () => {
             </div>
             <p className="text-sm">{formatDateToKoreanTime(announcement.createdAt)}</p>
             <div className="mt-2">
-              <div className="border" />
+              <hr />
               <p className="mt-2 ">{announcement.details}</p>
             </div>
           </>

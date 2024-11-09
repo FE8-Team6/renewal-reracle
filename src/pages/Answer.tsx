@@ -191,7 +191,7 @@ export const Answer = () => {
         </div>
         {createdAt && <p className="text-sm">{formatDateToKoreanTime(createdAt)}</p>}
         <div className="mt-2">
-          <div className="border" />
+          <hr />
           <p className="mt-2">{content}</p>
         </div>
         <div className="flex gap-3">
