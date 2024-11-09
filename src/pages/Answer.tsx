@@ -48,6 +48,34 @@ export const Answer = () => {
   const [editContent, setEditContent] = useState<string>(initialContent);
   const [question, setQuestion] = useState<string>(initialQuestion);
   const [content, setContent] = useState<string>(initialContent);
+  const [containerHeight, setContainerHeight] = useState('h-[54vh]');
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 395);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    const updateHeight = () => {
+      if (window.innerHeight >= 845) {
+        setContainerHeight('h-[54vh]');
+      } else {
+        setContainerHeight('h-[38vh]');
+      }
+    };
+
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+
+    return () => window.removeEventListener('resize', updateHeight);
+  }, []);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -172,10 +200,12 @@ export const Answer = () => {
           </div>
         </div>
       </div>
-      <div className="h-[54vh] space-y-2 overflow-y-auto">
+      <div className={`${containerHeight} space-y-2 overflow-y-auto`}>
         <KakaoAdfit320x100 />
         {submittedAnswers.map(({ id, author, content, createdAt }) => (
-          <div key={id} className="relative flex flex-col w-[22rem] mx-auto p-2 text-lg bg-purpleLight rounded-4">
+          <div
+            key={id}
+            className={`relative flex flex-col ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} mx-auto p-2 text-lg bg-purpleLight rounded-4`}>
             <p className="text-sm">{author}</p>
             <p className="text-lg text-black">{content}</p>
             {createdAt && <p className="text-xs text-gray-500">{formatDateToKoreanTime(new Date(createdAt))}</p>}
