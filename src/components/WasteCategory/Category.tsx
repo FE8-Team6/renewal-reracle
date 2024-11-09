@@ -4,7 +4,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import { NavLink } from 'react-router-dom';
 import { chunkArray } from '@/lib/utils/chunkArray';
 import { SearchBar } from '@/lib/common/SearchBar';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import KakaoAdfit320x100 from '../KakaoAdfit320x100';
 
 type Category = {

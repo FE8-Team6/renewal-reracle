@@ -2,6 +2,7 @@ import { db } from '@/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import KakaoAdfit320x100 from '../KakaoAdfit320x100';
 import KakaoAdfit320x50 from '../KakaoAdfit320x50';
 
 type ItemsDetails = {
@@ -41,22 +42,29 @@ const CategoryDetailItems = () => {
   }, [categoryId, itemId]);
 
   return (
-    <section className="flex flex-col justify-center w-full overflow-y-auto ">
-      <KakaoAdfit320x50 />
-      <div className="h-[70vh] flex flex-col items-center">
-        <h3 className="text-xl font-bold text-purple  w-[20rem]">{itemsDetails?.name}</h3>
-        {itemsDetails?.imageURL && (
-          <div className="w-[20rem] h-[12rem] bg-purpleLight rounded-lg flex justify-center items-center my-2">
-            <img src={itemsDetails.imageURL} alt={itemsDetails.name} className="max-w-[40%] h-auto object-contain" />
+    <section className="flex flex-col h-full">
+      <div className="flex-grow pb-32 overflow-y-auto">
+        <KakaoAdfit320x100 />
+        <KakaoAdfit320x50 />
+        <div className="flex flex-col items-center px-4">
+          <h3 className="w-full mt-4 text-xl font-bold text-purple">{itemsDetails?.name}</h3>
+          {itemsDetails?.imageURL && (
+            <div className="flex items-center justify-center w-full h-48 my-4 rounded-lg bg-purpleLight">
+              <img
+                src={itemsDetails.imageURL}
+                alt={itemsDetails.name}
+                className="max-w-[60%] max-h-[80%] object-contain"
+              />
+            </div>
+          )}
+          <h3 className="w-full mt-4 text-xl font-bold text-purple">배출방법</h3>
+          <div className="w-full">
+            {itemsDetails?.recyclingInstructions.map((instruction, index) => (
+              <span key={index} className="my-2 font-semibold">
+                {instruction}
+              </span>
+            ))}
           </div>
-        )}
-        <h3 className="text-xl font-bold text-purple  w-[20rem] ">배출방법</h3>
-        <div className="w-[20rem]">
-          {itemsDetails?.recyclingInstructions.map((instruction) => (
-            <p key={itemsDetails.id} className="my-2 font-semibold">
-              {instruction}
-            </p>
-          ))}
         </div>
       </div>
     </section>

@@ -4,7 +4,7 @@ import { db } from '@/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { chunkArray } from '@/lib/utils/chunkArray';
 import KakaoAdfit320x50 from '../KakaoAdfit320x50';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import KakaoAdfit320x100 from '../KakaoAdfit320x100';
 
 type Category = {
@@ -80,8 +80,6 @@ const CategoryItems = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
         </Carousel>
       </section>
     </div>
