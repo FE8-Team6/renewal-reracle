@@ -3,8 +3,9 @@ import { NavLink, useParams } from 'react-router-dom';
 import { db } from '@/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { chunkArray } from '@/lib/utils/chunkArray';
-import { SlCarousel, SlCarouselItem } from '@shoelace-style/shoelace/dist/react';
 import KakaoAdfit320x50 from '../KakaoAdfit320x50';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import KakaoAdfit320x100 from '../KakaoAdfit320x100';
 
 type Category = {
   id: string;
@@ -15,6 +16,8 @@ type Category = {
 const CategoryItems = () => {
   const { categoryId } = useParams();
   const [categoryItems, setCategoryItems] = useState<Category[]>([]);
+  const [containerWidth, setContainerWidth] = useState('w-[25rem]');
+
   const getCategoryItems = async () => {
     try {
       if (!categoryId) {
@@ -38,33 +41,50 @@ const CategoryItems = () => {
 
   useEffect(() => {
     getCategoryItems();
+
+    const updateContainerWidth = () => {
+      if (window.innerWidth <= 395) {
+        setContainerWidth('w-[21rem]');
+      } else {
+        setContainerWidth('w-[25rem]');
+      }
+    };
+
+    updateContainerWidth();
+    window.addEventListener('resize', updateContainerWidth);
+    return () => window.removeEventListener('resize', updateContainerWidth);
   }, [categoryId]);
 
   return (
-    <>
-      <KakaoAdfit320x50 />
-      <section className="w-full h-[70vh] flex flex-col justify-center overflow-y-auto">
-        <h2 className="ml-[5vh] text-xl font-bold text-purple">재활용품 세부 품목</h2>
-        <SlCarousel pagination mouse-dragging className="w-[100%] h-[28rem] mx-auto">
-          {chunkedItems.map((chunk, index) => (
-            <SlCarouselItem key={index}>
-              <div className="grid w-full grid-cols-3 gap-y-2">
-                {chunk.map((item) => (
-                  <div key={item.id}>
-                    <NavLink to={`/category/${categoryId}/item/${item.id}`} className="text-gray-800 no-underline">
-                      <div className="bg-yellowLight w-3/4 h-[6rem] flex justify-center items-center rounded-lg mx-auto hover:bg-yellow cursor-pointer">
-                        {item.imageURL && <img src={item.imageURL} alt={item.name} className="w-[2.5rem] h-[2.5rem]" />}
-                      </div>
-                      <p className="text-sm font-semibold text-center">{item.name}</p>
-                    </NavLink>
-                  </div>
-                ))}
-              </div>
-            </SlCarouselItem>
-          ))}
-        </SlCarousel>
+    <div className="flex flex-col h-full">
+      <KakaoAdfit320x100 />
+      <section className="flex-grow overflow-y-auto">
+        <KakaoAdfit320x50 />
+        <h2 className="mt-2 ml-5 text-xl font-bold text-purple">재활용품 세부 품목</h2>
+        <Carousel className="w-full h-full mt-4">
+          <CarouselContent>
+            {chunkedItems.map((chunk, index) => (
+              <CarouselItem key={index}>
+                <div className={`grid grid-cols-3 gap-4 ${containerWidth} mx-auto`}>
+                  {chunk.map((item) => (
+                    <div key={item.id} className="flex flex-col items-center">
+                      <NavLink to={`/category/${categoryId}/item/${item.id}`} className="no-underline">
+                        <div className="flex items-center justify-center w-24 h-24 rounded-lg cursor-pointer bg-yellowLight hover:bg-yellow">
+                          {item.imageURL && <img src={item.imageURL} alt={item.name} className="w-12 h-12" />}
+                        </div>
+                        <p className="mt-2 font-semibold text-center text-gray-800">{item.name}</p>
+                      </NavLink>
+                    </div>
+                  ))}
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
       </section>
-    </>
+    </div>
   );
 };
 
