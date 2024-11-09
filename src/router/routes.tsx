@@ -4,11 +4,20 @@ import Nav from '@/components/Nav/Nav';
 import CategoryDetailItems from '@/components/WasteCategory/CategoryDetailItems';
 import CategoryItems from '@/components/WasteCategory/CategoryItems';
 import BackHeader from '@/lib/common/BackHeader';
-import { Login, MyQuestion, NotFound, PasswordReset, Qna, SignUp, Announcement } from '@/pages';
-import AnnouncementDetailItem from '@/pages/AnnouncementDetailItem';
-import Answer from '@/pages/Answer';
-import Comments from '@/pages/Comments';
-import Home from '@/pages/Home';
+import {
+  Home,
+  Comments,
+  Login,
+  MyQuestion,
+  NotFound,
+  PasswordReset,
+  Qna,
+  SignUp,
+  Announcement,
+  AnnouncementDetailItem,
+  Answer,
+} from '@/pages';
+import { Outlet } from 'react-router-dom';
 
 export const routes = [
   {
@@ -46,22 +55,28 @@ export const routes = [
     element: <NotFound />,
   },
   {
-    path: 'category/:categoryId',
+    path: 'category',
     element: (
       <Layout>
-        <CategoryItems />
+        <Outlet />
       </Layout>
     ),
-  },
-  {
-    path: 'category/:categoryId/item/:itemId',
-    element: (
-      <>
-        <BackHeader />
-        <CategoryDetailItems />
-        <Nav />
-      </>
-    ),
+    children: [
+      {
+        path: ':categoryId',
+        element: <CategoryItems />,
+      },
+      {
+        path: ':categoryId/item/:itemId',
+        element: (
+          <>
+            <BackHeader />
+            <CategoryDetailItems />
+            <Nav />
+          </>
+        ),
+      },
+    ],
   },
   {
     path: 'qna',
@@ -75,19 +90,25 @@ export const routes = [
     path: 'announcement',
     element: (
       <Layout>
-        <Announcement />
+        <Outlet />
       </Layout>
     ),
-  },
-  {
-    path: 'announcement/:announcementId',
-    element: (
-      <>
-        <BackHeader />
-        <AnnouncementDetailItem />
-        <Nav />
-      </>
-    ),
+    children: [
+      {
+        path: '',
+        element: <Announcement />,
+      },
+      {
+        path: ':announcementId',
+        element: (
+          <>
+            <BackHeader />
+            <AnnouncementDetailItem />
+            <Nav />
+          </>
+        ),
+      },
+    ],
   },
   {
     path: 'answer/:questionId',
@@ -105,7 +126,6 @@ export const routes = [
       </Layout>
     ),
   },
-
   {
     path: 'myquestion',
     element: (

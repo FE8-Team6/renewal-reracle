@@ -28,7 +28,7 @@ type SubmittedAnswer = {
   likes: number;
 }[];
 
-const Answer = () => {
+export const Answer = () => {
   const location = useLocation();
   const questionId = location.state?.questionId || '';
   const initialQuestion = location.state?.question || '';
@@ -181,12 +181,12 @@ const Answer = () => {
             {createdAt && <p className="text-xs text-gray-500">{formatDateToKoreanTime(new Date(createdAt))}</p>}
           </div>
         ))}
-        <div className='flex flex-col w-[23rem] mx-auto'>
-        <NavLink to={`/comments/${questionId}`} state={{ questionId, question, submittedAnswers }}>
-          <Button variant="link" size="sm">
-            댓글을 남겨보세요.
-          </Button>
-        </NavLink>
+        <div className="flex flex-col w-[23rem] mx-auto">
+          <NavLink to={`/comments/${questionId}`} state={{ questionId, question, submittedAnswers }}>
+            <Button variant="link" size="sm">
+              댓글을 남겨보세요.
+            </Button>
+          </NavLink>
         </div>
       </div>
       <Nav />
@@ -226,5 +226,3 @@ const Answer = () => {
     </>
   );
 };
-
-export default Answer;

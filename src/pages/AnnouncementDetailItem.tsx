@@ -18,7 +18,7 @@ import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover
 import { MoreHorizontal } from 'lucide-react';
 import KakaoAdfit320x100 from '@/components/KakaoAdfit320x100';
 
-const AnnouncementDetailItem = () => {
+export const AnnouncementDetailItem = () => {
   const { announcementId } = useParams();
   const [announcement, setAnnouncement] = useState<{
     title: string;
@@ -181,5 +181,3 @@ const AnnouncementDetailItem = () => {
     </>
   );
 };
-
-export default AnnouncementDetailItem;
