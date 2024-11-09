@@ -201,6 +201,9 @@ export const Qna = () => {
 
   return (
     <>
+      <div className="w-full h-[2rem] bg-purple text-center flex items-center justify-center text-white text-[2vh]">
+        R지식in
+      </div>
       <KakaoAdfit320x50 />
       <div className="w-[22rem] h-[67vh] relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4 ">
         <KakaoAdfit320x100 />
