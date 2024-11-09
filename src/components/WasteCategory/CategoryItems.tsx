@@ -72,7 +72,7 @@ const CategoryItems = () => {
                         <div className="flex items-center justify-center w-24 h-24 rounded-lg cursor-pointer bg-yellowLight hover:bg-yellow">
                           {item.imageURL && <img src={item.imageURL} alt={item.name} className="w-12 h-12" />}
                         </div>
-                        <p className="mt-2 font-semibold text-center text-gray-800">{item.name}</p>
+                        <p className="mt-2 text-sm font-semibold text-center text-gray-800">{item.name}</p>
                       </NavLink>
                     </div>
                   ))}

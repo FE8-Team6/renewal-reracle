@@ -70,7 +70,7 @@ const Category = () => {
                         <div className="flex items-center justify-center w-24 h-24 rounded-lg cursor-pointer bg-yellowLight hover:bg-yellow">
                           <img src={category.imageURL} alt={category.name} className="w-12 h-12" />
                         </div>
-                        <p className="mt-2 font-semibold text-center">{category.name}</p>
+                        <p className="mt-2 text-sm font-semibold text-center">{category.name}</p>
                       </NavLink>
                     </div>
                   ))}
