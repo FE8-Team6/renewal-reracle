@@ -25,8 +25,20 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(({ error, c
   const [value, setValue] = useState<string>('');
   const [searchResults, setSearchResults] = useState<SearchResults>([]);
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
+  const [widthClass, setWidthClass] = useState<string>('w-[25rem]');
   const navigate = useNavigate();
   const resultsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const updateWidthClass = () => {
+      setWidthClass(window.innerWidth <= 395 ? 'w-[21rem]' : 'w-[23rem]');
+    };
+
+    updateWidthClass();
+    window.addEventListener('resize', updateWidthClass);
+
+    return () => window.removeEventListener('resize', updateWidthClass);
+  }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
@@ -114,29 +126,27 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(({ error, c
           value={value}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
-          className={`h-[50px] rounded-5 focus:outline-none ${
+          className={`h-[50px] rounded-5 focus:outline-none ${widthClass} ${
             error ? 'focus:border focus:border-error-40' : 'focus:border focus:border-primary-40'
           }`}
-          placeholder={props.placeholder || 'ex. 가발, 거울 등 재활용품을 입력해 주세요. '}
+          placeholder={props.placeholder || '찾고자 하는 재활용품을 입력해 주세요. '}
         />
         {value && (
           <button
             onClick={handleClear}
             className={`absolute right-3 rounded-10 ${error ? 'bg-error-40' : ''}`}
-            type="button"
-          >
+            type="button">
             <X className={`h-5 w-5 ${error ? 'text-neutral-0' : ''} `} />
           </button>
         )}
       </div>
       {searchResults.length > 0 && (
-        <div ref={resultsRef} className="absolute bg-white border shadow-lg rounded-4 w-[22rem] z-10">
+        <div ref={resultsRef} className={`absolute bg-white border shadow-lg rounded-4 ${widthClass} z-10`}>
           {searchResults.map((result, index) => (
             <div
               key={result.id}
               className={`p-2 cursor-pointer hover:bg-gray-200 ${index === selectedIndex ? 'bg-gray-200' : ''}`}
-              onClick={() => handleResultClick(result.name, result.categoryId, result.id)}
-            >
+              onClick={() => handleResultClick(result.name, result.categoryId, result.id)}>
               {result.name}
             </div>
           ))}
