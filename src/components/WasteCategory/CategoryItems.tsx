@@ -45,7 +45,7 @@ const CategoryItems = () => {
       <KakaoAdfit320x50 />
       <section className="w-full h-[70vh] flex flex-col justify-center overflow-y-auto">
         <h2 className="ml-[5vh] text-xl font-bold text-purple">재활용품 세부 품목</h2>
-        <SlCarousel mouse-dragging className="w-[100%] h-[28rem] mx-auto">
+        <SlCarousel pagination mouse-dragging className="w-[100%] h-[28rem] mx-auto">
           {chunkedItems.map((chunk, index) => (
             <SlCarouselItem key={index}>
               <div className="grid w-full grid-cols-3 gap-y-2">
