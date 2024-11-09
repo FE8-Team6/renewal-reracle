@@ -17,7 +17,6 @@ import {
   AnnouncementDetailItem,
   Answer,
 } from '@/pages';
-import { Outlet } from 'react-router-dom';
 
 export const routes = [
   {
@@ -55,28 +54,22 @@ export const routes = [
     element: <NotFound />,
   },
   {
-    path: 'category',
+    path: 'category/:categoryId',
     element: (
       <Layout>
-        <Outlet />
+        <CategoryItems />
       </Layout>
     ),
-    children: [
-      {
-        path: ':categoryId',
-        element: <CategoryItems />,
-      },
-      {
-        path: ':categoryId/item/:itemId',
-        element: (
-          <>
-            <BackHeader />
-            <CategoryDetailItems />
-            <Nav />
-          </>
-        ),
-      },
-    ],
+  },
+  {
+    path: 'category/:categoryId/item/:itemId',
+    element: (
+      <>
+        <BackHeader />
+        <CategoryDetailItems />
+        <Nav />
+      </>
+    ),
   },
   {
     path: 'qna',
@@ -90,25 +83,19 @@ export const routes = [
     path: 'announcement',
     element: (
       <Layout>
-        <Outlet />
+        <Announcement />
       </Layout>
     ),
-    children: [
-      {
-        path: '',
-        element: <Announcement />,
-      },
-      {
-        path: ':announcementId',
-        element: (
-          <>
-            <BackHeader />
-            <AnnouncementDetailItem />
-            <Nav />
-          </>
-        ),
-      },
-    ],
+  },
+  {
+    path: 'announcement/:announcementId',
+    element: (
+      <>
+        <BackHeader />
+        <AnnouncementDetailItem />
+        <Nav />
+      </>
+    ),
   },
   {
     path: 'answer/:questionId',
