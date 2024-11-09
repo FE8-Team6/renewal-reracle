@@ -2,7 +2,6 @@ import { db } from '@/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import KakaoAdfit320x100 from '../KakaoAdfit320x100';
 import KakaoAdfit320x50 from '../KakaoAdfit320x50';
 
 type ItemsDetails = {
@@ -44,7 +43,6 @@ const CategoryDetailItems = () => {
   return (
     <section className="flex flex-col h-full">
       <div className="flex-grow pb-32 overflow-y-auto">
-        <KakaoAdfit320x100 />
         <KakaoAdfit320x50 />
         <div className="flex flex-col items-center px-4">
           <h3 className="w-full mt-4 text-xl font-bold text-purple">{itemsDetails?.name}</h3>
