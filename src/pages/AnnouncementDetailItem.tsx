@@ -104,11 +104,14 @@ export const AnnouncementDetailItem = () => {
   return (
     <>
       <KakaoAdfit320x100 />
-      <section className="p-4">
+      <section className="px-4 py-2">
         {announcement ? (
           <>
+            <p className="text-xl">{announcement.title}</p>
             <div className="flex items-center justify-between">
-              <p className="font-semibold">{announcement.author}</p>
+              <div className="mt-2">
+                <p className="font-semibold">{announcement.author}</p>
+              </div>
               {isAdmin && (
                 <Popover>
                   <PopoverTrigger asChild>
@@ -129,8 +132,8 @@ export const AnnouncementDetailItem = () => {
             </div>
             <p className="text-sm">{formatDateToKoreanTime(announcement.createdAt)}</p>
             <div className="mt-2">
-              <p className="text-lg text-center">{announcement.title}</p>
-              <p className="mt-2 text-base text-center">{announcement.details}</p>
+              <hr />
+              <p className="mt-2 ">{announcement.details}</p>
             </div>
           </>
         ) : (

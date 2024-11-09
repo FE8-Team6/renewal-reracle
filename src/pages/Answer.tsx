@@ -164,31 +164,35 @@ export const Answer = () => {
   return (
     <>
       <BackHeader />
-      <div className="p-4">
+      <div className="px-4 py-2">
+        <p className="text-xl">{question}</p>
         <div className="flex items-center justify-between">
-          <p className="font-semibold">{author}</p>
-          {currentUser.uid === authorUid && (
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <MoreHorizontal className="w-5 h-5" />
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-[6rem]">
-                <Button variant="default" size="sm" className="w-full" onClick={() => setIsEditModalOpen(true)}>
-                  수정
-                </Button>
-                <Button variant="secondary" size="sm" className="w-full" onClick={handleDeleteQuestion}>
-                  삭제
-                </Button>
-              </PopoverContent>
-            </Popover>
-          )}
+          <div className="mt-2">
+            <div className="flex items-center justify-between"></div>
+            <p className="font-semibold">{author}</p>
+            {currentUser.uid === authorUid && (
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="ghost" size="icon">
+                    <MoreHorizontal className="w-5 h-5" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-[6rem]">
+                  <Button variant="default" size="sm" className="w-full" onClick={() => setIsEditModalOpen(true)}>
+                    수정
+                  </Button>
+                  <Button variant="secondary" size="sm" className="w-full" onClick={handleDeleteQuestion}>
+                    삭제
+                  </Button>
+                </PopoverContent>
+              </Popover>
+            )}
+          </div>
         </div>
         {createdAt && <p className="text-sm">{formatDateToKoreanTime(createdAt)}</p>}
         <div className="mt-2">
-          <p className="text-lg text-center">{question}</p>
-          <p className="mt-2 text-base text-center">{content}</p>
+          <hr />
+          <p className="mt-2">{content}</p>
         </div>
         <div className="flex gap-3">
           <p>댓글 {submittedAnswers.length}</p>
