@@ -21,7 +21,7 @@ const NotificationBanner = () => {
   }, []);
 
   const truncateTitle = (title: string) => {
-    return title.length > 33 ? `${title.slice(0, 33)}...` : title;
+    return title.length > 33 ? `${title.slice(0, 33)}..` : title;
   };
 
   return (

@@ -78,7 +78,7 @@ const MyPage = () => {
                 </span>
                 <button
                   onClick={() => handleDeleteClick(historyItem.id)}
-                  className="absolute flex items-center justify-center w-4 h-4 text-white transition-opacity rounded-full opacity-0 -top-1 -right-1 bg-purple group-hover:opacity-100">
+                  className="absolute flex items-center justify-center w-4 h-4 text-white transition-opacity rounded-full -top-1 -right-1 bg-purple">
                   <X size={12} />
                 </button>
               </div>
