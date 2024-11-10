@@ -52,13 +52,13 @@ const Category = () => {
   }, []);
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-[calc(100vh-10rem)]">
       <KakaoAdfit320x100 />
       <section className="flex-grow overflow-y-auto">
-        <div className="flex justify-center w-full mx-auto mt-2">
+        <div className="flex justify-center w-full mx-auto mt-2 mb-6">
           <SearchBar className="mx-auto" />
         </div>
-        <h2 className="mt-2 ml-5 text-xl font-bold text-purple">재활용품 분류</h2>
+        <h2 className="mt-4 ml-5 text-xl font-bold text-purple">재활용품 분류</h2>
         <Carousel className="w-full h-full mt-4">
           <CarouselContent>
             {chunkedCategories.map((chunk, index) => (
