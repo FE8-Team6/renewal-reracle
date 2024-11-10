@@ -23,6 +23,7 @@ const MyPage = () => {
       fetchRecentSearchHistory(storedUser.uid);
     }
   }, []);
+
   const fetchRecentSearchHistory = async (uid: string) => {
     const history = await getRecentSearchHistory(uid);
     setRecentSearchHistory(history);
@@ -57,9 +58,14 @@ const MyPage = () => {
                 <span className="text-sm text-gray-500">{user.email}</span>
               </div>
             </div>
-            <div className="space-y-2">
-              <button>
-                <span className="text-sm text-gray-500">닉네임 변경</span>
+            <div className="mt-2">
+              <button className="hover:underline text-purple">
+                <span className="text-sm text-purple font-medium">닉네임 변경</span>
+              </button>
+            </div>
+            <div className="mt-2">
+              <button onClick={() => navigate('/myquestion')} className="text-sm  hover:underline text-purple ">
+                <span className="text-purple font-medium">나의 R지식in 보러가기</span>
               </button>
             </div>
           </CardContent>
@@ -103,14 +109,9 @@ const MyPage = () => {
         </Card>
 
         <div className="space-y-2 text-center">
-          <Button variant="link" onClick={() => navigate('/myquestion')} className="text-sm">
-            나의 R지식in 보러가기
-          </Button>
-        </div>
-        <div className="space-y-2 text-center">
           <Button
             variant="secondary"
-            className="w-full text-white bg-blue-400 hover:bg-blue-500"
+            className="w-full text-white mb-2 bg-purple hover:bg-purpleDark"
             onClick={() => {
               localStorage.removeItem('userData');
               navigate('/login');
