@@ -58,14 +58,14 @@ const MyPage = () => {
                 <span className="text-sm text-gray-500">{user.email}</span>
               </div>
             </div>
-            <div className="mt-2">
-              <button className="hover:underline text-purple">
-                <span className="text-sm text-purple font-medium">닉네임 변경</span>
+            <div className="mt-4">
+              <button className="hover:underline text-gray-500">
+                <span className="text-sm text-gray-500 font-medium">닉네임 변경</span>
               </button>
             </div>
-            <div className="mt-2">
-              <button onClick={() => navigate('/myquestion')} className="text-sm  hover:underline text-purple ">
-                <span className="text-purple font-medium">나의 R지식in 보러가기</span>
+            <div className="mt-4">
+              <button onClick={() => navigate('/myquestion')} className="text-sm  hover:underline text-gray-500 ">
+                <span className="text-gray-500 font-medium">나의 R지식in 보러가기</span>
               </button>
             </div>
           </CardContent>
@@ -101,8 +101,8 @@ const MyPage = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
-              <button>
-                <span className="text-sm text-gray-500">REracle 개발 과정</span>
+              <button className="hover:underline text-gray-500">
+                <span className="text-sm font-medium text-gray-500">REracle 개발 과정</span>
               </button>
             </div>
           </CardContent>
