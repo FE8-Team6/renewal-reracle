@@ -12,9 +12,11 @@ const Nav = () => {
   };
 
   return (
-    <div className="w-full h-[12vh] fixed bottom-0">
-      <NotificationBanner />
-      <div className="w-full h-[8vh] absolute bottom-0 bg-green flex justify-evenly items-center">
+    <div className="fixed bottom-0 w-full">
+      {/* <div className="absolute bottom-[10vh] w-full">
+        <NotificationBanner />
+      </div> */}
+      <div className="w-full h-[4rem] absolute bottom-0 bg-green flex justify-evenly items-center">
         <button
           onClick={() => handleNavClick('/')}
           className="flex flex-col items-center transition-colors duration-300 hover:text-gray-500">
