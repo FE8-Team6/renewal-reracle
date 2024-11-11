@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { IoHomeOutline } from 'react-icons/io5';
 import { LuClipboardEdit } from 'react-icons/lu';
 import { HiOutlineQuestionMarkCircle } from 'react-icons/hi2';
-import NotificationBanner from '../NotificationBanner';
+// import NotificationBanner from '../NotificationBanner';
 
 const Nav = () => {
   const navigation = useNavigate();
