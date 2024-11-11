@@ -61,7 +61,7 @@ const MyPage = () => {
   return (
     <div className="flex flex-col h-[calc(100vh-10rem)]">
       <KakaoAdfit320x50 />
-      <section className="flex-grow overflow-y-auto mx-auto pb-4 mt-2 w-full">
+      <section className="flex-grow w-full pb-4 mx-auto mt-2 overflow-y-auto">
         <div className="flex flex-col items-center space-y-4">
           <Card className={`${cardWidth} mb-4`}>
             <CardHeader>
@@ -76,13 +76,13 @@ const MyPage = () => {
                 </div>
               </div>
               <div className="mt-4">
-                <button className="hover:underline text-gray-500">
-                  <span className="text-sm text-gray-500 font-medium">닉네임 변경</span>
+                <button className="text-gray-500 hover:underline">
+                  <span className="text-sm font-medium text-gray-500">닉네임 변경</span>
                 </button>
               </div>
               <div className="mt-4">
-                <button onClick={() => navigate('/myquestion')} className="text-sm hover:underline text-gray-500">
-                  <span className="text-gray-500 font-medium">나의 R지식in 보러가기</span>
+                <button onClick={() => navigate('/myquestion')} className="text-sm text-gray-500 hover:underline">
+                  <span className="font-medium text-gray-500">나의 R지식in 보러가기</span>
                 </button>
               </div>
             </CardContent>
@@ -118,7 +118,7 @@ const MyPage = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
-                <button className="hover:underline text-gray-500">
+                <button className="text-gray-500 hover:underline">
                   <span className="text-sm font-medium text-gray-500">REracle 개발 과정</span>
                 </button>
               </div>

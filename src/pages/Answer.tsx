@@ -167,8 +167,7 @@ export const Answer = () => {
       <div className="px-4 py-2">
         <p className="text-xl">{question}</p>
         <div className="flex items-center justify-between">
-          <div className="mt-2">
-            <div className="flex items-center justify-between"></div>
+          <div className="flex items-center justify-between w-full mt-2">
             <p className="font-semibold">{author}</p>
             {currentUser.uid === authorUid && (
               <Popover>
