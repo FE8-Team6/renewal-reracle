@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { chunkArray } from '@/lib/utils/chunkArray';
 import { SearchBar } from '@/lib/common/SearchBar';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
-import KakaoAdfit320x100 from '../KakaoAdfit320x100';
+import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50.tsx';
 
 type Category = {
   id: string;
@@ -53,7 +53,7 @@ const Category = () => {
 
   return (
     <div className="flex flex-col h-[calc(100vh-10rem)]">
-      <KakaoAdfit320x100 />
+      <KakaoAdfit320x50 />
       <section className="flex-grow overflow-y-auto">
         <div className="flex justify-center w-full mx-auto mt-2 mb-6">
           <SearchBar className="mx-auto" />

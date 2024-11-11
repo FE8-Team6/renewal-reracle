@@ -16,7 +16,7 @@ import { Input } from '@/components/ui/input';
 import { formatDateToKoreanTime } from '@/lib/utils/dateKoreanTime';
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
 import { MoreHorizontal } from 'lucide-react';
-import KakaoAdfit320x100 from '@/components/KakaoAdfit320x100';
+import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50.tsx';
 
 export const AnnouncementDetailItem = () => {
   const { announcementId } = useParams();
@@ -103,7 +103,7 @@ export const AnnouncementDetailItem = () => {
 
   return (
     <>
-      <KakaoAdfit320x100 />
+      <KakaoAdfit320x50 />
       <section className="px-4 py-2">
         {announcement ? (
           <>

@@ -5,7 +5,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { X } from 'lucide-react';
 import { RecentSearchHistory } from '@/lib/types/search';
 import { deleteSearchHistory, getRecentSearchHistory } from '@/api/searchssApi/recentSearch';
-import KakaoAdfit320x100 from '../KakaoAdfit320x100';
+import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50.tsx';
 
 const MyPage = () => {
   const [user, setUser] = useState<{ displayName: string; email: string }>({
@@ -60,7 +60,7 @@ const MyPage = () => {
 
   return (
     <div className="flex flex-col h-[calc(100vh-10rem)]">
-      <KakaoAdfit320x100 />
+      <KakaoAdfit320x50 />
       <section className="flex-grow overflow-y-auto mx-auto pb-4 mt-2 w-full">
         <div className="flex flex-col items-center space-y-4">
           <Card className={`${cardWidth} mb-4`}>
