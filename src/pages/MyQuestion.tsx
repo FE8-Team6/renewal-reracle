@@ -5,6 +5,7 @@ import { db } from '../firebase';
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { formatDateToKoreanTime } from '@/lib/utils/dateKoreanTime';
+import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50.tsx';
 
 type Question = {
   id: string;
@@ -90,6 +91,7 @@ export const MyQuestion = () => {
       <div className="w-full h-[2rem] bg-purple text-center flex items-center justify-center text-white text-[2vh]">
         마이 R지식in
       </div>
+      <KakaoAdfit320x50/>
       <div className="overflow-y-auto my-[1.5vh] mx-auto w-[22rem] h-[67vh] relative">
         {!questions.length ? (
           <div className="text-center">
