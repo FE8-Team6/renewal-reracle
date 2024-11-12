@@ -64,10 +64,14 @@ export const Answer = () => {
 
   useEffect(() => {
     const updateHeight = () => {
-      if (window.innerHeight >= 845) {
-        setContainerHeight('h-[54vh]');
+      if (window.innerHeight >= 1180) {
+        setContainerHeight('h-[48vh]');
+      } else if (window.innerHeight >= 1000) {
+        setContainerHeight('h-[62vh]');
+      } else if (window.innerHeight >= 940) {
+        setContainerHeight('h-[55vh]');
       } else {
-        setContainerHeight('h-[38vh]');
+        setContainerHeight('h-[calc(100vh-18rem)]');
       }
     };
 
