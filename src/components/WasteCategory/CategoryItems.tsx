@@ -56,7 +56,7 @@ const CategoryItems = () => {
   }, [categoryId]);
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-[calc(100vh-7rem)]">
       <KakaoAdfit320x100 />
       <section className="flex-grow overflow-y-auto">
         <KakaoAdfit320x50 />

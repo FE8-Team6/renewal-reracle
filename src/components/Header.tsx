@@ -15,7 +15,7 @@ const Header = () => {
     }
   };
   return (
-    <div className="w-full h-[3rem] bg-purpleLight rounded-t-lg flex items-center">
+    <header className="w-full h-[3rem] bg-purpleLight  flex items-center">
       <img
         src="/icon/REracle_logo.svg"
         alt="reracle 아이콘"
@@ -23,7 +23,7 @@ const Header = () => {
         className="w-[5rem] absolute ml-4 cursor-pointer"
       />
       <RxPerson onClick={handleUserIconClick} className="absolute right-0 w-5 h-5 mr-4 cursor-pointer" />
-    </div>
+    </header>
   );
 };
 

@@ -197,42 +197,392 @@ const wasteCategories = [
     name: '고철',
     imageURL:
       'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/categoryImages%2FscrapMetal.svg?alt=media&token=628fa921-5c4b-4380-a4bb-a924d13ff9d3',
-    items: [{}],
+    items: [
+      {
+        id: '1',
+        name: '나사(못)',
+        imageURL: '',
+        recyclingInstructions: [],
+      },
+      {
+        id: '2',
+        name: '낫',
+        imageURL:
+          'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FsickleHandle.svg?alt=media&token=6d23d912-bcae-4800-9887-c091f7b9a81candle',
+        recyclingInstructions: ['고철로 배출하되, 가능하다면 손잡이 부분(나무재질 등)을 분리하여 배출합니다.'],
+      },
+      {
+        id: '3',
+        name: '도끼',
+        imageURL: '',
+        recyclingInstructions: [],
+      },
+      {
+        id: '4',
+        name: '분유',
+        imageURL: '',
+        recyclingInstructions: [],
+      },
+      {
+        id: '5',
+        name: '맥주병뚜껑',
+        imageURL: '',
+        recyclingInstructions: [],
+      },
+      {
+        id: '6',
+        name: '쓰레받기',
+        imageURL: '',
+        recyclingInstructions: [],
+      },
+      {
+        id: '7',
+        name: '사다리',
+        imageURL:
+          'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fladder.svg?alt=media&token=7c6b3445-ba67-405a-b733-7af9abce74e2',
+        recyclingInstructions: [
+          '대형 생활 폐기물로 신고 후 스티커를 부착하여 배출합니다.',
+          '금속 재질이 많은 경우 고철로 분류하여 재활용센터에 배출할 수 있습니다.',
+        ],
+      },
+      {
+        id: '8',
+        name: '옷걸이',
+        imageURL: '',
+        recyclingInstructions: [],
+      },
+      {
+        id: '9',
+        name: '유리병 뚜껑',
+        imageURL: '',
+        recyclingInstructions: [],
+      },
+      {
+        id: '10',
+        name: '의류건조대',
+        imageURL: '',
+        recyclingInstructions: [],
+      },
+      {
+        id: '11',
+        name: '아령',
+        imageURL: '',
+        recyclingInstructions: [],
+      },
+      {
+        id: '12',
+        name: '압력솥',
+        imageURL: '',
+        recyclingInstructions: [],
+      },
+      {
+        id: '13',
+        name: '역기',
+        imageURL: '',
+        recyclingInstructions: [],
+      },
+      {
+        id: '14',
+        name: '철사',
+        imageURL: '',
+        recyclingInstructions: [],
+      },
+      {
+        id: '15',
+        name: '철판(가정요리용)',
+        imageURL: '',
+        recyclingInstructions: [],
+      },
+      {
+        id: '16',
+        name: '캔 따개',
+        imageURL: '',
+        recyclingInstructions: [],
+      },
+      {
+        id: '17',
+        name: '톱',
+        imageURL: '',
+        recyclingInstructions: [],
+      },
+      {
+        id: '18',
+        name: '후라이팬',
+        imageURL: '',
+        recyclingInstructions: [],
+      },
+    ],
   },
   {
     id: '5',
     name: '유리병',
     imageURL:
       'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/categoryImages%2FglassBottle.svg?alt=media&token=6245a4da-8309-4f00-ae3e-787fafbd4434',
-    items: [{}],
+    items: [
+      {
+        id: '1',
+        name: '유리병',
+        imageURL:
+          'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/categoryImages%2FglassBottle.svg?alt=media&token=6245a4da-8309-4f00-ae3e-787fafbd4434',
+        recyclingInstructions: [
+          '병뚜껑을 제거한 후 내용물을 비우고 물로 헹구어 배출합니다.',
+          '담배꽁초 등 이물질을 넣지 않도록 주의합니다.',
+          '깨진 병은 재활용되지 않으므로 일반 쓰레기로 배출해야 합니다.',
+        ],
+      },
+    ],
   },
   {
     id: '6',
     name: '플라스틱',
     imageURL:
       'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/categoryImages%2Fplastic.svg?alt=media&token=03b1cb19-1537-4766-a5cf-2f2ed6519a94',
-    items: [{}],
+    items: [
+      {
+        id: '1',
+        name: '국자',
+        imageURL: '',
+        recyclingInstructions: [
+          '음식물 등 이물질을 깨끗이 제거합니다.',
+          '여러 재질이 섞인 경우, 분리 가능한 부분은 분리하여 배출합니다.',
+        ],
+      },
+      {
+        id: '2',
+        name: '그릇',
+        imageURL: '',
+        recyclingInstructions: [
+          '음식물 등 이물질을 깨끗이 제거합니다.',
+          '여러 재질이 섞인 경우, 분리 가능한 부분은 분리하여 배출합니다.',
+        ],
+      },
+      {
+        id: '3',
+        name: '도마',
+        imageURL:
+          'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2FwoodenCuttingBoard.svg?alt=media&token=5323a935-2cf7-4dbc-8809-cd42740c0516',
+        recyclingInstructions: [
+          '음식물 등 이물질을 깨끗이 제거합니다.',
+          '여러 재질이 섞인 경우, 분리 가능한 부분은 분리하여 배출합니다.',
+        ],
+      },
+      {
+        id: '4',
+        name: '빨대',
+        imageURL: '',
+        recyclingInstructions: ['깨끗이 세척 후 배출합니다.'],
+      },
+      {
+        id: '5',
+        name: '볼풀공',
+        imageURL: '',
+        recyclingInstructions: ['깨끗이 세척 후 배출합니다.'],
+      },
+      {
+        id: '6',
+        name: '분무기',
+        imageURL: '',
+        recyclingInstructions: ['금속 스프링을 제거 후 배출합니다.'],
+      },
+      {
+        id: '7',
+        name: '리코더',
+        imageURL: '',
+        recyclingInstructions: ['금속 부분을 제거하고 배출합니다.'],
+      },
+      {
+        id: '8',
+        name: '마요네즈용기',
+        imageURL: '',
+        recyclingInstructions: [
+          '내용물을 완전히 비우고 물로 깨끗이 헹굽니다.',
+          '라벨을 제거하고 압착하여 부피를 줄입니다.',
+        ],
+      },
+      {
+        id: '9',
+        name: '메가폰',
+        imageURL: '',
+        recyclingInstructions: ['전지를 제거한 후 배출합니다.'],
+      },
+      {
+        id: '10',
+        name: '쓰레받기',
+        imageURL: '',
+        recyclingInstructions: ['이물질을 깨끗이 제거한 후 배출합니다.'],
+      },
+      {
+        id: '11',
+        name: '식용유용기',
+        imageURL: '',
+        recyclingInstructions: [
+          '내용물을 완전히 비우고 물로 깨끗이 헹굽니다.',
+          '라벨을 제거하고 압착하여 부피를 줄입니다.',
+        ],
+      },
+      {
+        id: '12',
+        name: '비디오테이프',
+        imageURL: '',
+        recyclingInstructions: ['케이스와 테이프를 분리하여 재질에 맞게 배출합니다.'],
+      },
+      {
+        id: '13',
+        name: '샴푸용기',
+        imageURL: '',
+        recyclingInstructions: [
+          '내용물을 완전히 비우고 물로 깨끗이 헹굽니다.',
+          '라벨을 제거하고 압착하여 부피를 줄입니다.',
+        ],
+      },
+      {
+        id: '14',
+        name: '의류건조대',
+        imageURL: '',
+        recyclingInstructions: ['금속 부분을 분리하여 배출합니다.'],
+      },
+      {
+        id: '15',
+        name: '젖병',
+        imageURL: '',
+        recyclingInstructions: ['고무 젖꼭지를 제거 후 배출합니다.'],
+      },
+      {
+        id: '16',
+        name: '치약용기',
+        imageURL: '',
+        recyclingInstructions: [
+          '내용물을 완전히 비우고 물로 깨끗이 헹굽니다.',
+          '라벨을 제거하고 압착하여 부피를 줄입니다.',
+        ],
+      },
+      {
+        id: '17',
+        name: '캡',
+        imageURL: '',
+        recyclingInstructions: ['페트병이나 유리병에서 분리하여 따로 배출합니다.'],
+      },
+      {
+        id: '18',
+        name: '컵',
+        imageURL: '',
+        recyclingInstructions: ['이물질을 깨끗이 제거한 후 배출합니다.'],
+      },
+      {
+        id: '19',
+        name: '케찹용기',
+        imageURL: '',
+        recyclingInstructions: [
+          '내용물을 완전히 비우고 물로 깨끗이 헹굽니다.',
+          '라벨을 제거하고 압착하여 부피를 줄입니다.',
+        ],
+      },
+      {
+        id: '20',
+        name: '페트병',
+        imageURL: '',
+        recyclingInstructions: [
+          '내용물을 비우고 헹군 후, 라벨을 제거합니다.',
+          '가능한 압착하여 부피를 줄이고 뚜껑을 닫아 배출합니다.',
+        ],
+      },
+    ],
   },
   {
     id: '7',
     name: '비닐',
     imageURL:
       'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/categoryImages%2Fvinyl.svg?alt=media&token=85092708-fa1b-449a-b2b1-2e355999ec0d',
-    items: [{}],
+    items: [
+      {
+        id: '1',
+        name: '비닐봉지',
+        imageURL: '',
+        recyclingInstructions: [
+          '색상이나 재활용 마크에 관계없이 모든 비닐봉지는 재활용이 가능합니다.',
+          '내용물을 비우고 이물질을 제거한 후 깨끗이 씻어서 배출합니다.',
+          '투명한 비닐봉투에 담아 배출하거나, 여러 장을 모아서 묶어 배출합니다.',
+          '음식물 등 이물질로 오염되어 제거하기 곤란한 경우는 종량제 봉투에 담아 배출합니다.',
+        ],
+      },
+      {
+        id: '2',
+        name: '완충재(뽁뽁이)',
+        imageURL: '',
+        recyclingInstructions: [
+          '뽁뽁이는 비닐류로 분류되어 재활용이 가능합니다.',
+          '테이프나 스티커 등이 붙어있다면 깨끗이 제거합니다.',
+          '이물질이 묻어있으면 물로 깨끗이 세척한 후 배출합니다.',
+          '세척한 뽁뽁이는 다른 비닐류와 함께 투명한 비닐봉투에 담아 배출합니다.',
+        ],
+      },
+    ],
   },
   {
     id: '8',
     name: '발포합성',
     imageURL:
       'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/categoryImages%2Fstyrofoam.svg?alt=media&token=0c7dc678-b6b4-4751-a31e-6eb57d4bf0a9',
-    items: [{}],
+    items: [
+      {
+        id: '1',
+        name: '스티로폼 완충재',
+        imageURL:
+          'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/styrofoam.svg?alt=media&token=75ee5827-29db-4948-89d3-d6e26f4cc9e3',
+        recyclingInstructions: [
+          '내용물을 비우고 물로 헹구는 등 이물질을 제거하여 배출한다.',
+          '부착상표 등 스티로폼과 다른 재질은 제거한 후 배출한다.',
+        ],
+      },
+    ],
   },
   {
     id: '9',
     name: '의류',
     imageURL:
       'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/categoryImages%2Fclothes.svg?alt=media&token=c7912347-56f8-4b44-adf7-efe41a7c5c48',
-    items: [{}],
+    items: [
+      {
+        id: '1',
+        name: '구두, 샌들, 슬리퍼',
+        imageURL: '',
+        recyclingInstructions: [
+          '재사용이 가능한 상태라면 의류수거함에 배출합니다.',
+          '심하게 훼손되었거나 재사용이 불가능한 경우 종량제 봉투에 버립니다.',
+          '일부 지자체에서는 의류수거함에 신발류를 수거하지 않을 수 있으므로, 지역 규정을 확인하세요.',
+        ],
+      },
+      {
+        id: '2',
+        name: '모자',
+        imageURL:
+          'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/detailItemImages%2Fhat.svg?alt=media&token=56c20dfc-6d97-4edb-a7d3-ad31fb0b04ad',
+        recyclingInstructions: [
+          '깨끗하고 재사용 가능한 상태의 모자는 의류수거함에 배출합니다.',
+          '너무 낡아서 재사용이 불가능한 모자는 일반쓰레기(종량제 봉투)로 버립니다.',
+          '밀짚모자는 종량제 봉투에 버립니다.',
+        ],
+      },
+      {
+        id: '3',
+        name: '머플러(목도리)',
+        imageURL: '',
+        recyclingInstructions: [
+          '깨끗하고 재사용 가능한 상태라면 의류수거함에 배출합니다.',
+          '오염되거나 훼손된 경우 종량제 봉투에 버립니다.',
+        ],
+      },
+      {
+        id: '4',
+        name: '의류',
+        imageURL: '',
+        recyclingInstructions: [
+          '깨끗하고 재사용 가능한 의류는 의류수거함에 배출합니다.',
+          '젖은 옷이나 이물질이 묻은 옷은 잘 말리고 세탁한 후 배출합니다.',
+          '재활용이 불가능할 정도로 훼손된 의류는 종량제 봉투에 버립니다.',
+        ],
+      },
+    ],
   },
   {
     id: '10',
