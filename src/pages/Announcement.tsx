@@ -119,7 +119,7 @@ export const Announcement = () => {
   };
 
   const truncateTitle = (title: string) => {
-    return title.length > 23 ? `${title.slice(0, 23)}...` : title;
+    return title.length > 28 ? `${title.slice(0, 28)}...` : title;
   };
 
   return (
