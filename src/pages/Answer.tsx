@@ -161,6 +161,14 @@ export const Answer = () => {
     }
   };
 
+  const formatContent = (content: string) => {
+    return content.split('\n').map((line, index) => (
+      <p key={index} className="mb-2">
+        {line}
+      </p>
+    ));
+  };
+
   return (
     <>
       <BackHeader />
@@ -210,7 +218,7 @@ export const Answer = () => {
             key={id}
             className={`relative flex flex-col ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} mx-auto p-2 text-lg bg-purpleLight rounded-4`}>
             <p className="text-sm">{author}</p>
-            <p className="text-lg text-black">{content}</p>
+            <p className="text-lg text-black">{formatContent(content)}</p>
             {createdAt && <p className="text-xs text-gray-500">{formatDateToKoreanTime(new Date(createdAt))}</p>}
           </div>
         ))}

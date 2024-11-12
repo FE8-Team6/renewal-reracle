@@ -119,6 +119,14 @@ export const Comments = () => {
     }
   };
 
+  const formatContent = (content: string) => {
+    return content.split('\n').map((line, index) => (
+      <p key={index} className="mb-2">
+        {line}
+      </p>
+    ));
+  };
+
   return (
     <>
       <BackHeader comment={submittedAnswers} />
@@ -167,7 +175,7 @@ export const Comments = () => {
                     </Popover>
                   )}
                 </div>
-                <p className="text-lg text-black">{answer.content}</p>
+                <div className="text-lg text-black">{formatContent(answer.content)}</div>
                 {answer.createdAt && (
                   <p className="text-xs text-gray-500">{formatDateToKoreanTime(new Date(answer.createdAt))}</p>
                 )}
