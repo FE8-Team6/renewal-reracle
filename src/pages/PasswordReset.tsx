@@ -1,66 +1,85 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
-import { Layout } from '@/components/layout/Layout';
-import LoginToSignUpTitle from '@/components/LoginToSignUpTitle';
 import { MdAlternateEmail } from 'react-icons/md';
 import { Button } from '@/components/ui/button';
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50';
+import KakaoAdfit320x100 from '@/components/KakaoAdfit320x100';
+import { Input } from '@/components/ui/input';
+
+const emailSchema = z.object({
+  email: z.string().email('이메일 형식이 올바르지 않습니다.'),
+});
 
 export const PasswordReset = () => {
-  const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
-  const [emailSent, setEmailSent] = useState(false);
-  const [errorKey, setErrorKey] = useState(0);
+  const [emailSent, setEmailSent] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const handlePasswordReset = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-    setEmailSent(false);
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-      setError('이메일 형식이 올바르지 않습니다.');
-      setErrorKey((prev) => prev + 1);
-      return;
-    }
+  const form = useForm<z.infer<typeof emailSchema>>({
+    resolver: zodResolver(emailSchema),
+    defaultValues: {
+      email: '',
+    },
+  });
+
+  const onSubmit = async (values: z.infer<typeof emailSchema>) => {
     try {
-      await sendPasswordResetEmail(auth, email);
+      await sendPasswordResetEmail(auth, values.email);
       setEmailSent(true);
-    } catch (error: any) {
-      if (error.code === 'auth/user-not-found') {
-        setError('가입되어 있지 않은 이메일 주소입니다.');
+    } catch (error) {
+      if ((error as { code: string }).code === 'auth/user-not-found') {
+        form.setError('email', { message: '가입되어 있지 않은 이메일 주소입니다.' });
       } else {
-        setError('비밀번호 재설정 이메일 전송에 실패했습니다.');
+        form.setError('email', { message: '비밀번호 재설정 이메일 전송에 실패했습니다.' });
       }
     }
   };
 
   return (
-    <Layout>
-      <LoginToSignUpTitle title="비밀번호 재설정" />
-      <section className="w-[56.3vh] h-[79.7vh] bg-white flex flex-col justify-center items-center gap-2 overflow-hidden">
-        <form onSubmit={handlePasswordReset} className="w-[46vh] flex flex-col justify-center items-center">
-          <div className="relative flex">
-            <input
-              type="text"
-              placeholder="이메일"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-[46vh] h-[6vh] border border-purple-500 rounded-[1vh] mb-[1vh] pl-[5vh] box-border text-[2vh]"
-            />
-            <MdAlternateEmail className="absolute left-[1.5vh] top-[1.8vh] text-[2.5vh] text-purple-500" />
-          </div>
-          {error && (
-            <p key={errorKey} className="absolute bottom-[7.5vh] animate-vibration text-red-500">
-              {error}
-            </p>
-          )}
-          <Button type="submit">비밀번호 재설정 이메일 전송</Button>
-        </form>
-        {emailSent && <p>비밀번호 재설정 이메일이 전송되었습니다.</p>}
-        <Button onClick={() => navigate('/login')}>취소</Button>
+    <main className="flex flex-col h-[calc(100vh-8rem)]">
+      <section className="flex-grow overflow-y-auto">
+        <KakaoAdfit320x50 />
+        <KakaoAdfit320x100 />
+        <div className="relative flex flex-col items-center justify-center w-full h-full gap-3 bg-white">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-lg font-bold text-purple">이메일</FormLabel>
+                    <FormControl>
+                      <div className="relative">
+                        <MdAlternateEmail className="absolute text-xl left-3 top-4 text-purple" />
+                        <Input
+                          type="text"
+                          placeholder="email@example.com"
+                          {...field}
+                          className="pl-10 w-full h-[6vh] border border-purple-500 rounded-[1vh] mb-[1vh] box-border text-[2vh]"
+                        />
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button variant="default" type="submit" size="default">
+                비밀번호 재설정
+              </Button>
+            </form>
+          </Form>
+          {emailSent && <p>비밀번호 재설정 이메일이 전송되었습니다.</p>}
+          <Button variant="link" size="sm" onClick={() => navigate(-1)}>
+            취소
+          </Button>
+        </div>
       </section>
-    </Layout>
+    </main>
   );
 };
