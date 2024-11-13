@@ -58,6 +58,7 @@ export const Qna = () => {
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [containerHeight, setContainerHeight] = useState('');
 
   useEffect(() => {
     const handleResize = () => {
@@ -68,6 +69,27 @@ export const Qna = () => {
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    const updateHeight = () => {
+      if (window.innerHeight >= 1300) {
+        setContainerHeight('h-[51vh]');
+      } else if (window.innerHeight >= 1180) {
+        setContainerHeight('h-[55vh]');
+      } else if (window.innerHeight >= 1000) {
+        setContainerHeight('h-[68vh]');
+      } else if (window.innerHeight >= 940) {
+        setContainerHeight('h-[55vh]');
+      } else {
+        setContainerHeight('h-[calc(100vh-14rem)]');
+      }
+    };
+
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+
+    return () => window.removeEventListener('resize', updateHeight);
   }, []);
 
   /**
@@ -218,7 +240,7 @@ export const Qna = () => {
       </div>
       <KakaoAdfit320x50 />
       <div
-        className={`mx-auto my-[1.5vh] relative overflow-y-auto overflow-x-hidden rounded-4 ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} h-[67vh]`}>
+        className={`mx-auto my-[1.5vh] relative overflow-y-auto overflow-x-hidden rounded-4 ${containerHeight} ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'}`}>
         <KakaoAdfit320x100 />
         {questions.map((question) => (
           <div
