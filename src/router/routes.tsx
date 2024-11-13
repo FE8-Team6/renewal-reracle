@@ -10,7 +10,7 @@ import {
   Login,
   MyQuestion,
   NotFound,
-  PasswordReset,
+  // PasswordReset,
   Qna,
   SignUp,
   Announcement,
@@ -36,10 +36,10 @@ export const routes = [
       </>
     ),
   },
-  {
-    path: '/pwreset',
-    element: <PasswordReset />,
-  },
+  // {
+  //   path: '/pwreset',
+  //   element: <PasswordReset />,
+  // },
   {
     path: '/signup',
     element: (
