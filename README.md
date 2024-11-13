@@ -15,7 +15,7 @@ REracle 사용자들이 쉽고 정확하게 재활용품을 분리수거할 수 
 
 <br/>
 <div align="center">
-  <img src="" width="50%" />
+  <img src="https://github.com/user-attachments/assets/9b331a77-d85d-4e35-a14d-805fa712ea77" width="50%" />
   <img src="" width="50%" />
   <img src="" width="50%" />
 </div>
