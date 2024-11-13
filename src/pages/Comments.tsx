@@ -24,6 +24,7 @@ export const Comments = () => {
   const questionId = location.state?.questionId || '';
   const question = location.state?.question || '';
   const [submittedAnswers, setSubmittedAnswers] = useState(location.state?.submittedAnswers || []);
+  const [containerHeight, setContainerHeight] = useState('h-[54vh]');
 
   const [currentUser, setCurrentUser] = useState<{
     uid: string;
@@ -46,6 +47,27 @@ export const Comments = () => {
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    const updateHeight = () => {
+      if (window.innerHeight >= 1300) {
+        setContainerHeight('h-[53vh]');
+      } else if (window.innerHeight >= 1180) {
+        setContainerHeight('h-[57vh]');
+      } else if (window.innerHeight >= 1000) {
+        setContainerHeight('h-[70vh]');
+      } else if (window.innerHeight >= 940) {
+        setContainerHeight('h-[55vh]');
+      } else {
+        setContainerHeight('h-[calc(100vh-12rem)]');
+      }
+    };
+
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+
+    return () => window.removeEventListener('resize', updateHeight);
   }, []);
 
   useEffect(() => {
@@ -132,7 +154,7 @@ export const Comments = () => {
       <BackHeader comment={submittedAnswers} />
       <div className="overflow-y-auto">
         <KakaoAdfit320x50 />
-        <div className="space-y-2 h-[67vh] mt-4">
+        <div className={`space-y-2 ${containerHeight} mt-4`}>
           {submittedAnswers
             .slice()
             .sort(
@@ -168,7 +190,7 @@ export const Comments = () => {
                           }}>
                           수정
                         </Button>
-                        <Button variant="default" size="sm" onClick={() => handleDeleteAnswer(answer.id)}>
+                        <Button variant="secondary" size="sm" onClick={() => handleDeleteAnswer(answer.id)}>
                           삭제
                         </Button>
                       </PopoverContent>
