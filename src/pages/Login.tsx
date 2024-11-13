@@ -51,7 +51,7 @@ export const Login = () => {
   return (
     <>
       <KakaoAdfit320x50 />
-      <section className="w-full h-[75vh] bg-white relative flex flex-col justify-center items-center gap-3 overflow-y-auto">
+      <section className="w-full h-[80vh] bg-white relative flex flex-col justify-center items-center gap-3 overflow-y-auto">
         <img src="/images/loginPageImg.png" alt="로그인 페이지 이미지" className="w-[12rem] h-[12rem] " />
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
@@ -89,8 +89,7 @@ export const Login = () => {
                       <button
                         type="button"
                         onClick={togglePasswordVisibility}
-                        className="absolute text-xl right-3 top-4 text-purple"
-                      >
+                        className="absolute text-xl right-3 top-4 text-purple">
                         {isShowPassword ? <MdVisibilityOff /> : <MdVisibility />}
                       </button>
                     </div>
