@@ -59,7 +59,7 @@ const MyPage = () => {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-7rem)]">
+    <div className="flex flex-col h-[calc(100vh-9rem)]">
       <KakaoAdfit320x50 />
       <section className="flex-grow w-full h-full pb-4 mx-auto mt-2 overflow-y-auto">
         <div className="flex flex-col items-center space-y-4">
