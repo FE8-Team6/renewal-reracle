@@ -45,6 +45,7 @@ export const Announcement = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [editId, setEditId] = useState<string>('');
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [containerHeight, setContainerHeight] = useState('');
 
   useEffect(() => {
     const handleResize = () => {
@@ -55,6 +56,27 @@ export const Announcement = () => {
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    const updateHeight = () => {
+      if (window.innerHeight >= 1300) {
+        setContainerHeight('h-[51vh]');
+      } else if (window.innerHeight >= 1180) {
+        setContainerHeight('h-[55vh]');
+      } else if (window.innerHeight >= 1000) {
+        setContainerHeight('h-[68vh]');
+      } else if (window.innerHeight >= 940) {
+        setContainerHeight('h-[55vh]');
+      } else {
+        setContainerHeight('h-[calc(100vh-14rem)]');
+      }
+    };
+
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+
+    return () => window.removeEventListener('resize', updateHeight);
   }, []);
 
   useEffect(() => {
@@ -124,12 +146,9 @@ export const Announcement = () => {
 
   return (
     <>
-      <div className="w-full h-[2rem] bg-yellow text-purple text-center flex items-center justify-center leading-[3.75vh] text-[2vh]">
-        공지사항
-      </div>
       <KakaoAdfit320x50 />
       <div
-        className={`${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} h-[67vh] relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4`}>
+        className={`${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} ${containerHeight}  relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4`}>
         <KakaoAdfit320x100 />
         {isAdmin && (
           <div className="fixed bottom-[16vh] left-[50%] transform -translate-x-1/2">
