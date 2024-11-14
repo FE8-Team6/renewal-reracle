@@ -10,3 +10,4 @@ export * from './AnnouncementDetailItem';
 export * from './NotFound';
 export * from './Answer';
 export * from './Comments';
+export * from './MyPage';

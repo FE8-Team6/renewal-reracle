@@ -1,5 +1,4 @@
 import { Layout } from '@/components/layout/Layout';
-import MyPage from '@/components/MyPage/MyPage';
 import Nav from '@/components/Nav/Nav';
 import CategoryDetailItems from '@/components/WasteCategory/CategoryDetailItems';
 import CategoryItems from '@/components/WasteCategory/CategoryItems';
@@ -16,6 +15,7 @@ import {
   Announcement,
   AnnouncementDetailItem,
   Answer,
+  MyPage,
 } from '@/pages';
 
 export const routes = [
