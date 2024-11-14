@@ -99,7 +99,13 @@ export const routes = [
   },
   {
     path: 'answer/:questionId',
-    element: <Answer />,
+    element: (
+      <>
+        <BackHeader />
+        <Answer />
+        <Nav />
+      </>
+    ),
   },
   {
     path: 'comments/:questionId',
