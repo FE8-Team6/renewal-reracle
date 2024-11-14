@@ -16,6 +16,7 @@ import {
   AnnouncementDetailItem,
   Answer,
   MyPage,
+  PasswordReset,
 } from '@/pages';
 
 export const routes = [
@@ -36,10 +37,10 @@ export const routes = [
       </>
     ),
   },
-  // {
-  //   path: '/pwreset',
-  //   element: <PasswordReset />,
-  // },
+  {
+    path: '/pwreset',
+    element: <PasswordReset />,
+  },
   {
     path: '/signup',
     element: (

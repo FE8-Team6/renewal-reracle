@@ -77,8 +77,8 @@ export const MyPage = () => {
                   </div>
                 </div>
                 <div className="mt-4">
-                  <button className="text-gray-500 hover:underline">
-                    <span className="text-sm font-medium text-gray-500">닉네임 변경</span>
+                  <button onClick={() => navigate('/pwreset')} className="text-gray-500 hover:underline">
+                    <span className="text-sm font-medium text-gray-500">비밀번호 변경</span>
                   </button>
                 </div>
                 <div className="mt-4">
