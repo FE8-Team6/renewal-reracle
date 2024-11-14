@@ -109,7 +109,12 @@ export const routes = [
   },
   {
     path: 'comments/:questionId',
-    element: <Comments />,
+    element: (
+      <>
+        <Comments />
+        <Nav />
+      </>
+    ),
   },
   {
     path: 'mypage',

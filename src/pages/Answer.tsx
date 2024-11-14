@@ -5,7 +5,6 @@ import { db } from '../firebase';
 import { Button } from '@/components/ui/button';
 import { ThumbsUp, MoreHorizontal } from 'lucide-react';
 import { formatDateToKoreanTime } from '@/lib/utils/dateKoreanTime';
-import Nav from '@/components/Nav/Nav';
 import {
   Dialog,
   DialogContent,
@@ -232,7 +231,6 @@ export const Answer = () => {
           </NavLink>
         </div>
       </div>
-      <Nav />
       <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
         <DialogContent>
           <DialogHeader>
