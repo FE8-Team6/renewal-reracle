@@ -235,15 +235,12 @@ export const Qna = () => {
 
   return (
     <>
-      <div className="w-full h-[2rem] bg-purple text-center flex items-center justify-center text-white text-[2vh]">
-        R지식in
-      </div>
       <KakaoAdfit320x50 />
-      <div
+      <main
         className={`mx-auto my-[1.5vh] relative overflow-y-auto overflow-x-hidden rounded-4 ${containerHeight} ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'}`}>
         <KakaoAdfit320x100 />
         {questions.map((question) => (
-          <div
+          <article
             key={question.id}
             className=" bg-greenLight w-full h-[6rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black ">
             <NavLink
@@ -262,15 +259,13 @@ export const Qna = () => {
               }}
               className="flex flex-col flex-grow">
               <div className="flex flex-col">
-                <span className="text-base font-semibold text-gray-900 truncate">
-                  {truncateTitle(question.question)}
-                </span>
-                <span className="text-sm text-gray-500">{question.author}</span>
+                <h2 className="font-semibold text-gray-900 truncate">{truncateTitle(question.question)}</h2>
+                <p className="text-sm text-gray-500">{question.author}</p>
               </div>
               <div className="flex items-center justify-between mt-1">
                 <div className="flex gap-2">
                   {question.createdAt && (
-                    <p className="text-sm">{formatDateToKoreanTime(question.createdAt.toDate())}</p>
+                    <time className="text-sm">{formatDateToKoreanTime(question.createdAt.toDate())}</time>
                   )}
                   <p className="text-sm">댓글 {question.commentCount}개</p>
                 </div>
@@ -289,9 +284,9 @@ export const Qna = () => {
                 </div>
               </div>
             </NavLink>
-          </div>
+          </article>
         ))}
-      </div>
+      </main>
       <div className="fixed bottom-[16vh] left-[50%] transform -translate-x-1/2">
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
           <button onClick={handleOpenModal} className="p-2 border bg-purple rounded-10">
@@ -333,5 +328,3 @@ export const Qna = () => {
     </>
   );
 };
-
-export default Qna;

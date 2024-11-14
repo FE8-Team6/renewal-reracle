@@ -16,7 +16,6 @@ import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover
 import { MoreHorizontal } from 'lucide-react';
 import { formatDateToKoreanTime } from '@/lib/utils/dateKoreanTime';
 import BackHeader from '@/lib/common/BackHeader';
-import Nav from '@/components/Nav/Nav';
 import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50';
 
 export const Comments = () => {
@@ -36,7 +35,7 @@ export const Comments = () => {
   const [answer, setAnswer] = useState<string>('');
   const [editingAnswer, setEditingAnswer] = useState<string | null>(null);
   const [editedContent, setEditedContent] = useState<string>('');
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -152,7 +151,7 @@ export const Comments = () => {
   return (
     <>
       <BackHeader comment={submittedAnswers} />
-      <div className="overflow-y-auto">
+      <main className="overflow-y-auto">
         <KakaoAdfit320x50 />
         <div className={`space-y-2 ${containerHeight} mt-4`}>
           {submittedAnswers
@@ -199,7 +198,7 @@ export const Comments = () => {
                 </div>
                 <div className="text-lg text-black">{formatContent(answer.content)}</div>
                 {answer.createdAt && (
-                  <p className="text-xs text-gray-500">{formatDateToKoreanTime(new Date(answer.createdAt))}</p>
+                  <time className="text-xs text-gray-500">{formatDateToKoreanTime(new Date(answer.createdAt))}</time>
                 )}
                 <Dialog open={editingAnswer === answer.id} onOpenChange={() => setEditingAnswer(null)}>
                   <DialogContent>
@@ -233,14 +232,12 @@ export const Comments = () => {
               variant="default"
               size="default"
               onClick={handleSubmit}
-              className={`${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'}`}>
+              className={`mb-5 ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'}`}>
               제출
             </Button>
           </div>
         </div>
-
-        <Nav />
-      </div>
+      </main>
     </>
   );
 };

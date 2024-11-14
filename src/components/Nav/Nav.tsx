@@ -12,31 +12,31 @@ const Nav = () => {
   };
 
   return (
-    <div className="fixed bottom-0 w-full">
+    <nav className="fixed bottom-0 w-full">
       {/* <div className="absolute bottom-[10vh] w-full">
         <NotificationBanner />
       </div> */}
-      <div className="w-full h-[4rem] absolute bottom-0 bg-green flex justify-evenly items-center">
+      <div className="w-full h-[5rem] absolute bottom-0 bg-green flex justify-evenly items-center">
         <button
           onClick={() => handleNavClick('/')}
-          className="flex flex-col items-center transition-colors duration-300 hover:text-gray-500">
-          <IoHomeOutline className="w-7 h-7" />
-          {/* <div className="mt-1 text-sm font-medium text-center text-grayDark">홈</div> */}
+          className="flex flex-col items-center transition-colors duration-300 hover:text-gray-400 focus:text-gray-500">
+          <IoHomeOutline className="w-6 h-6" />
+          <span className="mt-1 text-sm font-medium text-center text-grayDark">홈</span>
         </button>
         <button
           onClick={() => handleNavClick('/qna')}
-          className="flex flex-col items-center transition-colors duration-300 hover:text-gray-500">
-          <HiOutlineQuestionMarkCircle className="w-7 h-7" />
-          {/* <div className="mt-1 text-sm font-medium text-center text-grayDark">R지식in</div> */}
+          className="flex flex-col items-center transition-colors duration-300 hover:text-gray-400 focus:text-gray-500">
+          <HiOutlineQuestionMarkCircle className="w-6 h-6" />
+          <span className="mt-1 text-sm font-medium text-center text-grayDark">R지식in</span>
         </button>
         <button
           onClick={() => handleNavClick('/announcement')}
-          className="flex flex-col items-center transition-colors duration-300 hover:text-gray-500">
-          <LuClipboardEdit className="w-7 h-7" />
-          {/* <div className="mt-1 text-sm font-medium text-center text-grayDark">공지</div> */}
+          className="flex flex-col items-center transition-colors duration-300 hover:text-gray-400 focus:text-gray-500">
+          <LuClipboardEdit className="w-6 h-6" />
+          <span className="mt-1 text-sm font-medium text-center text-grayDark">공지</span>
         </button>
       </div>
-    </div>
+    </nav>
   );
 };
 

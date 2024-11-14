@@ -52,9 +52,9 @@ const Category = () => {
   }, []);
 
   return (
-    <div className="flex flex-col h-[calc(100vh-7rem)]">
-      <KakaoAdfit320x50 />
+    <main className="flex flex-col h-[calc(100vh-8rem)]">
       <section className="flex-grow overflow-y-auto">
+        <KakaoAdfit320x50 />
         <div className="flex justify-center w-full mx-auto mt-2 mb-6">
           <SearchBar className="mx-auto" />
         </div>
@@ -80,7 +80,7 @@ const Category = () => {
           </CarouselContent>
         </Carousel>
       </section>
-    </div>
+    </main>
   );
 };
 

@@ -16,7 +16,7 @@ type Category = {
 const CategoryItems = () => {
   const { categoryId } = useParams();
   const [categoryItems, setCategoryItems] = useState<Category[]>([]);
-  const [containerWidth, setContainerWidth] = useState('w-[25rem]');
+  const [containerWidth, setContainerWidth] = useState('w-[23rem]');
 
   const getCategoryItems = async () => {
     try {
@@ -46,7 +46,7 @@ const CategoryItems = () => {
       if (window.innerWidth <= 395) {
         setContainerWidth('w-[21rem]');
       } else {
-        setContainerWidth('w-[25rem]');
+        setContainerWidth('w-[23rem]');
       }
     };
 
@@ -56,32 +56,36 @@ const CategoryItems = () => {
   }, [categoryId]);
 
   return (
-    <div className="flex flex-col h-[calc(100vh-7rem)]">
+    <div className="flex flex-col h-[calc(100vh-8rem)]">
       <KakaoAdfit320x100 />
-      <section className="flex-grow overflow-y-auto">
+      <main className="flex-grow overflow-y-auto">
         <KakaoAdfit320x50 />
-        <h2 className="mt-2 ml-5 text-xl font-bold text-purple">재활용품 세부 품목</h2>
-        <Carousel className="w-full h-full mt-4">
-          <CarouselContent>
-            {chunkedItems.map((chunk, index) => (
-              <CarouselItem key={index}>
-                <div className={`grid grid-cols-3 gap-4 ${containerWidth} mx-auto`}>
-                  {chunk.map((item) => (
-                    <div key={item.id} className="flex flex-col items-center">
-                      <NavLink to={`/category/${categoryId}/item/${item.id}`} className="no-underline">
-                        <div className="flex items-center justify-center w-24 h-24 rounded-lg cursor-pointer bg-yellowLight hover:bg-yellow">
-                          {item.imageURL && <img src={item.imageURL} alt={item.name} className="w-12 h-12" />}
-                        </div>
-                        <p className="mt-2 text-sm font-semibold text-center text-gray-800">{item.name}</p>
-                      </NavLink>
-                    </div>
-                  ))}
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
-      </section>
+        <header className="mt-2 ml-5">
+          <h2 className="text-xl font-bold text-purple">재활용품 세부 품목</h2>
+        </header>
+        <section className="w-full h-full mt-4">
+          <Carousel>
+            <CarouselContent>
+              {chunkedItems.map((chunk, index) => (
+                <CarouselItem key={index}>
+                  <div className={`grid grid-cols-3 gap-4 ${containerWidth} mx-auto`}>
+                    {chunk.map((item) => (
+                      <article key={item.id} className="flex flex-col items-center">
+                        <NavLink to={`/category/${categoryId}/item/${item.id}`} className="no-underline">
+                          <div className="flex items-center justify-center w-24 h-24 rounded-lg cursor-pointer bg-yellowLight hover:bg-yellow">
+                            {item.imageURL && <img src={item.imageURL} alt={item.name} className="w-12 h-12" />}
+                          </div>
+                          <p className="mt-2 text-sm font-semibold text-center text-gray-800">{item.name}</p>
+                        </NavLink>
+                      </article>
+                    ))}
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        </section>
+      </main>
     </div>
   );
 };

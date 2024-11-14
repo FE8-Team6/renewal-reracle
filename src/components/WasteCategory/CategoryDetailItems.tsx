@@ -41,31 +41,35 @@ const CategoryDetailItems = () => {
   }, [categoryId, itemId]);
 
   return (
-    <section className="flex flex-col h-full">
+    <article className="flex flex-col h-full">
       <div className="flex-grow pb-32 overflow-y-auto">
         <KakaoAdfit320x50 />
         <div className="flex flex-col items-center px-4">
-          <h3 className="w-full mt-4 text-xl font-bold text-purple">{itemsDetails?.name}</h3>
+          <header className="w-full mt-4">
+            <h1 className="text-2xl font-bold text-purple">{itemsDetails?.name}</h1>
+          </header>
           {itemsDetails?.imageURL && (
-            <div className="flex items-center justify-center w-full h-48 my-4 rounded-lg bg-purpleLight">
+            <figure className="flex items-center justify-center w-full h-48 my-4 rounded-lg bg-purpleLight">
               <img
                 src={itemsDetails.imageURL}
                 alt={itemsDetails.name}
                 className="max-w-[60%] max-h-[80%] object-contain"
               />
-            </div>
+            </figure>
           )}
-          <h3 className="w-full mt-4 text-xl font-bold text-purple">배출방법</h3>
-          <div className="w-full">
-            {itemsDetails?.recyclingInstructions.map((instruction, index) => (
-              <span key={index} className="my-2 font-semibold">
-                {instruction}
-              </span>
-            ))}
-          </div>
+          <section className="w-full mt-4">
+            <h2 className="text-xl font-bold text-purple">배출방법</h2>
+            <div className="w-full">
+              {itemsDetails?.recyclingInstructions.map((instruction, index) => (
+                <p key={index} className="my-2 font-semibold">
+                  {instruction}
+                </p>
+              ))}
+            </div>
+          </section>
         </div>
       </div>
-    </section>
+    </article>
   );
 };
 

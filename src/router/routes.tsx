@@ -1,5 +1,4 @@
 import { Layout } from '@/components/layout/Layout';
-import MyPage from '@/components/MyPage/MyPage';
 import Nav from '@/components/Nav/Nav';
 import CategoryDetailItems from '@/components/WasteCategory/CategoryDetailItems';
 import CategoryItems from '@/components/WasteCategory/CategoryItems';
@@ -10,12 +9,13 @@ import {
   Login,
   MyQuestion,
   NotFound,
-  PasswordReset,
   Qna,
   SignUp,
   Announcement,
   AnnouncementDetailItem,
   Answer,
+  MyPage,
+  PasswordReset,
 } from '@/pages';
 
 export const routes = [
@@ -38,7 +38,13 @@ export const routes = [
   },
   {
     path: '/pwreset',
-    element: <PasswordReset />,
+    element: (
+      <>
+        <BackHeader />
+        <PasswordReset />
+        <Nav />
+      </>
+    ),
   },
   {
     path: '/signup',
@@ -99,11 +105,22 @@ export const routes = [
   },
   {
     path: 'answer/:questionId',
-    element: <Answer />,
+    element: (
+      <>
+        <BackHeader />
+        <Answer />
+        <Nav />
+      </>
+    ),
   },
   {
     path: 'comments/:questionId',
-    element: <Comments />,
+    element: (
+      <>
+        <Comments />
+        <Nav />
+      </>
+    ),
   },
   {
     path: 'mypage',

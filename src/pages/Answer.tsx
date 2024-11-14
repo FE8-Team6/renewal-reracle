@@ -5,8 +5,6 @@ import { db } from '../firebase';
 import { Button } from '@/components/ui/button';
 import { ThumbsUp, MoreHorizontal } from 'lucide-react';
 import { formatDateToKoreanTime } from '@/lib/utils/dateKoreanTime';
-import Nav from '@/components/Nav/Nav';
-import BackHeader from '@/lib/common/BackHeader';
 import {
   Dialog,
   DialogContent,
@@ -175,9 +173,8 @@ export const Answer = () => {
 
   return (
     <>
-      <BackHeader />
       <div className="px-4 py-2">
-        <p className="text-xl">{question}</p>
+        <h3 className="text-xl">{question}</h3>
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-between w-full mt-2">
             <p className="font-semibold">{author}</p>
@@ -200,7 +197,7 @@ export const Answer = () => {
             )}
           </div>
         </div>
-        {createdAt && <p className="text-sm">{formatDateToKoreanTime(createdAt)}</p>}
+        {createdAt && <time className="text-sm">{formatDateToKoreanTime(createdAt)}</time>}
         <div className="mt-2">
           <hr />
           <p className="mt-2">{content}</p>
@@ -234,7 +231,6 @@ export const Answer = () => {
           </NavLink>
         </div>
       </div>
-      <Nav />
       <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
         <DialogContent>
           <DialogHeader>

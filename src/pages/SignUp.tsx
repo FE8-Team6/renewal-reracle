@@ -11,13 +11,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50';
-
-const signUpSchema = z.object({
-  displayName: z.string().min(2, '닉네임은 2자 이상이어야 합니다.'),
-  email: z.string().email('이메일을 올바르게 입력해주세요.'),
-  password: z.string().min(8, '비밀번호는 8자 이상이어야 합니다.'),
-  confirmPassword: z.string().min(8, '비밀번호는 8자 이상이어야 합니다.'),
-});
+import { signUpSchema } from '@/lib/constant/signUpSchema';
 
 export const SignUp = () => {
   const [error, setError] = useState<string>('');
@@ -122,91 +116,93 @@ export const SignUp = () => {
   };
 
   return (
-    <>
-      <KakaoAdfit320x50 />
-      <section className="w-full h-[70vh] bg-white relative flex flex-col justify-center items-center gap-3 overflow-y-auto">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
-            <FormField
-              control={form.control}
-              name="displayName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-lg font-bold text-purple">닉네임</FormLabel>
-                  <FormControl>
-                    <div className="relative flex items-center gap-2">
-                      <MdOutlineTagFaces className="absolute text-xl left-3 top-4 text-purple" />
-                      <Input placeholder="닉네임" {...field} className="w-full pl-10" />
-                      <Button variant="secondary" size="sm" onClick={checkDisplayName} className="mt-2">
-                        중복 확인
-                      </Button>
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-lg font-bold text-purple">이메일</FormLabel>
-                  <FormControl>
-                    <div className="relative flex items-center gap-2">
-                      <MdAlternateEmail className="absolute text-xl left-3 top-4 text-purple" />
-                      <Input placeholder="이메일" {...field} className="w-full pl-10" />
-                      <Button variant="secondary" size="sm" onClick={checkEmail} className="mt-2">
-                        중복 확인
-                      </Button>
-                    </div>
-                  </FormControl>
-                  {emailError && <FormMessage className="text-error-40">{emailError}</FormMessage>}
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-lg font-bold text-purple">비밀번호</FormLabel>
-                  <FormControl>
-                    <div className="relative flex items-center gap-2">
-                      <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
-                      <Input type="password" placeholder="비밀번호" {...field} className="w-full pl-10" />
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="confirmPassword"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-lg font-bold text-purple">비밀번호 확인</FormLabel>
-                  <FormControl>
-                    <div className="relative flex items-center gap-2">
-                      <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
-                      <Input type="password" placeholder="비밀번호 확인" {...field} className="w-full pl-10" />
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            {error && <p className="text-sm font-medium text-error-40">{error}</p>}
-            <Button variant="default" type="submit" size="default" className="w-full">
-              회원가입
-            </Button>
-          </form>
-        </Form>
-        <Button variant="link" size="sm" onClick={() => navigate('/login')}>
-          <span>로그인</span>
-        </Button>
+    <main className="flex flex-col h-[calc(100vh-5rem)]">
+      <section className="flex-grow overflow-y-auto">
+        <KakaoAdfit320x50 />
+        <div className="w-full h-full bg-white relative flex flex-col justify-center items-center gap-3 ">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2 w-full max-w-md px-4">
+              <FormField
+                control={form.control}
+                name="displayName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-lg font-bold text-purple">닉네임</FormLabel>
+                    <FormControl>
+                      <div className="relative flex items-center gap-2">
+                        <MdOutlineTagFaces className="absolute text-xl left-3 top-4 text-purple" />
+                        <Input placeholder="닉네임" {...field} className="w-full pl-10" />
+                        <Button variant="secondary" size="sm" onClick={checkDisplayName} className="mt-2">
+                          중복 확인
+                        </Button>
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-lg font-bold text-purple">이메일</FormLabel>
+                    <FormControl>
+                      <div className="relative flex items-center gap-2">
+                        <MdAlternateEmail className="absolute text-xl left-3 top-4 text-purple" />
+                        <Input placeholder="이메일" {...field} className="w-full pl-10" />
+                        <Button variant="secondary" size="sm" onClick={checkEmail} className="mt-2">
+                          중복 확인
+                        </Button>
+                      </div>
+                    </FormControl>
+                    {emailError && <FormMessage className="text-error-40">{emailError}</FormMessage>}
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-lg font-bold text-purple">비밀번호</FormLabel>
+                    <FormControl>
+                      <div className="relative flex items-center gap-2">
+                        <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
+                        <Input type="password" placeholder="비밀번호" {...field} className="w-full pl-10" />
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-lg font-bold text-purple">비밀번호 확인</FormLabel>
+                    <FormControl>
+                      <div className="relative flex items-center gap-2">
+                        <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
+                        <Input type="password" placeholder="비밀번호 확인" {...field} className="w-full pl-10" />
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {error && <p className="text-sm font-medium text-error-40">{error}</p>}
+              <Button variant="default" type="submit" size="default" className="w-full">
+                회원가입
+              </Button>
+            </form>
+          </Form>
+          <Button variant="link" size="sm" onClick={() => navigate('/login')}>
+            <span>로그인</span>
+          </Button>
+        </div>
       </section>
-    </>
+    </main>
   );
 };

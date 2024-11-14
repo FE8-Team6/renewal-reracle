@@ -12,11 +12,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50';
-
-const loginSchema = z.object({
-  email: z.string().email('이메일 형식이 올바르지 않습니다.'),
-  password: z.string().min(8, '비밀번호는 8자 이상이어야 합니다.'),
-});
+import { loginSchema } from '@/lib/constant/loginSchema';
 
 export const Login = () => {
   const [error, setError] = useState<string>('');
@@ -49,67 +45,68 @@ export const Login = () => {
   };
 
   return (
-    <>
-      <KakaoAdfit320x50 />
-      <section className="w-full h-[75vh] bg-white relative flex flex-col justify-center items-center gap-3 overflow-y-auto">
-        <img src="/images/loginPageImg.png" alt="로그인 페이지 이미지" className="w-[12rem] h-[12rem] " />
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-lg text-purple">이메일</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <MdAlternateEmail className="absolute text-xl left-3 top-4 text-purple" />
-                      <Input placeholder="email@example.com" {...field} className="pl-10" />
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-lg text-purple">비밀번호</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
-                      <Input
-                        type={isShowPassword ? 'text' : 'password'}
-                        placeholder="Password"
-                        {...field}
-                        className="pl-10"
-                      />
-                      <button
-                        type="button"
-                        onClick={togglePasswordVisibility}
-                        className="absolute text-xl right-3 top-4 text-purple"
-                      >
-                        {isShowPassword ? <MdVisibilityOff /> : <MdVisibility />}
-                      </button>
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            {error && <p className="text-sm font-medium text-error-40">{error}</p>}
-            <Button variant="default" type="submit" size="default">
-              로그인
-            </Button>
-          </form>
-        </Form>
-        <GoogleButton />
-        <Button variant="link" size="sm" onClick={() => navigate('/signup')}>
-          <span>회원가입</span>
-        </Button>
+    <main className="flex flex-col h-[calc(100vh-5rem)]">
+      <section className="flex-grow overflow-y-auto">
+        <KakaoAdfit320x50 />
+        <div className="w-full h-full bg-white relative flex flex-col justify-center items-center gap-3 ">
+          <img src="/images/loginPageImg.png" alt="로그인 페이지 이미지" className="w-[12rem] h-[12rem] " />
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-lg font-bold text-purple">이메일</FormLabel>
+                    <FormControl>
+                      <div className="relative">
+                        <MdAlternateEmail className="absolute text-xl left-3 top-4 text-purple" />
+                        <Input placeholder="email@example.com" {...field} className="pl-10" />
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-lg font-bold text-purple">비밀번호</FormLabel>
+                    <FormControl>
+                      <div className="relative">
+                        <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
+                        <Input
+                          type={isShowPassword ? 'text' : 'password'}
+                          placeholder="Password"
+                          {...field}
+                          className="pl-10"
+                        />
+                        <button
+                          type="button"
+                          onClick={togglePasswordVisibility}
+                          className="absolute text-xl right-3 top-4 text-purple">
+                          {isShowPassword ? <MdVisibilityOff /> : <MdVisibility />}
+                        </button>
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {error && <p className="text-sm font-medium text-error-40">{error}</p>}
+              <Button variant="default" type="submit" size="default">
+                로그인
+              </Button>
+            </form>
+          </Form>
+          <GoogleButton />
+          <Button variant="link" size="sm" onClick={() => navigate('/signup')}>
+            <span>회원가입</span>
+          </Button>
+        </div>
       </section>
-    </>
+    </main>
   );
 };
