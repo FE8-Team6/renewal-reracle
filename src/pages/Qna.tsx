@@ -13,26 +13,12 @@ import {
   updateDoc,
   increment,
 } from 'firebase/firestore';
-import { NavLink } from 'react-router-dom';
 import { db } from '../firebase';
 import { serverTimestamp } from 'firebase/firestore';
-import { formatDateToKoreanTime } from '@/lib/utils/dateKoreanTime';
-import { Button } from '@/components/ui/button';
-import { ThumbsUp } from 'lucide-react';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-  DialogClose,
-} from '@/components/ui/dialog';
-import { GoPencil } from 'react-icons/go';
-import { Input } from '@/components/ui/input';
 import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50';
 import KakaoAdfit320x100 from '@/components/KakaoAdfit320x100';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import QuestionForm from '@/components/Question/QuestionForm';
+import QuestionItem from '@/components/Question/QuestionItem';
 
 type Question = {
   id: string;
@@ -59,9 +45,9 @@ export const Qna = () => {
   const [likedPosts, setLikedPosts] = useState<Set<string>>(new Set());
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
+  const [postCategory, setPostCategory] = useState<string>('분리수거 방법');
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
   const [containerHeight, setContainerHeight] = useState<string>('');
-  const [postCategory, setPostCategory] = useState<string>('분리수거 방법');
 
   useEffect(() => {
     const handleResize = () => {
@@ -227,19 +213,6 @@ export const Qna = () => {
     }
   };
 
-  const handleOpenModal = () => {
-    const userData = localStorage.getItem('userData');
-    if (!userData) {
-      alert('로그인이 필요합니다.');
-      return;
-    }
-    setIsModalOpen(true);
-  };
-
-  const truncateTitle = (title: string) => {
-    return title.length > 23 ? `${title.slice(0, 23)}...` : title;
-  };
-
   return (
     <>
       <KakaoAdfit320x50 />
@@ -247,101 +220,26 @@ export const Qna = () => {
         className={`mx-auto my-[1.5vh] relative overflow-y-auto overflow-x-hidden rounded-4 ${containerHeight} ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'}`}>
         <KakaoAdfit320x100 />
         {questions.map((question) => (
-          <article
+          <QuestionItem
             key={question.id}
-            className=" bg-greenLight w-full h-[6rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black ">
-            <NavLink
-              to={`/answer/${question.id}`}
-              state={{
-                questionId: question.id,
-                question: question.question,
-                content: question.content,
-                author: question.author,
-                createdAt: question.createdAt ? question.createdAt.toDate().toISOString() : null,
-                likes: question.likes,
-                likedPosts: Array.from(likedPosts),
-                commentCount: question.commentCount,
-                currentUser,
-                authorUid: question.authorUid,
-              }}
-              className="flex flex-col flex-grow">
-              <div className="flex flex-col">
-                <h2 className="font-semibold text-gray-900 truncate">{truncateTitle(question.question)}</h2>
-                <p className="text-sm text-gray-500">{question.author}</p>
-              </div>
-              <div className="flex items-center justify-between mt-1">
-                <div className="flex gap-2">
-                  {question.createdAt && (
-                    <time className="text-sm">{formatDateToKoreanTime(question.createdAt.toDate())}</time>
-                  )}
-                  <p className="text-sm">댓글 {question.commentCount}개</p>
-                </div>
-                <div className="flex items-center">
-                  <Button
-                    className="bg-transparent hover:bg-transparent"
-                    variant="secondary"
-                    size="icon"
-                    onClick={(event) => {
-                      event.preventDefault();
-                      handleLiked(question.id);
-                    }}>
-                    <ThumbsUp className={`w-[1rem] h-[1rem] ${likedPosts.has(question.id) ? 'text-blue-500' : ''}`} />
-                  </Button>
-                  <span>{question.likes}</span>
-                </div>
-              </div>
-            </NavLink>
-          </article>
+            question={question}
+            likedPosts={likedPosts}
+            currentUser={currentUser}
+            handleLiked={handleLiked}
+          />
         ))}
       </main>
-      <div className="fixed bottom-[16vh] left-[50%] transform -translate-x-1/2">
-        <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-          <button onClick={handleOpenModal} className="p-2 border bg-purple rounded-10">
-            <GoPencil className="w-5 h-5 text-white" />
-          </button>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>질문</DialogTitle>
-              <DialogDescription>질문을 추가하세요.</DialogDescription>
-            </DialogHeader>
-            <Select onValueChange={(value) => setPostCategory(value)} defaultValue="분리수거 방법">
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="카테고리 선택" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="분리수거 방법">분리수거 방법</SelectItem>
-                <SelectItem value="기타">기타</SelectItem>
-                <SelectItem value="개발 문의">개발 문의</SelectItem>
-              </SelectContent>
-            </Select>
-            <Input
-              type="text"
-              value={title}
-              onChange={(event) => setTitle(event.target.value)}
-              placeholder="제목"
-              className="w-full h-full pl-3 border border-gray-200 rounded-3 "
-            />
-            <textarea
-              value={content}
-              onChange={(event) => setContent(event.target.value)}
-              placeholder="내용"
-              className="w-full h-[20vh] p-2 mb-2 border "
-            />
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button variant="secondary" size="lg">
-                  닫기
-                </Button>
-              </DialogClose>
-              <DialogClose asChild>
-                <Button variant="default" size="lg" onClick={handleAddQuestion}>
-                  추가
-                </Button>
-              </DialogClose>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-      </div>
+      <QuestionForm
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        handleAddQuestion={handleAddQuestion}
+        title={title}
+        setTitle={setTitle}
+        content={content}
+        setContent={setContent}
+        postCategory={postCategory}
+        setPostCategory={setPostCategory}
+      />
     </>
   );
 };
