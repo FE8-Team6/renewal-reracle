@@ -1,4 +1,4 @@
-import { Layout } from '@/components/layout/Layout';
+import { MainLayout } from '@/components/layout/MainLayout';
 import Nav from '@/components/Nav/Nav';
 import CategoryDetailItems from '@/components/WasteCategory/CategoryDetailItems';
 import CategoryItems from '@/components/WasteCategory/CategoryItems';
@@ -21,11 +21,15 @@ import {
 export const routes = [
   {
     path: '/',
-    element: (
-      <Layout>
-        <Home />
-      </Layout>
-    ),
+    element: <MainLayout />,
+    children: [
+      { path: '/', element: <Home /> },
+      { path: 'qna', element: <Qna /> },
+      { path: 'announcement', element: <Announcement /> },
+      { path: 'mypage', element: <MyPage /> },
+      { path: 'myquestion', element: <MyQuestion /> },
+      { path: 'category/:categoryId', element: <CategoryItems /> },
+    ],
   },
   {
     path: '/login',
@@ -60,14 +64,6 @@ export const routes = [
     element: <NotFound />,
   },
   {
-    path: 'category/:categoryId',
-    element: (
-      <Layout>
-        <CategoryItems />
-      </Layout>
-    ),
-  },
-  {
     path: 'category/:categoryId/item/:itemId',
     element: (
       <>
@@ -75,22 +71,6 @@ export const routes = [
         <CategoryDetailItems />
         <Nav />
       </>
-    ),
-  },
-  {
-    path: 'qna',
-    element: (
-      <Layout>
-        <Qna />
-      </Layout>
-    ),
-  },
-  {
-    path: 'announcement',
-    element: (
-      <Layout>
-        <Announcement />
-      </Layout>
     ),
   },
   {
@@ -120,22 +100,6 @@ export const routes = [
         <Comments />
         <Nav />
       </>
-    ),
-  },
-  {
-    path: 'mypage',
-    element: (
-      <Layout>
-        <MyPage />
-      </Layout>
-    ),
-  },
-  {
-    path: 'myquestion',
-    element: (
-      <Layout>
-        <MyQuestion />
-      </Layout>
     ),
   },
 ];
