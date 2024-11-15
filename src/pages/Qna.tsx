@@ -267,7 +267,6 @@ export const Qna = () => {
           setTitle={setTitle}
           content={content}
           setContent={setContent}
-          postCategory={postCategory}
           setPostCategory={setPostCategory}
         />
       </section>
