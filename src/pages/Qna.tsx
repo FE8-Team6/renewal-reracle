@@ -57,8 +57,8 @@ export const Qna = () => {
   const [likedPosts, setLikedPosts] = useState<Set<string>>(new Set());
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [containerHeight, setContainerHeight] = useState('');
+  const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
+  const [containerHeight, setContainerHeight] = useState<string>('');
 
   useEffect(() => {
     const handleResize = () => {

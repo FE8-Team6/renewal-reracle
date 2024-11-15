@@ -102,12 +102,14 @@ export const AnnouncementDetailItem = () => {
   };
 
   return (
-    <>
+    <main>
       <KakaoAdfit320x50 />
       <section className="px-4 py-2">
         {announcement ? (
           <>
-            <p className="text-xl">{announcement.title}</p>
+            <header>
+              <h2 className="text-xl">{announcement.title}</h2>
+            </header>
             <div className="flex items-center justify-between">
               <div className="mt-2">
                 <p className="font-semibold">{announcement.author}</p>
@@ -150,10 +152,10 @@ export const AnnouncementDetailItem = () => {
               placeholder="제목"
               value={editAnnouncement.title}
               className="w-full p-2 mb-2 border"
-              onChange={(e) =>
+              onChange={(event) =>
                 setEditAnnouncement({
                   ...editAnnouncement,
-                  title: e.target.value,
+                  title: event.target.value,
                 })
               }
             />
@@ -161,10 +163,10 @@ export const AnnouncementDetailItem = () => {
               placeholder="상세 내용"
               value={editAnnouncement.details}
               className="w-full h-[10rem] "
-              onChange={(e) =>
+              onChange={(event) =>
                 setEditAnnouncement({
                   ...editAnnouncement,
-                  details: e.target.value,
+                  details: event.target.value,
                 })
               }
             />
@@ -181,6 +183,6 @@ export const AnnouncementDetailItem = () => {
           </DialogContent>
         </Dialog>
       </section>
-    </>
+    </main>
   );
 };

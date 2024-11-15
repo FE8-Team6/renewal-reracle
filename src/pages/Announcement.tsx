@@ -44,7 +44,8 @@ export const Announcement = () => {
   });
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [editId, setEditId] = useState<string>('');
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
+  const [containerHeight, setContainerHeight] = useState<string>('');
 
   useEffect(() => {
     const handleResize = () => {
@@ -55,6 +56,27 @@ export const Announcement = () => {
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    const updateHeight = () => {
+      if (window.innerHeight >= 1300) {
+        setContainerHeight('h-[51vh]');
+      } else if (window.innerHeight >= 1180) {
+        setContainerHeight('h-[55vh]');
+      } else if (window.innerHeight >= 1000) {
+        setContainerHeight('h-[68vh]');
+      } else if (window.innerHeight >= 940) {
+        setContainerHeight('h-[55vh]');
+      } else {
+        setContainerHeight('h-[calc(100vh-14rem)]');
+      }
+    };
+
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+
+    return () => window.removeEventListener('resize', updateHeight);
   }, []);
 
   useEffect(() => {
@@ -123,13 +145,10 @@ export const Announcement = () => {
   };
 
   return (
-    <>
-      <div className="w-full h-[2rem] bg-yellow text-purple text-center flex items-center justify-center leading-[3.75vh] text-[2vh]">
-        공지사항
-      </div>
+    <main>
       <KakaoAdfit320x50 />
-      <div
-        className={`${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} h-[67vh] relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4`}>
+      <section
+        className={`${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} ${containerHeight}  relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4`}>
         <KakaoAdfit320x100 />
         {isAdmin && (
           <div className="fixed bottom-[16vh] left-[50%] transform -translate-x-1/2">
@@ -187,22 +206,20 @@ export const Announcement = () => {
             className=" bg-yellowLight w-full h-[6rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black ">
             <NavLink to={`/announcement/${announcement.id}`} className="flex flex-col flex-grow">
               <div className="flex flex-col">
-                <span className="text-base font-semibold text-gray-900 truncate">
-                  {truncateTitle(announcement.title)}
-                </span>
-                <span className="text-sm text-gray-500">{announcement.author}</span>
+                <h2 className="text-base font-semibold text-gray-900 truncate">{truncateTitle(announcement.title)}</h2>
+                <p className="text-sm text-gray-500">{announcement.author}</p>
               </div>
               <div className="flex items-center justify-between mt-1">
                 <div className="flex gap-2">
                   {announcement.createdAt && (
-                    <p className="text-sm">{formatDateToKoreanTime(announcement.createdAt)}</p>
+                    <time className="text-sm">{formatDateToKoreanTime(announcement.createdAt)}</time>
                   )}
                 </div>
               </div>
             </NavLink>
           </div>
         ))}
-      </div>
-    </>
+      </section>
+    </main>
   );
 };
