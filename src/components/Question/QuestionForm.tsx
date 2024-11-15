@@ -62,7 +62,7 @@ const QuestionForm = ({
             <SelectContent>
               <SelectItem value="분리수거 방법">분리수거 방법</SelectItem>
               <SelectItem value="기타">기타</SelectItem>
-              <SelectItem value="개발 문의">개발 문의</SelectItem>
+              <SelectItem value="문의">문의</SelectItem>
             </SelectContent>
           </Select>
           <Input

@@ -233,7 +233,7 @@ export const Qna = () => {
   };
 
   return (
-    <>
+    <main>
       <KakaoAdfit320x50 />
       <div className="flex justify-center mt-1 overflow-x-auto whitespace-nowrap">
         {postCategories.map((postCategory) => (
@@ -245,30 +245,32 @@ export const Qna = () => {
           />
         ))}
       </div>
-      <main
-        className={`mx-auto my-[1.5vh] relative overflow-y-auto overflow-x-hidden rounded-4 ${containerHeight} ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'}`}>
-        <KakaoAdfit320x100 />
-        {filteredQuestions.map((question) => (
-          <QuestionItem
-            key={question.id}
-            question={question}
-            likedPosts={likedPosts}
-            currentUser={currentUser}
-            handleLiked={handleLiked}
-          />
-        ))}
-      </main>
-      <QuestionForm
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        handleAddQuestion={handleAddQuestion}
-        title={title}
-        setTitle={setTitle}
-        content={content}
-        setContent={setContent}
-        postCategory={postCategory}
-        setPostCategory={setPostCategory}
-      />
-    </>
+      <section>
+        <div
+          className={`mx-auto my-[1.5vh] relative overflow-y-auto overflow-x-hidden rounded-4 ${containerHeight} ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'}`}>
+          <KakaoAdfit320x100 />
+          {filteredQuestions.map((question) => (
+            <QuestionItem
+              key={question.id}
+              question={question}
+              likedPosts={likedPosts}
+              currentUser={currentUser}
+              handleLiked={handleLiked}
+            />
+          ))}
+        </div>
+        <QuestionForm
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          handleAddQuestion={handleAddQuestion}
+          title={title}
+          setTitle={setTitle}
+          content={content}
+          setContent={setContent}
+          postCategory={postCategory}
+          setPostCategory={setPostCategory}
+        />
+      </section>
+    </main>
   );
 };

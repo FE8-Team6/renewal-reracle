@@ -38,6 +38,7 @@ export const Answer = () => {
     uid: '',
   };
   const authorUid = location.state?.authorUid || '';
+  const postCategory = location.state?.postCategory || '';
   const [submittedAnswers, setSubmittedAnswers] = useState<SubmittedAnswer>(location.state?.submittedAnswers || []);
   const [likes, setLikes] = useState<number>(location.state?.likes || 0);
   const [likedPosts, setLikedPosts] = useState<Set<string>>(new Set(location.state?.likedPosts || []));
@@ -172,65 +173,68 @@ export const Answer = () => {
   };
 
   return (
-    <>
-      <div className="px-4 py-2">
-        <h3 className="text-xl">{question}</h3>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center justify-between w-full mt-2">
-            <p className="font-semibold">{author}</p>
-            {currentUser.uid === authorUid && (
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    <MoreHorizontal className="w-5 h-5" />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-[6rem]">
-                  <Button variant="default" size="sm" className="w-full" onClick={() => setIsEditModalOpen(true)}>
-                    수정
-                  </Button>
-                  <Button variant="secondary" size="sm" className="w-full" onClick={handleDeleteQuestion}>
-                    삭제
-                  </Button>
-                </PopoverContent>
-              </Popover>
-            )}
+    <main>
+      <section>
+        <div className="px-4 py-2">
+          <p className="text-sm text-purple">{postCategory}</p>
+          <h3 className="text-xl">{question}</h3>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between w-full mt-2">
+              <p className="font-semibold">{author}</p>
+              {currentUser.uid === authorUid && (
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button variant="ghost" size="icon">
+                      <MoreHorizontal className="w-5 h-5" />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-[6rem]">
+                    <Button variant="default" size="sm" className="w-full" onClick={() => setIsEditModalOpen(true)}>
+                      수정
+                    </Button>
+                    <Button variant="secondary" size="sm" className="w-full" onClick={handleDeleteQuestion}>
+                      삭제
+                    </Button>
+                  </PopoverContent>
+                </Popover>
+              )}
+            </div>
+          </div>
+          {createdAt && <time className="text-sm">{formatDateToKoreanTime(createdAt)}</time>}
+          <div className="mt-2">
+            <hr />
+            <p className="mt-2">{content}</p>
+          </div>
+          <div className="flex gap-3">
+            <p>댓글 {submittedAnswers.length}</p>
+            <div className="flex items-center">
+              <button className="pr-1" onClick={() => handleLike(questionId)}>
+                <ThumbsUp className={`w-5 h-5 ${likedPosts.has(questionId) ? 'text-blue-500' : ''}`} />
+              </button>
+              <span>{likes}</span>
+            </div>
           </div>
         </div>
-        {createdAt && <time className="text-sm">{formatDateToKoreanTime(createdAt)}</time>}
-        <div className="mt-2">
-          <hr />
-          <p className="mt-2">{content}</p>
-        </div>
-        <div className="flex gap-3">
-          <p>댓글 {submittedAnswers.length}</p>
-          <div className="flex items-center">
-            <button className="pr-1" onClick={() => handleLike(questionId)}>
-              <ThumbsUp className={`w-5 h-5 ${likedPosts.has(questionId) ? 'text-blue-500' : ''}`} />
-            </button>
-            <span>{likes}</span>
+        <div className={`${containerHeight} space-y-2 overflow-y-auto`}>
+          <KakaoAdfit320x50 />
+          {submittedAnswers.map(({ id, author, content, createdAt }) => (
+            <div
+              key={id}
+              className={`relative flex flex-col ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} mx-auto p-2 text-lg bg-purpleLight rounded-4`}>
+              <p className="text-sm">{author}</p>
+              <p className="text-lg text-black">{formatContent(content)}</p>
+              {createdAt && <p className="text-xs text-gray-500">{formatDateToKoreanTime(new Date(createdAt))}</p>}
+            </div>
+          ))}
+          <div className="flex flex-col w-[23rem] mx-auto">
+            <NavLink to={`/comments/${questionId}`} state={{ questionId, question, submittedAnswers }}>
+              <Button variant="link" size="sm">
+                댓글을 남겨보세요.
+              </Button>
+            </NavLink>
           </div>
         </div>
-      </div>
-      <div className={`${containerHeight} space-y-2 overflow-y-auto`}>
-        <KakaoAdfit320x50 />
-        {submittedAnswers.map(({ id, author, content, createdAt }) => (
-          <div
-            key={id}
-            className={`relative flex flex-col ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} mx-auto p-2 text-lg bg-purpleLight rounded-4`}>
-            <p className="text-sm">{author}</p>
-            <p className="text-lg text-black">{formatContent(content)}</p>
-            {createdAt && <p className="text-xs text-gray-500">{formatDateToKoreanTime(new Date(createdAt))}</p>}
-          </div>
-        ))}
-        <div className="flex flex-col w-[23rem] mx-auto">
-          <NavLink to={`/comments/${questionId}`} state={{ questionId, question, submittedAnswers }}>
-            <Button variant="link" size="sm">
-              댓글을 남겨보세요.
-            </Button>
-          </NavLink>
-        </div>
-      </div>
+      </section>
       <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
         <DialogContent>
           <DialogHeader>
@@ -264,6 +268,6 @@ export const Answer = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </>
+    </main>
   );
 };

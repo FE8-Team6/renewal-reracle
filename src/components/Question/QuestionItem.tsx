@@ -30,7 +30,7 @@ const QuestionItem = ({ question, likedPosts, currentUser, handleLiked }: Questi
   };
 
   return (
-    <article
+    <div
       key={question.id}
       className=" bg-greenLight w-full h-[6rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black ">
       <NavLink
@@ -46,6 +46,7 @@ const QuestionItem = ({ question, likedPosts, currentUser, handleLiked }: Questi
           commentCount: question.commentCount,
           currentUser,
           authorUid: question.authorUid,
+          postCategory: question.postCategory,
         }}
         className="flex flex-col flex-grow">
         <div className="flex flex-col">
@@ -74,7 +75,7 @@ const QuestionItem = ({ question, likedPosts, currentUser, handleLiked }: Questi
           </div>
         </div>
       </NavLink>
-    </article>
+    </div>
   );
 };
 
