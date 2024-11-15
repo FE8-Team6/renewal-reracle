@@ -4,7 +4,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import { NavLink } from 'react-router-dom';
 import { chunkArray } from '@/lib/utils/chunkArray';
 import { SearchBar } from '@/lib/common/SearchBar';
-import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import { Carousel, CarouselContent, CarouselItem, CarouselPagination } from '@/components/ui/carousel';
 import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50.tsx';
 
 type Category = {
@@ -59,7 +59,7 @@ const Category = () => {
           <SearchBar className="mx-auto" />
         </div>
         <h2 className="mt-4 ml-5 text-xl font-bold text-purple">재활용품 분류</h2>
-        <Carousel className="w-full h-full mt-4">
+        <Carousel className="h-[30rem] mt-4">
           <CarouselContent>
             {chunkedCategories.map((chunk, index) => (
               <CarouselItem key={index}>
@@ -78,6 +78,7 @@ const Category = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
+          <CarouselPagination />
         </Carousel>
       </section>
     </main>
