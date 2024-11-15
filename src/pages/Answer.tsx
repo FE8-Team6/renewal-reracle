@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/dialog';
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
 import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50.tsx';
+import { formatContent } from '@/lib/constant/formatContent';
 
 type SubmittedAnswer = {
   id: string;
@@ -162,14 +163,6 @@ export const Answer = () => {
     } catch (error) {
       console.error('UPDATE 에러 발생: ', error);
     }
-  };
-
-  const formatContent = (content: string) => {
-    return content.split('\n').map((line, index) => (
-      <p key={index} className="mb-2">
-        {line}
-      </p>
-    ));
   };
 
   return (
