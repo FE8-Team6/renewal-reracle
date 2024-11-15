@@ -71,15 +71,17 @@ export const Qna = () => {
   useEffect(() => {
     const updateHeight = () => {
       if (window.innerHeight >= 1300) {
-        setContainerHeight('h-[51vh]');
+        setContainerHeight('h-[49vh]');
+      } else if (window.innerHeight >= 1250) {
+        setContainerHeight('h-[52vh]');
       } else if (window.innerHeight >= 1180) {
-        setContainerHeight('h-[55vh]');
+        setContainerHeight('h-[56vh]');
       } else if (window.innerHeight >= 1000) {
-        setContainerHeight('h-[68vh]');
+        setContainerHeight('h-[66vh]');
       } else if (window.innerHeight >= 940) {
         setContainerHeight('h-[55vh]');
       } else {
-        setContainerHeight('h-[calc(100vh-14rem)]');
+        setContainerHeight('h-[calc(100vh-16rem)]');
       }
     };
 
