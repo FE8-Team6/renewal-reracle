@@ -88,21 +88,20 @@ export const MyQuestion = () => {
 
   return (
     <>
-      <div className="w-full h-[2rem] bg-purple text-center flex items-center justify-center text-white text-[2vh]">
+      <h2 className="w-full h-[2rem] bg-purple text-center flex items-center justify-center text-white text-xl">
         마이 R지식in
-      </div>
-      <KakaoAdfit320x50/>
-      <div className="overflow-y-auto my-[1.5vh] mx-auto w-[22rem] h-[67vh] relative">
+      </h2>
+      <KakaoAdfit320x50 />
+      <main className="overflow-y-auto my-[1.5vh] mx-auto w-[22rem] h-[67vh] relative">
         {!questions.length ? (
-          <div className="text-center">
+          <section className="text-center">
             <span>작성한 질문이 없습니다.</span>
-          </div>
+          </section>
         ) : (
           questions.map((questionData) => (
-            <div
+            <section
               key={questionData.id}
-              className="bg-greenLight my-[1.5vh] mx-auto h-[6rem] flex items-center justify-between px-[1vh] rounded-[10px] text-white text-[2vh]"
-            >
+              className="bg-greenLight my-[1.5vh] mx-auto h-[6rem] flex items-center justify-between px-[1vh] rounded-[10px] text-white text-[2vh]">
               <Link
                 to={`/answer/${questionData.id}`}
                 state={{
@@ -117,8 +116,7 @@ export const MyQuestion = () => {
                   authorUid: questionData.authorUid,
                   likedPosts: Array.from(likedPosts),
                 }}
-                className="text-black overflow-hidden whitespace-nowrap text-ellipsis inline-block w-[35vh] no-underline"
-              >
+                className="text-black overflow-hidden whitespace-nowrap text-ellipsis inline-block w-[35vh] no-underline">
                 <p>{questionData.question}</p>
                 <span className="text-sm text-gray-500">{questionData.author}</span>
                 <div className="flex items-center justify-between mt-2">
@@ -133,15 +131,14 @@ export const MyQuestion = () => {
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-black hover:text-purple"
-                onClick={() => handleDeleteQuestion(questionData.id)}
-              >
+                className="text-black hover:text-purple absolute top-1 -right-2"
+                onClick={() => handleDeleteQuestion(questionData.id)}>
                 <X width={15} height={15} />
               </Button>
-            </div>
+            </section>
           ))
         )}
-      </div>
+      </main>
     </>
   );
 };

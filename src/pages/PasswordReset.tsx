@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../firebase';
-import { useNavigate } from 'react-router-dom';
 import { MdAlternateEmail } from 'react-icons/md';
 import { Button } from '@/components/ui/button';
 import { z } from 'zod';
@@ -18,7 +17,6 @@ const emailSchema = z.object({
 
 export const PasswordReset = () => {
   const [emailSent, setEmailSent] = useState<boolean>(false);
-  const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof emailSchema>>({
     resolver: zodResolver(emailSchema),
@@ -45,7 +43,7 @@ export const PasswordReset = () => {
       <section className="flex-grow overflow-y-auto">
         <KakaoAdfit320x50 />
         <KakaoAdfit320x100 />
-        <div className="relative flex flex-col items-center justify-center w-full h-full gap-3 bg-white">
+        <div className="relative flex flex-col items-center justify-center w-full h-[30rem] gap-3 bg-white">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
               <FormField
@@ -57,12 +55,7 @@ export const PasswordReset = () => {
                     <FormControl>
                       <div className="relative">
                         <MdAlternateEmail className="absolute text-xl left-3 top-4 text-purple" />
-                        <Input
-                          type="text"
-                          placeholder="email@example.com"
-                          {...field}
-                          className="pl-10 w-full h-[6vh] border border-purple-500 rounded-[1vh] mb-[1vh] box-border text-[2vh]"
-                        />
+                        <Input type="text" placeholder="email@example.com" {...field} className="pl-10" />
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -75,9 +68,6 @@ export const PasswordReset = () => {
             </form>
           </Form>
           {emailSent && <p>비밀번호 재설정 이메일이 전송되었습니다.</p>}
-          <Button variant="link" size="sm" onClick={() => navigate(-1)}>
-            취소
-          </Button>
         </div>
       </section>
     </main>

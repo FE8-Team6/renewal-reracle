@@ -226,11 +226,18 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
 CarouselNext.displayName = 'CarouselNext';
 
 const CarouselPagination = () => {
-  const { selectedIndex, slideCount } = useCarousel();
+  const { api, selectedIndex, slideCount } = useCarousel();
 
   return (
-    <div className="absolute bottom-0 p-2 transform -translate-x-1/2 bg-white rounded-full shadow-md left-1/2">
-      {selectedIndex + 1} / {slideCount}
+    <div className="absolute bottom-4 left-0 right-0 flex justify-center items-center space-x-2">
+      {Array.from({ length: slideCount }).map((_, index) => (
+        <button
+          key={index}
+          className={`w-2.5 h-2.5 mx-1 rounded-full transition-all ${index === selectedIndex ? 'bg-purple scale-125' : 'bg-gray-400'}`}
+          onClick={() => api?.scrollTo(index)}
+          aria-label={`Go to slide ${index + 1}`}
+        />
+      ))}
     </div>
   );
 };
