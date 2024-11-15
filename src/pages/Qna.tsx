@@ -32,6 +32,7 @@ import { GoPencil } from 'react-icons/go';
 import { Input } from '@/components/ui/input';
 import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50';
 import KakaoAdfit320x100 from '@/components/KakaoAdfit320x100';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 type Question = {
   id: string;
@@ -42,6 +43,7 @@ type Question = {
   createdAt: Timestamp;
   likes: number;
   commentCount: number;
+  postCategory: string;
 }[];
 
 export const Qna = () => {
@@ -59,6 +61,7 @@ export const Qna = () => {
   const [content, setContent] = useState<string>('');
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
   const [containerHeight, setContainerHeight] = useState<string>('');
+  const [postCategory, setPostCategory] = useState<string>('분리수거 방법');
 
   useEffect(() => {
     const handleResize = () => {
@@ -120,6 +123,7 @@ export const Qna = () => {
           createdAt: questionData.createdAt,
           likes: questionData.likes || 0,
           commentCount: answersSnapshot.size,
+          postCategory: questionData.category,
         });
       }
       setQuestions(questionList);
@@ -155,6 +159,7 @@ export const Qna = () => {
         createdAt: serverTimestamp(),
         likes: 0,
         commentCount: 0,
+        postCategory,
       });
 
       const updatedQuestions = await getDocs(query(collection(db, 'questions'), orderBy('createdAt', 'desc')));
@@ -171,12 +176,14 @@ export const Qna = () => {
           createdAt: questionData.createdAt,
           likes: questionData.likes || 0,
           commentCount: answersSnapshot.size,
+          postCategory: questionData.category,
         });
       }
       setQuestions(questionList);
       setIsModalOpen(false);
       setTitle('');
       setContent('');
+      setPostCategory('분리수거 방법');
     } catch (error) {
       console.error('질문 추가 실패:', error);
     }
@@ -297,18 +304,28 @@ export const Qna = () => {
               <DialogTitle>질문</DialogTitle>
               <DialogDescription>질문을 추가하세요.</DialogDescription>
             </DialogHeader>
+            <Select onValueChange={(value) => setPostCategory(value)} defaultValue="분리수거 방법">
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="카테고리 선택" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="분리수거 방법">분리수거 방법</SelectItem>
+                <SelectItem value="기타">기타</SelectItem>
+                <SelectItem value="개발 문의">개발 문의</SelectItem>
+              </SelectContent>
+            </Select>
             <Input
               type="text"
               value={title}
               onChange={(event) => setTitle(event.target.value)}
               placeholder="제목"
-              className="w-full p-2 mb-2 border"
+              className="w-full h-full pl-3 border border-gray-200 rounded-3 "
             />
             <textarea
               value={content}
               onChange={(event) => setContent(event.target.value)}
               placeholder="내용"
-              className="w-full h-[30vh] p-2 mb-2 border"
+              className="w-full h-[20vh] p-2 mb-2 border "
             />
             <DialogFooter>
               <DialogClose asChild>
