@@ -15,7 +15,7 @@ type Category = {
 
 const Category = () => {
   const [categories, setCategories] = useState<Category[]>([]);
-  const [containerWidth, setContainerWidth] = useState('w-[23rem]');
+  const [containerWidth, setContainerWidth] = useState<string>('w-[23rem]');
 
   const chunkedCategories = chunkArray(categories, 9);
 
