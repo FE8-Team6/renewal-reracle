@@ -20,7 +20,6 @@ type QuestionFormProps = {
   setTitle: (title: string) => void;
   content: string;
   setContent: (content: string) => void;
-  postCategory: string;
   setPostCategory: (category: string) => void;
 };
 
@@ -32,7 +31,6 @@ const QuestionForm = ({
   setTitle,
   content,
   setContent,
-  //   postCategory,
   setPostCategory,
 }: QuestionFormProps) => {
   const handleOpenModal = () => {
