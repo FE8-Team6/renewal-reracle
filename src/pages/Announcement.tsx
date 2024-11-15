@@ -44,8 +44,8 @@ export const Announcement = () => {
   });
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [editId, setEditId] = useState<string>('');
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [containerHeight, setContainerHeight] = useState('');
+  const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
+  const [containerHeight, setContainerHeight] = useState<string>('');
 
   useEffect(() => {
     const handleResize = () => {
@@ -145,9 +145,9 @@ export const Announcement = () => {
   };
 
   return (
-    <>
+    <main>
       <KakaoAdfit320x50 />
-      <div
+      <section
         className={`${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} ${containerHeight}  relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4`}>
         <KakaoAdfit320x100 />
         {isAdmin && (
@@ -206,22 +206,20 @@ export const Announcement = () => {
             className=" bg-yellowLight w-full h-[6rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black ">
             <NavLink to={`/announcement/${announcement.id}`} className="flex flex-col flex-grow">
               <div className="flex flex-col">
-                <span className="text-base font-semibold text-gray-900 truncate">
-                  {truncateTitle(announcement.title)}
-                </span>
-                <span className="text-sm text-gray-500">{announcement.author}</span>
+                <h2 className="text-base font-semibold text-gray-900 truncate">{truncateTitle(announcement.title)}</h2>
+                <p className="text-sm text-gray-500">{announcement.author}</p>
               </div>
               <div className="flex items-center justify-between mt-1">
                 <div className="flex gap-2">
                   {announcement.createdAt && (
-                    <p className="text-sm">{formatDateToKoreanTime(announcement.createdAt)}</p>
+                    <time className="text-sm">{formatDateToKoreanTime(announcement.createdAt)}</time>
                   )}
                 </div>
               </div>
             </NavLink>
           </div>
         ))}
-      </div>
-    </>
+      </section>
+    </main>
   );
 };
