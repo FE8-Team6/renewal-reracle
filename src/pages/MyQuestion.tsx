@@ -88,18 +88,18 @@ export const MyQuestion = () => {
 
   return (
     <>
-      <div className="w-full h-[2rem] bg-purple text-center flex items-center justify-center text-white text-[2vh]">
+      <h2 className="w-full h-[2rem] bg-purple text-center flex items-center justify-center text-white text-xl">
         마이 R지식in
-      </div>
+      </h2>
       <KakaoAdfit320x50 />
-      <div className="overflow-y-auto my-[1.5vh] mx-auto w-[22rem] h-[67vh] relative">
+      <main className="overflow-y-auto my-[1.5vh] mx-auto w-[22rem] h-[67vh] relative">
         {!questions.length ? (
-          <div className="text-center">
+          <section className="text-center">
             <span>작성한 질문이 없습니다.</span>
-          </div>
+          </section>
         ) : (
           questions.map((questionData) => (
-            <div
+            <section
               key={questionData.id}
               className="bg-greenLight my-[1.5vh] mx-auto h-[6rem] flex items-center justify-between px-[1vh] rounded-[10px] text-white text-[2vh]">
               <Link
@@ -135,10 +135,10 @@ export const MyQuestion = () => {
                 onClick={() => handleDeleteQuestion(questionData.id)}>
                 <X width={15} height={15} />
               </Button>
-            </div>
+            </section>
           ))
         )}
-      </div>
+      </main>
     </>
   );
 };
