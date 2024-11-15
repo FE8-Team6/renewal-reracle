@@ -55,12 +55,7 @@ export const PasswordReset = () => {
                     <FormControl>
                       <div className="relative">
                         <MdAlternateEmail className="absolute text-xl left-3 top-4 text-purple" />
-                        <Input
-                          type="text"
-                          placeholder="email@example.com"
-                          {...field}
-                          className="pl-10 w-full h-[6vh] border border-purple-500 rounded-[1vh] mb-[1vh] box-border text-[2vh]"
-                        />
+                        <Input type="text" placeholder="email@example.com" {...field} className="pl-10" />
                       </div>
                     </FormControl>
                     <FormMessage />
