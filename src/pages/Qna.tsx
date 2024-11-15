@@ -50,7 +50,7 @@ export const Qna = () => {
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
   const [containerHeight, setContainerHeight] = useState<string>('');
   const [selectedPostCategory, setSelectedPostCategory] = useState<string>('전체');
-  const postCategories = ['전체', '분리수거 방법', '기타', '개발 문의'];
+  const postCategories = ['전체', '분리수거 방법', '기타', '문의'];
 
   const filteredQuestions =
     selectedPostCategory === '전체'
