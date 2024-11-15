@@ -19,6 +19,7 @@ import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50';
 import KakaoAdfit320x100 from '@/components/KakaoAdfit320x100';
 import QuestionForm from '@/components/Question/QuestionForm';
 import QuestionItem from '@/components/Question/QuestionItem';
+import PostCategoryButton from '@/components/PostCategoryButton';
 
 type Question = {
   id: string;
@@ -48,6 +49,13 @@ export const Qna = () => {
   const [postCategory, setPostCategory] = useState<string>('분리수거 방법');
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
   const [containerHeight, setContainerHeight] = useState<string>('');
+  const [selectedPostCategory, setSelectedPostCategory] = useState<string>('전체');
+  const postCategories = ['전체', '분리수거 방법', '기타', '개발 문의'];
+
+  const filteredQuestions =
+    selectedPostCategory === '전체'
+      ? questions
+      : questions.filter((question) => question.postCategory === selectedPostCategory);
 
   useEffect(() => {
     const handleResize = () => {
@@ -94,8 +102,17 @@ export const Qna = () => {
 
   useEffect(() => {
     const fetchQuestions = async () => {
-      const queryOrderBy = query(collection(db, 'questions'), orderBy('createdAt', 'desc'));
-      const querySnapshot = await getDocs(queryOrderBy);
+      let questionsQuery;
+      if (selectedPostCategory === '전체') {
+        questionsQuery = query(collection(db, 'questions'), orderBy('createdAt', 'desc'));
+      } else {
+        questionsQuery = query(
+          collection(db, 'questions'),
+          where('postCategory', '==', selectedPostCategory),
+          orderBy('createdAt', 'desc'),
+        );
+      }
+      const querySnapshot = await getDocs(questionsQuery);
       const questionList: Question = [];
       for (const doc of querySnapshot.docs) {
         const questionData = doc.data();
@@ -109,7 +126,7 @@ export const Qna = () => {
           createdAt: questionData.createdAt,
           likes: questionData.likes || 0,
           commentCount: answersSnapshot.size,
-          postCategory: questionData.category,
+          postCategory: questionData.postCategory,
         });
       }
       setQuestions(questionList);
@@ -129,7 +146,7 @@ export const Qna = () => {
 
     fetchQuestions();
     fetchLiked();
-  }, [currentUser.uid]);
+  }, [currentUser.uid, selectedPostCategory]);
 
   const handleAddQuestion = async () => {
     if (title.trim() === '' || content.trim() === '') {
@@ -162,7 +179,7 @@ export const Qna = () => {
           createdAt: questionData.createdAt,
           likes: questionData.likes || 0,
           commentCount: answersSnapshot.size,
-          postCategory: questionData.category,
+          postCategory: questionData.postCategory,
         });
       }
       setQuestions(questionList);
@@ -216,10 +233,20 @@ export const Qna = () => {
   return (
     <>
       <KakaoAdfit320x50 />
+      <div className="flex justify-center mt-1 overflow-x-auto whitespace-nowrap">
+        {postCategories.map((postCategory) => (
+          <PostCategoryButton
+            key={postCategory}
+            postCategory={postCategory}
+            isActive={selectedPostCategory === postCategory}
+            onClick={() => setSelectedPostCategory(postCategory)}
+          />
+        ))}
+      </div>
       <main
         className={`mx-auto my-[1.5vh] relative overflow-y-auto overflow-x-hidden rounded-4 ${containerHeight} ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'}`}>
         <KakaoAdfit320x100 />
-        {questions.map((question) => (
+        {filteredQuestions.map((question) => (
           <QuestionItem
             key={question.id}
             question={question}
