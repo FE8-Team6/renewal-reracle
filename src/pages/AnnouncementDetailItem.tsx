@@ -17,6 +17,7 @@ import { formatDateToKoreanTime } from '@/lib/utils/dateKoreanTime';
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
 import { MoreHorizontal } from 'lucide-react';
 import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50.tsx';
+import { formatContent } from '@/lib/constant/formatContent';
 
 export const AnnouncementDetailItem = () => {
   const { announcementId } = useParams();
@@ -135,7 +136,7 @@ export const AnnouncementDetailItem = () => {
             <p className="text-sm">{formatDateToKoreanTime(announcement.createdAt)}</p>
             <div className="mt-2">
               <hr />
-              <p className="mt-2 ">{announcement.details}</p>
+              <p className="mt-2 ">{formatContent(announcement.details)}</p>
             </div>
           </>
         ) : (
