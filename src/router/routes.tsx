@@ -1,8 +1,8 @@
+import { DetailLayout } from '@/components/layout/DetailLayout';
 import { MainLayout } from '@/components/layout/MainLayout';
 import Nav from '@/components/Nav/Nav';
 import CategoryDetailItems from '@/components/WasteCategory/CategoryDetailItems';
 import CategoryItems from '@/components/WasteCategory/CategoryItems';
-import BackHeader from '@/lib/common/BackHeader';
 import {
   Home,
   Comments,
@@ -20,7 +20,6 @@ import {
 
 export const routes = [
   {
-    path: '/',
     element: <MainLayout />,
     children: [
       { path: '/', element: <Home /> },
@@ -32,20 +31,28 @@ export const routes = [
     ],
   },
   {
-    path: '/login',
+    element: <DetailLayout />,
+    children: [
+      { path: '/pwreset', element: <PasswordReset /> },
+      { path: 'category/:categoryId/item/:itemId', element: <CategoryDetailItems /> },
+      { path: 'announcement/:announcementId', element: <AnnouncementDetailItem /> },
+      { path: 'answer/:questionId', element: <Answer /> },
+    ],
+  },
+  {
+    path: 'comments/:questionId',
     element: (
       <>
-        <Login />
+        <Comments />
         <Nav />
       </>
     ),
   },
   {
-    path: '/pwreset',
+    path: '/login',
     element: (
       <>
-        <BackHeader />
-        <PasswordReset />
+        <Login />
         <Nav />
       </>
     ),
@@ -62,44 +69,5 @@ export const routes = [
   {
     path: '*',
     element: <NotFound />,
-  },
-  {
-    path: 'category/:categoryId/item/:itemId',
-    element: (
-      <>
-        <BackHeader />
-        <CategoryDetailItems />
-        <Nav />
-      </>
-    ),
-  },
-  {
-    path: 'announcement/:announcementId',
-    element: (
-      <>
-        <BackHeader />
-        <AnnouncementDetailItem />
-        <Nav />
-      </>
-    ),
-  },
-  {
-    path: 'answer/:questionId',
-    element: (
-      <>
-        <BackHeader />
-        <Answer />
-        <Nav />
-      </>
-    ),
-  },
-  {
-    path: 'comments/:questionId',
-    element: (
-      <>
-        <Comments />
-        <Nav />
-      </>
-    ),
   },
 ];
