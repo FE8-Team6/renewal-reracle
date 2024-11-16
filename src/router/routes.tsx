@@ -1,6 +1,6 @@
 import { DetailLayout } from '@/components/layout/DetailLayout';
 import { MainLayout } from '@/components/layout/MainLayout';
-import Nav from '@/components/Nav/Nav';
+import { NavLayout } from '@/components/layout/NavLayout';
 import CategoryDetailItems from '@/components/WasteCategory/CategoryDetailItems';
 import CategoryItems from '@/components/WasteCategory/CategoryItems';
 import {
@@ -40,31 +40,21 @@ export const routes = [
     ],
   },
   {
-    path: 'comments/:questionId',
-    element: (
-      <>
-        <Comments />
-        <Nav />
-      </>
-    ),
-  },
-  {
-    path: '/login',
-    element: (
-      <>
-        <Login />
-        <Nav />
-      </>
-    ),
-  },
-  {
-    path: '/signup',
-    element: (
-      <>
-        <SignUp />
-        <Nav />
-      </>
-    ),
+    element: <NavLayout />,
+    children: [
+      {
+        path: 'comments/:questionId',
+        element: <Comments />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
+      },
+      {
+        path: '/signup',
+        element: <SignUp />,
+      },
+    ],
   },
   {
     path: '*',
