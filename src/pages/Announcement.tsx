@@ -13,11 +13,13 @@ import {
   DialogClose,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { GoPencil } from 'react-icons/go';
 import { formatDateToKoreanTime } from '@/lib/utils/dateKoreanTime';
 import { NavLink } from 'react-router-dom';
 import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50';
 import KakaoAdfit320x100 from '@/components/KakaoAdfit320x100';
+import AnnouncementCategoryButton from '@/lib/styles/CategoryButton/AnnouncementCategoryButton';
 
 type Announcement = {
   id: string;
@@ -25,6 +27,7 @@ type Announcement = {
   details: string;
   createdAt: Date;
   author: string;
+  category: string;
 };
 
 export const Announcement = () => {
@@ -34,6 +37,7 @@ export const Announcement = () => {
     title: '',
     details: '',
     author: '',
+    category: '',
   });
   const [currentUser, setCurrentUser] = useState<{
     displayName: string;
@@ -46,6 +50,14 @@ export const Announcement = () => {
   const [editId, setEditId] = useState<string>('');
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
   const [containerHeight, setContainerHeight] = useState<string>('');
+  const [selectedAnnouncementCategory, setselectedAnnouncementCategory] = useState<string>('전체');
+
+  const announcementCategories = ['전체', '개발', '업데이트', '기타'];
+
+  const filteredAnnouncements =
+    selectedAnnouncementCategory === '전체'
+      ? announcements
+      : announcements.filter((announcement) => announcement.category === selectedAnnouncementCategory);
 
   useEffect(() => {
     const handleResize = () => {
@@ -61,15 +73,17 @@ export const Announcement = () => {
   useEffect(() => {
     const updateHeight = () => {
       if (window.innerHeight >= 1300) {
-        setContainerHeight('h-[51vh]');
+        setContainerHeight('h-[49vh]');
+      } else if (window.innerHeight >= 1250) {
+        setContainerHeight('h-[52vh]');
       } else if (window.innerHeight >= 1180) {
-        setContainerHeight('h-[55vh]');
+        setContainerHeight('h-[56vh]');
       } else if (window.innerHeight >= 1000) {
-        setContainerHeight('h-[68vh]');
+        setContainerHeight('h-[66vh]');
       } else if (window.innerHeight >= 940) {
         setContainerHeight('h-[55vh]');
       } else {
-        setContainerHeight('h-[calc(100vh-14rem)]');
+        setContainerHeight('h-[calc(100vh-16rem)]');
       }
     };
 
@@ -108,13 +122,18 @@ export const Announcement = () => {
       details: doc.data().details,
       createdAt: doc.data().createdAt.toDate(),
       author: doc.data().author,
+      category: doc.data().category,
     }));
     setAnnouncements(announcementList);
   };
 
   const handleAddAnnouncement = async () => {
-    if (newAnnouncement.title.trim() === '' || newAnnouncement.details.trim() === '') {
-      alert('제목과 내용을 입력해주세요.');
+    if (
+      newAnnouncement.title.trim() === '' ||
+      newAnnouncement.details.trim() === '' ||
+      newAnnouncement.category === ''
+    ) {
+      alert('제목, 내용 및 카테고리를 입력해주세요.');
       return;
     }
     try {
@@ -132,7 +151,7 @@ export const Announcement = () => {
           author: currentUser.displayName,
         });
       }
-      setNewAnnouncement({ title: '', details: '', author: '' });
+      setNewAnnouncement({ title: '', details: '', author: '', category: '' });
       fetchAnnouncements();
       setIsModalOpen(false);
     } catch (error) {
@@ -147,6 +166,16 @@ export const Announcement = () => {
   return (
     <main>
       <KakaoAdfit320x50 />
+      <div className="flex justify-center mt-1 overflow-x-auto whitespace-nowrap">
+        {announcementCategories.map((announcementCategory) => (
+          <AnnouncementCategoryButton
+            key={announcementCategory}
+            postCategory={announcementCategory}
+            isActive={selectedAnnouncementCategory === announcementCategory}
+            onClick={() => setselectedAnnouncementCategory(announcementCategory)}
+          />
+        ))}
+      </div>
       <section
         className={`${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} ${containerHeight}  relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4`}>
         <KakaoAdfit320x100 />
@@ -163,6 +192,23 @@ export const Announcement = () => {
                   <DialogTitle>공지사항</DialogTitle>
                   <DialogDescription>새로운 공지사항을 작성하세요.</DialogDescription>
                 </DialogHeader>
+                <Select
+                  onValueChange={(value) =>
+                    setNewAnnouncement({
+                      ...newAnnouncement,
+                      category: value,
+                    })
+                  }
+                  defaultValue="카테고리 선택">
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="카테고리 선택" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="업데이트">업데이트</SelectItem>
+                    <SelectItem value="개발">개발</SelectItem>
+                    <SelectItem value="기타">기타</SelectItem>
+                  </SelectContent>
+                </Select>
                 <Input
                   type="text"
                   placeholder="제목"
@@ -200,7 +246,7 @@ export const Announcement = () => {
             </Dialog>
           </div>
         )}
-        {announcements.map((announcement) => (
+        {filteredAnnouncements.map((announcement) => (
           <div
             key={announcement.id}
             className=" bg-yellowLight w-full h-[6rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black ">

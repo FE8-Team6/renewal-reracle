@@ -19,7 +19,7 @@ import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50';
 import KakaoAdfit320x100 from '@/components/KakaoAdfit320x100';
 import QuestionForm from '@/components/Question/QuestionForm';
 import QuestionItem from '@/components/Question/QuestionItem';
-import PostCategoryButton from '@/components/PostCategoryButton';
+import PostCategoryButton from '@/lib/styles/CategoryButton/PostCategoryButton';
 
 type Question = {
   id: string;
