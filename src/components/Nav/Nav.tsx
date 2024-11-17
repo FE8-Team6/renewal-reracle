@@ -11,7 +11,7 @@ const Nav = () => {
   };
 
   return (
-    <nav className="w-full max-w-[440px] fixed bottom-0 left-1/2 flex justify-around bg-white -translate-x-1/2  px-1 py-2">
+    <nav className="w-full max-w-[500px] fixed bottom-0 left-1/2 flex justify-around bg-white -translate-x-1/2  px-1 py-2">
       {/* <div className="absolute bottom-[10vh] w-full">
         <NotificationBanner />
       </div> */}
