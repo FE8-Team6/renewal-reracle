@@ -116,8 +116,8 @@ export const SignUp = () => {
   };
 
   return (
-    <main className="flex flex-col h-[calc(100vh-5rem)]">
-      <section className="flex-grow overflow-y-auto">
+    <main className="flex flex-col min-h-[calc(100vh-8rem)]">
+      <section>
         <KakaoAdfit320x50 />
         <div className="w-full h-full bg-white relative flex flex-col justify-center items-center gap-3 ">
           <Form {...form}>

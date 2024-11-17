@@ -41,8 +41,8 @@ const CategoryDetailItems = () => {
   }, [categoryId, itemId]);
 
   return (
-    <article className="flex flex-col h-full">
-      <div className="flex-grow pb-32 overflow-y-auto">
+    <article className="flex flex-col min-h-[calc(100vh-8rem)] pb-[5rem]">
+      <div>
         <KakaoAdfit320x50 />
         <div className="flex flex-col items-center px-4">
           <header className="w-full mt-4">

@@ -52,8 +52,8 @@ const Category = () => {
   }, []);
 
   return (
-    <main className="flex flex-col h-[calc(100vh-8rem)]">
-      <section className="flex-grow ">
+    <main className="flex flex-col min-h-[calc(100vh-8rem)] pb-[5rem] ">
+      <section>
         <KakaoAdfit320x50 />
         <div className="flex justify-center w-full mx-auto mt-2 mb-6">
           <SearchBar className="mx-auto" />

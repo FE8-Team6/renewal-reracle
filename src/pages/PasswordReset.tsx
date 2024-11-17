@@ -39,8 +39,8 @@ export const PasswordReset = () => {
   };
 
   return (
-    <main className="flex flex-col h-[calc(100vh-8rem)]">
-      <section className="flex-grow overflow-y-auto">
+    <main className="flex flex-col min-h-[calc(100vh-8rem)]">
+      <section>
         <KakaoAdfit320x50 />
         <KakaoAdfit320x100 />
         <div className="relative flex flex-col items-center justify-center w-full h-[30rem] gap-3 bg-white">

@@ -226,7 +226,7 @@ export const Announcement = () => {
           <div
             key={announcement.id}
             className=" bg-yellowLight w-full h-[6rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black ">
-            <NavLink to={`/announcement/${announcement.id}`} className="flex flex-col flex-grow">
+            <NavLink to={`/announcement/${announcement.id}`} className="flex flex-col">
               <div className="flex flex-col">
                 <h2 className="text-base font-semibold text-gray-900 truncate">{truncateTitle(announcement.title)}</h2>
                 <p className="text-sm text-gray-500">{announcement.author}</p>

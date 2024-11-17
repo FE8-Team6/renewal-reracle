@@ -56,9 +56,9 @@ const CategoryItems = () => {
   }, [categoryId]);
 
   return (
-    <main className="flex flex-col h-[calc(100vh-8rem)]">
+    <main className="flex flex-col min-h-[calc(100vh-8rem)] pb-[5rem] ">
       <KakaoAdfit320x100 />
-      <section className="flex-grow overflow-y-auto">
+      <section>
         <KakaoAdfit320x50 />
         <h2 className="mt-4 ml-5 text-xl font-bold text-purple">재활용품 세부 품목</h2>
         <Carousel className="h-[30rem] mt-4 ">

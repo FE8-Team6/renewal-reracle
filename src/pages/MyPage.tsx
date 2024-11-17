@@ -59,11 +59,11 @@ export const MyPage = () => {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-9rem)]">
+    <main className="flex flex-col min-h-[calc(100vh-8rem)] pb-[5rem]">
       <KakaoAdfit320x50 />
-      <main className="flex-grow w-full h-full pb-4 mx-auto mt-2 overflow-y-auto">
+      <section className="flex-grow w-full h-full pb-4 mx-auto mt-2 overflow-y-auto">
         <div className="flex flex-col items-center space-y-4">
-          <section className={`${cardWidth} mb-4`}>
+          <div className={`${cardWidth} mb-4`}>
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg text-purple">프로필</CardTitle>
@@ -88,7 +88,7 @@ export const MyPage = () => {
                 </div>
               </CardContent>
             </Card>
-          </section>
+          </div>
 
           <section className={`${cardWidth} mb-4`}>
             <Card>
@@ -143,7 +143,7 @@ export const MyPage = () => {
             </Button>
           </div>
         </div>
-      </main>
-    </div>
+      </section>
+    </main>
   );
 };
