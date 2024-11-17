@@ -15,7 +15,7 @@ const Header = () => {
     }
   };
   return (
-    <header className="w-full h-[3rem] bg-purpleLight  flex items-center">
+    <header className="w-full max-w-[500px] h-[3rem] bg-purpleLight flex items-center">
       <img
         src="/icon/REracle_logo.svg"
         alt="reracle 아이콘"
