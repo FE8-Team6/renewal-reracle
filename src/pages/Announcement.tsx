@@ -142,7 +142,7 @@ export const Announcement = () => {
   return (
     <main>
       <KakaoAdfit320x50 />
-      <div className="flex justify-center mt-1 overflow-x-auto whitespace-nowrap">
+      <div className="flex justify-center mt-2">
         {announcementCategories.map((announcementCategory) => (
           <AnnouncementCategoryButton
             key={announcementCategory}

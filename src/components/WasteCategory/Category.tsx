@@ -53,12 +53,12 @@ const Category = () => {
 
   return (
     <main className="flex flex-col h-[calc(100vh-8rem)]">
-      <section className="flex-grow overflow-y-auto">
+      <section className="flex-grow ">
         <KakaoAdfit320x50 />
         <div className="flex justify-center w-full mx-auto mt-2 mb-6">
           <SearchBar className="mx-auto" />
         </div>
-        <h2 className="mt-4 ml-5 text-xl font-bold text-purple">재활용품 분류</h2>
+        <h2 className="mt-4 ml-10 text-xl font-bold text-purple">재활용품 분류</h2>
         <Carousel className="h-[30rem] mt-4">
           <CarouselContent>
             {chunkedCategories.map((chunk, index) => (
