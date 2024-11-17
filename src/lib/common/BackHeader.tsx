@@ -9,7 +9,7 @@ const BackHeader = ({ comment }: BackHeaderProps) => {
   const navigate = useNavigate();
 
   return (
-    <header className="flex items-center gap-2 p-3 bg-purpleLight">
+    <header className="fixed top-0 w-full max-w-[500px] z-50 p-3 h-[3rem] bg-purpleLight flex items-center">
       <button onClick={() => navigate(-1)}>
         <IoChevronBack className="w-5 h-5" />
       </button>

@@ -48,7 +48,6 @@ export const Answer = () => {
   const [editContent, setEditContent] = useState<string>(initialContent);
   const [question, setQuestion] = useState<string>(initialQuestion);
   const [content, setContent] = useState<string>(initialContent);
-  const [containerHeight, setContainerHeight] = useState('h-[54vh]');
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
@@ -60,25 +59,6 @@ export const Answer = () => {
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
-    const updateHeight = () => {
-      if (window.innerHeight >= 1180) {
-        setContainerHeight('h-[48vh]');
-      } else if (window.innerHeight >= 1000) {
-        setContainerHeight('h-[62vh]');
-      } else if (window.innerHeight >= 940) {
-        setContainerHeight('h-[55vh]');
-      } else {
-        setContainerHeight('h-[calc(100vh-18rem)]');
-      }
-    };
-
-    updateHeight();
-    window.addEventListener('resize', updateHeight);
-
-    return () => window.removeEventListener('resize', updateHeight);
   }, []);
 
   const navigate = useNavigate();
@@ -208,7 +188,7 @@ export const Answer = () => {
             </div>
           </div>
         </div>
-        <div className={`${containerHeight} space-y-2 overflow-y-auto`}>
+        <div className={`min-h-[calc(100vh-16rem)] space-y-2 pb-[6rem]`}>
           <KakaoAdfit320x50 />
           {submittedAnswers.map(({ id, author, content, createdAt }) => (
             <div

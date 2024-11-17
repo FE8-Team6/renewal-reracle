@@ -48,7 +48,6 @@ export const Qna = () => {
   const [content, setContent] = useState<string>('');
   const [postCategory, setPostCategory] = useState<string>('분리수거 방법');
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
-  const [containerHeight, setContainerHeight] = useState<string>('');
   const [selectedPostCategory, setSelectedPostCategory] = useState<string>('전체');
   const postCategories = ['전체', '분리수거 방법', '기타', '문의'];
 
@@ -66,29 +65,6 @@ export const Qna = () => {
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
-    const updateHeight = () => {
-      if (window.innerHeight >= 1300) {
-        setContainerHeight('h-[49vh]');
-      } else if (window.innerHeight >= 1250) {
-        setContainerHeight('h-[52vh]');
-      } else if (window.innerHeight >= 1180) {
-        setContainerHeight('h-[56vh]');
-      } else if (window.innerHeight >= 1000) {
-        setContainerHeight('h-[66vh]');
-      } else if (window.innerHeight >= 940) {
-        setContainerHeight('h-[55vh]');
-      } else {
-        setContainerHeight('h-[calc(100vh-16rem)]');
-      }
-    };
-
-    updateHeight();
-    window.addEventListener('resize', updateHeight);
-
-    return () => window.removeEventListener('resize', updateHeight);
   }, []);
 
   /**
@@ -235,7 +211,7 @@ export const Qna = () => {
   return (
     <main>
       <KakaoAdfit320x50 />
-      <div className="flex justify-center mt-1 overflow-x-auto whitespace-nowrap">
+      <div className="flex justify-center mt-1 whitespace-nowrap">
         {postCategories.map((postCategory) => (
           <PostCategoryButton
             key={postCategory}
@@ -247,7 +223,7 @@ export const Qna = () => {
       </div>
       <section>
         <div
-          className={`mx-auto my-[1.5vh] relative overflow-y-auto overflow-x-hidden rounded-4 ${containerHeight} ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'}`}>
+          className={`min-h-[calc(100vh-16rem)] mx-auto my-[1.5vh] relative rounded-4 ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} pb-[5rem]`}>
           <KakaoAdfit320x100 />
           {filteredQuestions.map((question) => (
             <QuestionItem

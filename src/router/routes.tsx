@@ -37,6 +37,14 @@ export const routes = [
       { path: 'category/:categoryId/item/:itemId', element: <CategoryDetailItems /> },
       { path: 'announcement/:announcementId', element: <AnnouncementDetailItem /> },
       { path: 'answer/:questionId', element: <Answer /> },
+      {
+        path: '/signup',
+        element: <SignUp />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
+      },
     ],
   },
   {
@@ -45,14 +53,6 @@ export const routes = [
       {
         path: 'comments/:questionId',
         element: <Comments />,
-      },
-      {
-        path: '/login',
-        element: <Login />,
-      },
-      {
-        path: '/signup',
-        element: <SignUp />,
       },
     ],
   },
