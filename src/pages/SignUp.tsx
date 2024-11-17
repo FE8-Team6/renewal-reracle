@@ -116,10 +116,11 @@ export const SignUp = () => {
   };
 
   return (
-    <main className="flex flex-col min-h-[calc(100vh-8rem)]">
+    <main className="flex flex-col min-h-[calc(100vh-8rem)] pb-[5rem]">
       <section>
         <KakaoAdfit320x50 />
-        <div className="w-full h-full bg-white relative flex flex-col justify-center items-center gap-3 ">
+        <div className="w-full h-full bg-white relative flex flex-col justify-center items-center gap-3">
+          <img src="/images/loginPageImg.png" alt="로그인 페이지 이미지" className="w-[12rem] h-[12rem] " />
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2 w-full max-w-md px-4">
               <FormField

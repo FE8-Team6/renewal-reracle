@@ -45,7 +45,7 @@ export const Login = () => {
   };
 
   return (
-    <main className="flex flex-col h-[calc(100vh-5rem)]">
+    <main className="flex flex-col min-h-[calc(100vh-8rem)] pb-[5rem]">
       <section className="flex-grow overflow-y-auto">
         <KakaoAdfit320x50 />
         <div className="w-full h-full bg-white relative flex flex-col justify-center items-center gap-3 ">
