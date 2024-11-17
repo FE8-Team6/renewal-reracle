@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import '@shoelace-style/shoelace/dist/themes/light.css';
-// import Loading from "./pages/Loading";
 import { routes } from './router/routes';
 import { saveWasteCategories } from './lib/utils/firestoreService';
 import NotificationWebApi from './components/NotificationWebApi';
@@ -19,9 +18,6 @@ const App = () => {
         <RouterProvider router={router} />
         <NotificationWebApi />
       </div>
-      {/* <StyledAppContainer> */}
-      {/* {isLoading ? <Loading /> : <RouterProvider router={router} />} */}
-      {/* </StyledAppContainer> */}
     </>
   );
 };
