@@ -49,7 +49,6 @@ export const Announcement = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [editId, setEditId] = useState<string>('');
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
-  const [containerHeight, setContainerHeight] = useState<string>('');
   const [selectedAnnouncementCategory, setselectedAnnouncementCategory] = useState<string>('전체');
 
   const announcementCategories = ['전체', '개발', '업데이트', '기타'];
@@ -68,29 +67,6 @@ export const Announcement = () => {
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
-    const updateHeight = () => {
-      if (window.innerHeight >= 1300) {
-        setContainerHeight('h-[49vh]');
-      } else if (window.innerHeight >= 1250) {
-        setContainerHeight('h-[52vh]');
-      } else if (window.innerHeight >= 1180) {
-        setContainerHeight('h-[56vh]');
-      } else if (window.innerHeight >= 1000) {
-        setContainerHeight('h-[66vh]');
-      } else if (window.innerHeight >= 940) {
-        setContainerHeight('h-[55vh]');
-      } else {
-        setContainerHeight('h-[calc(100vh-16rem)]');
-      }
-    };
-
-    updateHeight();
-    window.addEventListener('resize', updateHeight);
-
-    return () => window.removeEventListener('resize', updateHeight);
   }, []);
 
   useEffect(() => {
@@ -177,7 +153,7 @@ export const Announcement = () => {
         ))}
       </div>
       <section
-        className={`${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} ${containerHeight}  relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4`}>
+        className={`${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} h-full relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4 pb-[5rem]`}>
         <KakaoAdfit320x100 />
         {isAdmin && (
           <div className="fixed bottom-[16vh] left-[50%] transform -translate-x-1/2">

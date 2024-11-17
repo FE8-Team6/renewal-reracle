@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import { IoHomeOutline } from 'react-icons/io5';
 import { LuClipboardEdit } from 'react-icons/lu';
 import { HiOutlineQuestionMarkCircle } from 'react-icons/hi2';
-// import NotificationBanner from '../NotificationBanner';
 
 const Nav = () => {
   const navigation = useNavigate();
@@ -12,7 +11,7 @@ const Nav = () => {
   };
 
   return (
-    <nav className="fixed bottom-0 w-full">
+    <nav className="w-full max-w-[440px] fixed bottom-0 left-1/2 flex justify-around bg-white -translate-x-1/2  px-1 py-2">
       {/* <div className="absolute bottom-[10vh] w-full">
         <NotificationBanner />
       </div> */}
