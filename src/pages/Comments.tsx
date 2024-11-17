@@ -132,7 +132,7 @@ export const Comments = () => {
       <main className="overflow-y-auto">
         <KakaoAdfit320x50 />
 
-        <div className={`space-y-2 mt-4 min-h-[calc(100vh-16rem)] pb-[5rem] `}>
+        <div className={`space-y-2 mt-4 min-h-[calc(100vh-12rem)] pb-[5rem] `}>
           {submittedAnswers
             .slice()
             .sort(
