@@ -193,7 +193,8 @@ export const Answer = () => {
           {submittedAnswers.map(({ id, author, content, createdAt }) => (
             <div
               key={id}
-              className={`relative flex flex-col ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} mx-auto p-2 text-lg bg-purpleLight rounded-4`}>
+              className={`relative flex flex-col ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} mx-auto p-2 text-lg bg-purpleLight rounded-4`}
+            >
               <p className="text-sm">{author}</p>
               <p className="text-lg text-black">{formatContent(content)}</p>
               {createdAt && <p className="text-xs text-gray-500">{formatDateToKoreanTime(new Date(createdAt))}</p>}

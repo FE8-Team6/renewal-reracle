@@ -223,7 +223,8 @@ export const Qna = () => {
       </div>
       <section>
         <div
-          className={`min-h-[calc(100vh-16rem)] mx-auto my-[1.5vh] relative rounded-4 ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} pb-[5rem]`}>
+          className={`min-h-[calc(100vh-16rem)] mx-auto my-[1.5vh] relative rounded-4 ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} pb-[5rem]`}
+        >
           <KakaoAdfit320x100 />
           {filteredQuestions.map((question) => (
             <QuestionItem

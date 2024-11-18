@@ -32,7 +32,8 @@ const QuestionItem = ({ question, likedPosts, currentUser, handleLiked }: Questi
   return (
     <div
       key={question.id}
-      className=" bg-greenLight w-full h-[6rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black ">
+      className=" bg-greenLight w-full h-[6rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black "
+    >
       <NavLink
         to={`/answer/${question.id}`}
         state={{
@@ -48,7 +49,8 @@ const QuestionItem = ({ question, likedPosts, currentUser, handleLiked }: Questi
           authorUid: question.authorUid,
           postCategory: question.postCategory,
         }}
-        className="flex flex-col flex-grow">
+        className="flex flex-col flex-grow"
+      >
         <div className="flex flex-col">
           <h2 className="font-semibold text-gray-900 truncate">{truncateTitle(question.question)}</h2>
           <p className="text-sm text-gray-500">{question.author}</p>
@@ -68,7 +70,8 @@ const QuestionItem = ({ question, likedPosts, currentUser, handleLiked }: Questi
               onClick={(event) => {
                 event.preventDefault();
                 handleLiked(question.id);
-              }}>
+              }}
+            >
               <ThumbsUp className={`w-[1rem] h-[1rem] ${likedPosts.has(question.id) ? 'text-blue-500' : ''}`} />
             </Button>
             <span>{question.likes}</span>

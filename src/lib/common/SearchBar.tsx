@@ -135,7 +135,8 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(({ error, c
           <button
             onClick={handleClear}
             className={`absolute right-3 rounded-10 ${error ? 'bg-error-40' : ''}`}
-            type="button">
+            type="button"
+          >
             <X className={`h-5 w-5 ${error ? 'text-neutral-0' : ''} `} />
           </button>
         )}
@@ -146,7 +147,8 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(({ error, c
             <div
               key={result.id}
               className={`p-2 cursor-pointer hover:bg-gray-200 ${index === selectedIndex ? 'bg-gray-200' : ''}`}
-              onClick={() => handleResultClick(result.name, result.categoryId, result.id)}>
+              onClick={() => handleResultClick(result.name, result.categoryId, result.id)}
+            >
               {result.name}
             </div>
           ))}

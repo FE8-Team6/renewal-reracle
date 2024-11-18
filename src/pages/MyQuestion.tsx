@@ -101,7 +101,8 @@ export const MyQuestion = () => {
           questions.map((questionData) => (
             <section
               key={questionData.id}
-              className="bg-greenLight my-[1.5vh] mx-auto h-[6rem] flex items-center justify-between px-[1vh] rounded-[10px] text-white text-[2vh]">
+              className="bg-greenLight my-[1.5vh] mx-auto h-[6rem] flex items-center justify-between px-[1vh] rounded-[10px] text-white text-[2vh]"
+            >
               <Link
                 to={`/answer/${questionData.id}`}
                 state={{
@@ -116,7 +117,8 @@ export const MyQuestion = () => {
                   authorUid: questionData.authorUid,
                   likedPosts: Array.from(likedPosts),
                 }}
-                className="text-black overflow-hidden whitespace-nowrap text-ellipsis inline-block w-[35vh] no-underline">
+                className="text-black overflow-hidden whitespace-nowrap text-ellipsis inline-block w-[35vh] no-underline"
+              >
                 <p>{questionData.question}</p>
                 <span className="text-sm text-gray-500">{questionData.author}</span>
                 <div className="flex items-center justify-between mt-2">
@@ -132,7 +134,8 @@ export const MyQuestion = () => {
                 variant="ghost"
                 size="icon"
                 className="text-black hover:text-purple absolute top-1 -right-2"
-                onClick={() => handleDeleteQuestion(questionData.id)}>
+                onClick={() => handleDeleteQuestion(questionData.id)}
+              >
                 <X width={15} height={15} />
               </Button>
             </section>

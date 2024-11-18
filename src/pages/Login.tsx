@@ -86,7 +86,8 @@ export const Login = () => {
                         <button
                           type="button"
                           onClick={togglePasswordVisibility}
-                          className="absolute text-xl right-3 top-4 text-purple">
+                          className="absolute text-xl right-3 top-4 text-purple"
+                        >
                           {isShowPassword ? <MdVisibilityOff /> : <MdVisibility />}
                         </button>
                       </div>

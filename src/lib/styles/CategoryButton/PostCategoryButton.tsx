@@ -13,7 +13,8 @@ const PostCategoryButton: React.FC<CategoryButtonProps> = ({ postCategory, isAct
       variant={isActive ? 'default' : 'outline'}
       size="sm"
       className={`px-3 py-1 mr-2 mb-2 rounded-full text-sm ${isActive ? 'bg-purple text-white' : 'bg-gray-200 text-gray-700'}`}
-      onClick={onClick}>
+      onClick={onClick}
+    >
       {postCategory}
     </Button>
   );

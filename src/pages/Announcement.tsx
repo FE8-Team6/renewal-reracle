@@ -153,7 +153,8 @@ export const Announcement = () => {
         ))}
       </div>
       <section
-        className={`${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} min-h-[calc(100vh-16rem)] relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4 pb-[5rem]`}>
+        className={`${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} min-h-[calc(100vh-16rem)] relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4 pb-[5rem]`}
+      >
         <KakaoAdfit320x100 />
         {isAdmin && (
           <div className="fixed bottom-[16vh] left-[50%] transform -translate-x-1/2">
@@ -175,7 +176,8 @@ export const Announcement = () => {
                       category: value,
                     })
                   }
-                  defaultValue="카테고리 선택">
+                  defaultValue="카테고리 선택"
+                >
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="카테고리 선택" />
                   </SelectTrigger>
@@ -225,7 +227,8 @@ export const Announcement = () => {
         {filteredAnnouncements.map((announcement) => (
           <div
             key={announcement.id}
-            className=" bg-yellowLight w-full h-[6rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black ">
+            className=" bg-yellowLight w-full h-[6rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black "
+          >
             <NavLink to={`/announcement/${announcement.id}`} className="flex flex-col">
               <div className="flex flex-col">
                 <h2 className="text-base font-semibold text-gray-900 truncate">{truncateTitle(announcement.title)}</h2>
