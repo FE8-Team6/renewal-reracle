@@ -7,7 +7,7 @@ import { RecentSearchHistory } from '@/lib/types/search';
 import { deleteSearchHistory, getRecentSearchHistory } from '@/api/searchssApi/recentSearch';
 import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50.tsx';
 
-export const MyPage = () => {
+const MyPage = () => {
   const [user, setUser] = useState<{ displayName: string; email: string }>({
     displayName: '',
     email: '',
@@ -150,3 +150,5 @@ export const MyPage = () => {
     </main>
   );
 };
+
+export default MyPage;

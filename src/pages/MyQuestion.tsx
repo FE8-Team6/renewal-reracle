@@ -18,7 +18,7 @@ type Question = {
   commentCount: number;
 }[];
 
-export const MyQuestion = () => {
+const MyQuestion = () => {
   const [questions, setQuestions] = useState<Question>([]);
   const [currentUser, setCurrentUser] = useState<{
     displayName: string;
@@ -145,3 +145,5 @@ export const MyQuestion = () => {
     </>
   );
 };
+
+export default MyQuestion;

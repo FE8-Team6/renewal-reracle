@@ -15,7 +15,7 @@ const emailSchema = z.object({
   email: z.string().email('이메일 형식이 올바르지 않습니다.'),
 });
 
-export const PasswordReset = () => {
+const PasswordReset = () => {
   const [emailSent, setEmailSent] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof emailSchema>>({
@@ -73,3 +73,4 @@ export const PasswordReset = () => {
     </main>
   );
 };
+export default PasswordReset;
