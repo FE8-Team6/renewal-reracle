@@ -43,7 +43,7 @@ const QuestionForm = ({
   };
 
   return (
-    <div className="fixed bottom-[16vh] left-[50%] transform -translate-x-1/2">
+    <div className="fixed bottom-[5rem] left-[50%] transform -translate-x-1/2">
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <button onClick={handleOpenModal} className="p-2 border bg-purple rounded-10">
           <GoPencil className="w-5 h-5 text-white" />
