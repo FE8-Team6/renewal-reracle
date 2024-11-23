@@ -96,14 +96,22 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(({ error, c
     }
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = async (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'ArrowDown') {
       setSelectedIndex((prevIndex) => (prevIndex < searchResults.length - 1 ? prevIndex + 1 : prevIndex));
     } else if (event.key === 'ArrowUp') {
       setSelectedIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
-    } else if (event.key === 'Enter' && selectedIndex >= 0) {
-      const selectedResult = searchResults[selectedIndex];
-      handleResultClick(selectedResult.name, selectedResult.categoryId, selectedResult.id);
+    } else if (event.key === 'Enter') {
+      if (selectedIndex >= 0 && searchResults.length > 0) {
+        const selectedResult = searchResults[selectedIndex];
+        handleResultClick(selectedResult.name, selectedResult.categoryId, selectedResult.id);
+      } else {
+        await handleSearch();
+        if (searchResults.length > 0) {
+          const firstResult = searchResults[0];
+          handleResultClick(firstResult.name, firstResult.categoryId, firstResult.id);
+        }
+      }
     }
   };
 
