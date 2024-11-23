@@ -26,6 +26,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(({ error, c
   const [searchResults, setSearchResults] = useState<SearchResults>([]);
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
   const [widthClass, setWidthClass] = useState<string>('w-[25rem]');
+  const [isNoResults, setIsNoResults] = useState<boolean>(false);
   const navigate = useNavigate();
   const resultsRef = useRef<HTMLDivElement>(null);
 
@@ -51,6 +52,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(({ error, c
     setValue('');
     setSearchResults([]);
     setSelectedIndex(-1);
+    setIsNoResults(false);
     if (props.onChange) {
       props.onChange({
         target: { value: '' },
@@ -61,6 +63,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(({ error, c
   const handleSearch = async () => {
     if (value.trim() === '') {
       setSearchResults([]);
+      setIsNoResults(false);
       return;
     }
 
@@ -79,7 +82,9 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(({ error, c
           categoryId: category.id,
         })),
     );
+
     setSearchResults(results.slice(0, 8));
+    setIsNoResults(results.length === 0);
   };
 
   useEffect(() => {
@@ -96,14 +101,22 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(({ error, c
     }
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = async (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'ArrowDown') {
       setSelectedIndex((prevIndex) => (prevIndex < searchResults.length - 1 ? prevIndex + 1 : prevIndex));
     } else if (event.key === 'ArrowUp') {
       setSelectedIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
-    } else if (event.key === 'Enter' && selectedIndex >= 0) {
-      const selectedResult = searchResults[selectedIndex];
-      handleResultClick(selectedResult.name, selectedResult.categoryId, selectedResult.id);
+    } else if (event.key === 'Enter') {
+      if (selectedIndex >= 0 && searchResults.length > 0) {
+        const selectedResult = searchResults[selectedIndex];
+        handleResultClick(selectedResult.name, selectedResult.categoryId, selectedResult.id);
+      } else {
+        await handleSearch();
+        if (searchResults.length > 0) {
+          const firstResult = searchResults[0];
+          handleResultClick(firstResult.name, firstResult.categoryId, firstResult.id);
+        }
+      }
     }
   };
 
@@ -152,6 +165,11 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(({ error, c
               {result.name}
             </div>
           ))}
+        </div>
+      )}
+      {isNoResults && (
+        <div className={`absolute bg-white border shadow-lg rounded-4 ${widthClass} p-2 z-10`}>
+          검색 결과가 없습니다.
         </div>
       )}
       {error && (
