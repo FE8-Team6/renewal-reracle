@@ -101,6 +101,10 @@ export const routes = [
       },
       { path: '/signup', element: <SignUp /> },
       { path: '/login', element: <Login /> },
+      {
+        path: '*',
+        element: <NotFound />,
+      },
     ],
   },
   {
@@ -115,9 +119,5 @@ export const routes = [
         ),
       },
     ],
-  },
-  {
-    path: '*',
-    element: <NotFound />,
   },
 ];
