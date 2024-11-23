@@ -153,7 +153,7 @@ const Announcement = () => {
         ))}
       </div>
       <section
-        className={`${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} min-h-[calc(100vh-16rem)] relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4 pb-[5rem]`}
+        className={`${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} min-h-[calc(100vh-12rem)] relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4 pb-[5rem]`}
       >
         <KakaoAdfit320x100 />
         {isAdmin && (
