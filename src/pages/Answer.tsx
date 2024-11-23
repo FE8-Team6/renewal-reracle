@@ -188,7 +188,7 @@ const Answer = () => {
             </div>
           </div>
         </div>
-        <div className={`min-h-[calc(100vh-16rem)] space-y-2 pb-[6rem]`}>
+        <div className={`min-h-[calc(100vh-12rem)]  space-y-2 pb-[6rem]`}>
           <KakaoAdfit320x50 />
           {submittedAnswers.map(({ id, author, content, createdAt }) => (
             <div
