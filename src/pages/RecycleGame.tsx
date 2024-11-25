@@ -26,35 +26,40 @@ const WASTE_TYPES = {
   PLASTIC: 'plastic',
   GLASS: 'glass',
   FOOD: 'food',
+  ELECTRONICS: 'electronics',
+  HAZARDOUS: 'hazardous',
 } as const;
 
 const PUZZLE_ITEMS: PuzzleItem[] = [
   { id: 1, type: 'metal', name: '알루미늄 캔', image: '🥤', correctBin: WASTE_TYPES.METAL },
   { id: 2, type: 'metal', name: '통조림캔', image: '🥫', correctBin: WASTE_TYPES.METAL },
   { id: 3, type: 'metal', name: '스프레이 캔', image: '💨', correctBin: WASTE_TYPES.METAL },
-  { id: 4, type: 'metal', name: '철사', image: '📎', correctBin: WASTE_TYPES.METAL },
-  { id: 5, type: 'paper', name: '신문지', image: '📰', correctBin: WASTE_TYPES.PAPER },
-  { id: 6, type: 'paper', name: '종이상자', image: '📦', correctBin: WASTE_TYPES.PAPER },
-  { id: 7, type: 'paper', name: '책', image: '📚', correctBin: WASTE_TYPES.PAPER },
-  { id: 8, type: 'paper', name: '휴지', image: '🧻', correctBin: WASTE_TYPES.PAPER },
-  { id: 9, type: 'plastic', name: '페트병', image: '🧃', correctBin: WASTE_TYPES.PLASTIC },
-  { id: 10, type: 'plastic', name: '요구르트', image: '🥛', correctBin: WASTE_TYPES.PLASTIC },
-  { id: 11, type: 'plastic', name: '샴푸통', image: '🧴', correctBin: WASTE_TYPES.PLASTIC },
-  { id: 12, type: 'plastic', name: '플라스틱 컵', image: '🥤', correctBin: WASTE_TYPES.PLASTIC },
-  { id: 13, type: 'glass', name: '유리병', image: '🍾', correctBin: WASTE_TYPES.GLASS },
-  { id: 14, type: 'glass', name: '와인병', image: '🍷', correctBin: WASTE_TYPES.GLASS },
-  { id: 15, type: 'glass', name: '맥주병', image: '🍺', correctBin: WASTE_TYPES.GLASS },
-  { id: 16, type: 'glass', name: '유리컵', image: '🥛', correctBin: WASTE_TYPES.GLASS },
-  { id: 17, type: 'food', name: '사과껍질', image: '🍎', correctBin: WASTE_TYPES.FOOD },
-  { id: 18, type: 'food', name: '바나나껍질', image: '🍌', correctBin: WASTE_TYPES.FOOD },
-  { id: 19, type: 'food', name: '당근껍질', image: '🥕', correctBin: WASTE_TYPES.FOOD },
-  { id: 20, type: 'food', name: '감자껍질', image: '🥔', correctBin: WASTE_TYPES.FOOD },
-];
+  { id: 4, type: 'paper', name: '신문지', image: '📰', correctBin: WASTE_TYPES.PAPER },
+  { id: 5, type: 'paper', name: '종이상자', image: '📦', correctBin: WASTE_TYPES.PAPER },
+  { id: 6, type: 'paper', name: '책', image: '📚', correctBin: WASTE_TYPES.PAPER },
+  { id: 7, type: 'plastic', name: '페트병', image: '🧃', correctBin: WASTE_TYPES.PLASTIC },
+  { id: 8, type: 'plastic', name: '요구르트', image: '🥛', correctBin: WASTE_TYPES.PLASTIC },
+  { id: 9, type: 'plastic', name: '샴푸통', image: '🧴', correctBin: WASTE_TYPES.PLASTIC },
+  { id: 10, type: 'glass', name: '유리병', image: '🍾', correctBin: WASTE_TYPES.GLASS },
+  { id: 11, type: 'glass', name: '와인병', image: '🍷', correctBin: WASTE_TYPES.GLASS },
+  { id: 12, type: 'glass', name: '맥주병', image: '🍺', correctBin: WASTE_TYPES.GLASS },
+  { id: 13, type: 'food', name: '사과껍질', image: '🍎', correctBin: WASTE_TYPES.FOOD },
+  { id: 14, type: 'food', name: '바나나껍질', image: '🍌', correctBin: WASTE_TYPES.FOOD },
+  { id: 15, type: 'food', name: '당근껍질', image: '🥕', correctBin: WASTE_TYPES.FOOD },
+  { id: 16, type: 'electronics', name: '휴대폰', image: '📱', correctBin: WASTE_TYPES.ELECTRONICS },
+  { id: 17, type: 'electronics', name: '노트북', image: '💻', correctBin: WASTE_TYPES.ELECTRONICS },
+  { id: 18, type: 'electronics', name: '텔레비전', image: '📺', correctBin: WASTE_TYPES.ELECTRONICS },
+  { id: 19, type: 'hazardous', name: '배터리', image: '🔋', correctBin: WASTE_TYPES.HAZARDOUS },
+  { id: 20, type: 'hazardous', name: '페인트', image: '🎨', correctBin: WASTE_TYPES.HAZARDOUS },
+  { id: 21, type: 'hazardous', name: '살충제', image: '💨', correctBin: WASTE_TYPES.HAZARDOUS },
+] as const;
 
 const LEVEL_CONFIG: LevelConfig = {
-  1: { boardSize: 12 },
-  2: { boardSize: 16 },
-  3: { boardSize: 20 },
+  1: { boardSize: 4 },
+  2: { boardSize: 8 },
+  3: { boardSize: 12 },
+  4: { boardSize: 16 },
+  5: { boardSize: 20 },
 };
 
 const ReraclePuzzle = () => {
@@ -68,6 +73,14 @@ const ReraclePuzzle = () => {
   const [timeLeft, setTimeLeft] = useState(150);
   const [lastAction, setLastAction] = useState<{ cell: Cell; item: PuzzleItem } | null>(null);
 
+  const shuffleArray = (array: string[]): string[] => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
   const initializeBoard = () => {
     const { boardSize } = LEVEL_CONFIG[level];
 
@@ -76,14 +89,15 @@ const ReraclePuzzle = () => {
       return types[index % types.length];
     });
 
-    const newBoard = binTypes.map((binType, index) => ({
+    const shuffledBinTypes = shuffleArray(binTypes);
+
+    const newBoard = shuffledBinTypes.map((binType, index) => ({
       id: index,
       binType,
       item: null,
     }));
 
     setBoard(newBoard);
-
     setItems(PUZZLE_ITEMS);
   };
 
@@ -220,10 +234,12 @@ const ReraclePuzzle = () => {
             onClick={() => handleCellClick(cell)}
             className={`w-20 h-20 border-2 rounded-lg flex items-center justify-center cursor-pointer
         ${cell.binType === WASTE_TYPES.METAL ? 'bg-gray-100' : ''}
-        ${cell.binType === WASTE_TYPES.PAPER ? 'bg-blue-100' : ''}
+        ${cell.binType === WASTE_TYPES.PAPER ? 'bg-blue-400' : ''}
         ${cell.binType === WASTE_TYPES.PLASTIC ? 'bg-green' : ''}
         ${cell.binType === WASTE_TYPES.GLASS ? 'bg-yellow' : ''}
         ${cell.binType === WASTE_TYPES.FOOD ? 'bg-red' : ''}
+        ${cell.binType === WASTE_TYPES.ELECTRONICS ? 'bg-purple' : ''}
+        ${cell.binType === WASTE_TYPES.HAZARDOUS ? 'bg-orange-100' : ''}
       `}
           >
             {cell.item && <div className="text-4xl">{cell.item.image}</div>}
@@ -261,6 +277,8 @@ const ReraclePuzzle = () => {
         <p>🟩 초록색 구역: 플라스틱류</p>
         <p>🟨 노란색 구역: 유리류</p>
         <p>🟥 빨간색 구역: 음식물류</p>
+        <p>🟪 보라색 구역: 가전제품</p>
+        <p>🟧 주황색 구역: 유해 폐기물</p>
       </div>
 
       <div className="space-x-2">
