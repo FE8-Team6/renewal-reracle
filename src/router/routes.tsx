@@ -126,7 +126,7 @@ export const routes = [
     element: (
       <>
         <BackHeader />
-        <ReraclePuzzle />,
+        <ReraclePuzzle />
       </>
     ),
     path: '/game',

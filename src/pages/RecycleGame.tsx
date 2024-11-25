@@ -42,7 +42,13 @@ const PUZZLE_ITEMS: PuzzleItem[] = [
   { id: 15, type: 'food', name: '당근껍질', image: '🥕', correctBin: WASTE_TYPES.FOOD },
 ];
 
-const ReraclePuzzle: React.FC = () => {
+const LEVEL_CONFIG = {
+  1: { boardSize: 9 },
+  2: { boardSize: 12 },
+  3: { boardSize: 15 },
+};
+
+const ReraclePuzzle = () => {
   const [board, setBoard] = useState<Cell[]>([]);
   const [items, setItems] = useState<PuzzleItem[]>([]);
   const [selectedItem, setSelectedItem] = useState<PuzzleItem | null>(null);
@@ -50,27 +56,16 @@ const ReraclePuzzle: React.FC = () => {
   const [score, setScore] = useState(0);
   const [level, setLevel] = useState(1);
   const [moves, setMoves] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(60);
+  const [timeLeft, setTimeLeft] = useState(150);
   const [lastAction, setLastAction] = useState<{ cell: Cell; item: PuzzleItem } | null>(null);
 
   const initializeBoard = () => {
-    const binTypes = [
-      WASTE_TYPES.METAL,
-      WASTE_TYPES.METAL,
-      WASTE_TYPES.METAL,
-      WASTE_TYPES.PAPER,
-      WASTE_TYPES.PAPER,
-      WASTE_TYPES.PAPER,
-      WASTE_TYPES.PLASTIC,
-      WASTE_TYPES.PLASTIC,
-      WASTE_TYPES.PLASTIC,
-      WASTE_TYPES.GLASS,
-      WASTE_TYPES.GLASS,
-      WASTE_TYPES.GLASS,
-      WASTE_TYPES.FOOD,
-      WASTE_TYPES.FOOD,
-      WASTE_TYPES.FOOD,
-    ];
+    const { boardSize } = LEVEL_CONFIG[level];
+
+    const binTypes = Array.from({ length: boardSize }, (_, index) => {
+      const types = Object.values(WASTE_TYPES);
+      return types[index % types.length];
+    });
 
     const newBoard = binTypes.map((binType, index) => ({
       id: index,
@@ -80,8 +75,7 @@ const ReraclePuzzle: React.FC = () => {
 
     setBoard(newBoard);
 
-    const shuffledItems = [...PUZZLE_ITEMS].sort(() => Math.random() - 0.5).slice(0, 15);
-    setItems(shuffledItems);
+    setItems(PUZZLE_ITEMS);
   };
 
   useEffect(() => {
@@ -140,18 +134,26 @@ const ReraclePuzzle: React.FC = () => {
 
     setLastAction({ cell, item: selectedItem });
   };
-  // 퍼즐 완성 체크
+
   const checkPuzzleComplete = (currentBoard: Cell[]) => {
     const isAllCorrect = currentBoard.every((cell) => cell.item && cell.item.correctBin === cell.binType);
 
     if (isAllCorrect) {
       setIsComplete(true);
       setScore(score + 500);
-      setTimeout(() => {
-        setLevel(level + 1);
-        setIsComplete(false);
-        initializeBoard();
-      }, 2000);
+
+      if (level < 3) {
+        setTimeout(() => {
+          setLevel(level + 1);
+          setIsComplete(false);
+          initializeBoard();
+        }, 2000);
+      } else {
+        setTimeout(() => {
+          alert('축하합니다! 모든 레벨을 완료했습니다!');
+          handleRestart();
+        }, 2000);
+      }
     }
   };
 
@@ -159,7 +161,7 @@ const ReraclePuzzle: React.FC = () => {
     setLevel(1);
     setScore(0);
     setMoves(0);
-    setTimeLeft(60);
+    setTimeLeft(150);
     initializeBoard();
   };
 
@@ -185,6 +187,11 @@ const ReraclePuzzle: React.FC = () => {
     setLastAction(null);
   };
 
+  const calculateGridRows = (itemCount: number): string => {
+    const gridSize = Math.ceil(Math.sqrt(itemCount));
+    return `grid-rows-${gridSize}`;
+  };
+
   return (
     <div className="flex flex-col items-center w-full max-w-4xl mx-auto p-4">
       <div className="mb-8 text-center">
@@ -197,20 +204,18 @@ const ReraclePuzzle: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-2 mb-8">
+      <div className={`grid grid-cols-3 gap-2 mb-8 ${calculateGridRows(board.length)}`}>
         {board.map((cell) => (
           <div
             key={cell.id}
             onClick={() => handleCellClick(cell)}
-            className={`
-              w-24 h-24 border-2 rounded-lg flex items-center justify-center cursor-pointer
-              ${cell.binType === WASTE_TYPES.METAL ? 'bg-gray-100' : ''}
-              ${cell.binType === WASTE_TYPES.PAPER ? 'bg-blue-100' : ''}
-              ${cell.binType === WASTE_TYPES.PLASTIC ? 'bg-green' : ''}
-              ${cell.binType === WASTE_TYPES.GLASS ? 'bg-yellow' : ''}
-              ${cell.binType === WASTE_TYPES.FOOD ? 'bg-red' : ''}
-              ${selectedItem && !cell.item ? 'border-dashed border-gray-400' : ''}
-            `}
+            className={`w-24 h-24 border-2 rounded-lg flex items-center justify-center cursor-pointer
+        ${cell.binType === WASTE_TYPES.METAL ? 'bg-gray-100' : ''}
+        ${cell.binType === WASTE_TYPES.PAPER ? 'bg-blue-100' : ''}
+        ${cell.binType === WASTE_TYPES.PLASTIC ? 'bg-green' : ''}
+        ${cell.binType === WASTE_TYPES.GLASS ? 'bg-yellow' : ''}
+        ${cell.binType === WASTE_TYPES.FOOD ? 'bg-red' : ''}
+      `}
           >
             {cell.item && <div className="text-4xl">{cell.item.image}</div>}
           </div>
