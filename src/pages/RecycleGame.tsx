@@ -42,7 +42,7 @@ const PUZZLE_ITEMS: PuzzleItem[] = [
   { id: 15, type: 'food', name: '당근껍질', image: '🥕', correctBin: WASTE_TYPES.FOOD },
 ];
 
-const RecyclePuzzle: React.FC = () => {
+const ReraclePuzzle: React.FC = () => {
   const [board, setBoard] = useState<Cell[]>([]);
   const [items, setItems] = useState<PuzzleItem[]>([]);
   const [selectedItem, setSelectedItem] = useState<PuzzleItem | null>(null);
@@ -264,4 +264,4 @@ const RecyclePuzzle: React.FC = () => {
   );
 };
 
-export default RecyclePuzzle;
+export default ReraclePuzzle;
