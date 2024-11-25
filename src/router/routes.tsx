@@ -16,6 +16,7 @@ const PasswordReset = React.lazy(() => import('@/pages/PasswordReset'));
 const Qna = React.lazy(() => import('@/pages/Qna'));
 
 import { Home, Login, SignUp, NotFound } from '@/pages';
+import RecycleGame from '@/pages/RecycleGame';
 
 export const routes = [
   {
@@ -119,5 +120,9 @@ export const routes = [
         ),
       },
     ],
+  },
+  {
+    element: <RecycleGame />,
+    path: '/game',
   },
 ];
