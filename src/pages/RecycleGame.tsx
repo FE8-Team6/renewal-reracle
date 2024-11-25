@@ -1,20 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { CheckCircle2 } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
-interface PuzzleItem {
+type PuzzleItem = {
   id: number;
   type: string;
   name: string;
   image: string;
   correctBin: string;
-}
+};
 
-interface Cell {
+type Cell = {
   id: number;
   binType: string;
   item: PuzzleItem | null;
-}
+};
+
+type LevelConfig = {
+  [key: number]: { boardSize: number };
+};
 
 const WASTE_TYPES = {
   METAL: 'metal',
@@ -22,30 +26,35 @@ const WASTE_TYPES = {
   PLASTIC: 'plastic',
   GLASS: 'glass',
   FOOD: 'food',
-};
+} as const;
 
 const PUZZLE_ITEMS: PuzzleItem[] = [
   { id: 1, type: 'metal', name: '알루미늄 캔', image: '🥤', correctBin: WASTE_TYPES.METAL },
   { id: 2, type: 'metal', name: '통조림캔', image: '🥫', correctBin: WASTE_TYPES.METAL },
   { id: 3, type: 'metal', name: '스프레이 캔', image: '💨', correctBin: WASTE_TYPES.METAL },
-  { id: 4, type: 'paper', name: '신문지', image: '📰', correctBin: WASTE_TYPES.PAPER },
-  { id: 5, type: 'paper', name: '종이상자', image: '📦', correctBin: WASTE_TYPES.PAPER },
-  { id: 6, type: 'paper', name: '책', image: '📚', correctBin: WASTE_TYPES.PAPER },
-  { id: 7, type: 'plastic', name: '페트병', image: '🧃', correctBin: WASTE_TYPES.PLASTIC },
-  { id: 8, type: 'plastic', name: '요구르트', image: '🥛', correctBin: WASTE_TYPES.PLASTIC },
-  { id: 9, type: 'plastic', name: '샴푸통', image: '🧴', correctBin: WASTE_TYPES.PLASTIC },
-  { id: 10, type: 'glass', name: '유리병', image: '🍾', correctBin: WASTE_TYPES.GLASS },
-  { id: 11, type: 'glass', name: '와인병', image: '🍷', correctBin: WASTE_TYPES.GLASS },
-  { id: 12, type: 'glass', name: '맥주병', image: '🍺', correctBin: WASTE_TYPES.GLASS },
-  { id: 13, type: 'food', name: '사과껍질', image: '🍎', correctBin: WASTE_TYPES.FOOD },
-  { id: 14, type: 'food', name: '바나나껍질', image: '🍌', correctBin: WASTE_TYPES.FOOD },
-  { id: 15, type: 'food', name: '당근껍질', image: '🥕', correctBin: WASTE_TYPES.FOOD },
+  { id: 4, type: 'metal', name: '철사', image: '📎', correctBin: WASTE_TYPES.METAL },
+  { id: 5, type: 'paper', name: '신문지', image: '📰', correctBin: WASTE_TYPES.PAPER },
+  { id: 6, type: 'paper', name: '종이상자', image: '📦', correctBin: WASTE_TYPES.PAPER },
+  { id: 7, type: 'paper', name: '책', image: '📚', correctBin: WASTE_TYPES.PAPER },
+  { id: 8, type: 'paper', name: '휴지', image: '🧻', correctBin: WASTE_TYPES.PAPER },
+  { id: 9, type: 'plastic', name: '페트병', image: '🧃', correctBin: WASTE_TYPES.PLASTIC },
+  { id: 10, type: 'plastic', name: '요구르트', image: '🥛', correctBin: WASTE_TYPES.PLASTIC },
+  { id: 11, type: 'plastic', name: '샴푸통', image: '🧴', correctBin: WASTE_TYPES.PLASTIC },
+  { id: 12, type: 'plastic', name: '플라스틱 컵', image: '🥤', correctBin: WASTE_TYPES.PLASTIC },
+  { id: 13, type: 'glass', name: '유리병', image: '🍾', correctBin: WASTE_TYPES.GLASS },
+  { id: 14, type: 'glass', name: '와인병', image: '🍷', correctBin: WASTE_TYPES.GLASS },
+  { id: 15, type: 'glass', name: '맥주병', image: '🍺', correctBin: WASTE_TYPES.GLASS },
+  { id: 16, type: 'glass', name: '유리컵', image: '🥛', correctBin: WASTE_TYPES.GLASS },
+  { id: 17, type: 'food', name: '사과껍질', image: '🍎', correctBin: WASTE_TYPES.FOOD },
+  { id: 18, type: 'food', name: '바나나껍질', image: '🍌', correctBin: WASTE_TYPES.FOOD },
+  { id: 19, type: 'food', name: '당근껍질', image: '🥕', correctBin: WASTE_TYPES.FOOD },
+  { id: 20, type: 'food', name: '감자껍질', image: '🥔', correctBin: WASTE_TYPES.FOOD },
 ];
 
-const LEVEL_CONFIG = {
-  1: { boardSize: 9 },
-  2: { boardSize: 12 },
-  3: { boardSize: 15 },
+const LEVEL_CONFIG: LevelConfig = {
+  1: { boardSize: 12 },
+  2: { boardSize: 16 },
+  3: { boardSize: 20 },
 };
 
 const ReraclePuzzle = () => {
@@ -204,12 +213,12 @@ const ReraclePuzzle = () => {
         </div>
       </div>
 
-      <div className={`grid grid-cols-3 gap-2 mb-8 ${calculateGridRows(board.length)}`}>
+      <div className={`grid grid-cols-4 gap-2 mb-8 ${calculateGridRows(board.length)}`}>
         {board.map((cell) => (
           <div
             key={cell.id}
             onClick={() => handleCellClick(cell)}
-            className={`w-24 h-24 border-2 rounded-lg flex items-center justify-center cursor-pointer
+            className={`w-20 h-20 border-2 rounded-lg flex items-center justify-center cursor-pointer
         ${cell.binType === WASTE_TYPES.METAL ? 'bg-gray-100' : ''}
         ${cell.binType === WASTE_TYPES.PAPER ? 'bg-blue-100' : ''}
         ${cell.binType === WASTE_TYPES.PLASTIC ? 'bg-green' : ''}
