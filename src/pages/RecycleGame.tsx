@@ -21,7 +21,7 @@ type LevelConfig = {
   [key: number]: { boardSize: number };
 };
 
-const enum WASTE_TYPES {
+enum WASTE_TYPES {
   METAL = 'metal',
   PAPER = 'paper',
   PLASTIC = 'plastic',
@@ -72,7 +72,7 @@ const ReraclePuzzle = () => {
   const [level, setLevel] = useState(1);
   const [moves, setMoves] = useState(0);
   const [timeLeft, setTimeLeft] = useState(10);
-  const [lastAction, setLastAction] = useState<{ cell: Cell; item: PuzzleItem } | null>(null);
+  const [lastAction, setLastAction] = useState<{ cell: Cell; item: PuzzleItem; isCorrect: boolean } | null>(null);
   const [isTimeOver, setIsTimeOver] = useState(false);
 
   const shuffleArray = (array: string[]): string[] => {
@@ -96,7 +96,7 @@ const ReraclePuzzle = () => {
 
     const newBoard = shuffledBinTypes.map((binType, index) => ({
       id: index,
-      binType,
+      binType: binType as WASTE_TYPES,
       item: null,
     }));
 
