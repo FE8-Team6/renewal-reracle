@@ -1,18 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { CheckCircle2 } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 type PuzzleItem = {
   id: number;
   type: string;
   name: string;
   image: string;
-  correctBin: string;
+  correctBin: WASTE_TYPES;
 };
 
 type Cell = {
   id: number;
-  binType: string;
+  binType: WASTE_TYPES;
   item: PuzzleItem | null;
 };
 
@@ -20,15 +21,15 @@ type LevelConfig = {
   [key: number]: { boardSize: number };
 };
 
-const WASTE_TYPES = {
-  METAL: 'metal',
-  PAPER: 'paper',
-  PLASTIC: 'plastic',
-  GLASS: 'glass',
-  FOOD: 'food',
-  ELECTRONICS: 'electronics',
-  HAZARDOUS: 'hazardous',
-} as const;
+const enum WASTE_TYPES {
+  METAL = 'metal',
+  PAPER = 'paper',
+  PLASTIC = 'plastic',
+  GLASS = 'glass',
+  FOOD = 'food',
+  ELECTRONICS = 'electronics',
+  HAZARDOUS = 'hazardous',
+}
 
 const PUZZLE_ITEMS: PuzzleItem[] = [
   { id: 1, type: 'metal', name: '알루미늄 캔', image: '🥤', correctBin: WASTE_TYPES.METAL },
@@ -52,7 +53,7 @@ const PUZZLE_ITEMS: PuzzleItem[] = [
   { id: 19, type: 'hazardous', name: '배터리', image: '🔋', correctBin: WASTE_TYPES.HAZARDOUS },
   { id: 20, type: 'hazardous', name: '페인트', image: '🎨', correctBin: WASTE_TYPES.HAZARDOUS },
   { id: 21, type: 'hazardous', name: '살충제', image: '💨', correctBin: WASTE_TYPES.HAZARDOUS },
-] as const;
+];
 
 const LEVEL_CONFIG: LevelConfig = {
   1: { boardSize: 4 },
@@ -70,15 +71,17 @@ const ReraclePuzzle = () => {
   const [score, setScore] = useState(0);
   const [level, setLevel] = useState(1);
   const [moves, setMoves] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(150);
+  const [timeLeft, setTimeLeft] = useState(10);
   const [lastAction, setLastAction] = useState<{ cell: Cell; item: PuzzleItem } | null>(null);
+  const [isTimeOver, setIsTimeOver] = useState(false);
 
   const shuffleArray = (array: string[]): string[] => {
-    for (let i = array.length - 1; i > 0; i--) {
+    const copiedArray = [...array];
+    for (let i = copiedArray.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+      [copiedArray[i], copiedArray[j]] = [copiedArray[j], copiedArray[i]];
     }
-    return array;
+    return copiedArray;
   };
 
   const initializeBoard = () => {
@@ -103,15 +106,14 @@ const ReraclePuzzle = () => {
 
   useEffect(() => {
     initializeBoard();
-  }, [level]);
+  }, []);
 
   useEffect(() => {
     if (timeLeft > 0) {
       const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
       return () => clearTimeout(timer);
     } else {
-      alert('시간 초과! 게임을 다시 시작합니다.');
-      handleRestart();
+      setIsTimeOver(true);
     }
   }, [timeLeft]);
 
@@ -155,7 +157,7 @@ const ReraclePuzzle = () => {
       checkPuzzleComplete(newBoard);
     }
 
-    setLastAction({ cell, item: selectedItem });
+    setLastAction({ cell, item: selectedItem, isCorrect });
   };
 
   const checkPuzzleComplete = (currentBoard: Cell[]) => {
@@ -184,7 +186,7 @@ const ReraclePuzzle = () => {
     setLevel(1);
     setScore(0);
     setMoves(0);
-    setTimeLeft(150);
+    setTimeLeft(10);
     initializeBoard();
   };
 
@@ -200,7 +202,7 @@ const ReraclePuzzle = () => {
 
   const handleUndo = () => {
     if (!lastAction) return;
-    const { cell, item } = lastAction;
+    const { cell, item, isCorrect } = lastAction;
 
     const newBoard = [...board];
     newBoard[cell.id] = { ...cell, item: null };
@@ -208,12 +210,18 @@ const ReraclePuzzle = () => {
     setBoard(newBoard);
     setItems([...items, item]);
     setLastAction(null);
+
+    if (isCorrect) {
+      setScore(score - 100);
+    } else {
+      setScore(score + 50);
+    }
   };
 
-  const calculateGridRows = (itemCount: number): string => {
-    const gridSize = Math.ceil(Math.sqrt(itemCount));
+  const calculateGridRows = useMemo(() => {
+    const gridSize = Math.ceil(Math.sqrt(board.length));
     return `grid-rows-${gridSize}`;
-  };
+  }, [board.length]);
 
   return (
     <div className="flex flex-col items-center w-full max-w-4xl mx-auto p-4">
@@ -227,20 +235,27 @@ const ReraclePuzzle = () => {
         </div>
       </div>
 
-      <div className={`grid grid-cols-4 gap-2 mb-8 ${calculateGridRows(board.length)}`}>
+      <div className={`grid grid-cols-4 gap-2 mb-8 ${calculateGridRows}`}>
         {board.map((cell) => (
           <div
             key={cell.id}
             onClick={() => handleCellClick(cell)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                handleCellClick(cell);
+              }
+            }}
+            tabIndex={0}
+            role="button"
             className={`w-20 h-20 border-2 rounded-lg flex items-center justify-center cursor-pointer
-        ${cell.binType === WASTE_TYPES.METAL ? 'bg-gray-100' : ''}
-        ${cell.binType === WASTE_TYPES.PAPER ? 'bg-blue-400' : ''}
-        ${cell.binType === WASTE_TYPES.PLASTIC ? 'bg-green' : ''}
-        ${cell.binType === WASTE_TYPES.GLASS ? 'bg-yellow' : ''}
-        ${cell.binType === WASTE_TYPES.FOOD ? 'bg-red' : ''}
-        ${cell.binType === WASTE_TYPES.ELECTRONICS ? 'bg-purple' : ''}
-        ${cell.binType === WASTE_TYPES.HAZARDOUS ? 'bg-orange-100' : ''}
-      `}
+              ${cell.binType === WASTE_TYPES.METAL ? 'bg-gray-100' : ''}
+              ${cell.binType === WASTE_TYPES.PAPER ? 'bg-blue-400' : ''}
+              ${cell.binType === WASTE_TYPES.PLASTIC ? 'bg-green' : ''}
+              ${cell.binType === WASTE_TYPES.GLASS ? 'bg-yellow' : ''}
+              ${cell.binType === WASTE_TYPES.FOOD ? 'bg-red' : ''}
+              ${cell.binType === WASTE_TYPES.ELECTRONICS ? 'bg-purple' : ''}
+              ${cell.binType === WASTE_TYPES.HAZARDOUS ? 'bg-orange-100' : ''}
+            `}
           >
             {cell.item && <div className="text-4xl">{cell.item.image}</div>}
           </div>
@@ -252,6 +267,13 @@ const ReraclePuzzle = () => {
           <div
             key={item.id}
             onClick={() => handleItemSelect(item)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                handleItemSelect(item);
+              }
+            }}
+            tabIndex={0}
+            role="button"
             className={`
               w-16 h-16 border-2 rounded-lg flex flex-col items-center justify-center cursor-pointer
               ${selectedItem?.id === item.id ? 'border-blue-500 bg-blue-50' : ''}
@@ -270,6 +292,25 @@ const ReraclePuzzle = () => {
         </Alert>
       )}
 
+      {isTimeOver && (
+        <Dialog open={isTimeOver} onOpenChange={setIsTimeOver}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>시간 초과</DialogTitle>
+            </DialogHeader>
+            <div className="text-center">
+              <p>시간이 초과되었습니다. 게임을 다시 시작합니다.</p>
+              <button
+                onClick={handleRestart}
+                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+              >
+                재시작
+              </button>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
+
       <div className="mt-8 text-center text-gray-600">
         <h2 className="font-bold mb-2">분리수거 방법</h2>
         <p>🟦 파란색 구역: 종이류</p>
@@ -282,9 +323,6 @@ const ReraclePuzzle = () => {
       </div>
 
       <div className="space-x-2">
-        <button onClick={handleRestart} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-          재시작
-        </button>
         <button onClick={handleHint} className="mt-4 px-4 py-2 bg-yellow text-white rounded-lg hover:bg-yellow-600">
           힌트 보기
         </button>
