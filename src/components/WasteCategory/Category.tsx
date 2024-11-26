@@ -52,36 +52,34 @@ const Category = () => {
   }, []);
 
   return (
-    <main className="flex flex-col min-h-[calc(100vh-8rem)] pb-[5rem] ">
-      <section>
-        <KakaoAdfit320x50 />
-        <div className="flex justify-center w-full mx-auto mt-2 mb-6">
-          <SearchBar className="mx-auto" />
-        </div>
-        <h2 className="mt-4 ml-10 text-xl font-bold text-purple">재활용품 분류</h2>
-        <Carousel className="h-[30rem] mt-4">
-          <CarouselContent>
-            {chunkedCategories.map((chunk, index) => (
-              <CarouselItem key={index}>
-                <div className={`grid grid-cols-3 gap-4 ${containerWidth} mx-auto`}>
-                  {chunk.map((category) => (
-                    <div key={category.id} className="flex flex-col items-center">
-                      <NavLink to={`/category/${category.id}`} className="no-underline">
-                        <div className="flex items-center justify-center w-24 h-24 rounded-lg cursor-pointer bg-yellowLight hover:bg-yellow">
-                          <img src={category.imageURL} alt={category.name} className="w-12 h-12" />
-                        </div>
-                        <p className="mt-2 text-sm font-semibold text-center">{category.name}</p>
-                      </NavLink>
-                    </div>
-                  ))}
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPagination />
-        </Carousel>
-      </section>
-    </main>
+    <section>
+      <KakaoAdfit320x50 />
+      <div className="flex justify-center w-full mx-auto mt-2 mb-6">
+        <SearchBar className="mx-auto" />
+      </div>
+      <h2 className="mt-4 ml-10 text-xl font-bold text-purple">재활용품 분류</h2>
+      <Carousel className="h-[30rem] mt-4">
+        <CarouselContent>
+          {chunkedCategories.map((chunk, index) => (
+            <CarouselItem key={index}>
+              <div className={`grid grid-cols-3 gap-4 ${containerWidth} mx-auto`}>
+                {chunk.map((category) => (
+                  <div key={category.id} className="flex flex-col items-center">
+                    <NavLink to={`/category/${category.id}`} className="no-underline">
+                      <div className="flex items-center justify-center w-24 h-24 rounded-lg cursor-pointer bg-yellowLight hover:bg-yellow">
+                        <img src={category.imageURL} alt={category.name} className="w-12 h-12" />
+                      </div>
+                      <p className="mt-2 text-sm font-semibold text-center">{category.name}</p>
+                    </NavLink>
+                  </div>
+                ))}
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPagination />
+      </Carousel>
+    </section>
   );
 };
 
