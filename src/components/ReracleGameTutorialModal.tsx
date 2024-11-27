@@ -1,5 +1,4 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-// import { Button } from '@/components/ui/button';
 
 type ReracleGameTutorialModalProps = {
   isOpen: boolean;
@@ -28,11 +27,6 @@ const ReracleGameTutorialModal = ({ isOpen, onClose }: ReracleGameTutorialModalP
           <li>🟪 보라색: 가전제품</li>
           <li>🟧 주황색: 유해 폐기물</li>
         </ul>
-        {/* <DialogFooter>
-          <Button variant="default" size="lg" onClick={onClose}>
-            시작하기
-          </Button>
-        </DialogFooter> */}
       </DialogContent>
     </Dialog>
   );
