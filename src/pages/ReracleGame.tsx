@@ -3,87 +3,21 @@ import { CheckCircle2 } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import ReracleGameTutorialModal from '@/components/ReracleGameTutorialModal';
-type PuzzleItem = {
-  id: number;
-  type: string;
-  name: string;
-  image: string;
-  correctBin: WASTE_TYPES;
-};
-
-type Cell = {
-  id: number;
-  binType: WASTE_TYPES;
-  item: PuzzleItem | null;
-};
-
-type LevelConfig = {
-  [key: number]: { boardSize: number };
-};
-
-enum WASTE_TYPES {
-  METAL = 'metal',
-  PAPER = 'paper',
-  PLASTIC = 'plastic',
-  GLASS = 'glass',
-  FOOD = 'food',
-  ELECTRONICS = 'electronics',
-  HAZARDOUS = 'hazardous',
-}
-
-const PUZZLE_ITEMS: PuzzleItem[] = [
-  { id: 1, type: 'metal', name: '알루미늄 캔', image: '🥤', correctBin: WASTE_TYPES.METAL },
-  { id: 2, type: 'metal', name: '통조림캔', image: '🥫', correctBin: WASTE_TYPES.METAL },
-  { id: 3, type: 'metal', name: '스프레이 캔', image: '💨', correctBin: WASTE_TYPES.METAL },
-  { id: 4, type: 'paper', name: '신문지', image: '📰', correctBin: WASTE_TYPES.PAPER },
-  { id: 5, type: 'paper', name: '종이상자', image: '📦', correctBin: WASTE_TYPES.PAPER },
-  { id: 6, type: 'paper', name: '책', image: '📚', correctBin: WASTE_TYPES.PAPER },
-  { id: 7, type: 'plastic', name: '페트병', image: '🧃', correctBin: WASTE_TYPES.PLASTIC },
-  { id: 8, type: 'plastic', name: '요구르트', image: '🥛', correctBin: WASTE_TYPES.PLASTIC },
-  { id: 9, type: 'plastic', name: '샴푸통', image: '🧴', correctBin: WASTE_TYPES.PLASTIC },
-  { id: 10, type: 'glass', name: '유리병', image: '🍾', correctBin: WASTE_TYPES.GLASS },
-  { id: 11, type: 'glass', name: '와인병', image: '🍷', correctBin: WASTE_TYPES.GLASS },
-  { id: 12, type: 'glass', name: '맥주병', image: '🍺', correctBin: WASTE_TYPES.GLASS },
-  { id: 13, type: 'food', name: '사과껍질', image: '🍎', correctBin: WASTE_TYPES.FOOD },
-  { id: 14, type: 'food', name: '바나나껍질', image: '🍌', correctBin: WASTE_TYPES.FOOD },
-  { id: 15, type: 'food', name: '당근껍질', image: '🥕', correctBin: WASTE_TYPES.FOOD },
-  { id: 16, type: 'electronics', name: '휴대폰', image: '📱', correctBin: WASTE_TYPES.ELECTRONICS },
-  { id: 17, type: 'electronics', name: '노트북', image: '💻', correctBin: WASTE_TYPES.ELECTRONICS },
-  { id: 18, type: 'electronics', name: '텔레비전', image: '📺', correctBin: WASTE_TYPES.ELECTRONICS },
-  { id: 19, type: 'hazardous', name: '배터리', image: '🔋', correctBin: WASTE_TYPES.HAZARDOUS },
-  { id: 20, type: 'hazardous', name: '페인트', image: '🎨', correctBin: WASTE_TYPES.HAZARDOUS },
-  { id: 21, type: 'hazardous', name: '살충제', image: '💨', correctBin: WASTE_TYPES.HAZARDOUS },
-];
-
-const LEVEL_CONFIG: LevelConfig = {
-  1: { boardSize: 4 },
-  2: { boardSize: 8 },
-  3: { boardSize: 12 },
-  4: { boardSize: 16 },
-  5: { boardSize: 20 },
-};
+import { LEVEL_CONFIG, PUZZLE_ITEMS, shuffleArray } from '@/lib/constant/ReracleGameItem';
+import { Cell, PuzzleItem, WASTE_TYPES } from '@/lib/types/reraclePuzzleGame';
 
 const ReraclePuzzle = () => {
   const [board, setBoard] = useState<Cell[]>([]);
   const [items, setItems] = useState<PuzzleItem[]>([]);
   const [selectedItem, setSelectedItem] = useState<PuzzleItem | null>(null);
-  const [isComplete, setIsComplete] = useState(false);
-  const [score, setScore] = useState(0);
-  const [level, setLevel] = useState(1);
-  const [moves, setMoves] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(10);
+  const [isComplete, setIsComplete] = useState<boolean>(false);
+  const [score, setScore] = useState<number>(0);
+  const [level, setLevel] = useState<number>(1);
+  const [moves, setMoves] = useState<number>(0);
+  const [timeLeft, setTimeLeft] = useState<number>(10);
   const [lastAction, setLastAction] = useState<{ cell: Cell; item: PuzzleItem; isCorrect: boolean } | null>(null);
-  const [isTimeOver, setIsTimeOver] = useState(false);
-  const [isTutorialOpen, setIsTutorialOpen] = useState(true);
-
-  const shuffleArray = (array: T[]): T[] => {
-    const copiedArray = [...array];
-    for (let i = copiedArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [copiedArray[i], copiedArray[j]] = [copiedArray[j], copiedArray[i]];
-    }
-    return copiedArray;
-  };
+  const [isTimeOver, setIsTimeOver] = useState<boolean>(false);
+  const [isTutorialOpen, setIsTutorialOpen] = useState<boolean>(true);
 
   const initializeBoard = () => {
     const { boardSize } = LEVEL_CONFIG[level];
