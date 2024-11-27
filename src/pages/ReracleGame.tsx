@@ -187,6 +187,7 @@ const ReraclePuzzle = () => {
     setScore(0);
     setMoves(0);
     setTimeLeft(10);
+    setIsTimeOver(false);
     initializeBoard();
   };
 
