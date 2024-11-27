@@ -12,7 +12,7 @@ export const Home = () => {
           onClick={() => navigate('/game')}
         >
           <img src="/REracle.svg" alt="REracle 아이콘" className="w-9 h-9" />
-          <span>퍼즐 게임</span>
+          <span>분리수거 퍼즐 게임</span>
         </button>
       </div>
     </main>
