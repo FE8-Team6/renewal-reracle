@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { CheckCircle2 } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-
+import ReracleGameTutorialModal from '@/components/ReracleGameTutorialModal';
 type PuzzleItem = {
   id: number;
   type: string;
@@ -74,8 +74,9 @@ const ReraclePuzzle = () => {
   const [timeLeft, setTimeLeft] = useState(10);
   const [lastAction, setLastAction] = useState<{ cell: Cell; item: PuzzleItem; isCorrect: boolean } | null>(null);
   const [isTimeOver, setIsTimeOver] = useState(false);
+  const [isTutorialOpen, setIsTutorialOpen] = useState(true);
 
-  const shuffleArray = (array: string[]): string[] => {
+  const shuffleArray = (array: T[]): T[] => {
     const copiedArray = [...array];
     for (let i = copiedArray.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -226,6 +227,8 @@ const ReraclePuzzle = () => {
 
   return (
     <div className="flex flex-col items-center w-full max-w-4xl mx-auto p-4">
+      <ReracleGameTutorialModal isOpen={isTutorialOpen} onClose={() => setIsTutorialOpen(false)} />
+
       <div className="mb-8 text-center">
         <h1 className="text-2xl font-bold mb-2">분리수거 퍼즐</h1>
         <div className="flex gap-4 justify-center">
