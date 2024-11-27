@@ -17,7 +17,7 @@ const ReraclePuzzle = () => {
   const [timeLeft, setTimeLeft] = useState<number>(10);
   const [lastAction, setLastAction] = useState<{ cell: Cell; item: PuzzleItem; isCorrect: boolean } | null>(null);
   const [isTimeOver, setIsTimeOver] = useState<boolean>(false);
-  const [isTutorialOpen, setIsTutorialOpen] = useState<boolean>(true);
+  const [isTutorialOpen, setIsTutorialOpen] = useState<boolean>(false);
 
   const initializeBoard = () => {
     const { boardSize } = LEVEL_CONFIG[level];
@@ -251,16 +251,27 @@ const ReraclePuzzle = () => {
 
       <div className="mt-8 text-center text-gray-600">
         <h2 className="font-bold mb-2">분리수거 방법</h2>
-        <p>🟦 파란색 구역: 종이류</p>
-        <p>⬜ 회색 구역: 금속류</p>
-        <p>🟩 초록색 구역: 플라스틱류</p>
-        <p>🟨 노란색 구역: 유리류</p>
-        <p>🟥 빨간색 구역: 음식물류</p>
-        <p>🟪 보라색 구역: 가전제품</p>
-        <p>🟧 주황색 구역: 유해 폐기물</p>
+        <ul>
+          <li>🟦 파란색 구역: 종이류</li>
+          <li>⬜ 회색 구역: 금속류</li>
+          <li>🟩 초록색 구역: 플라스틱류</li>
+          <li>🟨 노란색 구역: 유리류</li>
+          <li>🟥 빨간색 구역: 음식물류</li>
+          <li>🟪 보라색 구역: 가전제품</li>
+          <li>🟧 주황색 구역: 유해 폐기물</li>
+        </ul>
       </div>
 
       <div className="space-x-2">
+        <button onClick={handleRestart} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+          재시작
+        </button>
+        <button
+          onClick={() => setIsTutorialOpen(true)}
+          className="mt-4 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
+        >
+          튜토리얼 보기
+        </button>
         <button onClick={handleHint} className="mt-4 px-4 py-2 bg-yellow text-white rounded-lg hover:bg-yellow-600">
           힌트 보기
         </button>
