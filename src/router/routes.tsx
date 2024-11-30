@@ -16,6 +16,8 @@ const PasswordReset = React.lazy(() => import('@/pages/PasswordReset'));
 const Qna = React.lazy(() => import('@/pages/Qna'));
 
 import { Home, Login, SignUp, NotFound } from '@/pages';
+import ReraclePuzzle from '@/pages/ReracleGame';
+import BackHeader from '@/lib/common/BackHeader';
 
 export const routes = [
   {
@@ -119,5 +121,14 @@ export const routes = [
         ),
       },
     ],
+  },
+  {
+    element: (
+      <>
+        <BackHeader />
+        <ReraclePuzzle />
+      </>
+    ),
+    path: '/game',
   },
 ];
