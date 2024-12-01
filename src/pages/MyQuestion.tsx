@@ -5,7 +5,7 @@ import { db } from '../firebase';
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { formatDateToKoreanTime } from '@/lib/utils/dateKoreanTime';
-import KakaoAdfit320x50 from '@/components/KakaoAdfit/KakaoAdfit320x50.tsx';
+import { KakaoAdfit320x50 } from '@/components/KakaoAdfit';
 
 type Question = {
   id: string;

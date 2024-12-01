@@ -16,7 +16,7 @@ import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover
 import { MoreHorizontal } from 'lucide-react';
 import { formatDateToKoreanTime } from '@/lib/utils/dateKoreanTime';
 import BackHeader from '@/lib/common/BackHeader';
-import KakaoAdfit320x50 from '@/components/KakaoAdfit/KakaoAdfit320x50';
+import { KakaoAdfit320x50 } from '@/components/KakaoAdfit';
 
 const Comments = () => {
   const location = useLocation();

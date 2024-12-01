@@ -5,7 +5,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { X } from 'lucide-react';
 import { RecentSearchHistory } from '@/lib/types/search';
 import { deleteSearchHistory, getRecentSearchHistory } from '@/api/searchssApi/recentSearch';
-import KakaoAdfit320x50 from '@/components/KakaoAdfit/KakaoAdfit320x50.tsx';
+import { KakaoAdfit320x50 } from '@/components/KakaoAdfit';
 
 const MyPage = () => {
   const [user, setUser] = useState<{ displayName: string; email: string }>({

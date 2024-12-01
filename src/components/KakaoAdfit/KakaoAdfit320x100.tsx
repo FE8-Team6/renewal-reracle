@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-const KakaoAdfit320x100 = () => {
+export const KakaoAdfit320x100 = () => {
   const scriptElement = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -23,5 +23,3 @@ const KakaoAdfit320x100 = () => {
     </div>
   );
 };
-
-export default KakaoAdfit320x100;

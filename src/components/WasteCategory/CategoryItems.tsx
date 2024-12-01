@@ -3,9 +3,8 @@ import { NavLink, useParams } from 'react-router-dom';
 import { db } from '@/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { chunkArray } from '@/lib/utils/chunkArray';
-import KakaoAdfit320x50 from '../KakaoAdfit320x50';
 import { Carousel, CarouselContent, CarouselItem, CarouselPagination } from '@/components/ui/carousel';
-import KakaoAdfit320x100 from '../KakaoAdfit320x100';
+import { KakaoAdfit320x100, KakaoAdfit320x50 } from '../KakaoAdfit';
 
 type Category = {
   id: string;

@@ -2,7 +2,7 @@ import { db } from '@/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import KakaoAdfit320x50 from '../KakaoAdfit320x50';
+import { KakaoAdfit320x50 } from '../KakaoAdfit';
 
 type ItemsDetails = {
   id: string;

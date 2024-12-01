@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { chunkArray } from '@/lib/utils/chunkArray';
 import { SearchBar } from '@/lib/common/SearchBar';
 import { Carousel, CarouselContent, CarouselItem, CarouselPagination } from '@/components/ui/carousel';
-import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50.tsx';
+import { KakaoAdfit320x50 } from '@/components/KakaoAdfit';
 
 type Category = {
   id: string;
