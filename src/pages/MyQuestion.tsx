@@ -92,7 +92,7 @@ const MyQuestion = () => {
         마이 R지식in
       </h2>
       <KakaoAdfit320x50 />
-      <main className="overflow-y-auto my-[1.5vh] mx-auto w-[22rem] h-[67vh] relative">
+      <main className="relative overflow-y-auto my-[1.5vh] mx-auto w-[22rem] min-h-[calc(100vh-4rem)] pb-[5rem] ">
         {!questions.length ? (
           <section className="text-center">
             <span>작성한 질문이 없습니다.</span>
@@ -101,7 +101,7 @@ const MyQuestion = () => {
           questions.map((questionData) => (
             <section
               key={questionData.id}
-              className="bg-greenLight my-[1.5vh] mx-auto h-[6rem] flex items-center justify-between px-[1vh] rounded-[10px] text-white text-[2vh]">
+              className="relative bg-greenLight my-[1.5vh]  mx-auto h-[6rem] flex items-center justify-between px-2 rounded-[10px] text-white ">
               <Link
                 to={`/answer/${questionData.id}`}
                 state={{
@@ -131,7 +131,7 @@ const MyQuestion = () => {
               <Button
                 variant="ghost"
                 size="icon"
-                className="absolute text-black hover:text-purple top-1 -right-2"
+                className="absolute text-black -top-1 -right-2 hover:text-purple"
                 onClick={() => handleDeleteQuestion(questionData.id)}>
                 <X width={15} height={15} />
               </Button>
