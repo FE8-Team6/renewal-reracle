@@ -92,7 +92,7 @@ const MyQuestion = () => {
         마이 R지식in
       </h2>
       <KakaoAdfit320x50 />
-      <main className="overflow-y-auto my-[1.5vh] mx-auto w-[22rem] h-[67vh] relative">
+      <main className="overflow-y-auto my-[1.5vh] mx-auto w-[22rem] min-h-[calc(100vh-4rem)]  relative">
         {!questions.length ? (
           <section className="text-center">
             <span>작성한 질문이 없습니다.</span>
