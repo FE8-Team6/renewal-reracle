@@ -5,7 +5,7 @@ import { db } from '../firebase';
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { formatDateToKoreanTime } from '@/lib/utils/dateKoreanTime';
-import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50.tsx';
+import KakaoAdfit320x50 from '@/components/KakaoAdfit/KakaoAdfit320x50.tsx';
 
 type Question = {
   id: string;
@@ -101,8 +101,7 @@ const MyQuestion = () => {
           questions.map((questionData) => (
             <section
               key={questionData.id}
-              className="bg-greenLight my-[1.5vh] mx-auto h-[6rem] flex items-center justify-between px-[1vh] rounded-[10px] text-white text-[2vh]"
-            >
+              className="bg-greenLight my-[1.5vh] mx-auto h-[6rem] flex items-center justify-between px-[1vh] rounded-[10px] text-white text-[2vh]">
               <Link
                 to={`/answer/${questionData.id}`}
                 state={{
@@ -117,8 +116,7 @@ const MyQuestion = () => {
                   authorUid: questionData.authorUid,
                   likedPosts: Array.from(likedPosts),
                 }}
-                className="text-black overflow-hidden whitespace-nowrap text-ellipsis inline-block w-[35vh] no-underline"
-              >
+                className="text-black overflow-hidden whitespace-nowrap text-ellipsis inline-block w-[35vh] no-underline">
                 <p>{questionData.question}</p>
                 <span className="text-sm text-gray-500">{questionData.author}</span>
                 <div className="flex items-center justify-between mt-2">
@@ -133,9 +131,8 @@ const MyQuestion = () => {
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-black hover:text-purple absolute top-1 -right-2"
-                onClick={() => handleDeleteQuestion(questionData.id)}
-              >
+                className="absolute text-black hover:text-purple top-1 -right-2"
+                onClick={() => handleDeleteQuestion(questionData.id)}>
                 <X width={15} height={15} />
               </Button>
             </section>

@@ -5,7 +5,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { X } from 'lucide-react';
 import { RecentSearchHistory } from '@/lib/types/search';
 import { deleteSearchHistory, getRecentSearchHistory } from '@/api/searchssApi/recentSearch';
-import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50.tsx';
+import KakaoAdfit320x50 from '@/components/KakaoAdfit/KakaoAdfit320x50.tsx';
 
 const MyPage = () => {
   const [user, setUser] = useState<{ displayName: string; email: string }>({
@@ -101,14 +101,12 @@ const MyPage = () => {
                     <div key={historyItem.id} className="relative px-3 py-1 rounded-full bg-yellow group">
                       <span
                         className="cursor-pointer text-purple hover:text-purpleDark"
-                        onClick={() => handleNavClick(historyItem.categoryId, historyItem.itemId)}
-                      >
+                        onClick={() => handleNavClick(historyItem.categoryId, historyItem.itemId)}>
                         #{historyItem.query}
                       </span>
                       <button
                         onClick={() => handleDeleteClick(historyItem.id)}
-                        className="absolute flex items-center justify-center w-4 h-4 text-white transition-opacity rounded-full -top-1 -right-1 bg-purple"
-                      >
+                        className="absolute flex items-center justify-center w-4 h-4 text-white transition-opacity rounded-full -top-1 -right-1 bg-purple">
                         <X size={12} />
                       </button>
                     </div>
@@ -140,8 +138,7 @@ const MyPage = () => {
               onClick={() => {
                 localStorage.removeItem('userData');
                 navigate('/login');
-              }}
-            >
+              }}>
               로그아웃
             </Button>
           </div>

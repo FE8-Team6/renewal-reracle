@@ -15,8 +15,8 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebase';
 import { serverTimestamp } from 'firebase/firestore';
-import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50';
-import KakaoAdfit320x100 from '@/components/KakaoAdfit320x100';
+import KakaoAdfit320x50 from '@/components/KakaoAdfit/KakaoAdfit320x50';
+import KakaoAdfit320x100 from '@/components/KakaoAdfit/KakaoAdfit320x100';
 import QuestionForm from '@/components/Question/QuestionForm';
 import QuestionItem from '@/components/Question/QuestionItem';
 import PostCategoryButton from '@/lib/styles/CategoryButton/PostCategoryButton';
@@ -223,8 +223,7 @@ const Qna = () => {
       </div>
       <section>
         <div
-          className={`min-h-[calc(100vh-12rem)] mx-auto my-[1.5vh] relative rounded-4 ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} pb-[5rem]`}
-        >
+          className={`min-h-[calc(100vh-12rem)] mx-auto my-[1.5vh] relative rounded-4 ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} pb-[5rem]`}>
           <KakaoAdfit320x100 />
           {filteredQuestions.map((question) => (
             <QuestionItem

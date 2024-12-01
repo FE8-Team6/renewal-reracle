@@ -11,8 +11,8 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50';
 import { loginSchema } from '@/lib/constant/loginSchema';
+import KakaoAdfit320x50 from '@/components/KakaoAdfit/KakaoAdfit320x50';
 
 export const Login = () => {
   const [error, setError] = useState<string>('');
@@ -48,7 +48,7 @@ export const Login = () => {
     <main className="flex flex-col min-h-[calc(100vh-8rem)] pb-[5rem]">
       <section className="flex-grow overflow-y-auto">
         <KakaoAdfit320x50 />
-        <div className="w-full h-full bg-white relative flex flex-col justify-center items-center gap-3 ">
+        <div className="relative flex flex-col items-center justify-center w-full h-full gap-3 bg-white ">
           <img src="/images/loginPageImg.png" alt="로그인 페이지 이미지" className="w-[12rem] h-[12rem] " />
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
@@ -86,8 +86,7 @@ export const Login = () => {
                         <button
                           type="button"
                           onClick={togglePasswordVisibility}
-                          className="absolute text-xl right-3 top-4 text-purple"
-                        >
+                          className="absolute text-xl right-3 top-4 text-purple">
                           {isShowPassword ? <MdVisibilityOff /> : <MdVisibility />}
                         </button>
                       </div>

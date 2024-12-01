@@ -7,8 +7,8 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50';
-import KakaoAdfit320x100 from '@/components/KakaoAdfit320x100';
+import KakaoAdfit320x50 from '@/components/KakaoAdfit/KakaoAdfit320x50';
+import KakaoAdfit320x100 from '@/components/KakaoAdfit/KakaoAdfit320x100';
 import { Input } from '@/components/ui/input';
 
 const emailSchema = z.object({

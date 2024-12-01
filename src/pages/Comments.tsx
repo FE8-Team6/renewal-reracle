@@ -16,7 +16,7 @@ import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover
 import { MoreHorizontal } from 'lucide-react';
 import { formatDateToKoreanTime } from '@/lib/utils/dateKoreanTime';
 import BackHeader from '@/lib/common/BackHeader';
-import KakaoAdfit320x50 from '@/components/KakaoAdfit320x50';
+import KakaoAdfit320x50 from '@/components/KakaoAdfit/KakaoAdfit320x50';
 
 const Comments = () => {
   const location = useLocation();
@@ -148,8 +148,7 @@ const Comments = () => {
             .map((answer: { id: string; author: string; content: string; authorUid: string; createdAt: string }) => (
               <div
                 key={answer.id}
-                className={`relative flex flex-col ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'}  mx-auto p-2 text-lg bg-purpleLight border rounded-4`}
-              >
+                className={`relative flex flex-col ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'}  mx-auto p-2 text-lg bg-purpleLight border rounded-4`}>
                 <div className="flex items-center justify-between">
                   <p className="text-sm">{answer.author}</p>
                   {currentUser && currentUser.uid === answer.authorUid && (
@@ -166,8 +165,7 @@ const Comments = () => {
                           onClick={() => {
                             setEditingAnswer(answer.id);
                             setEditedContent(answer.content);
-                          }}
-                        >
+                          }}>
                           수정
                         </Button>
                         <Button variant="secondary" size="sm" onClick={() => handleDeleteAnswer(answer.id)}>
@@ -213,8 +211,7 @@ const Comments = () => {
               variant="default"
               size="default"
               onClick={handleSubmit}
-              className={`mb-5 ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'}`}
-            >
+              className={`mb-5 ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'}`}>
               제출
             </Button>
           </div>
