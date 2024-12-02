@@ -7,11 +7,14 @@ export const Home = () => {
   return (
     <>
       <Helmet>
-        <title>홈페이지 - Recycle</title>
-        <meta name="description" content="리사이클 홈페이지입니다." />
         <meta property="og:title" content="홈페이지 - Recycle" />
         <meta property="og:description" content="쉽게 찾을 수 있는 분리수거 가이드 웹/앱 서비스" />
-        <meta property="og:image" content="/REracle.svg" />
+        <meta
+          property="og:image"
+          content="https://commons.wikimedia.org/wiki/File:Recycle001.svg#/media/File:U+2672.svg"
+        />
+        <meta property="og:url" content="https://reracle.netlify.app/" />
+        <meta property="og:locale" content="ko_KR" />
       </Helmet>
 
       <main className="flex flex-col min-h-[calc(100vh-8rem)] pb-[5rem] ">
