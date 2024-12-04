@@ -1,9 +1,5 @@
-importScripts(
-  "https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"
-);
-importScripts(
-  "https://www.gstatic.com/firebasejs/9.6.1/firebase-messaging-compat.js"
-);
+importScripts('https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js');
+importScripts('https://www.gstatic.com/firebasejs/9.6.1/firebase-messaging-compat.js');
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_APP_FIREBASE_API_KEY,
@@ -19,34 +15,34 @@ firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage((payload) => {
-  const title = payload.notification.title + " (onBackgroundMessage)";
+  const title = payload.notification.title + ' (onBackgroundMessage)';
   const notificationOptions = {
     body: payload.notification.body,
-    icon: "/REracle.svg",
+    icon: '/REracle.svg',
   };
 
   self.registration.showNotification(title, notificationOptions);
 });
 
-self.addEventListener("notificationclick", function (event) {
+self.addEventListener('notificationclick', function (event) {
   event.notification.close();
 
-  const redirectUrl = event?.notification?.data?.redirectUrl || "/announcement";
+  const redirectUrl = event?.notification?.data?.redirectUrl || '/announcement';
 
   event.waitUntil(
     clients
       .matchAll({
-        type: "window",
+        type: 'window',
       })
       .then(function (clientList) {
         for (const client of clientList) {
-          if (client.url === redirectUrl && "focus" in client) {
+          if (client.url === redirectUrl && 'focus' in client) {
             return client.focus();
           }
         }
         if (clients.openWindow) {
           return clients.openWindow(redirectUrl);
         }
-      })
+      }),
   );
 });

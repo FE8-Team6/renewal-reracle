@@ -4,20 +4,24 @@ import { chunkArray } from '@/utils/chunkArray';
 import { SearchBar } from '@/lib/common/SearchBar';
 import { Carousel, CarouselContent, CarouselItem, CarouselPagination } from '@/components/ui/carousel';
 import { KakaoAdfit320x50 } from '@/components/KakaoAdfit';
-import { CategoryType } from '@/apis/categoryApi/category';
+import { Categories } from '@/apis/categoryApi/category';
 import { getCategories } from '@/apis/categoryApi/category';
 
 const Category = () => {
-  const [categories, setCategories] = useState<CategoryType[]>([]);
+  const [categories, setCategories] = useState<Categories[]>([]);
   const [containerWidth, setContainerWidth] = useState<string>('w-[23rem]');
 
   const chunkedCategories = chunkArray(categories, 9);
 
   useEffect(() => {
-    getCategories().then((categoryItem) => setCategories(categoryItem));
-  }, []);
+    getCategories().then((categoryItem) => {
+      try {
+        setCategories(categoryItem);
+      } catch (error) {
+        console.error('카테고리를 가져오는 중 오류가 발생했습니다.', error);
+      }
+    });
 
-  useEffect(() => {
     const updateContainerWidth = () => {
       if (window.innerWidth <= 395) {
         setContainerWidth('w-[21rem]');
