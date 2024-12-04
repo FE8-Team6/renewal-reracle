@@ -1,6 +1,6 @@
-import { DetailLayout } from '@/layout/DetailLayout';
-import { MainLayout } from '@/layout/MainLayout';
-import { NavLayout } from '@/layout/NavLayout';
+import { DetailLayout } from '@/layouts/DetailLayout';
+import { MainLayout } from '@/layouts/MainLayout';
+import { NavLayout } from '@/layouts/NavLayout';
 import Loading from '@/pages/Loading';
 import React, { Suspense } from 'react';
 
