@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { db } from '@/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { NavLink } from 'react-router-dom';
-import { chunkArray } from '@/lib/utils/chunkArray';
+import { chunkArray } from '@/utils/chunkArray';
 import { SearchBar } from '@/lib/common/SearchBar';
 import { Carousel, CarouselContent, CarouselItem, CarouselPagination } from '@/components/ui/carousel';
 import { KakaoAdfit320x50 } from '@/components/KakaoAdfit';
