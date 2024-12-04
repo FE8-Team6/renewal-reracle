@@ -4,7 +4,7 @@ import { collection, query, where, getDocs, doc, deleteDoc, setDoc, updateDoc, i
 import { db } from '../firebase';
 import { Button } from '@/components/ui/button';
 import { ThumbsUp, MoreHorizontal } from 'lucide-react';
-import { formatDateToKoreanTime } from '@/lib/utils/dateKoreanTime';
+import { formatDateToKoreanTime } from '@/utils/dateKoreanTime';
 import {
   Dialog,
   DialogContent,
@@ -193,7 +193,8 @@ const Answer = () => {
           {submittedAnswers.map(({ id, author, content, createdAt }) => (
             <div
               key={id}
-              className={`relative flex flex-col ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} mx-auto p-2 text-lg bg-purpleLight rounded-4`}>
+              className={`relative flex flex-col ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} mx-auto p-2 text-lg bg-purpleLight rounded-4`}
+            >
               <p className="text-sm">{author}</p>
               <p className="text-lg text-black">{formatContent(content)}</p>
               {createdAt && <p className="text-xs text-gray-500">{formatDateToKoreanTime(new Date(createdAt))}</p>}

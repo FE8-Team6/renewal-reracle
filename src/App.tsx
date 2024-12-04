@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { routes } from './router/routes';
-import { saveWasteCategories } from './lib/utils/firestoreService';
-import NotificationWebApi from './components/NotificationWebApi';
+import { routes } from '@/router/routes';
+import { saveWasteCategories } from '@/utils/firestoreService';
+import NotificationWebApi from '@/components/NotificationWebApi';
 
 const router = createBrowserRouter(routes);
 

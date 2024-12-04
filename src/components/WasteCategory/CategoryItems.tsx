@@ -1,45 +1,27 @@
 import { useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
-import { db } from '@/firebase';
-import { doc, getDoc } from 'firebase/firestore';
-import { chunkArray } from '@/lib/utils/chunkArray';
+import { chunkArray } from '@/utils/chunkArray';
 import { Carousel, CarouselContent, CarouselItem, CarouselPagination } from '@/components/ui/carousel';
-import { KakaoAdfit320x100, KakaoAdfit320x50 } from '../KakaoAdfit';
-
-type Category = {
-  id: string;
-  name: string;
-  imageURL: string;
-};
+import { KakaoAdfit320x100, KakaoAdfit320x50 } from '@/components/KakaoAdfit';
+import { getCategoryItems, Categories } from '@/apis/categoryApi/category';
 
 const CategoryItems = () => {
   const { categoryId } = useParams();
-  const [categoryItems, setCategoryItems] = useState<Category[]>([]);
+  const [categoryItems, setCategoryItems] = useState<Categories[]>([]);
   const [containerWidth, setContainerWidth] = useState('w-[23rem]');
 
-  const getCategoryItems = async () => {
-    try {
-      if (!categoryId) {
-        console.log('카테고리 ID가 존재하지 않습니다.');
-        return;
-      }
-      const categoryRef = doc(db, 'WasteCategories', categoryId);
-      const categorySnap = await getDoc(categoryRef);
-
-      if (categorySnap.exists()) {
-        setCategoryItems(categorySnap.data().items);
-      } else {
-        console.log('카테고리가 존재하지 않습니다.');
-      }
-    } catch (error) {
-      console.error('카테고리가 존재하지 않습니다.', error);
-    }
-  };
-
-  const chunkedItems = chunkArray(categoryItems, 9);
-
   useEffect(() => {
-    getCategoryItems();
+    if (!categoryId) {
+      console.log('카테고리 ID가 존재하지 않습니다.');
+      return;
+    }
+    getCategoryItems(categoryId).then((categoryItem) => {
+      try {
+        setCategoryItems(categoryItem);
+      } catch (error) {
+        console.error('아이템을 가져오는 중 오류가 발생했습니다.', error);
+      }
+    });
 
     const updateContainerWidth = () => {
       if (window.innerWidth <= 395) {
@@ -54,13 +36,15 @@ const CategoryItems = () => {
     return () => window.removeEventListener('resize', updateContainerWidth);
   }, [categoryId]);
 
+  const chunkedItems = chunkArray(categoryItems, 9);
+
   return (
-    <main className="flex flex-col min-h-[calc(100vh-8rem)] pb-[5rem] ">
+    <main className="flex flex-col min-h-[calc(100vh-8rem)] pb-[5rem]">
       <KakaoAdfit320x100 />
       <section>
         <KakaoAdfit320x50 />
         <h2 className="mt-4 ml-5 text-xl font-bold text-purple">재활용품 세부 품목</h2>
-        <Carousel className="h-[30rem] mt-4 ">
+        <Carousel className="h-[30rem] mt-4">
           <CarouselContent>
             {chunkedItems.map((chunk, index) => (
               <CarouselItem key={index}>

@@ -1,42 +1,26 @@
 import { useEffect, useState } from 'react';
-import { db } from '@/firebase';
-import { collection, getDocs } from 'firebase/firestore';
 import { NavLink } from 'react-router-dom';
-import { chunkArray } from '@/lib/utils/chunkArray';
+import { chunkArray } from '@/utils/chunkArray';
 import { SearchBar } from '@/lib/common/SearchBar';
 import { Carousel, CarouselContent, CarouselItem, CarouselPagination } from '@/components/ui/carousel';
 import { KakaoAdfit320x50 } from '@/components/KakaoAdfit';
-
-type Category = {
-  id: string;
-  name: string;
-  imageURL: string;
-};
+import { Categories } from '@/apis/categoryApi/category';
+import { getCategories } from '@/apis/categoryApi/category';
 
 const Category = () => {
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<Categories[]>([]);
   const [containerWidth, setContainerWidth] = useState<string>('w-[23rem]');
 
   const chunkedCategories = chunkArray(categories, 9);
 
-  const getCategories = async () => {
-    try {
-      const categoriesCollectionRef = collection(db, 'WasteCategories');
-      const categoriesSnap = await getDocs(categoriesCollectionRef);
-
-      const categoriesData = categoriesSnap.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as Category[];
-
-      setCategories(categoriesData);
-    } catch (error) {
-      console.error('카테고리가 존재하지 않습니다.', error);
-    }
-  };
-
   useEffect(() => {
-    getCategories();
+    getCategories().then((categoryItem) => {
+      try {
+        setCategories(categoryItem);
+      } catch (error) {
+        console.error('카테고리를 가져오는 중 오류가 발생했습니다.', error);
+      }
+    });
 
     const updateContainerWidth = () => {
       if (window.innerWidth <= 395) {

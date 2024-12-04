@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { formatDateToKoreanTime } from '@/lib/utils/dateKoreanTime';
+import { formatDateToKoreanTime } from '@/utils/dateKoreanTime';
 import { Button } from '@/components/ui/button';
 import { ThumbsUp } from 'lucide-react';
 import { Timestamp } from 'firebase/firestore';
