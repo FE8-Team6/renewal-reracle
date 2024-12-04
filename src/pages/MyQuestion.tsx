@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { db } from '../firebase';
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { formatDateToKoreanTime } from '@/lib/utils/dateKoreanTime';
+import { formatDateToKoreanTime } from '@/utils/dateKoreanTime';
 import { KakaoAdfit320x50 } from '@/components/KakaoAdfit';
 
 type Question = {
@@ -101,7 +101,8 @@ const MyQuestion = () => {
           questions.map((questionData) => (
             <section
               key={questionData.id}
-              className="relative bg-greenLight my-[1.5vh]  mx-auto h-[6rem] flex items-center justify-between px-2 rounded-[10px] text-white ">
+              className="relative bg-greenLight my-[1.5vh]  mx-auto h-[6rem] flex items-center justify-between px-2 rounded-[10px] text-white "
+            >
               <Link
                 to={`/answer/${questionData.id}`}
                 state={{
@@ -116,7 +117,8 @@ const MyQuestion = () => {
                   authorUid: questionData.authorUid,
                   likedPosts: Array.from(likedPosts),
                 }}
-                className="text-black overflow-hidden whitespace-nowrap text-ellipsis inline-block w-[35vh] no-underline">
+                className="text-black overflow-hidden whitespace-nowrap text-ellipsis inline-block w-[35vh] no-underline"
+              >
                 <p>{questionData.question}</p>
                 <span className="text-sm text-gray-500">{questionData.author}</span>
                 <div className="flex items-center justify-between mt-2">
@@ -132,7 +134,8 @@ const MyQuestion = () => {
                 variant="ghost"
                 size="icon"
                 className="absolute text-black -top-1 -right-2 hover:text-purple"
-                onClick={() => handleDeleteQuestion(questionData.id)}>
+                onClick={() => handleDeleteQuestion(questionData.id)}
+              >
                 <X width={15} height={15} />
               </Button>
             </section>

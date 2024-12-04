@@ -13,7 +13,7 @@ import {
   DialogClose,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { formatDateToKoreanTime } from '@/lib/utils/dateKoreanTime';
+import { formatDateToKoreanTime } from '@/utils/dateKoreanTime';
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
 import { MoreHorizontal } from 'lucide-react';
 import { formatContent } from '@/lib/constant/formatContent';

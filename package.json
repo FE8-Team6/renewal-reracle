@@ -11,7 +11,8 @@
     "gen-pwa": "pwa-assets-generator --preset minimal public/REracle.svg",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "prepare": "husky install",
-    "test": "vitest"
+    "test": "vitest",
+    "build:clear": "rm -rf dist"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
