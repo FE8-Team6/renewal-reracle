@@ -3,6 +3,9 @@ import { MainLayout } from '@/layouts/MainLayout';
 import { NavLayout } from '@/layouts/NavLayout';
 import Loading from '@/pages/Loading';
 import React, { Suspense } from 'react';
+import { Home, Login, SignUp, NotFound } from '@/pages';
+import ReraclePuzzle from '@/pages/ReracleGame';
+import BackHeader from '@/lib/common/BackHeader';
 
 const CategoryDetailItems = React.lazy(() => import('@/components/WasteCategory/CategoryDetailItems'));
 const CategoryItems = React.lazy(() => import('@/components/WasteCategory/CategoryItems'));
@@ -14,10 +17,7 @@ const Answer = React.lazy(() => import('@/pages/Answer'));
 const MyPage = React.lazy(() => import('@/pages/MyPage'));
 const PasswordReset = React.lazy(() => import('@/pages/PasswordReset'));
 const Qna = React.lazy(() => import('@/pages/Qna'));
-
-import { Home, Login, SignUp, NotFound } from '@/pages';
-import ReraclePuzzle from '@/pages/ReracleGame';
-import BackHeader from '@/lib/common/BackHeader';
+const Article = React.lazy(() => import('@/pages/Article'));
 
 export const routes = [
   {
@@ -29,6 +29,14 @@ export const routes = [
         element: (
           <Suspense fallback={<Loading />}>
             <Qna />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/article',
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Article />
           </Suspense>
         ),
       },

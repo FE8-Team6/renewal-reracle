@@ -31,6 +31,13 @@ export const Nav = () => {
           <span className="mt-1 text-sm font-medium text-center text-grayDark">R지식in</span>
         </button>
         <button
+          onClick={() => handleNavClick('/article')}
+          className="flex flex-col items-center transition-colors duration-300 hover:text-gray-400 focus:text-gray-500"
+        >
+          <HiOutlineQuestionMarkCircle className="w-6 h-6" />
+          <span className="mt-1 text-sm font-medium text-center text-grayDark">아티클</span>
+        </button>
+        <button
           onClick={() => handleNavClick('/announcement')}
           className="flex flex-col items-center transition-colors duration-300 hover:text-gray-400 focus:text-gray-500"
         >
