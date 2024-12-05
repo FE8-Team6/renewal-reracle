@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { X } from 'lucide-react';
-import { RecentSearchHistory } from '@/lib/types/search';
+import { RecentSearchHistory } from '@/types/search';
 import { deleteSearchHistory, getRecentSearchHistory } from '@/apis/searchssApi/recentSearch';
 import { KakaoAdfit320x50 } from '@/components/KakaoAdfit';
 

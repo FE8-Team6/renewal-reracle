@@ -1,4 +1,4 @@
-import { PuzzleItem, WASTE_TYPES } from '../types/reraclePuzzleGame';
+import { PuzzleItem, WASTE_TYPES } from '@/types/reraclePuzzleGame.ts';
 
 type LevelConfig = {
   [key: number]: { boardSize: number };

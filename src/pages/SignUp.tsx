@@ -10,7 +10,7 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { signUpSchema } from '@/lib/constant/signUpSchema';
+import { signUpSchema } from '@/constant/signUpSchema';
 import { KakaoAdfit320x50 } from '@/components/KakaoAdfit';
 
 export const SignUp = () => {
