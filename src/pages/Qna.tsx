@@ -16,8 +16,7 @@ import {
 import { db } from '../firebase';
 import { serverTimestamp } from 'firebase/firestore';
 import { KakaoAdfit320x50, KakaoAdfit320x100 } from '@/components/KakaoAdfit';
-import QuestionForm from '@/components/Question/QuestionForm';
-import QuestionItem from '@/components/Question/QuestionItem';
+import { QuestionForm, QuestionItem } from '@/components/Question';
 import { PostCategoryButton } from '@/lib/common/CategoryButton';
 
 type Question = {
