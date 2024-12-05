@@ -18,7 +18,7 @@ import { serverTimestamp } from 'firebase/firestore';
 import { KakaoAdfit320x50, KakaoAdfit320x100 } from '@/components/KakaoAdfit';
 import QuestionForm from '@/components/Question/QuestionForm';
 import QuestionItem from '@/components/Question/QuestionItem';
-import PostCategoryButton from '@/lib/common/CategoryButton/PostCategoryButton';
+import { PostCategoryButton } from '@/lib/common/CategoryButton';
 
 type Question = {
   id: string;
