@@ -7,7 +7,7 @@ import { KakaoAdfit320x50 } from '@/components/KakaoAdfit';
 import { Categories } from '@/apis/categoryApi/category';
 import { getCategories } from '@/apis/categoryApi/category';
 
-const Category = () => {
+export const Category = () => {
   const [categories, setCategories] = useState<Categories[]>([]);
   const [containerWidth, setContainerWidth] = useState<string>('w-[23rem]');
 
@@ -66,5 +66,3 @@ const Category = () => {
     </section>
   );
 };
-
-export default Category;
