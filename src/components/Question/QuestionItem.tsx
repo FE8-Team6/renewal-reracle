@@ -24,7 +24,7 @@ type QuestionItemProps = {
   handleLiked: (id: string) => void;
 };
 
-const QuestionItem = ({ question, likedPosts, currentUser, handleLiked }: QuestionItemProps) => {
+export const QuestionItem = ({ question, likedPosts, currentUser, handleLiked }: QuestionItemProps) => {
   const truncateTitle = (title: string) => {
     return title.length > 23 ? `${title.slice(0, 23)}...` : title;
   };
@@ -81,5 +81,3 @@ const QuestionItem = ({ question, likedPosts, currentUser, handleLiked }: Questi
     </div>
   );
 };
-
-export default QuestionItem;

@@ -23,7 +23,7 @@ type QuestionFormProps = {
   setPostCategory: (category: string) => void;
 };
 
-const QuestionForm = ({
+export const QuestionForm = ({
   isModalOpen,
   setIsModalOpen,
   handleAddQuestion,
@@ -93,5 +93,3 @@ const QuestionForm = ({
     </div>
   );
 };
-
-export default QuestionForm;
