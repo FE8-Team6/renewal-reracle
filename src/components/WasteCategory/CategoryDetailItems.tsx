@@ -61,7 +61,7 @@ const CategoryDetailItems = () => {
             <h2 className="text-xl font-bold text-purple">배출방법</h2>
             <div className="w-full">
               {itemsDetails?.recyclingInstructions.map((instruction, index) => (
-                <p key={index} className="my-2 font-semibold">
+                <p key={index} className="my-2 font-semibold select-text">
                   {instruction}
                 </p>
               ))}
