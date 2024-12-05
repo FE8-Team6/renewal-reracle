@@ -3,8 +3,8 @@ import { CheckCircle2 } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import ReracleGameTutorialModal from '@/components/ReracleGameTutorialModal';
-import { LEVEL_CONFIG, PUZZLE_ITEMS, shuffleArray } from '@/lib/constant/ReracleGameItem';
-import { Cell, PuzzleItem, WASTE_TYPES } from '@/lib/types/reraclePuzzleGame';
+import { LEVEL_CONFIG, PUZZLE_ITEMS, shuffleArray } from '@/constant/ReracleGameItem';
+import { Cell, PuzzleItem, WASTE_TYPES } from '@/types/reraclePuzzleGame';
 
 const ReraclePuzzle = () => {
   const [board, setBoard] = useState<Cell[]>([]);

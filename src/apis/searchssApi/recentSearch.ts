@@ -11,7 +11,7 @@ import {
   deleteDoc,
 } from 'firebase/firestore';
 import { db } from '@/firebase';
-import { RecentSearchHistory } from '@/lib/types/search';
+import { RecentSearchHistory } from '@/types/search';
 
 /**
  * @description Firestore에 검색 기록 저장

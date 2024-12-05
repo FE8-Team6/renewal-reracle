@@ -17,7 +17,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { GoPencil } from 'react-icons/go';
 import { formatDateToKoreanTime } from '@/utils/dateKoreanTime';
 import { NavLink } from 'react-router-dom';
-import AnnouncementCategoryButton from '@/lib/styles/CategoryButton/AnnouncementCategoryButton';
+import { AnnouncementCategoryButton } from '@/lib/common/CategoryButton';
 import { KakaoAdfit320x100, KakaoAdfit320x50 } from '@/components/KakaoAdfit';
 
 type Announcement = {

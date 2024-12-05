@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/dialog';
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
 import { KakaoAdfit320x50 } from '@/components/KakaoAdfit';
-import { formatContent } from '@/lib/constant/formatContent';
+import { formatContent } from '@/constant/formatContent';
 
 type SubmittedAnswer = {
   id: string;

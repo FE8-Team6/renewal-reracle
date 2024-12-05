@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { useNavigate } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/firebase';
-import { SearchResults } from '../types/search';
+import { SearchResults } from '@/types/search';
 import { postSearchHistory } from '@/apis/searchssApi/recentSearch';
 
 interface SearchBarProps extends React.InputHTMLAttributes<HTMLInputElement> {

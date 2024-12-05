@@ -11,7 +11,7 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { loginSchema } from '@/lib/constant/loginSchema';
+import { loginSchema } from '@/constant/loginSchema';
 import { KakaoAdfit320x50 } from '@/components/KakaoAdfit';
 
 export const Login = () => {

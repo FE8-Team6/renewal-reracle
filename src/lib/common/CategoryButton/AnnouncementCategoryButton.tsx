@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button.tsx';
 
 type AnnouncementCategoryButtonProps = {
   postCategory: string;
@@ -7,7 +7,11 @@ type AnnouncementCategoryButtonProps = {
   onClick: () => void;
 };
 
-const AnnouncementCategoryButton: React.FC<AnnouncementCategoryButtonProps> = ({ postCategory, isActive, onClick }) => {
+export const AnnouncementCategoryButton: React.FC<AnnouncementCategoryButtonProps> = ({
+  postCategory,
+  isActive,
+  onClick,
+}) => {
   return (
     <Button
       variant={isActive ? 'default' : 'outline'}
@@ -19,5 +23,3 @@ const AnnouncementCategoryButton: React.FC<AnnouncementCategoryButtonProps> = ({
     </Button>
   );
 };
-
-export default AnnouncementCategoryButton;

@@ -16,9 +16,8 @@ import {
 import { db } from '../firebase';
 import { serverTimestamp } from 'firebase/firestore';
 import { KakaoAdfit320x50, KakaoAdfit320x100 } from '@/components/KakaoAdfit';
-import QuestionForm from '@/components/Question/QuestionForm';
-import QuestionItem from '@/components/Question/QuestionItem';
-import PostCategoryButton from '@/lib/styles/CategoryButton/PostCategoryButton';
+import { QuestionForm, QuestionItem } from '@/components/Question';
+import { PostCategoryButton } from '@/lib/common/CategoryButton';
 
 type Question = {
   id: string;
@@ -222,7 +221,8 @@ const Qna = () => {
       </div>
       <section>
         <div
-          className={`min-h-[calc(100vh-12rem)] mx-auto my-[1.5vh] relative rounded-4 ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} pb-[5rem]`}>
+          className={`min-h-[calc(100vh-12rem)] mx-auto my-[1.5vh] relative rounded-4 ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} pb-[5rem]`}
+        >
           <KakaoAdfit320x100 />
           {filteredQuestions.map((question) => (
             <QuestionItem

@@ -3,7 +3,7 @@ import { IoHomeOutline } from 'react-icons/io5';
 import { LuClipboardEdit } from 'react-icons/lu';
 import { HiOutlineQuestionMarkCircle } from 'react-icons/hi2';
 
-const Nav = () => {
+export const Nav = () => {
   const navigation = useNavigate();
 
   const handleNavClick = (path: string) => {
@@ -41,5 +41,3 @@ const Nav = () => {
     </nav>
   );
 };
-
-export default Nav;

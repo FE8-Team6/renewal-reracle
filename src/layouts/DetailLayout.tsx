@@ -1,4 +1,4 @@
-import Nav from '@/components/Nav/Nav';
+import { Nav } from '@/components/Nav';
 import BackHeader from '@/lib/common/BackHeader';
 import { Outlet } from 'react-router-dom';
 
