@@ -13,7 +13,7 @@ export type Articles = {
 
 const getArticles = async (id: string) => {
   try {
-    const articleRef = doc(db, 'Articles', id);
+    const articleRef = doc(db, 'Article', id);
     const articleSnap = await getDoc(articleRef);
 
     if (articleSnap.exists()) {
