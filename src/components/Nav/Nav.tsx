@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { IoHomeOutline } from 'react-icons/io5';
 import { LuClipboardEdit } from 'react-icons/lu';
-import { HiOutlineQuestionMarkCircle } from 'react-icons/hi2';
+import { MdOutlineArticle } from 'react-icons/md';
+import { PiArticleNyTimesLight } from 'react-icons/pi';
 
 export const Nav = () => {
   const navigation = useNavigate();
@@ -27,14 +28,14 @@ export const Nav = () => {
           onClick={() => handleNavClick('/qna')}
           className="flex flex-col items-center transition-colors duration-300 hover:text-gray-400 focus:text-gray-500"
         >
-          <HiOutlineQuestionMarkCircle className="w-6 h-6" />
+          <PiArticleNyTimesLight className="w-6 h-6" />
           <span className="mt-1 text-sm font-medium text-center text-grayDark">R지식in</span>
         </button>
         <button
           onClick={() => handleNavClick('/article')}
           className="flex flex-col items-center transition-colors duration-300 hover:text-gray-400 focus:text-gray-500"
         >
-          <HiOutlineQuestionMarkCircle className="w-6 h-6" />
+          <MdOutlineArticle className="w-6 h-6" />
           <span className="mt-1 text-sm font-medium text-center text-grayDark">아티클</span>
         </button>
         <button
