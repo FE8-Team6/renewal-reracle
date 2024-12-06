@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { routes } from '@/router/routes';
 import { saveWasteCategories } from '@/utils/firestoreService';
+import { saveArticles } from '@/utils/articleService';
 import NotificationWebApi from '@/components/NotificationWebApi';
 
 const router = createBrowserRouter(routes);
@@ -9,6 +10,7 @@ const router = createBrowserRouter(routes);
 const App = () => {
   useEffect(() => {
     saveWasteCategories();
+    saveArticles();
   }, []);
 
   return (
