@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getArticles, Articles } from '@/apis/articleApi/article.ts';
-
+import { KakaoAdfit320x50, KakaoAdfit320x100 } from '@/components/KakaoAdfit';
 const Article = () => {
   const [articles, setArticles] = useState<Articles>({
     id: '',
@@ -31,6 +31,9 @@ const Article = () => {
   return (
     <main className="min-h-[calc(100vh-8rem)] pb-[5rem]">
       <section>
+        <KakaoAdfit320x50 />
+        <KakaoAdfit320x100 />
+
         <h1 className="text-2xl font-bold">{articles.title}</h1>
         <div className="flex justify-center my-4">
           {articles.video && (
