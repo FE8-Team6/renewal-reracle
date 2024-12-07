@@ -23,7 +23,7 @@ const getCategories = async () => {
   }
 };
 
-const getCategoryItems = async (categoryId: string): Promise<Categories[]> => {
+const getCategoryItems = async (categoryId: string) => {
   try {
     const categoryRef = doc(db, 'WasteCategories', categoryId);
     const categorySnap = await getDoc(categoryRef);
