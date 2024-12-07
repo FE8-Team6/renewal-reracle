@@ -24,10 +24,10 @@ const ArticleItem = () => {
   }
 
   return (
-    <main className="min-h-[calc(100vh-8rem)] pb-[5rem] bg-gray-100">
+    <main className="min-h-[calc(100vh-8rem)] pb-[5rem]">
       <KakaoAdfit320x50 />
       <KakaoAdfit320x100 />
-      <section className="p-8 bg-white shadow-md rounded-lg">
+      <section className="p-8 bg-white shadow-md rounded-">
         <h1 className="text-3xl font-bold mb-6">{article.title}</h1>
         <div className="flex justify-center my-4">
           {article.video && (
