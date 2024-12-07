@@ -17,7 +17,11 @@ const CategoryItems = () => {
     }
     getCategoryItems(categoryId).then((categoryItem) => {
       try {
-        setCategoryItems(categoryItem);
+        if (categoryItem) {
+          setCategoryItems(categoryItem);
+        } else {
+          console.error('아이템을 가져오는 중 오류가 발생했습니다. categoryItem이 undefined입니다.');
+        }
       } catch (error) {
         console.error('아이템을 가져오는 중 오류가 발생했습니다.', error);
       }
