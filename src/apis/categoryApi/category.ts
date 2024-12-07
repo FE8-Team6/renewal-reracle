@@ -23,7 +23,7 @@ const getCategories = async () => {
   }
 };
 
-const getCategoryItems = async (categoryId: string): Promise<Categories[]> => {
+const getCategoryItems = async (categoryId: string) => {
   try {
     const categoryRef = doc(db, 'WasteCategories', categoryId);
     const categorySnap = await getDoc(categoryRef);
@@ -32,7 +32,6 @@ const getCategoryItems = async (categoryId: string): Promise<Categories[]> => {
       return categorySnap.data().items as Categories[];
     } else {
       console.log('카테고리가 존재하지 않습니다.');
-      return [];
     }
   } catch (error) {
     console.error('카테고리가 존재하지 않습니다.', error);
