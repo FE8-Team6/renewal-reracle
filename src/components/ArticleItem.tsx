@@ -14,7 +14,21 @@ const ArticleItem = () => {
   useEffect(() => {
     if (id) {
       getArticleById(id).then((articleItem) => {
-        setArticle(articleItem);
+        if (
+          articleItem &&
+          typeof articleItem === 'object' &&
+          'title' in articleItem &&
+          'content' in articleItem &&
+          'video' in articleItem
+        ) {
+          setArticle(articleItem as { title: string; content: { text: string; image: string }[]; video: string });
+        } else {
+          setArticle({
+            title: '',
+            content: [{ text: '', image: '' }],
+            video: '',
+          });
+        }
       });
     }
   }, [id]);
@@ -28,7 +42,7 @@ const ArticleItem = () => {
       <KakaoAdfit320x50 />
       <KakaoAdfit320x100 />
       <section className="p-8 bg-white shadow-md rounded-">
-        <h1 className="text-3xl font-bold mb-6">{article.title}</h1>
+        <h1 className="mb-6 text-3xl font-bold">{article.title}</h1>
         <div className="flex justify-center my-4">
           {article.video && (
             <video controls width="500" className="rounded-lg shadow-md">
@@ -58,6 +72,9 @@ const ArticleItem = () => {
                 />
               ) : null,
           )}
+        <a href="https://mediahub.seoul.go.kr/archives/2010772" target="_blank" className="text-blue-500 underline">
+          원문 보기
+        </a>
       </section>
     </main>
   );

@@ -15,12 +15,12 @@ const Article = () => {
       <KakaoAdfit320x50 />
       <KakaoAdfit320x100 />
       <div className="px-8 py-4">
-        <h1 className="text-2xl font-bold mb-6">기사 목록</h1>
+        <h1 className="mb-6 text-2xl font-bold">기사 목록</h1>
         <ul className="space-y-4">
           {articles.map((article) => (
-            <li key={article.id} className="border p-4 rounded-lg shadow hover:bg-gray-50 transition">
+            <li key={article.id} className="p-4 transition border rounded-lg shadow hover:bg-gray-50">
               <Link to={`/article/${article.id}`}>
-                <h2 className="text-xl font-semibold mb-2">{article.title}</h2>
+                <h2 className="mb-2 text-xl font-semibold">{article.title}</h2>
                 <p className="text-sm text-gray-600">
                   {(article.content[0].text && article.content[0]?.text.slice(0, 100)) || '요약 내용 없음...'}
                 </p>
