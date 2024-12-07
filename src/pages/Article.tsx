@@ -1,72 +1,31 @@
-import { useState, useEffect } from 'react';
-import { getArticles, Articles } from '@/apis/articleApi/article.ts';
-import { KakaoAdfit320x50, KakaoAdfit320x100 } from '@/components/KakaoAdfit';
-const Article = () => {
-  const [articles, setArticles] = useState<Articles>({
-    id: '',
-    title: '',
-    content: [],
-    video: '',
-  });
-  const articleId = '1';
+import { useEffect, useState } from 'react';
+import { getArticles, Articles } from '@/apis/articleApi/article';
+import { Link } from 'react-router-dom';
+
+const ArticleList = () => {
+  const [articles, setArticles] = useState<Articles[]>([]);
 
   useEffect(() => {
-    getArticles(articleId).then((articleItem) => {
-      try {
-        if (articleItem) {
-          setArticles(articleItem);
-        } else {
-          console.error('해당 기사를 찾을 수 없습니다.');
-        }
-      } catch {
-        console.error('Error fetching article:');
-      }
-    });
-  }, [articleId]);
-
-  if (!articles) {
-    return <div>해당 기사를 찾을 수 없습니다.</div>;
-  }
+    getArticles().then((data) => setArticles(data));
+  }, []);
 
   return (
     <main className="min-h-[calc(100vh-8rem)] pb-[5rem]">
-      <section>
-        <KakaoAdfit320x50 />
-        <KakaoAdfit320x100 />
-
-        <h1 className="text-2xl font-bold">{articles.title}</h1>
-        <div className="flex justify-center my-4">
-          {articles.video && (
-            <video controls width="500">
-              <source src={articles.video} type="video/mp4" />
-            </video>
-          )}
-        </div>
-        {articles.content &&
-          articles.content.map(
-            (
-              item: {
-                text?: string;
-                image?: string;
-              },
-              index: number,
-            ) =>
-              item.text ? (
-                <p key={index} className="mb-4">
-                  {item.text}
-                </p>
-              ) : item.image ? (
-                <img
-                  key={index}
-                  src={item.image}
-                  alt={`Article Content ${index}`}
-                  className="my-4 w-full max-w-md mx-auto"
-                />
-              ) : null,
-          )}
-      </section>
+      <h1 className="text-2xl font-bold">기사 목록</h1>
+      <ul className="space-y-4">
+        {articles.map((article) => (
+          <li key={article.id} className="border p-4 rounded-lg shadow">
+            <Link to={`/articles/${article.id}`}>
+              <h2 className="text-xl font-semibold">{article.title}</h2>
+              {/*<p className="text-sm text-gray-600">*/}
+              {/*  {article.content[0]?.text.slice(0, 100) || '요약 내용 없음...'}*/}
+              {/*</p>*/}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </main>
   );
 };
 
-export default Article;
+export default ArticleList;
