@@ -1,5 +1,5 @@
 import { db } from '@/firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 
 export type Articles = {
   id: string;
@@ -20,4 +20,20 @@ const getArticles = async (): Promise<Articles[]> => {
   })) as Articles[];
 };
 
-export { getArticles };
+const getArticleById = async (id: string) => {
+  try {
+    const articleRef = doc(db, 'Article', id);
+    const articleSnap = await getDoc(articleRef);
+
+    if (articleSnap.exists()) {
+      return { id: articleSnap.id, ...articleSnap.data() };
+    } else {
+      console.log('아티클이 존재하지 않습니다.');
+    }
+  } catch (error) {
+    console.error('getArticleById API 에러가 발생:', error);
+    throw error;
+  }
+};
+
+export { getArticles, getArticleById };

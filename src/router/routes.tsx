@@ -6,6 +6,7 @@ import React, { Suspense } from 'react';
 import { Home, Login, SignUp, NotFound } from '@/pages';
 import ReraclePuzzle from '@/pages/ReracleGame';
 import BackHeader from '@/lib/common/BackHeader';
+import ArticleItem from '@/components/ArticleItem.tsx';
 
 const CategoryDetailItems = React.lazy(() => import('@/components/WasteCategory/CategoryDetailItems'));
 const CategoryItems = React.lazy(() => import('@/components/WasteCategory/CategoryItems'));
@@ -41,7 +42,15 @@ export const routes = [
         ),
       },
       {
-        path: 'announcement',
+        path: '/article/:id',
+        element: (
+          <Suspense fallback={<Loading />}>
+            <ArticleItem />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/announcement',
         element: (
           <Suspense fallback={<Loading />}>
             <Announcement />
@@ -49,7 +58,7 @@ export const routes = [
         ),
       },
       {
-        path: 'mypage',
+        path: '/mypage',
         element: (
           <Suspense fallback={<Loading />}>
             <MyPage />
@@ -57,7 +66,7 @@ export const routes = [
         ),
       },
       {
-        path: 'myquestion',
+        path: '/myquestion',
         element: (
           <Suspense fallback={<Loading />}>
             <MyQuestion />
