@@ -47,7 +47,6 @@ const Announcement = () => {
   });
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [editId, setEditId] = useState<string>('');
-  const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
   const [selectedAnnouncementCategory, setselectedAnnouncementCategory] = useState<string>('전체');
 
   const announcementCategories = ['전체', '개발', '업데이트', '기타'];
@@ -56,17 +55,6 @@ const Announcement = () => {
     selectedAnnouncementCategory === '전체'
       ? announcements
       : announcements.filter((announcement) => announcement.category === selectedAnnouncementCategory);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsSmallScreen(window.innerWidth <= 395);
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   useEffect(() => {
     const userData = localStorage.getItem('userData');
@@ -151,9 +139,7 @@ const Announcement = () => {
           />
         ))}
       </div>
-      <section
-        className={`${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} min-h-[calc(100vh-12rem)] relative overflow-y-auto overflow-x-hidden mx-auto my-[1.5vh] rounded-4 pb-[5rem]`}
-      >
+      <section className="w-full min-h-[calc(100vh-12rem)] relative overflow-y-auto overflow-x-hidden mx-auto my-3 rounded-4 pb-[5rem] px-8">
         <KakaoAdfit320x100 />
         {isAdmin && (
           <div className="fixed bottom-[16vh] left-[50%] transform -translate-x-1/2">
