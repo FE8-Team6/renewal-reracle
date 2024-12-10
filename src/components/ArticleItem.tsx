@@ -53,26 +53,19 @@ const ArticleItem = () => {
           )}
         </div>
         {article.content &&
-          article.content.map(
-            (
-              item: {
-                text?: string;
-                image?: string;
-              },
-              index: number,
-            ) =>
-              item.text ? (
-                <p key={index} className="mb-4 text-lg leading-relaxed">
-                  {item.text}
-                </p>
-              ) : item.image ? (
-                <img
-                  key={index}
-                  src={item.image}
-                  alt={`Article Content ${index}`}
-                  className="w-full max-w-md mx-auto my-4 rounded-lg shadow-md"
-                />
-              ) : null,
+          article.content.map((item: { text?: string; image?: string }) =>
+            item.text ? (
+              <p key={article.id} className="mb-4 text-lg leading-relaxed">
+                {item.text}
+              </p>
+            ) : item.image ? (
+              <img
+                key={article.id}
+                src={item.image}
+                alt={`Article Content ${article.id}`}
+                className="w-full max-w-md mx-auto my-4 rounded-lg shadow-md"
+              />
+            ) : null,
           )}
         <div className="mt-8 p-4 bg-gray-100 rounded-lg shadow-md">
           <h2 className="mb-4 text-xl font-bold">출처</h2>

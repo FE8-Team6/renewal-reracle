@@ -15,7 +15,7 @@ const Article = () => {
       <KakaoAdfit320x50 />
       <KakaoAdfit320x100 />
       <div className="px-8 py-4">
-        <h1 className="mb-6 text-2xl font-bold">기사 목록</h1>
+        <h1 className="mb-6 text-2xl font-bold text-purple">기사 목록</h1>
         <ul className="space-y-4">
           {articles.map((article) => (
             <li key={article.id} className="p-4 transition border rounded-lg shadow hover:bg-gray-50">
