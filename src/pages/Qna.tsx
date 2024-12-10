@@ -45,7 +45,6 @@ const Qna = () => {
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const [postCategory, setPostCategory] = useState<string>('분리수거 방법');
-  const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
   const [selectedPostCategory, setSelectedPostCategory] = useState<string>('전체');
   const postCategories = ['전체', '분리수거 방법', '기타', '문의'];
 
@@ -53,17 +52,6 @@ const Qna = () => {
     selectedPostCategory === '전체'
       ? questions
       : questions.filter((question) => question.postCategory === selectedPostCategory);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsSmallScreen(window.innerWidth <= 395);
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   /**
    * @description 로컬스토리지에 저장된 사용자 정보를 불러옵니다.
@@ -220,9 +208,7 @@ const Qna = () => {
         ))}
       </div>
       <section>
-        <div
-          className={`min-h-[calc(100vh-12rem)] mx-auto my-[1.5vh] relative rounded-4 ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} pb-[5rem]`}
-        >
+        <div className={`min-h-[calc(100vh-12rem)] mx-auto my-3 relative rounded-4 w-full pb-[5rem] px-8`}>
           <KakaoAdfit320x100 />
           {filteredQuestions.map((question) => (
             <QuestionItem
