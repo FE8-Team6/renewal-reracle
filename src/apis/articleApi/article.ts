@@ -7,8 +7,9 @@ export type Articles = {
   content: {
     text?: string;
     image?: string;
+    video: string;
   }[];
-  video: string;
+  sourceLink?: string;
 };
 
 const getArticles = async (): Promise<Articles[]> => {

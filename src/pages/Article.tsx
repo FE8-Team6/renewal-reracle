@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 import { getArticles, Articles } from '@/apis/articleApi/article';
 import { Link } from 'react-router-dom';
 import { KakaoAdfit320x100, KakaoAdfit320x50 } from '@/components/KakaoAdfit';
+import { getFirstTextContent } from '@/constant/getFirstTextContent';
 
 const Article = () => {
   const [articles, setArticles] = useState<Articles[]>([]);
+  console.log(articles);
 
   useEffect(() => {
     getArticles().then((article) => setArticles(article));
@@ -21,9 +23,7 @@ const Article = () => {
             <li key={article.id} className="p-4 transition border rounded-lg shadow hover:bg-gray-50">
               <Link to={`/article/${article.id}`}>
                 <h2 className="mb-2 text-xl font-semibold">{article.title}</h2>
-                <p className="text-sm text-gray-600">
-                  {(article.content[0].text && article.content[0]?.text.slice(0, 100)) || '요약 내용 없음...'}
-                </p>
+                <p className="text-sm text-gray-600">{getFirstTextContent(article.content).slice(0, 100)}</p>{' '}
               </Link>
             </li>
           ))}

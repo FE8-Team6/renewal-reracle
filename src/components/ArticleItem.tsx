@@ -8,27 +8,21 @@ const ArticleItem = () => {
   const [article, setArticle] = useState<Articles>({
     id: '',
     title: '',
-    content: [{ text: '', image: '' }],
-    video: '',
+    content: [{ text: '', image: '', video: '' }],
+    sourceLink: '',
   });
 
   useEffect(() => {
     if (id) {
       getArticleById(id).then((articleItem) => {
-        if (
-          articleItem &&
-          typeof articleItem === 'object' &&
-          'title' in articleItem &&
-          'content' in articleItem &&
-          'video' in articleItem
-        ) {
+        if (articleItem && typeof articleItem === 'object' && 'title' in articleItem && 'content' in articleItem) {
           setArticle(articleItem as Articles);
         } else {
           setArticle({
             id: '',
             title: '',
-            content: [{ text: '', image: '' }],
-            video: '',
+            content: [{ text: '', image: '', video: '' }],
+            sourceLink: '',
           });
         }
       });
@@ -44,18 +38,11 @@ const ArticleItem = () => {
       <KakaoAdfit320x50 />
       <KakaoAdfit320x100 />
       <section className="p-8 bg-white shadow-md rounded-">
-        <h1 className="mb-6 text-3xl font-bold">{article.title}</h1>
-        <div className="flex justify-center my-4">
-          {article.video && (
-            <video controls width="500" className="rounded-lg shadow-md">
-              <source src={article.video} type="video/mp4" />
-            </video>
-          )}
-        </div>
+        <h1 className="mb-6 text-3xl font-bold text-purple">{article.title}</h1>
         {article.content &&
-          article.content.map((item: { text?: string; image?: string }) =>
+          article.content.map((item: { text?: string; image?: string; video?: string }) =>
             item.text ? (
-              <p key={article.id} className="mb-4 text-lg leading-relaxed">
+              <p key={article.id} className="mb-4 text-lg select-text">
                 {item.text}
               </p>
             ) : item.image ? (
@@ -65,11 +52,17 @@ const ArticleItem = () => {
                 alt={`Article Content ${article.id}`}
                 className="w-full max-w-md mx-auto my-4 rounded-lg shadow-md"
               />
+            ) : item.video ? (
+              <div className="flex justify-center my-4" key={article.id}>
+                <video controls width="500" className="rounded-lg shadow-md">
+                  <source src={item.video} type="video/mp4" />
+                </video>
+              </div>
             ) : null,
           )}
         <div className="mt-8 p-4 bg-gray-100 rounded-lg shadow-md">
           <h2 className="mb-4 text-xl font-bold">출처</h2>
-          <a href="https://mediahub.seoul.go.kr/archives/2010772" target="_blank" className="text-blue-500 underline">
+          <a href={article.sourceLink} target="_blank" className="text-blue-500 underline">
             원문 보기
           </a>
         </div>

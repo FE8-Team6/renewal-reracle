@@ -5,9 +5,11 @@ const articles = [
   {
     id: '1',
     title: '헷갈리기 쉬운 재활용품, 올바른 분리배출 방법은 이렇게!',
-    video:
-      'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/article%2FcmYwYFLwWqovdSjMlCDNAeztLwMvOQQW.mp4?alt=media&token=8ae2ab46-faff-4a4e-ad52-452b1b580fcb',
     content: [
+      {
+        video:
+          'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/article%2FcmYwYFLwWqovdSjMlCDNAeztLwMvOQQW.mp4?alt=media&token=8ae2ab46-faff-4a4e-ad52-452b1b580fcb',
+      },
       {
         text: `얼마 전, 아파트 엘리베이터에 부착된 '재활용품 분리배출' 안내문을 보았다. 새삼스럽다고 생각했지만, 재차 안내하게 된 이유가 있으리라 보고 다시 한번 읽어보았다. 특히 부피가 크고, 많이 버려지는 '폐지류'에 대해서 상세히 안내하고 있었는데, 수거일 하루 전, 재활용품 배출 장소에 가보았더니 얼마나 무분별하게 버려지고 있었는지 깨달았다.`,
       },
@@ -111,6 +113,45 @@ const articles = [
         text: `재활용품 분리배출은 자발적인 행동이지만, 올바른 시민의식을 바탕으로 한 구체적인 실천이 요구된다. ‘나 하나뿐이야’라는 이기적인 마음보다 공동체, 환경, 더 나아가 지구를 생각하는 마음으로 적극적으로 참여하기를 바란다.`,
       },
     ],
+    sourceLink: 'https://mediahub.seoul.go.kr/archives/2010772',
+  },
+  {
+    id: '2',
+    title: '재질별 분리배출',
+    content: [
+      {
+        image:
+          'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/article%2F10.png?alt=media&token=eac66992-22ff-43b7-a233-3b43c823a78f',
+      },
+      {
+        image:
+          'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/article%2F11.png?alt=media&token=e92c62e8-43f3-499d-b29e-070eb58132dd',
+      },
+      {
+        image:
+          'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/article%2F12.png?alt=media&token=d6401949-6d76-4a9d-8963-a7818d3f687e',
+      },
+      {
+        image:
+          'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/article%2F13.png?alt=media&token=ae2b3cf5-78bb-4466-b3dc-ab64e56812cb',
+      },
+      {
+        image:
+          'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/article%2F14.png?alt=media&token=8116e3ac-85c2-4d31-b13f-e824003f9050',
+      },
+      {
+        image:
+          'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/article%2F15.png?alt=media&token=6536cde0-ed8d-4b2e-9f31-5f0462465033',
+      },
+      {
+        image:
+          'https://firebasestorage.googleapis.com/v0/b/web-game-5b1b6.appspot.com/o/article%2F16.png?alt=media&token=2af80ae4-c4bc-4f30-9f1c-4e2c6b547218',
+      },
+      {
+        text: `본 저작물은 한국소비자원에서 2024년 작성하여 공공누리 제1유형으로 개방한 '분리수거 가이드(작성자: 한국소비자원)'을 참고하여 작성되었습니다. 해당 자료는 http://www.kca.go.kr에서 확인할 수 있습니다.`,
+      },
+    ],
+    sourceLink: 'https://www.kca.go.kr/smartconsumer/sub.do?menukey=7740',
   },
 ];
 
@@ -120,8 +161,8 @@ export const saveArticles = async () => {
 
     await setDoc(articleRef, {
       title: article.title,
-      video: article.video,
       content: article.content,
+      sourceLink: article.sourceLink,
     });
   }
   console.log('Article 저장 완료 되었습니다.');
