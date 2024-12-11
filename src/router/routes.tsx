@@ -6,7 +6,6 @@ import React, { Suspense } from 'react';
 import { Home, Login, SignUp, NotFound } from '@/pages';
 import ReraclePuzzle from '@/pages/ReracleGame';
 import BackHeader from '@/lib/common/BackHeader';
-import ArticleItem from '@/components/ArticleItem.tsx';
 
 const CategoryDetailItems = React.lazy(() => import('@/components/WasteCategory/CategoryDetailItems'));
 const CategoryItems = React.lazy(() => import('@/components/WasteCategory/CategoryItems'));
@@ -19,6 +18,7 @@ const MyPage = React.lazy(() => import('@/pages/MyPage'));
 const PasswordReset = React.lazy(() => import('@/pages/PasswordReset'));
 const Qna = React.lazy(() => import('@/pages/Qna'));
 const Article = React.lazy(() => import('@/pages/Article'));
+const ArticleItem = React.lazy(() => import('@/components/ArticleItem.tsx'));
 
 export const routes = [
   {
@@ -41,14 +41,7 @@ export const routes = [
           </Suspense>
         ),
       },
-      {
-        path: '/article/:id',
-        element: (
-          <Suspense fallback={<Loading />}>
-            <ArticleItem />
-          </Suspense>
-        ),
-      },
+
       {
         path: '/announcement',
         element: (
@@ -91,6 +84,14 @@ export const routes = [
         element: (
           <Suspense fallback={<Loading />}>
             <PasswordReset />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/article/:id',
+        element: (
+          <Suspense fallback={<Loading />}>
+            <ArticleItem />
           </Suspense>
         ),
       },

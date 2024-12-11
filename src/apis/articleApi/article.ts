@@ -5,10 +5,12 @@ export type Articles = {
   id: string;
   title: string;
   content: {
+    id: string;
     text?: string;
     image?: string;
+    video: string;
   }[];
-  video: string;
+  sourceLink?: string;
 };
 
 const getArticles = async (): Promise<Articles[]> => {
