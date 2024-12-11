@@ -6,7 +6,6 @@ import { getFirstTextContent } from '@/constant/getFirstTextContent';
 
 const Article = () => {
   const [articles, setArticles] = useState<Articles[]>([]);
-  console.log(articles);
 
   useEffect(() => {
     getArticles().then((article) => setArticles(article));

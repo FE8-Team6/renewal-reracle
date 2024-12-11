@@ -8,7 +8,7 @@ const ArticleItem = () => {
   const [article, setArticle] = useState<Articles>({
     id: '',
     title: '',
-    content: [{ text: '', image: '', video: '' }],
+    content: [{ id: '', text: '', image: '', video: '' }],
     sourceLink: '',
   });
 
@@ -21,7 +21,7 @@ const ArticleItem = () => {
           setArticle({
             id: '',
             title: '',
-            content: [{ text: '', image: '', video: '' }],
+            content: [{ id: '', text: '', image: '', video: '' }],
             sourceLink: '',
           });
         }
@@ -40,20 +40,20 @@ const ArticleItem = () => {
       <section className="p-8 bg-white shadow-md rounded-">
         <h1 className="mb-6 text-3xl font-bold text-purple">{article.title}</h1>
         {article.content &&
-          article.content.map((item: { text?: string; image?: string; video?: string }) =>
+          article.content.map((item) =>
             item.text ? (
-              <p key={article.id} className="mb-4 text-lg select-text">
+              <p key={item.id} className="mb-4 text-lg select-text">
                 {item.text}
               </p>
             ) : item.image ? (
               <img
-                key={article.id}
+                key={item.id}
                 src={item.image}
-                alt={`Article Content ${article.id}`}
+                alt={'Article Content images'}
                 className="w-full max-w-md mx-auto my-4 rounded-lg shadow-md"
               />
             ) : item.video ? (
-              <div className="flex justify-center my-4" key={article.id}>
+              <div className="flex justify-center my-4" key={item.id}>
                 <video controls width="500" className="rounded-lg shadow-md">
                   <source src={item.video} type="video/mp4" />
                 </video>
