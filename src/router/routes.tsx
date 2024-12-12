@@ -1,6 +1,4 @@
-import { DetailLayout } from '@/layouts/DetailLayout';
-import { MainLayout } from '@/layouts/MainLayout';
-import { NavLayout } from '@/layouts/NavLayout';
+import { DetailLayout, MainLayout, NavLayout } from '@/layouts';
 import Loading from '@/pages/Loading';
 import React, { Suspense } from 'react';
 import { Home, Login, SignUp, NotFound } from '@/pages';
