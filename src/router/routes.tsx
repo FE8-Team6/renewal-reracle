@@ -6,6 +6,7 @@ import React, { Suspense } from 'react';
 import { Home, Login, SignUp, NotFound } from '@/pages';
 import ReraclePuzzle from '@/pages/ReracleGame';
 import BackHeader from '@/lib/common/BackHeader';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 
 const CategoryDetailItems = React.lazy(() => import('@/components/WasteCategory/CategoryDetailItems'));
 const CategoryItems = React.lazy(() => import('@/components/WasteCategory/CategoryItems'));
@@ -24,54 +25,72 @@ export const routes = [
   {
     element: <MainLayout />,
     children: [
-      { path: '/', element: <Home /> },
+      {
+        path: '/',
+        element: (
+          <ErrorBoundary>
+            <Home />
+          </ErrorBoundary>
+        ),
+      },
       {
         path: 'qna',
         element: (
-          <Suspense fallback={<Loading />}>
-            <Qna />
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<Loading />}>
+              <Qna />
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
       {
         path: '/article',
         element: (
-          <Suspense fallback={<Loading />}>
-            <Article />
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<Loading />}>
+              <Article />
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
-
       {
         path: '/announcement',
         element: (
-          <Suspense fallback={<Loading />}>
-            <Announcement />
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<Loading />}>
+              <Announcement />
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
       {
         path: '/mypage',
         element: (
-          <Suspense fallback={<Loading />}>
-            <MyPage />
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<Loading />}>
+              <MyPage />
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
       {
         path: '/myquestion',
         element: (
-          <Suspense fallback={<Loading />}>
-            <MyQuestion />
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<Loading />}>
+              <MyQuestion />
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
       {
         path: 'category/:categoryId',
         element: (
-          <Suspense fallback={<Loading />}>
-            <CategoryItems />
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<Loading />}>
+              <CategoryItems />
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
     ],
@@ -82,45 +101,69 @@ export const routes = [
       {
         path: '/pwreset',
         element: (
-          <Suspense fallback={<Loading />}>
-            <PasswordReset />
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<Loading />}>
+              <PasswordReset />
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
       {
         path: '/article/:id',
         element: (
-          <Suspense fallback={<Loading />}>
-            <ArticleItem />
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<Loading />}>
+              <ArticleItem />
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
       {
         path: 'category/:categoryId/item/:itemId',
         element: (
-          <Suspense fallback={<Loading />}>
-            <CategoryDetailItems />
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<Loading />}>
+              <CategoryDetailItems />
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
       {
         path: 'announcement/:announcementId',
         element: (
-          <Suspense fallback={<Loading />}>
-            <AnnouncementDetailItem />
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<Loading />}>
+              <AnnouncementDetailItem />
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
       {
         path: 'answer/:questionId',
         element: (
-          <Suspense fallback={<Loading />}>
-            <Answer />
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<Loading />}>
+              <Answer />
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
-      { path: '/signup', element: <SignUp /> },
-      { path: '/login', element: <Login /> },
+      {
+        path: '/signup',
+        element: (
+          <ErrorBoundary>
+            <SignUp />
+          </ErrorBoundary>
+        ),
+      },
+      {
+        path: '/login',
+        element: (
+          <ErrorBoundary>
+            <Login />
+          </ErrorBoundary>
+        ),
+      },
       {
         path: '*',
         element: <NotFound />,
@@ -133,19 +176,21 @@ export const routes = [
       {
         path: 'comments/:questionId',
         element: (
-          <Suspense fallback={<Loading />}>
-            <Comments />
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<Loading />}>
+              <Comments />
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
     ],
   },
   {
     element: (
-      <>
+      <ErrorBoundary>
         <BackHeader />
         <ReraclePuzzle />
-      </>
+      </ErrorBoundary>
     ),
     path: '/game',
   },
