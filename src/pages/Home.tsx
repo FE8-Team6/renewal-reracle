@@ -1,9 +1,9 @@
 import { Category } from '@/components/WasteCategory';
 import { Helmet } from 'react-helmet-async';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   return (
     <>
       <Helmet>
@@ -19,7 +19,7 @@ export const Home = () => {
 
       <main className="flex flex-col min-h-[calc(100vh-8rem)] pb-[5rem] ">
         <Category />
-        <div className="flex items-center justify-center my-4">
+        {/* <div className="flex items-center justify-center my-4">
           <button
             className="bg-purpleLight p-2 w-[40%] rounded-2 flex items-center justify-center gap-2"
             onClick={() => navigate('/game')}
@@ -27,7 +27,7 @@ export const Home = () => {
             <img src="/REracle.svg" alt="REracle 아이콘" className="w-9 h-9" />
             <span>분리수거 퍼즐 게임</span>
           </button>
-        </div>
+        </div> */}
       </main>
     </>
   );
