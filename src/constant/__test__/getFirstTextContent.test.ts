@@ -1,5 +1,5 @@
-import { getFirstTextContent } from '@/constant/getFirstTextContent';
 import { describe, expect, it } from 'vitest';
+import { getFirstTextContent } from '../getFirstTextContent';
 
 describe('getFirstTextContent', () => {
   it('첫 번째 텍스트 내용을 반환합니다.', () => {
