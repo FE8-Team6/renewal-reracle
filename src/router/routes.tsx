@@ -6,8 +6,8 @@ import ReraclePuzzle from '@/pages/ReracleGame';
 import BackHeader from '@/lib/common/BackHeader';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 
-const CategoryDetailItems = React.lazy(() => import('@/components/WasteCategory/CategoryDetailItems'));
-const CategoryItems = React.lazy(() => import('@/components/WasteCategory/CategoryItems'));
+const CategoryDetailItemsPage = React.lazy(() => import('@/pages/CategoryDetailItemsPage'));
+const CategoryItemsPage = React.lazy(() => import('@/pages/CategoryItemsPage'));
 const Comments = React.lazy(() => import('@/pages/Comments'));
 const MyQuestion = React.lazy(() => import('@/pages/MyQuestion'));
 const Announcement = React.lazy(() => import('@/pages/Announcement'));
@@ -86,7 +86,7 @@ export const routes = [
         element: (
           <ErrorBoundary>
             <Suspense fallback={<Loading />}>
-              <CategoryItems />
+              <CategoryItemsPage />
             </Suspense>
           </ErrorBoundary>
         ),
@@ -121,7 +121,7 @@ export const routes = [
         element: (
           <ErrorBoundary>
             <Suspense fallback={<Loading />}>
-              <CategoryDetailItems />
+              <CategoryDetailItemsPage />
             </Suspense>
           </ErrorBoundary>
         ),
