@@ -19,7 +19,7 @@ import { MoreHorizontal } from 'lucide-react';
 import { formatContent } from '@/constant/formatContent';
 import { KakaoAdfit320x50 } from '@/components/KakaoAdfit';
 
-const AnnouncementDetailItem = () => {
+const AnnouncementDetailItemPage = () => {
   const { announcementId } = useParams();
   const [announcement, setAnnouncement] = useState<{
     title: string;
@@ -187,4 +187,4 @@ const AnnouncementDetailItem = () => {
     </main>
   );
 };
-export default AnnouncementDetailItem;
+export default AnnouncementDetailItemPage;

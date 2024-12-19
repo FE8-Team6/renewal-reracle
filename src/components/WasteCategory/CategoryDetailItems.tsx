@@ -11,7 +11,7 @@ type ItemsDetails = {
   recyclingInstructions: string[];
 };
 
-const CategoryDetailItems = () => {
+export const CategoryDetailItems = () => {
   const { categoryId, itemId } = useParams();
   const [itemsDetails, setItemsDetails] = useState<ItemsDetails>();
 
@@ -72,5 +72,3 @@ const CategoryDetailItems = () => {
     </article>
   );
 };
-
-export default CategoryDetailItems;

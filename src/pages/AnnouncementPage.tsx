@@ -29,7 +29,7 @@ type Announcement = {
   category: string;
 };
 
-const Announcement = () => {
+const AnnouncementPage = () => {
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const [newAnnouncement, setNewAnnouncement] = useState({
@@ -234,4 +234,4 @@ const Announcement = () => {
   );
 };
 
-export default Announcement;
+export default AnnouncementPage;

@@ -1,23 +1,23 @@
 import { DetailLayout, MainLayout, NavLayout } from '@/layouts';
-import Loading from '@/pages/Loading';
 import React, { Suspense } from 'react';
-import { Home, Login, SignUp, NotFound } from '@/pages';
+import { HomePage, LoginPage, SignUpPage, NotFoundPage } from '@/pages';
 import ReraclePuzzle from '@/pages/ReracleGame';
 import BackHeader from '@/lib/common/BackHeader';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
+import Loading from '@/components/Loading';
 
-const CategoryDetailItems = React.lazy(() => import('@/components/WasteCategory/CategoryDetailItems'));
-const CategoryItems = React.lazy(() => import('@/components/WasteCategory/CategoryItems'));
-const Comments = React.lazy(() => import('@/pages/Comments'));
-const MyQuestion = React.lazy(() => import('@/pages/MyQuestion'));
-const Announcement = React.lazy(() => import('@/pages/Announcement'));
-const AnnouncementDetailItem = React.lazy(() => import('@/pages/AnnouncementDetailItem'));
-const Answer = React.lazy(() => import('@/pages/Answer'));
+const CategoryDetailItemsPage = React.lazy(() => import('@/pages/CategoryDetailItemsPage'));
+const CategoryItemsPage = React.lazy(() => import('@/pages/CategoryItemsPage'));
+const CommentsPage = React.lazy(() => import('@/pages/CommentsPage'));
+const MyQuestionPage = React.lazy(() => import('@/pages/MyQuestionPage'));
+const AnnouncementPage = React.lazy(() => import('@/pages/AnnouncementPage'));
+const AnnouncementDetailItemPage = React.lazy(() => import('@/pages/AnnouncementDetailItemPage'));
+const AnswerPage = React.lazy(() => import('@/pages/AnswerPage'));
 const MyPage = React.lazy(() => import('@/pages/MyPage'));
-const PasswordReset = React.lazy(() => import('@/pages/PasswordReset'));
-const Qna = React.lazy(() => import('@/pages/Qna'));
-const Article = React.lazy(() => import('@/pages/Article'));
-const ArticleItem = React.lazy(() => import('@/components/ArticleItem.tsx'));
+const PasswordResetPage = React.lazy(() => import('@/pages/PasswordResetPage'));
+const QnaPage = React.lazy(() => import('@/pages/QnaPage'));
+const ArticlePage = React.lazy(() => import('@/pages/ArticlePage'));
+const ArticleItem = React.lazy(() => import('@/components/ArticleItem'));
 
 export const routes = [
   {
@@ -27,7 +27,7 @@ export const routes = [
         path: '/',
         element: (
           <ErrorBoundary>
-            <Home />
+            <HomePage />
           </ErrorBoundary>
         ),
       },
@@ -36,7 +36,7 @@ export const routes = [
         element: (
           <ErrorBoundary>
             <Suspense fallback={<Loading />}>
-              <Qna />
+              <QnaPage />
             </Suspense>
           </ErrorBoundary>
         ),
@@ -46,7 +46,7 @@ export const routes = [
         element: (
           <ErrorBoundary>
             <Suspense fallback={<Loading />}>
-              <Article />
+              <ArticlePage />
             </Suspense>
           </ErrorBoundary>
         ),
@@ -56,7 +56,7 @@ export const routes = [
         element: (
           <ErrorBoundary>
             <Suspense fallback={<Loading />}>
-              <Announcement />
+              <AnnouncementPage />
             </Suspense>
           </ErrorBoundary>
         ),
@@ -76,7 +76,7 @@ export const routes = [
         element: (
           <ErrorBoundary>
             <Suspense fallback={<Loading />}>
-              <MyQuestion />
+              <MyQuestionPage />
             </Suspense>
           </ErrorBoundary>
         ),
@@ -86,7 +86,7 @@ export const routes = [
         element: (
           <ErrorBoundary>
             <Suspense fallback={<Loading />}>
-              <CategoryItems />
+              <CategoryItemsPage />
             </Suspense>
           </ErrorBoundary>
         ),
@@ -101,7 +101,7 @@ export const routes = [
         element: (
           <ErrorBoundary>
             <Suspense fallback={<Loading />}>
-              <PasswordReset />
+              <PasswordResetPage />
             </Suspense>
           </ErrorBoundary>
         ),
@@ -121,7 +121,7 @@ export const routes = [
         element: (
           <ErrorBoundary>
             <Suspense fallback={<Loading />}>
-              <CategoryDetailItems />
+              <CategoryDetailItemsPage />
             </Suspense>
           </ErrorBoundary>
         ),
@@ -131,7 +131,7 @@ export const routes = [
         element: (
           <ErrorBoundary>
             <Suspense fallback={<Loading />}>
-              <AnnouncementDetailItem />
+              <AnnouncementDetailItemPage />
             </Suspense>
           </ErrorBoundary>
         ),
@@ -141,7 +141,7 @@ export const routes = [
         element: (
           <ErrorBoundary>
             <Suspense fallback={<Loading />}>
-              <Answer />
+              <AnswerPage />
             </Suspense>
           </ErrorBoundary>
         ),
@@ -150,7 +150,7 @@ export const routes = [
         path: '/signup',
         element: (
           <ErrorBoundary>
-            <SignUp />
+            <SignUpPage />
           </ErrorBoundary>
         ),
       },
@@ -158,13 +158,13 @@ export const routes = [
         path: '/login',
         element: (
           <ErrorBoundary>
-            <Login />
+            <LoginPage />
           </ErrorBoundary>
         ),
       },
       {
         path: '*',
-        element: <NotFound />,
+        element: <NotFoundPage />,
       },
     ],
   },
@@ -176,7 +176,7 @@ export const routes = [
         element: (
           <ErrorBoundary>
             <Suspense fallback={<Loading />}>
-              <Comments />
+              <CommentsPage />
             </Suspense>
           </ErrorBoundary>
         ),

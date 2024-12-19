@@ -9,12 +9,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { KakaoAdfit320x50, KakaoAdfit320x100 } from '@/components/KakaoAdfit';
 import { Input } from '@/components/ui/input';
+import { emailSchema } from '@/constant/emailSchema';
 
-const emailSchema = z.object({
-  email: z.string().email('이메일 형식이 올바르지 않습니다.'),
-});
-
-const PasswordReset = () => {
+const PasswordResetPage = () => {
   const [emailSent, setEmailSent] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof emailSchema>>({
@@ -72,4 +69,4 @@ const PasswordReset = () => {
     </main>
   );
 };
-export default PasswordReset;
+export default PasswordResetPage;

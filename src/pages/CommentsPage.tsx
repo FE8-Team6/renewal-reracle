@@ -18,7 +18,7 @@ import { formatDateToKoreanTime } from '@/utils/dateKoreanTime';
 import BackHeader from '@/lib/common/BackHeader';
 import { KakaoAdfit320x50 } from '@/components/KakaoAdfit';
 
-const Comments = () => {
+const CommentsPage = () => {
   const location = useLocation();
   const questionId = location.state?.questionId || '';
   const question = location.state?.question || '';
@@ -224,4 +224,4 @@ const Comments = () => {
   );
 };
 
-export default Comments;
+export default CommentsPage;

@@ -5,7 +5,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselPagination } from '@/c
 import { KakaoAdfit320x100, KakaoAdfit320x50 } from '@/components/KakaoAdfit';
 import { getCategoryItems, Categories } from '@/apis/categoryApi/category';
 
-const CategoryItems = () => {
+export const CategoryItems = () => {
   const { categoryId } = useParams();
   const [categoryItems, setCategoryItems] = useState<Categories[]>([]);
   const [containerWidth, setContainerWidth] = useState('w-[23rem]');
@@ -73,5 +73,3 @@ const CategoryItems = () => {
     </main>
   );
 };
-
-export default CategoryItems;
