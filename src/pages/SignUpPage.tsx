@@ -13,7 +13,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { signUpSchema } from '@/constant/signUpSchema';
 import { KakaoAdfit320x50 } from '@/components/KakaoAdfit';
 
-export const SignUp = () => {
+export const SignUpPage = () => {
   const [error, setError] = useState<string>('');
   const [emailError, setEmailError] = useState<string>('');
   const [isDisplayNameChecked, setIsDisplayNameChecked] = useState<boolean>(false);

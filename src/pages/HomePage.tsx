@@ -2,7 +2,7 @@ import { Category } from '@/components/WasteCategory';
 import { Helmet } from 'react-helmet-async';
 // import { useNavigate } from 'react-router-dom';
 
-export const Home = () => {
+export const HomePage = () => {
   // const navigate = useNavigate();
 
   const siteUrl = 'https://reracle.netlify.app';

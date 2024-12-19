@@ -1,4 +1,4 @@
-export const NotFound = () => {
+export const NotFoundPage = () => {
   return (
     <main className="min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center bg-gray-100">
       <h1 className="text-4xl font-bold text-gray-800 mb-4">페이지를 찾을 수 없습니다</h1>

@@ -14,7 +14,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { loginSchema } from '@/constant/loginSchema';
 import { KakaoAdfit320x50 } from '@/components/KakaoAdfit';
 
-export const Login = () => {
+export const LoginPage = () => {
   const [error, setError] = useState<string>('');
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();

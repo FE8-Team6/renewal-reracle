@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { KakaoAdfit320x100, KakaoAdfit320x50 } from '@/components/KakaoAdfit';
 import { getFirstTextContent } from '@/constant/getFirstTextContent';
 
-const Article = () => {
+const ArticlePage = () => {
   const [articles, setArticles] = useState<Articles[]>([]);
 
   useEffect(() => {
@@ -32,4 +32,4 @@ const Article = () => {
   );
 };
 
-export default Article;
+export default ArticlePage;

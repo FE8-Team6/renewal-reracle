@@ -31,7 +31,7 @@ type Question = {
   postCategory: string;
 }[];
 
-const Qna = () => {
+const QnaPage = () => {
   const [questions, setQuestions] = useState<Question>([]);
   const [currentUser, setCurrentUser] = useState<{
     displayName: string;
@@ -235,4 +235,4 @@ const Qna = () => {
   );
 };
 
-export default Qna;
+export default QnaPage;

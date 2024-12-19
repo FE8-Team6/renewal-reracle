@@ -27,7 +27,7 @@ type SubmittedAnswer = {
   likes: number;
 }[];
 
-const Answer = () => {
+const AnswerPage = () => {
   const location = useLocation();
   const questionId = location.state?.questionId || '';
   const initialQuestion = location.state?.question || '';
@@ -245,4 +245,4 @@ const Answer = () => {
     </main>
   );
 };
-export default Answer;
+export default AnswerPage;
