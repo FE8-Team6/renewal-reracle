@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import { IoChevronBack } from 'react-icons/io5';
 
-interface BackHeaderProps {
+type BackHeaderProps = {
   comment?: string[];
-}
+};
 
 const BackHeader = ({ comment }: BackHeaderProps) => {
   const navigate = useNavigate();
