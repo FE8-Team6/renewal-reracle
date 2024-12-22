@@ -37,11 +37,11 @@ git clone https://github.com/FE8-Team6/renewal-reracle.git
 ```
 
 ```bash
-npm install
+yarn install
 ```
 
 ```bash
-npm run dev
+yarn dev
 ```
 
 <br/><br/>
