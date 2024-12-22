@@ -47,17 +47,25 @@ export const CategoryItems = () => {
       <KakaoAdfit320x100 />
       <section>
         <KakaoAdfit320x50 />
-        <h2 className="mt-4 ml-5 text-xl font-bold text-purple">재활용품 세부 품목</h2>
-        <Carousel className="h-[30rem] mt-4">
+        <h2 aria-label="재활용품 세부 품목" className="mt-4 ml-5 text-xl font-bold text-purple">
+          재활용품 세부 품목
+        </h2>
+        <Carousel className="h-[30rem] mt-4" aria-label="재활용품 세부 품목 슬라이드">
           <CarouselContent>
-            {chunkedItems.map((chunk, index) => (
-              <CarouselItem key={index}>
+            {chunkedItems.map((chunk, pageIndex) => (
+              <CarouselItem key={pageIndex} role="group" aria-label={`${pageIndex + 1}페이지`}>
                 <div className={`grid grid-cols-3 gap-4 ${containerWidth} mx-auto`}>
                   {chunk.map((item) => (
                     <div key={item.id} className="flex flex-col items-center">
-                      <NavLink to={`/category/${categoryId}/item/${item.id}`} className="no-underline">
+                      <NavLink
+                        to={`/category/${categoryId}/item/${item.id}`}
+                        className="no-underline"
+                        aria-label={`${item.name} 상세 정보 보기`}
+                      >
                         <div className="flex items-center justify-center w-24 h-24 rounded-lg cursor-pointer bg-yellowLight hover:bg-yellow">
-                          {item.imageURL && <img src={item.imageURL} alt={item.name} className="w-12 h-12" />}
+                          {item.imageURL && (
+                            <img src={item.imageURL} alt={`${item.name} 아이콘`} className="w-12 h-12" />
+                          )}
                         </div>
                         <p className="mt-2 text-sm font-semibold text-center text-gray-800">{item.name}</p>
                       </NavLink>
