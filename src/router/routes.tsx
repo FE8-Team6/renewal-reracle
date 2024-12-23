@@ -5,6 +5,7 @@ import ReraclePuzzle from '@/pages/ReracleGame';
 import BackHeader from '@/lib/common/BackHeader';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import Loading from '@/components/Loading';
+import QnaPage from '@/pages/QnaPage';
 
 const CategoryDetailItemsPage = React.lazy(() => import('@/pages/CategoryDetailItemsPage'));
 const CategoryItemsPage = React.lazy(() => import('@/pages/CategoryItemsPage'));
@@ -15,7 +16,6 @@ const AnnouncementDetailItemPage = React.lazy(() => import('@/pages/Announcement
 const AnswerPage = React.lazy(() => import('@/pages/AnswerPage'));
 const MyPage = React.lazy(() => import('@/pages/MyPage'));
 const PasswordResetPage = React.lazy(() => import('@/pages/PasswordResetPage'));
-const QnaPage = React.lazy(() => import('@/pages/QnaPage'));
 const ArticlePage = React.lazy(() => import('@/pages/ArticlePage'));
 const ArticleItem = React.lazy(() => import('@/components/ArticleItem'));
 
@@ -35,9 +35,7 @@ export const routes = [
         path: 'qna',
         element: (
           <ErrorBoundary>
-            <Suspense fallback={<Loading />}>
-              <QnaPage />
-            </Suspense>
+            <QnaPage />
           </ErrorBoundary>
         ),
       },
