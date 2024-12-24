@@ -181,7 +181,7 @@ const AnswerPage = () => {
           <div className="flex gap-3">
             <p>댓글 {submittedAnswers.length}</p>
             <div className="flex items-center">
-              <button className="pr-1" onClick={() => handleLike(questionId)}>
+              <button className="pr-1" type="button" onClick={() => handleLike(questionId)}>
                 <ThumbsUp className={`w-5 h-5 ${likedPosts.has(questionId) ? 'text-blue-500' : ''}`} />
               </button>
               <span>{likes}</span>

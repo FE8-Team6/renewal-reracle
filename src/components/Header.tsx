@@ -20,6 +20,7 @@ const Header = () => {
         onClick={() => handleNavClick('/')}
         className="absolute ml-4 cursor-pointer w-[5rem]"
         aria-label="홈으로 이동"
+        type="button"
       >
         <img src="/icon/REracle_logo.svg" alt="reracle 아이콘" className="w-full" />
       </button>

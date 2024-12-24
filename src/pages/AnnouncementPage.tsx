@@ -145,7 +145,7 @@ const AnnouncementPage = () => {
           <div className="fixed bottom-[16vh] left-[50%] transform -translate-x-1/2">
             <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
               <DialogTrigger asChild>
-                <button className="p-2 border bg-yellow rounded-10">
+                <button className="p-2 border bg-yellow rounded-10" type="button">
                   <GoPencil className="w-5 h-5 text-white" />
                 </button>
               </DialogTrigger>

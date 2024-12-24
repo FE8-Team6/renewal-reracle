@@ -77,12 +77,16 @@ const MyPage = () => {
                   </div>
                 </div>
                 <div className="mt-4">
-                  <button onClick={() => navigate('/pwreset')} className="text-gray-500 hover:underline">
+                  <button onClick={() => navigate('/pwreset')} type="button" className="text-gray-500 hover:underline">
                     <span className="text-sm font-medium text-gray-500">비밀번호 변경</span>
                   </button>
                 </div>
                 <div className="mt-4">
-                  <button onClick={() => navigate('/myquestion')} className="text-sm text-gray-500 hover:underline">
+                  <button
+                    onClick={() => navigate('/myquestion')}
+                    type="button"
+                    className="text-sm text-gray-500 hover:underline"
+                  >
                     <span className="font-medium text-gray-500">나의 R지식in 보러가기</span>
                   </button>
                 </div>
@@ -106,6 +110,7 @@ const MyPage = () => {
                         #{historyItem.query}
                       </span>
                       <button
+                        type="button"
                         onClick={() => handleDeleteClick(historyItem.id)}
                         className="absolute flex items-center justify-center w-4 h-4 text-white transition-opacity rounded-full -top-1 -right-1 bg-purple"
                       >
@@ -125,7 +130,7 @@ const MyPage = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
-                  <button className="text-gray-500 hover:underline">
+                  <button type="button" className="text-gray-500 hover:underline">
                     <span className="text-sm font-medium text-gray-500">REracle 개발 과정</span>
                   </button>
                 </div>

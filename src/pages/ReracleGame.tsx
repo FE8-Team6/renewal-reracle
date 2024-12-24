@@ -239,6 +239,7 @@ const ReraclePuzzle = () => {
             <div className="text-center">
               <p>시간이 초과되었습니다. 게임을 다시 시작합니다.</p>
               <button
+                type="button"
                 onClick={handleRestart}
                 className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
               >

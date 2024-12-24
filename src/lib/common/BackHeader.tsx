@@ -13,7 +13,12 @@ const BackHeader = ({ comment }: BackHeaderProps) => {
       className="fixed top-0 w-full max-w-[500px] z-50 p-3 h-[3rem] bg-purpleLight flex items-center"
       role="banner"
     >
-      <button onClick={() => navigate(-1)} aria-label="뒤로 가기" className="flex items-center justify-center">
+      <button
+        onClick={() => navigate(-1)}
+        type="button"
+        aria-label="뒤로 가기"
+        className="flex items-center justify-center"
+      >
         <IoChevronBack className="w-5 h-5" />
       </button>
       {comment && (
