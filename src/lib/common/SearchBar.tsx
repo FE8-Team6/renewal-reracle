@@ -128,7 +128,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(({ error, c
   }, [selectedIndex]);
 
   return (
-    <div className={`${className || 'w-full'}`}>
+    <div className={`${className || 'w-full'}`} role="search" aria-label="재활용품 검색">
       <div className={'relative flex items-center w-full'}>
         <div className="absolute left-3">
           <Search className="w-5 h-5" />
@@ -142,25 +142,45 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(({ error, c
           className={`h-[50px] rounded-5 focus:outline-none ${widthClass} ${
             error ? 'focus:border focus:border-error-40' : 'focus:border focus:border-primary-40'
           }`}
-          placeholder={props.placeholder || '찾고자 하는 재활용품을 입력해 주세요. '}
+          placeholder={props.placeholder || '찾고자 하는 재활용품을 입력해 주세요.'}
+          aria-label="재활용품 검색"
+          role="searchbox"
+          aria-expanded={searchResults.length > 0}
+          aria-controls="search-results"
         />
         {value && (
           <button
             onClick={handleClear}
             className={`absolute right-3 rounded-10 ${error ? 'bg-error-40' : ''}`}
             type="button"
+            aria-label="검색어 지우기"
           >
             <X className={`h-5 w-5 ${error ? 'text-neutral-0' : ''} `} />
           </button>
         )}
       </div>
       {searchResults.length > 0 && (
-        <div ref={resultsRef} className={`absolute bg-white border shadow-lg rounded-4 ${widthClass} z-10`}>
+        <div
+          ref={resultsRef}
+          className={`absolute bg-white border shadow-lg rounded-4 ${widthClass} z-10`}
+          role="listbox"
+          id="search-results"
+          aria-label="검색 결과 목록"
+        >
           {searchResults.map((result, index) => (
             <div
               key={result.id}
+              role="option"
+              tabIndex={0}
+              aria-selected={index === selectedIndex}
+              id={`result-${index}`}
               className={`p-2 cursor-pointer hover:bg-gray-200 ${index === selectedIndex ? 'bg-gray-200' : ''}`}
               onClick={() => handleResultClick(result.name, result.categoryId, result.id)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleResultClick(result.name, result.categoryId, result.id);
+                }
+              }}
             >
               {result.name}
             </div>
@@ -168,7 +188,13 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(({ error, c
         </div>
       )}
       {isNoResults && (
-        <div className={`absolute bg-white border shadow-lg rounded-4 ${widthClass} p-2 z-10`}>
+        <div
+          role="alert"
+          aria-live="assertive"
+          tabIndex={0}
+          aria-label="검색 결과가 없습니다. 다시 검색어를 입력해 주세요."
+          className={`absolute bg-white border shadow-lg rounded-4 ${widthClass} p-2 z-10`}
+        >
           검색 결과가 없습니다.
         </div>
       )}
