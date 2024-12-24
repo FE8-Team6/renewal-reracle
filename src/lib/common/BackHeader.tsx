@@ -16,7 +16,11 @@ const BackHeader = ({ comment }: BackHeaderProps) => {
       <button onClick={() => navigate(-1)} aria-label="뒤로 가기" className="flex items-center justify-center">
         <IoChevronBack className="w-5 h-5" />
       </button>
-      {comment && <h2 aria-live="polite">댓글 {comment.length}개</h2>}
+      {comment && (
+        <h2 aria-live="polite" tabIndex={0}>
+          댓글 {comment.length}개
+        </h2>
+      )}
     </header>
   );
 };
