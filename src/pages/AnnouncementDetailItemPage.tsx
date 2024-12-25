@@ -103,51 +103,79 @@ const AnnouncementDetailItemPage = () => {
   };
 
   return (
-    <main>
+    <main aria-label="공지사항 상세 페이지">
       <KakaoAdfit320x50 />
-      <section className="px-4 py-2 min-h-[calc(100vh-8rem)]">
+      <section className="px-4 py-2 min-h-[calc(100vh-8rem)]" aria-label="공지사항 내용">
         {announcement ? (
-          <>
+          <article>
             <header>
-              <h2 className="text-xl">{announcement.title}</h2>
+              <h1 className="text-xl" tabIndex={0} aria-label={`공지사항 제목: ${announcement.title}`}>
+                {announcement.title}
+              </h1>
             </header>
             <div className="flex items-center justify-between">
               <div className="mt-2">
-                <p className="font-semibold">{announcement.author}</p>
+                <p className="font-semibold" tabIndex={0} aria-label={`작성자: ${announcement.author}`}>
+                  {announcement.author}
+                </p>
               </div>
               {isAdmin && (
                 <Popover>
                   <PopoverTrigger asChild>
-                    <Button variant="ghost" size="icon">
+                    <Button variant="ghost" size="icon" aria-label="관리자 메뉴">
                       <MoreHorizontal className="w-5 h-5" />
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-[6rem]">
-                    <Button variant="default" size="sm" className="w-full" onClick={() => setIsEditModalOpen(true)}>
+                    <Button
+                      variant="default"
+                      size="sm"
+                      className="w-full"
+                      aria-label="공지사항 수정하기"
+                      onClick={() => setIsEditModalOpen(true)}
+                    >
                       수정
                     </Button>
-                    <Button variant="secondary" size="sm" className="w-full" onClick={handleDeleteAnnouncement}>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      className="w-full"
+                      aria-label="공지사항 삭제하기"
+                      onClick={handleDeleteAnnouncement}
+                    >
                       삭제
                     </Button>
                   </PopoverContent>
                 </Popover>
               )}
             </div>
-            <p className="text-sm">{formatDateToKoreanTime(announcement.createdAt)}</p>
-            <div className="mt-2">
+            <time
+              dateTime={announcement.createdAt.toISOString()}
+              tabIndex={0}
+              className="text-sm"
+              aria-label={`작성일: ${formatDateToKoreanTime(announcement.createdAt)}`}
+            >
+              {formatDateToKoreanTime(announcement.createdAt)}
+            </time>
+            <div className="mt-2" tabIndex={0} aria-label={`공지사항 내용: ${announcement.details}`}>
               <hr />
               <p className="mt-2 ">{formatContent(announcement.details)}</p>
             </div>
-          </>
+          </article>
         ) : (
-          <p className="text-black">공지사항이 없습니다.</p>
+          <p role="alert" aria-live="polite">
+            공지사항이 없습니다.
+          </p>
         )}
-        <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
-          <DialogContent>
+        <Dialog aria-labelledby="dialog-title" open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
+          <DialogContent role="dialog">
             <DialogHeader>
-              <DialogTitle>공지사항 수정</DialogTitle>
+              <DialogTitle id="dialog-title">공지사항 수정</DialogTitle>
               <DialogDescription>공지사항을 수정하세요.</DialogDescription>
             </DialogHeader>
+            <label htmlFor="edit-title" className="sr-only">
+              제목
+            </label>
             <Input
               type="text"
               placeholder="제목"
@@ -160,6 +188,9 @@ const AnnouncementDetailItemPage = () => {
                 })
               }
             />
+            <label htmlFor="edit-details" className="sr-only">
+              상세 내용
+            </label>
             <textarea
               placeholder="상세 내용"
               value={editAnnouncement.details}
