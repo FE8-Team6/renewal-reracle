@@ -57,7 +57,7 @@ export const QuestionItem = ({ question, likedPosts, currentUser, handleLiked }:
           <h2 className="font-semibold text-gray-900 truncate" tabIndex={0} aria-label={`제목: ${question.question} `}>
             {truncateTitle(question.question)}
           </h2>
-          <p className="text-sm text-gray-500" aria-label={`작성자: ${question.author}`} tabIndex={0}>
+          <p className="text-sm text-gray-700" aria-label={`작성자: ${question.author}`} tabIndex={0}>
             {question.author}
           </p>
         </header>
