@@ -105,7 +105,7 @@ const AnnouncementDetailItemPage = () => {
   return (
     <main>
       <KakaoAdfit320x50 />
-      <section className="px-4 py-2 min-h-[calc(100vh-11rem)]">
+      <section className="px-4 py-2 min-h-[calc(100vh-8rem)]">
         {announcement ? (
           <>
             <header>
