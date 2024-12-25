@@ -1,7 +1,7 @@
 <br/>
 
 <div align="center">
-  <img src="/public/images/loginPageImg.png" width="200px" alt="Reracle 로고 사진" />
+  <img src="/public/images/loginPageImg.png" width="200px" alt="Reracle 로고 사진입니다." />
 </div>
 
 <h3 align="center">
