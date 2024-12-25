@@ -127,6 +127,7 @@ const MyPage = () => {
                       role="listitem"
                     >
                       <button
+                        type="button"
                         className="cursor-pointer text-purple hover:text-purpleDark"
                         onClick={() => handleNavClick(historyItem.categoryId, historyItem.itemId)}
                         aria-label={`${historyItem.query} 검색 결과로 이동`}
