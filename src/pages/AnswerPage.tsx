@@ -146,26 +146,44 @@ const AnswerPage = () => {
   };
 
   return (
-    <main>
+    <main aria-label="질문과 답변">
       <section>
         <div className="px-4 py-2">
-          <p className="text-sm text-purple">{postCategory}</p>
-          <h3 className="text-xl">{question}</h3>
+          <p className="text-sm text-purple" tabIndex={0} aria-label={`카테고리: ${postCategory}`}>
+            {postCategory}
+          </p>
+          <h1 className="text-xl" tabIndex={0} aria-label={`질문: ${question}`}>
+            {question}
+          </h1>
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-between w-full mt-2">
-              <p className="font-semibold">{author}</p>
+              <p className="font-semibold" tabIndex={0} aria-label={`질문자: ${author}`} role="text">
+                {author}
+              </p>
               {currentUser.uid === authorUid && (
                 <Popover>
                   <PopoverTrigger asChild>
-                    <Button variant="ghost" size="icon">
-                      <MoreHorizontal className="w-5 h-5" />
+                    <Button variant="ghost" size="icon" aria-label="게시글 관리 메뉴">
+                      <MoreHorizontal className="w-5 h-5" aria-hidden="true" />
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-[6rem]">
-                    <Button variant="default" size="sm" className="w-full" onClick={() => setIsEditModalOpen(true)}>
+                    <Button
+                      variant="default"
+                      size="sm"
+                      className="w-full"
+                      onClick={() => setIsEditModalOpen(true)}
+                      aria-label="게시글 수정하기"
+                    >
                       수정
                     </Button>
-                    <Button variant="secondary" size="sm" className="w-full" onClick={handleDeleteQuestion}>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      className="w-full"
+                      onClick={handleDeleteQuestion}
+                      aria-label="게시글 삭제하기"
+                    >
                       삭제
                     </Button>
                   </PopoverContent>
@@ -173,18 +191,38 @@ const AnswerPage = () => {
               )}
             </div>
           </div>
-          {createdAt && <time className="text-sm">{formatDateToKoreanTime(createdAt)}</time>}
+          {createdAt && (
+            <time className="text-sm" tabIndex={0} aria-label={`작성일: ${formatDateToKoreanTime(createdAt)}`}>
+              {formatDateToKoreanTime(createdAt)}
+            </time>
+          )}
           <div className="mt-2">
             <hr />
-            <p className="mt-2">{content}</p>
+            <p className="mt-2" tabIndex={0} aria-label={`질문 내용: ${content}`} role="text">
+              {content}
+            </p>
           </div>
           <div className="flex gap-3">
-            <p>댓글 {submittedAnswers.length}</p>
+            <p tabIndex={0} aria-label={`댓글 수 ${submittedAnswers.length}개`} role="text">
+              댓글 {submittedAnswers.length}
+            </p>
             <div className="flex items-center">
-              <button className="pr-1" onClick={() => handleLike(questionId)}>
-                <ThumbsUp className={`w-5 h-5 ${likedPosts.has(questionId) ? 'text-blue-500' : ''}`} />
+              <button
+                className="pr-1"
+                type="button"
+                onClick={() => handleLike(questionId)}
+                aria-label={`좋아요 ${likedPosts.has(questionId) ? '취소하겠습니까?' : '누르시겠습니까?'}`}
+                aria-pressed={likedPosts.has(questionId)}
+              >
+                <ThumbsUp
+                  className={`w-5 h-5 ${likedPosts.has(questionId) ? 'text-blue-500' : ''}`}
+                  aria-hidden="true"
+                />
               </button>
-              <span>{likes}</span>
+
+              <span tabIndex={0} aria-label={`좋아요 ${likes}개`}>
+                {likes}
+              </span>
             </div>
           </div>
         </div>
@@ -193,56 +231,83 @@ const AnswerPage = () => {
           {submittedAnswers.map(({ id, author, content, createdAt }) => (
             <div
               key={id}
+              tabIndex={0}
+              aria-label="답변 내용"
               className={`relative flex flex-col ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'} mx-auto p-2 text-lg bg-purpleLight rounded-4`}
             >
-              <p className="text-sm">{author}</p>
-              <p className="text-lg text-black">{formatContent(content)}</p>
-              {createdAt && <p className="text-xs text-gray-500">{formatDateToKoreanTime(new Date(createdAt))}</p>}
+              <p className="text-sm" tabIndex={0} aria-label={`답변자: ${author}`}>
+                {author}
+              </p>
+              <p className="text-lg text-black" tabIndex={0} aria-label={`답변 내용: ${formatContent(content)}`}>
+                {formatContent(content)}
+              </p>
+              {createdAt && (
+                <time
+                  className="text-xs text-gray-500"
+                  tabIndex={0}
+                  aria-label={`작성일: ${formatDateToKoreanTime(new Date(createdAt))}`}
+                >
+                  {formatDateToKoreanTime(new Date(createdAt))}
+                </time>
+              )}
             </div>
           ))}
-          <div className="flex flex-col w-[23rem] mx-auto">
+          <nav className="flex flex-col w-[23rem] mx-auto">
             <NavLink to={`/comments/${questionId}`} state={{ questionId, question, submittedAnswers }}>
               <Button variant="link" size="sm">
                 댓글을 남겨보세요.
               </Button>
             </NavLink>
-          </div>
+          </nav>
         </div>
       </section>
-      <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
-        <DialogContent>
+      <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen} aria-labelledby="edit-dialog-title">
+        <DialogContent role="dialog">
           <DialogHeader>
-            <DialogTitle>게시글 수정</DialogTitle>
+            <DialogTitle id="edit-dialog-title">게시글 수정</DialogTitle>
             <DialogDescription>게시글을 수정하세요.</DialogDescription>
           </DialogHeader>
-          <input
-            type="text"
-            value={editTitle}
-            onChange={(event) => setEditTitle(event.target.value)}
-            placeholder="제목"
-            className="w-full p-2 mb-2 border"
-          />
-          <textarea
-            value={editContent}
-            onChange={(event) => setEditContent(event.target.value)}
-            placeholder="내용"
-            className="w-full h-[30vh] p-2 mb-2 border"
-          />
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="default" size="sm" onClick={handleEditQuestion}>
-                수정
-              </Button>
-            </DialogClose>
-            <DialogClose asChild>
-              <Button variant="secondary" size="sm">
-                닫기
-              </Button>
-            </DialogClose>
-          </DialogFooter>
+          <form onSubmit={(event) => event.preventDefault()}>
+            <label htmlFor="edit-title" className="sr-only">
+              제목
+            </label>
+            <input
+              id="edit-title"
+              type="text"
+              value={editTitle}
+              onChange={(event) => setEditTitle(event.target.value)}
+              placeholder="제목"
+              className="w-full p-2 mb-2 border"
+              aria-label="수정할 제목"
+            />
+            <label htmlFor="edit-content" className="sr-only">
+              내용
+            </label>
+            <textarea
+              id="edit-content"
+              value={editContent}
+              onChange={(event) => setEditContent(event.target.value)}
+              placeholder="내용"
+              className="w-full h-[30vh] p-2 mb-2 border"
+              aria-label="수정할 내용"
+            />
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="default" size="sm" onClick={handleEditQuestion} aria-label="수정 완료">
+                  수정
+                </Button>
+              </DialogClose>
+              <DialogClose asChild>
+                <Button variant="secondary" size="sm" aria-label="수정 취소">
+                  닫기
+                </Button>
+              </DialogClose>
+            </DialogFooter>
+          </form>
         </DialogContent>
       </Dialog>
     </main>
   );
 };
+
 export default AnswerPage;

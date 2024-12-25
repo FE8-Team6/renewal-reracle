@@ -17,7 +17,6 @@ const NotificationWebApi = () => {
         const token = await getToken(messaging, {
           vapidKey: 'BCVj54gMWhvuspDe57rl7SCO8dbRbKPdtGb5IYs9O18AVQPeW1zKZaAVWWNYpLeG3Svh_whLfyGmDBSpQ-u31Gs',
         });
-        console.log('FCM Token:', token);
         const user = auth.currentUser;
         if (user) {
           const userDoc = doc(db, 'users', user.uid);

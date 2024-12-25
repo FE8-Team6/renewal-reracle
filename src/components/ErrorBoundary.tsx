@@ -7,7 +7,11 @@ const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
       <pre className="text-sm text-error-40 mb-4 max-w-[100%] whitespace-pre-wrap break-words text-center">
         {error.message}
       </pre>
-      <button onClick={resetErrorBoundary} className="px-4 py-2 bg-purple text-white rounded-lg hover:bg-purple/80">
+      <button
+        onClick={resetErrorBoundary}
+        className="px-4 py-2 bg-purple text-white rounded-lg hover:bg-purple/80"
+        type="button"
+      >
         다시 시도
       </button>
     </div>

@@ -59,57 +59,88 @@ const MyPage = () => {
   };
 
   return (
-    <main className="flex flex-col min-h-[calc(100vh-8rem)] pb-[5rem]">
+    <main className="flex flex-col min-h-[calc(100vh-8rem)] pb-[5rem]" aria-label="마이 페이지">
       <KakaoAdfit320x50 />
-      <section className="flex-grow w-full h-full pb-4 mx-auto mt-2 overflow-y-auto">
+      <div className="flex-grow w-full h-full pb-4 mx-auto mt-2 overflow-y-auto">
         <div className="flex flex-col items-center space-y-4">
-          <div className={`${cardWidth} mb-4`}>
+          <section
+            className={`${cardWidth} mb-4`}
+            aria-labelledby="profile-title"
+            tabIndex={0}
+            aria-label="프로필 정보"
+          >
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg text-purple">프로필</CardTitle>
+                <CardTitle id="profile-title" className="text-lg text-purple">
+                  프로필
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center space-x-4">
                   <img src="/REracle.svg" alt="REracle 대표 아이콘" className="w-12 h-12" />
                   <div className="flex flex-col">
-                    <span>{user.displayName}</span>
-                    <span className="text-sm text-gray-500">{user.email}</span>
+                    <span aria-label={`사용자 이름: ${user.displayName}`} tabIndex={0}>
+                      {user.displayName}
+                    </span>
+                    <span className="text-sm text-gray-500" tabIndex={0} aria-label={`이메일: ${user.email}`}>
+                      {user.email}
+                    </span>
                   </div>
                 </div>
-                <div className="mt-4">
-                  <button onClick={() => navigate('/pwreset')} className="text-gray-500 hover:underline">
+                <nav className="mt-4" aria-label="프로필 메뉴">
+                  <button
+                    onClick={() => navigate('/pwreset')}
+                    type="button"
+                    className="text-gray-500 hover:underline"
+                    aria-label="비밀번호 변경하기"
+                  >
                     <span className="text-sm font-medium text-gray-500">비밀번호 변경</span>
                   </button>
-                </div>
+                </nav>
                 <div className="mt-4">
-                  <button onClick={() => navigate('/myquestion')} className="text-sm text-gray-500 hover:underline">
+                  <button
+                    onClick={() => navigate('/myquestion')}
+                    type="button"
+                    className="mt-4 text-sm text-gray-500 hover:underline"
+                    aria-label="나의 R지식in 페이지로 이동"
+                  >
                     <span className="font-medium text-gray-500">나의 R지식in 보러가기</span>
                   </button>
                 </div>
               </CardContent>
             </Card>
-          </div>
+          </section>
 
-          <section className={`${cardWidth} mb-4`}>
+          <section className={`${cardWidth} mb-4`} aria-labelledby="search-history-title">
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg text-purple">나의 최근 재활용품 검색 목록</CardTitle>
+                <CardTitle id="search-history-title" className="text-lg text-purple">
+                  나의 최근 재활용품 검색 목록
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2" role="list" aria-label="최근 검색 항목">
                   {recentSearchHistory.map((historyItem) => (
-                    <div key={historyItem.id} className="relative px-3 py-1 rounded-full bg-yellow group">
-                      <span
+                    <div
+                      key={historyItem.id}
+                      className="relative px-3 py-1 rounded-full bg-yellow group"
+                      role="listitem"
+                    >
+                      <button
+                        type="button"
                         className="cursor-pointer text-purple hover:text-purpleDark"
                         onClick={() => handleNavClick(historyItem.categoryId, historyItem.itemId)}
+                        aria-label={`${historyItem.query} 검색 결과로 이동`}
                       >
                         #{historyItem.query}
-                      </span>
+                      </button>
                       <button
+                        type="button"
                         onClick={() => handleDeleteClick(historyItem.id)}
-                        className="absolute flex items-center justify-center w-4 h-4 text-white transition-opacity rounded-full -top-1 -right-1 bg-purple"
+                        className="absolute flex items-center justify-center w-4 h-4 text-white transition-opacity rounded-full -top-1 -right-1 bg-purple-500"
+                        aria-label={`${historyItem.query} 검색 기록 삭제`}
                       >
-                        <X size={12} />
+                        <X size={12} aria-hidden="true" />
                       </button>
                     </div>
                   ))}
@@ -118,14 +149,16 @@ const MyPage = () => {
             </Card>
           </section>
 
-          <section className={`${cardWidth} mb-4`}>
+          <section className={`${cardWidth} mb-4`} aria-labelledby="etc-title">
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg text-purple">기타</CardTitle>
+                <CardTitle id="etc-title" className="text-lg text-purple">
+                  기타
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
-                  <button className="text-gray-500 hover:underline">
+                  <button type="button" className="text-gray-500 hover:underline" aria-label="REracle 개발 과정 보기">
                     <span className="text-sm font-medium text-gray-500">REracle 개발 과정</span>
                   </button>
                 </div>
@@ -141,12 +174,13 @@ const MyPage = () => {
                 localStorage.removeItem('userData');
                 navigate('/login');
               }}
+              aria-label="로그아웃하기"
             >
               로그아웃
             </Button>
           </div>
         </div>
-      </section>
+      </div>
     </main>
   );
 };

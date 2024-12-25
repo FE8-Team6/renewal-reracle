@@ -16,13 +16,21 @@ const Header = () => {
   };
   return (
     <header className="fixed top-0 w-full max-w-[500px] z-50 h-[3rem] bg-purpleLight flex items-center">
-      <img
-        src="/icon/REracle_logo.svg"
-        alt="reracle 아이콘"
+      <button
         onClick={() => handleNavClick('/')}
-        className="w-[5rem] absolute ml-4 cursor-pointer"
+        className="absolute ml-4 cursor-pointer w-[5rem]"
+        aria-label="홈으로 이동"
+        type="button"
+      >
+        <img src="/icon/REracle_logo.svg" alt="reracle 아이콘" className="w-full" />
+      </button>
+      <RxPerson
+        onClick={handleUserIconClick}
+        className="absolute right-0 w-5 h-5 mr-4 cursor-pointer"
+        role="button"
+        aria-label="사용자 페이지로 이동"
+        tabIndex={0}
       />
-      <RxPerson onClick={handleUserIconClick} className="absolute right-0 w-5 h-5 mr-4 cursor-pointer" />
     </header>
   );
 };

@@ -14,12 +14,10 @@ const App = () => {
   }, []);
 
   return (
-    <>
-      <div className="relative select-none m-auto flex flex-col w-full max-w-[500px] h-full bg-white pt-[3rem]">
-        <RouterProvider router={router} />
-        <NotificationWebApi />
-      </div>
-    </>
+    <div className="relative select-none m-auto flex flex-col w-full max-w-[500px] h-full bg-white pt-[3rem]">
+      <RouterProvider router={router} />
+      <NotificationWebApi />
+    </div>
   );
 };
 

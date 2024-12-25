@@ -233,13 +233,19 @@ const CarouselPagination = () => {
   const { api, selectedIndex, slideCount } = useCarousel();
 
   return (
-    <div className="absolute bottom-4 left-0 right-0 flex justify-center items-center space-x-2">
+    <div
+      className="absolute bottom-4 left-0 right-0 flex justify-center items-center space-x-2"
+      role="tablist"
+      aria-label="슬라이드 페이지네이션"
+    >
       {Array.from({ length: slideCount }).map((_, index) => (
         <button
           key={index}
+          role="tab"
+          aria-selected={index === selectedIndex}
           className={`w-2.5 h-2.5 mx-1 rounded-full transition-all ${index === selectedIndex ? 'bg-purple scale-125' : 'bg-gray-400'}`}
           onClick={() => api?.scrollTo(index)}
-          aria-label={`Go to slide ${index + 1}`}
+          aria-label={`${slideCount}개 중 ${index + 1}번째 슬라이드로 이동`}
         />
       ))}
     </div>

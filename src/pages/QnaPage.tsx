@@ -197,7 +197,13 @@ const QnaPage = () => {
   return (
     <main>
       <KakaoAdfit320x50 />
-      <div className="flex justify-center mt-1 whitespace-nowrap">
+      <div
+        className="flex justify-center mt-1 whitespace-nowrap"
+        role="radiogroup"
+        aria-label="게시물 카테고리 선택할 수 있습니다."
+        tabIndex={0}
+        aria-live="polite"
+      >
         {postCategories.map((postCategory) => (
           <PostCategoryButton
             key={postCategory}

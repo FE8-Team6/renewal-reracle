@@ -127,26 +127,31 @@ const AnnouncementPage = () => {
   };
 
   return (
-    <main>
+    <main aria-label="공지사항 페이지">
       <KakaoAdfit320x50 />
-      <div className="flex justify-center mt-2">
+      <nav className="flex justify-center mt-2" role="navigation" aria-label="공지사항 카테고리">
         {announcementCategories.map((announcementCategory) => (
           <AnnouncementCategoryButton
             key={announcementCategory}
             postCategory={announcementCategory}
             isActive={selectedAnnouncementCategory === announcementCategory}
             onClick={() => setselectedAnnouncementCategory(announcementCategory)}
+            aria-selected={selectedAnnouncementCategory === announcementCategory}
+            aria-label={`${announcementCategory} 카테고리`}
           />
         ))}
-      </div>
-      <section className="w-full min-h-[calc(100vh-12rem)] relative overflow-y-auto overflow-x-hidden mx-auto my-3 rounded-4 pb-[5rem] px-8">
+      </nav>
+      <section
+        className="w-full min-h-[calc(100vh-12rem)] relative overflow-y-auto overflow-x-hidden mx-auto my-3 rounded-4 pb-[5rem] px-8"
+        aria-label="공지사항 목록"
+      >
         <KakaoAdfit320x100 />
         {isAdmin && (
           <div className="fixed bottom-[16vh] left-[50%] transform -translate-x-1/2">
             <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
               <DialogTrigger asChild>
-                <button className="p-2 border bg-yellow rounded-10">
-                  <GoPencil className="w-5 h-5 text-white" />
+                <button className="p-2 border bg-yellow rounded-10" type="button" aria-label="공지사항 작성하기">
+                  <GoPencil className="w-5 h-5 text-white" aria-hidden="true" />
                 </button>
               </DialogTrigger>
               <DialogContent>
@@ -172,7 +177,11 @@ const AnnouncementPage = () => {
                     <SelectItem value="기타">기타</SelectItem>
                   </SelectContent>
                 </Select>
+                <label htmlFor="announcement-title" className="sr-only">
+                  제목
+                </label>
                 <Input
+                  id="announcement-title"
                   type="text"
                   placeholder="제목"
                   value={newAnnouncement.title}
@@ -184,7 +193,11 @@ const AnnouncementPage = () => {
                     })
                   }
                 />
+                <label htmlFor="announcement-details" className="sr-only">
+                  상세 내용
+                </label>
                 <textarea
+                  id="announcement-details"
                   placeholder="상세 내용"
                   value={newAnnouncement.details}
                   className="w-full h-[10rem] border border-purple rounded-4 p-2 mb-2 "
@@ -209,26 +222,43 @@ const AnnouncementPage = () => {
             </Dialog>
           </div>
         )}
-        {filteredAnnouncements.map((announcement) => (
-          <div
-            key={announcement.id}
-            className=" bg-yellowLight w-full h-[6rem] mx-auto my-3 flex items-center justify-between px-3 rounded-4 text-black "
-          >
-            <NavLink to={`/announcement/${announcement.id}`} className="flex flex-col">
-              <div className="flex flex-col">
-                <h2 className="text-base font-semibold text-gray-900 truncate">{truncateTitle(announcement.title)}</h2>
-                <p className="text-sm text-gray-500">{announcement.author}</p>
-              </div>
-              <div className="flex items-center justify-between mt-1">
-                <div className="flex gap-2">
+        <ul className="space-y-3" role="list" aria-label="공지사항 목록">
+          {filteredAnnouncements.map((announcement) => (
+            <li
+              key={announcement.id}
+              className="bg-yellowLight w-full h-[6rem] mx-auto flex items-center justify-between px-3 rounded-4 text-black"
+            >
+              <NavLink
+                to={`/announcement/${announcement.id}`}
+                className="flex flex-col"
+                aria-label={`${announcement.title} 공지사항 상세보기`}
+              >
+                <article>
+                  <h2
+                    className="text-base font-semibold text-gray-900 truncate"
+                    tabIndex={0}
+                    aria-label={`제목: ${announcement.title}`}
+                  >
+                    {truncateTitle(announcement.title)}
+                  </h2>
+                  <p className="text-sm text-gray-500" tabIndex={0} aria-label={`작성자: ${announcement.author}`}>
+                    {announcement.author}
+                  </p>
                   {announcement.createdAt && (
-                    <time className="text-sm">{formatDateToKoreanTime(announcement.createdAt)}</time>
+                    <time
+                      tabIndex={0}
+                      dateTime={announcement.createdAt.toISOString()}
+                      className="text-sm"
+                      aria-label={`작성일: ${formatDateToKoreanTime(announcement.createdAt)}`}
+                    >
+                      {formatDateToKoreanTime(announcement.createdAt)}
+                    </time>
                   )}
-                </div>
-              </div>
-            </NavLink>
-          </div>
-        ))}
+                </article>
+              </NavLink>
+            </li>
+          ))}
+        </ul>
       </section>
     </main>
   );

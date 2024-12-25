@@ -36,22 +36,26 @@ export const Category = () => {
   }, []);
 
   return (
-    <section>
+    <section aria-label="재활용품 카테고리">
       <KakaoAdfit320x50 />
       <div className="flex justify-center w-full mx-auto mt-2 mb-6">
         <SearchBar className="mx-auto" />
       </div>
       <h2 className="mt-4 ml-10 text-xl font-bold text-purple">재활용품 분류</h2>
-      <Carousel className="h-[30rem] mt-4">
+      <Carousel className="h-[30rem] mt-4" aria-label="재활용품 카테고리 슬라이드">
         <CarouselContent>
-          {chunkedCategories.map((chunk, index) => (
-            <CarouselItem key={index}>
+          {chunkedCategories.map((chunk, pageIndex) => (
+            <CarouselItem key={pageIndex} role="group" aria-label={`${pageIndex + 1}페이지`}>
               <div className={`grid grid-cols-3 gap-4 ${containerWidth} mx-auto`}>
                 {chunk.map((category) => (
                   <div key={category.id} className="flex flex-col items-center">
-                    <NavLink to={`/category/${category.id}`} className="no-underline">
+                    <NavLink
+                      to={`/category/${category.id}`}
+                      className="no-underline"
+                      aria-label={`${category.name} 카테고리로 이동`}
+                    >
                       <div className="flex items-center justify-center w-24 h-24 rounded-lg cursor-pointer bg-yellowLight hover:bg-yellow">
-                        <img src={category.imageURL} alt={category.name} className="w-12 h-12" />
+                        <img src={category.imageURL} alt={`${category.name} 아이콘`} className="w-12 h-12" />
                       </div>
                       <p className="mt-2 text-sm font-semibold text-center">{category.name}</p>
                     </NavLink>
@@ -61,7 +65,7 @@ export const Category = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPagination />
+        <CarouselPagination aria-label="페이지 네비게이션" />
       </Carousel>
     </section>
   );
