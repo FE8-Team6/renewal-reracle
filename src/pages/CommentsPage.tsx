@@ -129,10 +129,9 @@ const CommentsPage = () => {
   return (
     <>
       <BackHeader comment={submittedAnswers} />
-      <main className="overflow-y-auto">
+      <main className="overflow-y-auto" aria-label="댓글 페이지">
         <KakaoAdfit320x50 />
-
-        <div className={`space-y-2 mt-4 min-h-[calc(100vh-12rem)] pb-[5rem] `}>
+        <section className="space-y-2 mt-4 min-h-[calc(100vh-12rem)] pb-[5rem]" aria-label="댓글 목록">
           {submittedAnswers
             .slice()
             .sort(
@@ -146,16 +145,20 @@ const CommentsPage = () => {
               ) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
             )
             .map((answer: { id: string; author: string; content: string; authorUid: string; createdAt: string }) => (
-              <div
+              <article
                 key={answer.id}
+                tabIndex={0}
+                aria-label="댓글"
                 className={`relative flex flex-col ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'}  mx-auto p-2 text-lg bg-purpleLight border rounded-4`}
               >
                 <div className="flex items-center justify-between">
-                  <p className="text-sm">{answer.author}</p>
+                  <p className="text-sm" tabIndex={0} aria-label={`작성자: ${answer.author}`}>
+                    {answer.author}
+                  </p>
                   {currentUser && currentUser.uid === answer.authorUid && (
                     <Popover>
                       <PopoverTrigger asChild>
-                        <Button variant="ghost" size="icon" className="w-4 h-4">
+                        <Button variant="ghost" size="icon" aria-label="댓글 관리 메뉴" className="w-4 h-4">
                           <MoreHorizontal className="w-4 h-4" />
                         </Button>
                       </PopoverTrigger>
@@ -163,6 +166,7 @@ const CommentsPage = () => {
                         <Button
                           variant="default"
                           size="sm"
+                          aria-label="댓글 수정하기"
                           onClick={() => {
                             setEditingAnswer(answer.id);
                             setEditedContent(answer.content);
@@ -170,16 +174,29 @@ const CommentsPage = () => {
                         >
                           수정
                         </Button>
-                        <Button variant="secondary" size="sm" onClick={() => handleDeleteAnswer(answer.id)}>
+                        <Button
+                          variant="secondary"
+                          size="sm"
+                          aria-label="댓글 삭제하기"
+                          onClick={() => handleDeleteAnswer(answer.id)}
+                        >
                           삭제
                         </Button>
                       </PopoverContent>
                     </Popover>
                   )}
                 </div>
-                <div className="text-lg text-black">{formatContent(answer.content)}</div>
+                <div className="text-lg text-black" tabIndex={0} aria-label={`댓글 내용: ${answer.content}`}>
+                  {formatContent(answer.content)}
+                </div>
                 {answer.createdAt && (
-                  <time className="text-xs text-gray-500">{formatDateToKoreanTime(new Date(answer.createdAt))}</time>
+                  <time
+                    className="text-xs text-gray-500"
+                    tabIndex={0}
+                    aria-label={`작성일: ${formatDateToKoreanTime(new Date(answer.createdAt))}`}
+                  >
+                    {formatDateToKoreanTime(new Date(answer.createdAt))}
+                  </time>
                 )}
                 <Dialog open={editingAnswer === answer.id} onOpenChange={() => setEditingAnswer(null)}>
                   <DialogContent>
@@ -201,10 +218,12 @@ const CommentsPage = () => {
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
-              </div>
+              </article>
             ))}
           <div className="mt-4 text-center">
             <textarea
+              placeholder="댓글을 작성하세요"
+              aria-label="댓글을 작성하세요"
               className={` ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'}  h-[8vh] border border-gray-300 rounded-4`}
               value={answer}
               onChange={(event) => setAnswer(event.target.value)}
@@ -213,12 +232,13 @@ const CommentsPage = () => {
               variant="default"
               size="default"
               onClick={handleSubmit}
+              aria-label="댓글 제출하기"
               className={`mb-5 ${isSmallScreen ? 'w-[20rem]' : 'w-[23rem]'}`}
             >
               제출
             </Button>
           </div>
-        </div>
+        </section>
       </main>
     </>
   );
