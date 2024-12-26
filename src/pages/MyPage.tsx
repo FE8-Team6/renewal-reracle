@@ -137,7 +137,7 @@ const MyPage = () => {
                       <button
                         type="button"
                         onClick={() => handleDeleteClick(historyItem.id)}
-                        className="absolute flex items-center justify-center w-4 h-4 text-white transition-opacity rounded-full -top-1 -right-1 bg-purple-500"
+                        className="absolute flex items-center justify-center w-4 h-4 text-white transition-opacity rounded-full -top-1 -right-1 bg-purple"
                         aria-label={`${historyItem.query} 검색 기록 삭제`}
                       >
                         <X size={12} aria-hidden="true" />
