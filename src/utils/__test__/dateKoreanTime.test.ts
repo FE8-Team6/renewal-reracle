@@ -10,10 +10,21 @@ describe('formatDateToKoreanTime', () => {
     expect(result).toMatch(/2024\. 01\. 01\. 오후 09:00/);
   });
 
-  it('잘못된 날짜 입력시 기본 메시지를 반환합니다.', () => {
+  it('null 입력시 기본 메시지를 반환합니다', () => {
     const invalidDate = null as unknown as Date;
     const result = formatDateToKoreanTime(invalidDate);
+    expect(result).toBe('알 수 없는 시간');
+  });
 
+  it('undefined 입력시 기본 메시지를 반환합니다', () => {
+    const invalidDate = undefined as unknown as Date;
+    const result = formatDateToKoreanTime(invalidDate);
+    expect(result).toBe('알 수 없는 시간');
+  });
+
+  it('잘못된 날짜 객체 입력시 기본 메시지를 반환합니다', () => {
+    const invalidDate = new Date('invalid');
+    const result = formatDateToKoreanTime(invalidDate);
     expect(result).toBe('알 수 없는 시간');
   });
 });
