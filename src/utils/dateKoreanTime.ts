@@ -1,3 +1,8 @@
+/**
+ * @description 날짜를 한국 시간으로 변환하는 함수입니다.
+ * @param date
+ * @returns
+ */
 export const formatDateToKoreanTime = (date: Date) => {
   if (!date) return '알 수 없는 시간';
   return date.toLocaleString('ko-KR', {

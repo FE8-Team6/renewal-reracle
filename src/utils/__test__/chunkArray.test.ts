@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { chunkArray } from '../chunkArray';
+import { chunkArray } from '@/utils/chunkArray';
 
 describe('chunkArray', () => {
   it('배열을 지정된 크기로 나눕니다', () => {
