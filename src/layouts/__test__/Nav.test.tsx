@@ -57,7 +57,7 @@ describe('Nav Component', () => {
 
   it('네비게이션이 올바른 접근성 속성을 가집니다.', () => {
     const nav = screen.getByRole('navigation');
-    expect(nav).toHaveAttribute('aria-label', '주 네비게이션션');
+    expect(nav).toHaveAttribute('aria-label', '주 네비게이션');
   });
 
   it('모든 버튼에 아이콘이 렌더링됩니다.', () => {
