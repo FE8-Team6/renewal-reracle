@@ -157,6 +157,8 @@ yarn dev
 
 [뷰포트 단위에서 rem, px, %, vh로 리팩토링](https://wiggly-baroness-02b.notion.site/rem-px-vh-1236a40423b880deb679cc9cbdf706e9)
 
-[PWA의 PUSH 알림 구현 과정](https://yho7955.tistory.com/56)
+[React PWA에서 푸시 알림 구현하기: 사용자 경험을 한 단계 업그레이드하세요.](https://yho7955.tistory.com/56)
+
+[REracle: 비용 효율적인 서비스 운영](https://yho7955.tistory.com/57)
 
 <br/><br/>
