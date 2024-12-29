@@ -145,9 +145,9 @@ yarn dev
 ### 1️⃣ 먼저 피그마로 기획을 했습니다.
 
 ### [🖼️ 피그마](https://www.figma.com/design/rEXJRUKlp9Mkb7XeR6jPlf/%EC%9E%AC%ED%99%9C%EC%9A%A9%EC%A0%95%EB%B3%B4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8?node-id=0-1&node-type=canvas&t=jmZkWg7pCGFI6jqY-0)
-
-- 초반 REracle 프로젝트는 처음에 4명에서 기획을 하여 1명이 피그마 와이어프레임을 작성하였습니다.
-- 디자인 시안을 확인할 수 있습니다.
+초반 REracle 프로젝트는 처음에 4명에서 기획을 하여 1명이 피그마 와이어프레임을 작성하였습니다.
+<br/>
+디자인 시안을 확인할 수 있습니다.
 
 <br/>
 
