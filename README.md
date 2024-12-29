@@ -150,15 +150,11 @@ yarn dev
 - 디자인 시안을 확인할 수 있습니다.
 
 ### 2️⃣ 개발 과정에서 고민 했던 내용
+REracle을 혼자서 기획 및 구현하면서 고민했던 내용들을 볼 수 있습니다.
 
-- REracle을 혼자서 기획 및 구현하면서 고민했던 내용들을 볼 수 있습니다.
-
-[Styled-components에서 Tailwind로 전환](https://yho7955.tistory.com/55)
-
-[뷰포트 단위에서 rem, px, %, vh로 리팩토링](https://wiggly-baroness-02b.notion.site/rem-px-vh-1236a40423b880deb679cc9cbdf706e9)
-
-[React PWA에서 푸시 알림 구현하기: 사용자 경험을 한 단계 업그레이드하세요.](https://yho7955.tistory.com/56)
-
-[REracle: 비용 효율적인 서비스 운영](https://yho7955.tistory.com/57)
+- [Styled-components에서 Tailwind로 전환](https://yho7955.tistory.com/55)
+- [뷰포트 단위에서 rem, px, %, vh로 리팩토링](https://wiggly-baroness-02b.notion.site/rem-px-vh-1236a40423b880deb679cc9cbdf706e9)
+- [React PWA에서 푸시 알림 구현하기: 사용자 경험을 한 단계 업그레이드하세요.](https://yho7955.tistory.com/56)
+- [REracle: 비용 효율적인 서비스 운영](https://yho7955.tistory.com/57)
 
 <br/><br/>
