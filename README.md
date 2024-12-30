@@ -152,7 +152,7 @@ yarn dev
 <br/>
 
 ### 2️⃣ REracle 프로젝트 컨벤션
-### [🤙 REracle 프로젝트 컨벤션](https://github.com/FE8-Team6/renewal-reracle/wiki/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%BB%A8%EB%B2%A4%EC%85%98)
+### [🤙 REracle 프로젝트 컨벤션](https://github.com/FE8-Team6/renewal-reracle/wiki/02.-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%BB%A8%EB%B2%A4%EC%85%98)
 프로젝트에 **일관된 개발 컨벤션을 사용**하였습니다. **브랜치 이름**과 **커밋 메시지**, **label** 등에 동일한 규칙을 적용하여 어떤 작업을 진행하고 있는 명확하게 표시하고, 쉽게 이해하도록 하였습니다.
 
 <br/>
