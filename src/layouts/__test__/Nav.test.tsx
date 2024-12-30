@@ -55,15 +55,18 @@ describe('Nav Component', () => {
     }
   });
 
-  it('네비게이션이 올바른 접근성 속성을 가집니다.', () => {
-    const nav = screen.getByRole('navigation');
-    expect(nav).toHaveAttribute('aria-label', '주 네비게이션');
-  });
-
-  it('모든 버튼에 아이콘이 렌더링됩니다.', () => {
+  it('모든 네이비게이션 버튼이 aria-label을 가집니다.', () => {
     const buttons = screen.getAllByRole('button');
     buttons.forEach((button) => {
-      expect(button.querySelector('svg')).toBeInTheDocument();
+      expect(button).toHaveAttribute('aria-label');
+      const label = button.getAttribute('aria-label');
+      expect(label).not.toBe('');
+      expect(label?.length).toBeGreaterThan(1);
     });
+
+    expect(screen.getByRole('button', { name: '홈으로 이동' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'R지식in으로 이동' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '아티클로 이동' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '공지로 이동' })).toBeInTheDocument();
   });
 });
