@@ -134,6 +134,15 @@ yarn dev
           </p>
         </div>
       </td>
+      <td align="center" valign="middle">
+        <div>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png" width="500" height="1" />
+          <img width="50" src="https://vitest.dev/logo-shadow.svg" />
+          <p align="center">
+            Vitest
+          </p>
+        </div>
+      </td>
     </tr>
   </tbody>
 </table>
