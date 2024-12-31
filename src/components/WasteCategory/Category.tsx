@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { chunkArray } from '@/utils/chunkArray';
-import { SearchBar } from '@/lib/common/SearchBar';
 import { Carousel, CarouselContent, CarouselItem, CarouselPagination } from '@/components/ui/carousel';
 import { KakaoAdfit320x50 } from '@/components/KakaoAdfit';
 import { Categories } from '@/apis/categoryApi/category';
 import { getCategories } from '@/apis/categoryApi/category';
+import { SearchBar } from '@/lib/common/SearchBar';
 
 export const Category = () => {
   const [categories, setCategories] = useState<Categories[]>([]);
