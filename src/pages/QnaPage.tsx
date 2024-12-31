@@ -19,7 +19,7 @@ import { KakaoAdfit320x50, KakaoAdfit320x100 } from '@/components/KakaoAdfit';
 import { QuestionForm, QuestionItem } from '@/components/Question';
 import { PostCategoryButton } from '@/lib/common/CategoryButton';
 
-type Question = {
+type QuestionType = {
   id: string;
   question: string;
   author: string;
@@ -32,7 +32,7 @@ type Question = {
 }[];
 
 const QnaPage = () => {
-  const [questions, setQuestions] = useState<Question>([]);
+  const [questions, setQuestions] = useState<QuestionType>([]);
   const [currentUser, setCurrentUser] = useState<{
     displayName: string;
     uid: string;
@@ -77,7 +77,7 @@ const QnaPage = () => {
         );
       }
       const querySnapshot = await getDocs(questionsQuery);
-      const questionList: Question = [];
+      const questionList: QuestionType = [];
       for (const doc of querySnapshot.docs) {
         const questionData = doc.data();
         const answersSnapshot = await getDocs(query(collection(db, 'answers'), where('questionId', '==', doc.id)));
@@ -130,7 +130,7 @@ const QnaPage = () => {
       });
 
       const updatedQuestions = await getDocs(query(collection(db, 'questions'), orderBy('createdAt', 'desc')));
-      const questionList: Question = [];
+      const questionList: QuestionType = [];
       for (const doc of updatedQuestions.docs) {
         const questionData = doc.data();
         const answersSnapshot = await getDocs(query(collection(db, 'answers'), where('questionId', '==', doc.id)));
