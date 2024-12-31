@@ -2,7 +2,7 @@ import { DetailLayout, MainLayout, NavLayout } from '@/layouts';
 import React, { Suspense } from 'react';
 import { HomePage, LoginPage, SignUpPage, NotFoundPage } from '@/pages';
 import ReraclePuzzle from '@/pages/ReracleGame';
-import BackHeader from '@/lib/common/BackHeader';
+import { BackHeader } from '@/lib/common/BackHeader';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import Loading from '@/components/Loading';
 

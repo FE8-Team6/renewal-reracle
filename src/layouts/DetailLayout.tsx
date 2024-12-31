@@ -1,5 +1,5 @@
 import { Nav } from '@/components/Nav';
-import BackHeader from '@/lib/common/BackHeader';
+import { BackHeader } from '@/lib/common/BackHeader';
 import { Outlet } from 'react-router-dom';
 
 export const DetailLayout = () => {

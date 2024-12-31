@@ -5,7 +5,7 @@ type BackHeaderProps = {
   comment?: string[];
 };
 
-const BackHeader = ({ comment }: BackHeaderProps) => {
+export const BackHeader = ({ comment }: BackHeaderProps) => {
   const navigate = useNavigate();
 
   return (
@@ -29,5 +29,3 @@ const BackHeader = ({ comment }: BackHeaderProps) => {
     </header>
   );
 };
-
-export default BackHeader;
