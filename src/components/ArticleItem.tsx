@@ -1,11 +1,11 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Articles, getArticleById } from '@/apis/articleApi/article';
+import { ArticlesType, getArticleById } from '@/apis/articleApi/article';
 import { KakaoAdfit320x100, KakaoAdfit320x50 } from '@/components/KakaoAdfit';
 
 const ArticleItem = () => {
   const { id } = useParams<{ id: string }>();
-  const [article, setArticle] = useState<Articles>({
+  const [article, setArticle] = useState<ArticlesType>({
     id: '',
     title: '',
     content: [{ id: '', text: '', image: '', video: '' }],
@@ -16,7 +16,7 @@ const ArticleItem = () => {
     if (id) {
       getArticleById(id).then((articleItem) => {
         if (articleItem && typeof articleItem === 'object' && 'title' in articleItem && 'content' in articleItem) {
-          setArticle(articleItem as Articles);
+          setArticle(articleItem as ArticlesType);
         } else {
           setArticle({
             id: '',

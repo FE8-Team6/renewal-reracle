@@ -11,17 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { GoPencil } from 'react-icons/go';
-
-type QuestionFormProps = {
-  isModalOpen: boolean;
-  setIsModalOpen: (isOpen: boolean) => void;
-  handleAddQuestion: () => void;
-  title: string;
-  setTitle: (title: string) => void;
-  content: string;
-  setContent: (content: string) => void;
-  setPostCategory: (category: string) => void;
-};
+import { QuestionFormProps } from '@/types/question';
 
 export const QuestionForm = ({
   isModalOpen,
