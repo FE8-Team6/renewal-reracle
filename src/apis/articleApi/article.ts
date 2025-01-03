@@ -1,7 +1,7 @@
 import { db } from '@/firebase';
 import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 
-export type Articles = {
+export type ArticlesType = {
   id: string;
   title: string;
   content: {
@@ -13,13 +13,13 @@ export type Articles = {
   sourceLink?: string;
 };
 
-const getArticles = async (): Promise<Articles[]> => {
+const getArticles = async (): Promise<ArticlesType[]> => {
   const articlesRef = collection(db, 'Article');
   const articleSnap = await getDocs(articlesRef);
   return articleSnap.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),
-  })) as Articles[];
+  })) as ArticlesType[];
 };
 
 const getArticleById = async (id: string) => {

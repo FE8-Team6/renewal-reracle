@@ -1,7 +1,7 @@
 import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import { db } from '@/firebase';
 
-export type Categories = {
+export type CategoriesType = {
   id: string;
   name: string;
   imageURL: string;
@@ -15,7 +15,7 @@ const getCategories = async () => {
     const categoriesData = categoriesSnap.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
-    })) as Categories[];
+    })) as CategoriesType[];
     return categoriesData;
   } catch (error) {
     console.error('카테고리가 존재하지 않습니다.', error);
@@ -29,7 +29,7 @@ const getCategoryItems = async (categoryId: string) => {
     const categorySnap = await getDoc(categoryRef);
 
     if (categorySnap.exists()) {
-      return categorySnap.data().items as Categories[];
+      return categorySnap.data().items as CategoriesType[];
     } else {
       console.log('카테고리가 존재하지 않습니다.');
     }
