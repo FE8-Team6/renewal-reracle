@@ -2,27 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { formatDateToKoreanTime } from '@/utils/dateKoreanTime';
 import { Button } from '@/components/ui/button';
 import { ThumbsUp } from 'lucide-react';
-import { Timestamp } from 'firebase/firestore';
-
-type QuestionItemProps = {
-  question: {
-    id: string;
-    question: string;
-    author: string;
-    authorUid: string;
-    content: string;
-    createdAt: Timestamp;
-    likes: number;
-    commentCount: number;
-    postCategory: string;
-  };
-  likedPosts: Set<string>;
-  currentUser: {
-    displayName: string;
-    uid: string;
-  };
-  handleLiked: (id: string) => void;
-};
+import { QuestionItemProps } from '@/types/question';
 
 export const QuestionItem = ({ question, likedPosts, currentUser, handleLiked }: QuestionItemProps) => {
   const truncateTitle = (title: string) => {

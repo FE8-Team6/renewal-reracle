@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { AiOutlineNotification } from 'react-icons/ai';
 import { NavLink } from 'react-router-dom';
 
-const NotificationBanner = () => {
+export const NotificationBanner = () => {
   const [latestAnnouncement, setLatestAnnouncement] = useState<string>('');
 
   useEffect(() => {
@@ -35,5 +35,3 @@ const NotificationBanner = () => {
     </div>
   );
 };
-
-export default NotificationBanner;

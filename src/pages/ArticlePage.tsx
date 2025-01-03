@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { getArticles, Articles } from '@/apis/articleApi/article';
+import { getArticles, ArticlesType } from '@/apis/articleApi/article';
 import { Link } from 'react-router-dom';
 import { KakaoAdfit320x100, KakaoAdfit320x50 } from '@/components/KakaoAdfit';
 import { getFirstTextContent } from '@/constant/getFirstTextContent';
 
 const ArticlePage = () => {
-  const [articles, setArticles] = useState<Articles[]>([]);
+  const [articles, setArticles] = useState<ArticlesType[]>([]);
 
   useEffect(() => {
     getArticles().then((article) => {

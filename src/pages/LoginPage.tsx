@@ -3,7 +3,6 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { MdAlternateEmail, MdOutlinePassword, MdVisibility, MdVisibilityOff } from 'react-icons/md';
 import { Button } from '@/components/ui/button';
-import GoogleButton from '@/components/GoogleButton';
 import { Input } from '@/components/ui/input';
 import { getUserProfile } from '@/apis/userApi/user';
 import { auth } from '@/firebase';
@@ -13,6 +12,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { loginSchema } from '@/constant/loginSchema';
 import { KakaoAdfit320x50 } from '@/components/KakaoAdfit';
+import { GoogleButton } from '@/components/GoogleButton/GoogleButton';
 
 export const LoginPage = () => {
   const [error, setError] = useState<string>('');

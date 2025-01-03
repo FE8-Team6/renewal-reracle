@@ -3,7 +3,7 @@ import { getMessaging, getToken, onMessage } from 'firebase/messaging';
 import { app, auth, db } from '@/firebase';
 import { doc, setDoc } from 'firebase/firestore';
 
-const NotificationWebApi = () => {
+export const NotificationWebApi = () => {
   useEffect(() => {
     const messaging = getMessaging(app);
 
@@ -41,7 +41,5 @@ const NotificationWebApi = () => {
     requestPermission();
   }, []);
 
-  return <div></div>;
+  return <></>;
 };
-
-export default NotificationWebApi;
