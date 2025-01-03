@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { auth } from '@/firebase';
 import { useNavigate } from 'react-router-dom';
 
-const GoogleButton = () => {
+export const GoogleButton = () => {
   const navigate = useNavigate();
 
   const handleGoogleLogin = async () => {
@@ -32,5 +32,3 @@ const GoogleButton = () => {
     </Button>
   );
 };
-
-export default GoogleButton;
