@@ -3,17 +3,11 @@ import { doc, getDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { KakaoAdfit320x50 } from '../KakaoAdfit';
-
-type ItemsDetails = {
-  id: string;
-  name: string;
-  imageURL: string;
-  recyclingInstructions: string[];
-};
+import { ItemsDetailsType } from '@/types/category';
 
 export const CategoryDetailItems = () => {
   const { categoryId, itemId } = useParams();
-  const [itemsDetails, setItemsDetails] = useState<ItemsDetails>();
+  const [itemsDetails, setItemsDetails] = useState<ItemsDetailsType>();
 
   const getDetailItems = async () => {
     if (!categoryId || !itemId) {
@@ -26,7 +20,7 @@ export const CategoryDetailItems = () => {
 
       if (categorySnap.exists()) {
         const items = categorySnap.data().items;
-        const item = items.find((item: ItemsDetails) => item.id === itemId);
+        const item = items.find((item: ItemsDetailsType) => item.id === itemId);
         setItemsDetails(item);
       } else {
         console.log('카테고리가 존재하지 않습니다.');

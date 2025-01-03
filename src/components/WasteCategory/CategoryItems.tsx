@@ -3,11 +3,11 @@ import { NavLink, useParams } from 'react-router-dom';
 import { chunkArray } from '@/utils/chunkArray';
 import { Carousel, CarouselContent, CarouselItem, CarouselPagination } from '@/components/ui/carousel';
 import { KakaoAdfit320x100, KakaoAdfit320x50 } from '@/components/KakaoAdfit';
-import { getCategoryItems, Categories } from '@/apis/categoryApi/category';
+import { getCategoryItems, CategoriesType } from '@/apis/categoryApi/category';
 
 export const CategoryItems = () => {
   const { categoryId } = useParams();
-  const [categoryItems, setCategoryItems] = useState<Categories[]>([]);
+  const [categoryItems, setCategoryItems] = useState<CategoriesType[]>([]);
   const [containerWidth, setContainerWidth] = useState('w-[23rem]');
 
   useEffect(() => {

@@ -3,12 +3,12 @@ import { NavLink } from 'react-router-dom';
 import { chunkArray } from '@/utils/chunkArray';
 import { Carousel, CarouselContent, CarouselItem, CarouselPagination } from '@/components/ui/carousel';
 import { KakaoAdfit320x50 } from '@/components/KakaoAdfit';
-import { Categories } from '@/apis/categoryApi/category';
+import { CategoriesType } from '@/apis/categoryApi/category';
 import { getCategories } from '@/apis/categoryApi/category';
 import { SearchBar } from '@/lib/common/SearchBar';
 
 export const Category = () => {
-  const [categories, setCategories] = useState<Categories[]>([]);
+  const [categories, setCategories] = useState<CategoriesType[]>([]);
   const [containerWidth, setContainerWidth] = useState<string>('w-[23rem]');
 
   const chunkedCategories = chunkArray(categories, 9);
