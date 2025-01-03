@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { formatDateToKoreanTime } from '@/utils/dateKoreanTime';
 import { KakaoAdfit320x50 } from '@/components/KakaoAdfit';
 
-type Question = {
+type QuestionType = {
   id: string;
   question: string;
   author: string;
@@ -19,7 +19,7 @@ type Question = {
 }[];
 
 const MyQuestion = () => {
-  const [questions, setQuestions] = useState<Question>([]);
+  const [questions, setQuestions] = useState<QuestionType>([]);
   const [currentUser, setCurrentUser] = useState<{
     displayName: string;
     uid: string;
@@ -46,7 +46,7 @@ const MyQuestion = () => {
           orderBy('createdAt', 'desc'),
         );
         const querySnapshot = await getDocs(q);
-        const questionList: Question = [];
+        const questionList: QuestionType = [];
         for (const doc of querySnapshot.docs) {
           const questionData = doc.data();
           const answersSnapshot = await getDocs(query(collection(db, 'answers'), where('questionId', '==', doc.id)));
