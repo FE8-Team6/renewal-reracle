@@ -116,29 +116,50 @@ export const SignUpPage = () => {
   };
 
   return (
-    <main className="flex flex-col min-h-[calc(100vh-8rem)] pb-[5rem]">
+    <main className="flex flex-col min-h-[calc(100vh-8rem)] pb-[5rem]" aria-label="회원가입 페이지" tabIndex={0}>
       <section>
         <KakaoAdfit320x50 />
         <div className="relative flex flex-col items-center justify-center w-full h-full gap-3 bg-white">
           <img src="/images/loginPageImg.png" alt="로그인 페이지 이미지" className="w-[12rem] h-[12rem] " />
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-md px-4 space-y-2">
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="w-full max-w-md px-4 space-y-2"
+              aria-label="회원가입 폼"
+              tabIndex={0}
+            >
               <FormField
                 control={form.control}
                 name="displayName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-lg font-bold text-purple">닉네임</FormLabel>
+                    <FormLabel className="text-lg font-bold text-purple" tabIndex={0}>
+                      닉네임
+                    </FormLabel>
                     <FormControl>
                       <div className="relative flex items-center gap-2">
                         <MdOutlineTagFaces className="absolute text-xl left-3 top-4 text-purple" />
-                        <Input placeholder="닉네임" {...field} className="w-full pl-10" />
-                        <Button variant="secondary" size="sm" onClick={checkDisplayName} className="mt-2">
+                        <Input
+                          id="displayName"
+                          placeholder="닉네임"
+                          {...field}
+                          className="w-full pl-10"
+                          aria-required="true"
+                          aria-invalid={!!error}
+                          aria-describedby="displayName-error"
+                        />
+                        <Button
+                          variant="secondary"
+                          size="sm"
+                          onClick={checkDisplayName}
+                          className="mt-2"
+                          aria-label="닉네임 중복 확인"
+                        >
                           중복 확인
                         </Button>
                       </div>
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage id="displayName-error" role="alert" tabIndex={0} />
                   </FormItem>
                 )}
               />
@@ -147,17 +168,31 @@ export const SignUpPage = () => {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-lg font-bold text-purple">이메일</FormLabel>
+                    <FormLabel className="text-lg font-bold text-purple" tabIndex={0}>
+                      이메일
+                    </FormLabel>
                     <FormControl>
                       <div className="relative flex items-center gap-2">
                         <MdAlternateEmail className="absolute text-xl left-3 top-4 text-purple" />
-                        <Input placeholder="이메일" {...field} className="w-full pl-10" />
+                        <Input
+                          id="email"
+                          placeholder="이메일"
+                          {...field}
+                          className="w-full pl-10"
+                          aria-required="true"
+                          aria-invalid={!!emailError}
+                          aria-describedby="email-error"
+                        />
                         <Button variant="secondary" size="sm" onClick={checkEmail} className="mt-2">
                           중복 확인
                         </Button>
                       </div>
                     </FormControl>
-                    {emailError && <FormMessage className="text-error-40">{emailError}</FormMessage>}
+                    {emailError && (
+                      <FormMessage className="text-error-40" id="email-error" role="alert" tabIndex={0}>
+                        {emailError}
+                      </FormMessage>
+                    )}
                   </FormItem>
                 )}
               />
@@ -166,14 +201,23 @@ export const SignUpPage = () => {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-lg font-bold text-purple">비밀번호</FormLabel>
+                    <FormLabel className="text-lg font-bold text-purple" tabIndex={0}>
+                      비밀번호
+                    </FormLabel>
                     <FormControl>
                       <div className="relative flex items-center gap-2">
                         <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
-                        <Input type="password" placeholder="비밀번호" {...field} className="w-full pl-10" />
+                        <Input
+                          type="password"
+                          placeholder="비밀번호"
+                          {...field}
+                          className="w-full pl-10"
+                          aria-required="true"
+                          aria-describedby="password-error"
+                        />
                       </div>
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage id="password-error" role="alert" tabIndex={0} className="text-error-40" />
                   </FormItem>
                 )}
               />
@@ -182,24 +226,37 @@ export const SignUpPage = () => {
                 name="confirmPassword"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-lg font-bold text-purple">비밀번호 확인</FormLabel>
+                    <FormLabel className="text-lg font-bold text-purple" tabIndex={0}>
+                      비밀번호 확인
+                    </FormLabel>
                     <FormControl>
                       <div className="relative flex items-center gap-2">
                         <MdOutlinePassword className="absolute text-xl left-3 top-4 text-purple" />
-                        <Input type="password" placeholder="비밀번호 확인" {...field} className="w-full pl-10" />
+                        <Input
+                          type="password"
+                          placeholder="비밀번호 확인"
+                          {...field}
+                          className="w-full pl-10"
+                          aria-required="true"
+                          aria-describedby="confirm-password-error"
+                        />
                       </div>
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage id="confirm-password-error" role="alert" tabIndex={0} className="text-error-40" />
                   </FormItem>
                 )}
               />
-              {error && <p className="text-sm font-medium text-error-40">{error}</p>}
-              <Button variant="default" type="submit" size="default" className="w-full">
+              {error && (
+                <p className="text-sm font-medium text-error-40" role="alert" aria-live="polite">
+                  {error}
+                </p>
+              )}
+              <Button variant="default" type="submit" size="default" className="w-full" aria-label="회원가입하기">
                 회원가입
               </Button>
             </form>
           </Form>
-          <Button variant="link" size="sm" onClick={() => navigate('/login')}>
+          <Button variant="link" size="sm" onClick={() => navigate('/login')} aria-label="로그인 페이지로 이동">
             <span>로그인</span>
           </Button>
         </div>
