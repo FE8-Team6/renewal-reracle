@@ -26,8 +26,8 @@ export const GoogleButton = () => {
   };
 
   return (
-    <Button variant="secondary" size="default" onClick={handleGoogleLogin}>
-      <img src="/icon/google.svg" alt="Google Icon" className="mr-2 w-[1.2rem] h-[1.2rem]" />
+    <Button variant="secondary" size="default" onClick={handleGoogleLogin} aria-label="구글로 로그인하기">
+      <img src="/icon/google.svg" alt="구글 아이콘" className="mr-2 w-[1.2rem] h-[1.2rem]" />
       구글 계정으로 로그인
     </Button>
   );
