@@ -159,7 +159,9 @@ const MyPage = () => {
               <CardContent>
                 <div className="space-y-2">
                   <button type="button" className="text-gray-500 hover:underline" aria-label="REracle 개발 과정 보기">
-                    <span className="text-sm font-medium text-gray-500">REracle 개발 과정</span>
+                    <a href="https://github.com/FE8-Team6/renewal-reracle">
+                      <span className="text-sm font-medium text-gray-500">REracle 개발 과정</span>
+                    </a>
                   </button>
                 </div>
               </CardContent>
