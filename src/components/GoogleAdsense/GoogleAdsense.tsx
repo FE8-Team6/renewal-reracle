@@ -1,11 +1,6 @@
 import { useEffect } from 'react';
 
-type GoogleAdsenseProps = {
-  slot?: string;
-  style?: React.CSSProperties;
-};
-
-export const GoogleAdsense = ({ slot, style }: GoogleAdsenseProps) => {
+export const GoogleAdsense = () => {
   useEffect(() => {
     // 프로덕션 환경에서만 실행
     if (process.env.NODE_ENV === 'production') {
@@ -28,9 +23,7 @@ export const GoogleAdsense = ({ slot, style }: GoogleAdsenseProps) => {
   return (
     <ins
       className="adsbygoogle"
-      style={{ display: 'block', ...style }}
       data-ad-client="ca-pub-1166711304342551"
-      data-ad-slot={slot}
       data-ad-format="auto"
       data-full-width-responsive="true"
     />
